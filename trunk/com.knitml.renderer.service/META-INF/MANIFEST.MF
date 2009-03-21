@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KnitML Rendering Service Plug-in
+Bundle-SymbolicName: com.knitml.renderer.service
+Bundle-Version: 0.2.0
+Bundle-Activator: com.knitml.renderer.service.Activator
+Bundle-Vendor: KnitML
+Require-Bundle: org.eclipse.core.runtime,
+ com.knitml.libs
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Import-Package: org.jibx.runtime
+Export-Package: com.knitml.renderer.service
