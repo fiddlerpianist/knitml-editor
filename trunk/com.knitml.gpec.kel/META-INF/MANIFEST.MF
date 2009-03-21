@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Kel Plug-in
+Bundle-SymbolicName: com.knitml.gpec.kel; singleton:=true
+Bundle-Version: 0.2.0
+Bundle-Vendor: KnitML
+Require-Bundle: org.eclipse.jface.text,
+ org.eclipse.core.resources,
+ org.eclipse.ui,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.ide,
+ org.eclipse.core.runtime,
+ com.knitml.gpec.renderer.preferences,
+ com.knitml.renderer.service
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Activator: com.knitml.gpec.internal.kel.KelPlugin
+Bundle-ActivationPolicy: lazy
+Import-Package: com.knitml.core.common,
+ com.knitml.el,
+ com.knitml.renderer.chart.symbol,
+ com.knitml.renderer.context,
+ com.knitml.renderer.impl.basic,
+ com.knitml.renderer.util,
+ com.knitml.validation,
+ com.knitml.validation.context,
+ com.knitml.validation.context.impl,
+ com.knitml.validation.visitor.instruction,
+ com.knitml.validation.visitor.instruction.impl,
+ org.jibx.runtime,
+ org.springframework.core.io
