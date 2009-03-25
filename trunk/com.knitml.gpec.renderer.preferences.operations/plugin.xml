@@ -2,6 +2,12 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.knitml.gpec.renderer.preferences.operations.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
          point="org.eclipse.ui.preferencePages">
       <page
             category="com.knitml.gpec.renderer.preferences.main"
