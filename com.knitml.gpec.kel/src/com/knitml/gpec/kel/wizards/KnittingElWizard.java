@@ -72,10 +72,11 @@ public class KnittingElWizard extends Wizard implements INewWizard {
 	public boolean performFinish() {
 		final String containerName = page.getContainerName();
 		final String fileName = page.getFileName();
+		final boolean generateWithComments = page.isGenerateWithComments();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
 				try {
-					doFinish(containerName, fileName, monitor);
+					doFinish(containerName, fileName, generateWithComments, monitor);
 				} catch (CoreException e) {
 					throw new InvocationTargetException(e);
 				} finally {
@@ -104,6 +105,7 @@ public class KnittingElWizard extends Wizard implements INewWizard {
 	private void doFinish(
 		String containerName,
 		String fileName,
+		boolean withComments,
 		IProgressMonitor monitor)
 		throws CoreException {
 		// create a sample file
@@ -114,16 +116,33 @@ public class KnittingElWizard extends Wizard implements INewWizard {
 			throwCoreException("Container \"" + containerName + "\" does not exist.");
 		}
 		IContainer container = (IContainer) resource;
-		final IFile file = container.getFile(new Path(fileName));
+		IFile candidateFile = container.getFile(new Path(fileName));
+		final IFile file;
+		if (candidateFile.getFileExtension() == null) {
+			file = ((IContainer)container).getFile(new Path(fileName + ".kel"));
+		} else {
+			file = candidateFile;
+		}
+		InputStream stream = null;
 		try {
-			InputStream stream = openContentStream();
-			if (file.exists()) {
-				file.setContents(stream, true, true, monitor);
+			Path path;
+			if (withComments) {
+				path = new Path("templates/template-with-comments.kel");
 			} else {
-				file.create(stream, true, monitor);
+				path = new Path("templates/template.kel");
 			}
-			stream.close();
+			stream = openContentStream(path);
+			file.create(stream, true, monitor);
 		} catch (IOException e) {
+			// ignore
+		} finally {
+			if (stream != null) {
+				try {
+					stream.close();
+				} catch (IOException ex) {
+					// ignore
+				}
+			}
 		}
 		monitor.worked(1);
 		monitor.setTaskName("Opening file for editing...");
@@ -144,8 +163,8 @@ public class KnittingElWizard extends Wizard implements INewWizard {
 	 * We will initialize file contents with a sample text.
 	 */
 
-	private InputStream openContentStream() throws IOException {
-		return KelUtils.getDefault().openStream(new Path("templates/template.kel"));
+	private InputStream openContentStream(Path path) throws IOException {
+		return KelUtils.getDefault().openStream(path);
 	}
 
 	private void throwCoreException(String message) throws CoreException {
