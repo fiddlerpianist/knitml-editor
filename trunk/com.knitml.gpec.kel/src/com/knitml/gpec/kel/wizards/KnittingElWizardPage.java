@@ -1,6 +1,7 @@
 package com.knitml.gpec.kel.wizards;
 
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -34,15 +35,17 @@ public class KnittingElWizardPage extends WizardPage {
 
 	private ISelection selection;
 
+	private Button commentsCheckbox;
+	
 	/**
-	 * Constructor for SampleNewWizardPage.
+	 * Constructor for KnittingElWizardPage.
 	 * 
 	 * @param pageName
 	 */
 	public KnittingElWizardPage(ISelection selection) {
 		super("wizardPage");
 		setTitle("KnitML file (KEL)");
-		setDescription("This wizard creates a new KnitML file using the Knitting Expression Language");
+		setDescription("This wizard creates a new pattern using the Knitting Expression Language");
 		this.selection = selection;
 	}
 
@@ -55,11 +58,12 @@ public class KnittingElWizardPage extends WizardPage {
 		container.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
+		
 		Label label = new Label(container, SWT.NULL);
 		label.setText("&Project:");
 
 		containerText = new Text(container, SWT.BORDER | SWT.SINGLE);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		GridData gd = new GridData(SWT.FILL, SWT.NONE, true, false);
 		containerText.setLayoutData(gd);
 		containerText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
@@ -85,6 +89,17 @@ public class KnittingElWizardPage extends WizardPage {
 				dialogChanged();
 			}
 		});
+		
+		// fill out the grid for formatting
+		label = new Label(container, SWT.NULL);
+		label = new Label(container, SWT.NULL);
+		
+		commentsCheckbox = new Button(container, SWT.CHECK
+	            | SWT.LEFT);
+		gd = new GridData(SWT.FILL, SWT.NONE, true, false, 2, 1);
+		commentsCheckbox.setLayoutData(gd);
+		commentsCheckbox.setText("Generate the sample with comments");
+		
 		initialize();
 		dialogChanged();
 		setControl(container);
@@ -168,6 +183,14 @@ public class KnittingElWizardPage extends WizardPage {
 				return;
 			}
 		}
+		IFile file = ((IContainer)container).getFile(new Path(fileName));
+		if (file.getFileExtension() == null) {
+			file = ((IContainer)container).getFile(new Path(fileName + ".kel"));
+		}
+		if (file.exists()) {
+			updateStatus("File already exists. Please choose a different file name");
+			return;
+		}
 		updateStatus(null);
 	}
 
@@ -182,5 +205,9 @@ public class KnittingElWizardPage extends WizardPage {
 
 	public String getFileName() {
 		return fileText.getText();
+	}
+	
+	public boolean isGenerateWithComments() {
+		return commentsCheckbox.getSelection();
 	}
 }

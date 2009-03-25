@@ -12,9 +12,12 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -56,13 +59,17 @@ import com.knitml.validation.visitor.instruction.impl.SpringVisitorFactory;
  * <ul>
  * <li>page 0 contains a the KEL editor
  * <li>page 1 shows the XML equivalent (i.e. converted XML)
- * <li>page 2 shows the XML once it's been processed through the KnitML
- * Validation Engine
- * <li>page 3 shows the final pattern (currently only using default preferences)
+ * <li>page 2 shows the final rendered pattern (using workspace preferences)
  * </ul>
  */
 public class KnittingElEditor extends MultiPageEditorPart implements
 		IResourceChangeListener {
+
+	private enum PatternControlType {
+		BROWSER, TEXT
+	};
+
+	protected final int PATTERN_PAGE = 2;
 
 	/**
 	 * Only overridden because the superclass made this method (and the
@@ -96,8 +103,11 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	// only one of these will be used
 	private StyledText renderedPattern;
 	private Browser renderingBrowser;
+	// switch which indicates which control we are currently using
+	private PatternControlType controlInUse;
 
 	private boolean converted = false;
+	@SuppressWarnings("unused")
 	private boolean validated = false;
 	private boolean rendered = false;
 
@@ -108,7 +118,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
 	}
 
-	protected void createPage0() {
+	protected void createKelPage() {
 		try {
 			editor = new TextEditor();
 			int index = addPage(editor, getEditorInput());
@@ -120,7 +130,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		}
 	}
 
-	protected void createPage1() {
+	protected void createXmlPage() {
 		Composite composite = new Composite(getContainer(), SWT.NONE);
 		FillLayout layout = new FillLayout();
 		composite.setLayout(layout);
@@ -128,10 +138,10 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		convertedXml.setEditable(false);
 
 		int index = addPage(composite);
-		setPageText(index, "Converted XML");
+		setPageText(index, "XML View");
 	}
 
-	protected void createPage2() {
+	protected void createXmlValidatedPage() {
 		Composite composite = new Composite(getContainer(), SWT.NONE);
 		FillLayout layout = new FillLayout();
 		composite.setLayout(layout);
@@ -139,10 +149,10 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		validatedXml.setEditable(false);
 
 		int index = addPage(composite);
-		setPageText(index, "Validated XML");
+		setPageText(index, "XML Validated View");
 	}
 
-	protected void createPage3() {
+	protected void createPatternPage() {
 		int index = addPage(null);
 		setPageText(index, "Pattern View");
 	}
@@ -151,10 +161,10 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	 * Creates the pages of the multi-page editor.
 	 */
 	protected void createPages() {
-		createPage0();
-		createPage1();
-		createPage2();
-		createPage3();
+		createKelPage();
+		createXmlPage();
+		// createXmlValidatedPage();
+		createPatternPage();
 	}
 
 	/**
@@ -164,15 +174,13 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	 */
 	public void dispose() {
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
-		editor.dispose();
+		disposePatternViewControls();
+		if (validatedXml != null) {
+			validatedXml.dispose();
+			validatedXml = null;
+		}
 		convertedXml.dispose();
-		validatedXml.dispose();
-		if (renderingBrowser != null) {
-			renderingBrowser.dispose();
-		}
-		if (renderedPattern != null) {
-			renderedPattern.dispose();
-		}
+		editor.dispose();
 		super.dispose();
 	}
 
@@ -234,38 +242,120 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 			if (!converted) {
 				convertKel();
 			}
-		} else if (newPageIndex == 2) {
-			if (!validated) {
-				if (!converted) {
-					convertKel();
-					if (!converted) {
-						super.pageChange(1);
-						return;
-					}
-				}
-				validateXml();
-			}
-		} else if (newPageIndex == 3) {
+			// } else if (newPageIndex == 2) {
+			// if (!validated) {
+			// if (!converted) {
+			// convertKel();
+			// if (!converted) {
+			// super.pageChange(1);
+			// return;
+			// }
+			// }
+			// validateXml();
+			// }
+		} else if (newPageIndex == PATTERN_PAGE) {
 			if (!rendered) {
 				if (!converted) {
 					convertKel();
 					if (!converted) {
+						// FIXME this doesn't work
 						setActivePage(1);
 						return;
 					}
 				}
-				initializePatternView();
+				initializePatternViewControl();
 				renderPattern();
 			}
 		}
 		super.pageChange(newPageIndex);
 	}
 
-	private void disposePatternViewControls() {
-		Control control = getControl(3);
-		if (control != null) {
-			control.dispose();
+	/**
+	 * Initializes the pattern view's main control. It will reuse an existing
+	 * control if it's of the correct type, otherwise it will destroy any
+	 * existing control and create a new one.
+	 */
+	private void initializePatternViewControl() {
+		PatternControlType controlTypeToUse;
+		RenderingPreferencesService preferencesService = KelPlugin.getDefault()
+				.getRenderingPreferencesService();
+		Preferences preferences = preferencesService.getCurrentPreferences();
+		String textRendererFactoryName = BasicTextRendererFactory.class
+				.getName();
+		String rendererFactoryName = preferences.get(
+				PreferenceKeys.RENDERER_FACTORY, textRendererFactoryName);
+
+		if (rendererFactoryName.equals(textRendererFactoryName)) {
+			controlTypeToUse = PatternControlType.TEXT;
+		} else {
+			controlTypeToUse = PatternControlType.BROWSER;
 		}
+
+		// if the control type we are going to use isn't the one currently in
+		// use
+		if (controlTypeToUse != controlInUse) {
+			disposePatternViewControls();
+			Control control = createPatternViewControl(controlTypeToUse,
+					preferences);
+			setControl(PATTERN_PAGE, control);
+			controlInUse = controlTypeToUse;
+		}
+	}
+
+	/**
+	 * Creates the render controls necessary to render the pattern based on the
+	 * type. Currently supports Text and HTML, falling back to Text if an HTML
+	 * browser cannot be instantiated.
+	 * 
+	 * @param controlTypeToUse
+	 * @param preferences
+	 * @return
+	 */
+	private Control createPatternViewControl(
+			PatternControlType controlTypeToUse, Preferences preferences) {
+		if (controlTypeToUse == PatternControlType.TEXT) {
+			return createTextPatternViewControl(preferences);
+		}
+		try {
+			// TODO could support Mozilla option at some point (when we
+			// embed an XULRunner)
+			renderingBrowser = new Browser(getContainer(), SWT.NONE);
+			return renderingBrowser;
+		} catch (SWTError err) {
+			// create fallback text view controls
+			KelPlugin
+					.getDefault()
+					.getLog()
+					.log(
+							new Status(
+									IStatus.WARNING,
+									KelPlugin.PLUGIN_ID,
+									"Could not find suitable web browser on system. Will default to rendering HTML in a text window",
+									err));
+			return createTextPatternViewControl(preferences);
+		}
+	}
+
+	/**
+	 * Creates the controls necessary to render the pattern in a plain text
+	 * viewer.
+	 * 
+	 * @param preferences
+	 * @return
+	 */
+	private Control createTextPatternViewControl(Preferences preferences) {
+		Composite composite = new Composite(getContainer(), SWT.NONE);
+		FillLayout layout = new FillLayout();
+		composite.setLayout(layout);
+		renderedPattern = new StyledText(composite, SWT.H_SCROLL | SWT.V_SCROLL);
+		renderedPattern.setEditable(false);
+		if (preferences.getBoolean(PreferenceKeys.CHART_GLOBALLY, false)) {
+			renderedPattern.setFont(JFaceResources.getTextFont());
+		}
+		return composite;
+	}
+
+	private void disposePatternViewControls() {
 		if (renderingBrowser != null) {
 			renderingBrowser.dispose();
 			renderingBrowser = null;
@@ -274,36 +364,6 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 			renderedPattern.dispose();
 			renderedPattern = null;
 		}
-	}
-	
-	private void initializePatternView() {
-		
-		disposePatternViewControls();
-		Control control;
-
-		RenderingPreferencesService preferencesService = KelPlugin.getDefault()
-				.getRenderingPreferencesService();
-		Preferences preferences = preferencesService.getCurrentPreferences();
-		String textRendererFactoryName = BasicTextRendererFactory.class
-				.getName();
-		String rendererFactoryName = preferences.get(
-				PreferenceKeys.RENDERER_FACTORY, textRendererFactoryName);
-		if (rendererFactoryName.equals(textRendererFactoryName)) {
-			Composite composite = new Composite(getContainer(), SWT.NONE);
-			FillLayout layout = new FillLayout();
-			composite.setLayout(layout);
-			renderedPattern = new StyledText(composite, SWT.H_SCROLL
-					| SWT.V_SCROLL);
-			renderedPattern.setEditable(false);
-			if (preferences.getBoolean(PreferenceKeys.CHART_GLOBALLY, false)) {
-				renderedPattern.setFont(JFaceResources.getTextFont());
-			}
-			control = composite;
-		} else {
-			renderingBrowser = new Browser(getContainer(), SWT.NONE);
-			control = renderingBrowser;
-		}
-		setControl(3, control);
 	}
 
 	protected boolean convertKel() {
@@ -386,7 +446,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 
 			renderingService.renderPattern(parameters, configuration
 					.getRendererFactory(), options);
-			writeContentToPage3(renderedPatternWriter.toString());
+			writeContentToPatternPage(renderedPatternWriter.toString());
 			rendered = true;
 		} catch (Exception ex) {
 			Throwable cause = ex;
@@ -394,20 +454,20 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 				cause = cause.getCause();
 			}
 			if (cause instanceof NoSymbolFoundException) {
-				writeContentToPage3("The system is unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
+				writeContentToPatternPage("The system is unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
 						+ cause.getMessage());
 			} else {
 				StringWriter stringError = new StringWriter();
 				PrintWriter pw = new PrintWriter(stringError);
 				ex.printStackTrace(pw);
-				writeContentToPage3("Could not render pattern: exception is "
+				writeContentToPatternPage("Could not render pattern: exception is "
 						+ stringError.toString());
 			}
 			rendered = false;
 		}
 	}
 
-	private void writeContentToPage3(String content) {
+	private void writeContentToPatternPage(String content) {
 		if (renderingBrowser != null) {
 			renderingBrowser.setText(content);
 		} else {
