@@ -11,7 +11,6 @@ import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.renderer.chart.advisor.impl.AireRiverSymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.KnittersSymbolsWSymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.TextArtSymbolAdvisor;
-import com.knitml.renderer.chart.symbol.impl.TextArtSymbolProvider;
 
 /**
  * This class represents a preference page that is contributed to the
