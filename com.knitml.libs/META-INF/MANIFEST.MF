@@ -81,18 +81,14 @@ Export-Package: com.knitml.core.common;version="0.5.0";uses:="com.knitml.core.mo
    com.knitml.renderer.context,
    com.knitml.core.model.header",
  com.knitml.renderer.chart;version="0.5.0";uses:="com.knitml.core.common",
- com.knitml.renderer.chart.advisor;version="0.5.0",
- com.knitml.renderer.chart.advisor.impl;version="0.5.0",
+ com.knitml.renderer.chart.advisor;version="0.5.0";uses:="com.knitml.renderer.chart.stylesheet,com.knitml.renderer.chart,com.knitml.renderer.chart.symbol",
+ com.knitml.renderer.chart.advisor.impl;version="0.5.0";uses:="com.knitml.renderer.chart.advisor",
  com.knitml.renderer.chart.stylesheet;version="0.5.0",
- com.knitml.renderer.chart.stylesheet.impl;version="0.5.0",
- com.knitml.renderer.chart.symbol;version="0.5.0",
- com.knitml.renderer.chart.symbol.impl;version="0.5.0",
- com.knitml.renderer.chart.writer;version="0.5.0";uses:="com.knitml.renderer.chart.symboladvisor,com.knitml.renderer.chart",
- com.knitml.renderer.chart.writer.impl;version="0.5.0";
-  uses:="org.springframework.core.io,
-   com.knitml.renderer.chart.writer,
-   com.knitml.renderer.chart.symboladvisor,
-   com.knitml.renderer.chart",
+ com.knitml.renderer.chart.stylesheet.impl;version="0.5.0";uses:="com.knitml.renderer.chart.stylesheet",
+ com.knitml.renderer.chart.symbol;version="0.5.0";uses:="com.knitml.renderer.common,com.knitml.renderer.chart",
+ com.knitml.renderer.chart.symbol.impl;version="0.5.0";uses:="com.knitml.renderer.chart,com.knitml.renderer.chart.symbol",
+ com.knitml.renderer.chart.writer;version="0.5.0";uses:="com.knitml.renderer.chart,com.knitml.renderer.chart.symbol",
+ com.knitml.renderer.chart.writer.impl;version="0.5.0";uses:="com.knitml.renderer.chart.writer,com.knitml.renderer.chart,com.knitml.renderer.chart.symbol",
  com.knitml.renderer.common;version="0.5.0",
  com.knitml.renderer.context;version="0.5.0";
   uses:="org.apache.commons.lang.math,
@@ -108,6 +104,7 @@ Export-Package: com.knitml.core.common;version="0.5.0";uses:="com.knitml.core.mo
    javax.measure.unit",
  com.knitml.renderer.event;version="0.5.0";uses:="com.knitml.renderer",
  com.knitml.renderer.event.impl;version="0.5.0";uses:="com.knitml.renderer,com.knitml.core.common,com.knitml.renderer.event",
+ com.knitml.renderer.impl;version="0.5.0",
  com.knitml.renderer.impl.basic;version="0.5.0";
   uses:="com.knitml.core.model.directions.information,
    com.knitml.core.model,
@@ -130,15 +127,29 @@ Export-Package: com.knitml.core.common;version="0.5.0";uses:="com.knitml.core.mo
    com.knitml.core.model.directions.block,
    com.knitml.renderer.chart.writer,
    com.knitml.core.common,
-   com.knitml.renderer.chart.symboladvisor,
    com.knitml.renderer.chart,
+   com.knitml.renderer.chart.symbol,
    com.knitml.renderer.context",
+ com.knitml.renderer.impl.charting.analyzer;version="0.5.0";
+  uses:="org.apache.commons.lang.math,
+   com.knitml.core.model.directions.block,
+   com.knitml.core.model.directions,
+   com.knitml.core.common,
+   com.knitml.core.model.directions.inline,
+   com.knitml.renderer.context",
+ com.knitml.renderer.impl.helpers;version="0.5.0";
+  uses:="org.apache.commons.lang.math,
+   com.knitml.core.common,
+   com.knitml.renderer.plural,
+   org.springframework.context,
+   com.knitml.renderer.context,
+   com.knitml.core.model.header",
  com.knitml.renderer.impl.html;version="0.5.0";
   uses:="com.knitml.renderer,
    com.knitml.renderer.impl.helpers,
    com.knitml.core.model,
-   com.knitml.renderer.chart.writer,
    com.knitml.renderer.impl.basic,
+   com.knitml.renderer.chart.stylesheet,
    org.springframework.context,
    com.knitml.renderer.context",
  com.knitml.renderer.plural;version="0.5.0",
@@ -180,5 +191,5 @@ Export-Package: com.knitml.core.common;version="0.5.0";uses:="com.knitml.core.mo
  com.knitml.validation.visitor.util;version="0.5.0";uses:="com.knitml.engine,com.knitml.core.model.directions.block,com.knitml.validation.context"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: com.knitml.dependencies;bundle-version="0.5.0",
- org.springframework;bundle-version="2.5.6",
- org.slf4j;bundle-version="1.5.2"
+ org.springframework;bundle-version="2.5.6"
+Import-Package: org.slf4j;version="1.5.2"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="knitml-pattern-renderer-0.5.0-SNAPSHOT.jar" sourcepath="C:/Documents and Settings/I264193/.m2/repository/com/knitml/knitml-pattern-renderer/0.5.0-SNAPSHOT/knitml-pattern-renderer-0.5.0-SNAPSHOT-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="knitml-pattern-renderer-0.5.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="knitml-core-0.5.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="knitml-el-0.5.0-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="knitml-knitting-engine-0.5.0-SNAPSHOT.jar"/>
