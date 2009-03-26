@@ -28,7 +28,7 @@ Export-Package: org.apache.commons.logging;version="1.1.1",
  org.apache.log4j.spi,
  org.apache.log4j.varia,
  org.apache.log4j.xml,
- org.slf4j,
- org.slf4j.helpers,
- org.slf4j.impl,
- org.slf4j.spi
+ org.slf4j;version="1.5.2",
+ org.slf4j.helpers;version="1.5.2",
+ org.slf4j.impl;version="1.5.2",
+ org.slf4j.spi;version="1.5.2"
