@@ -1,0 +1,52 @@
+// This is a template KEL file for a knitting pattern.
+// Two slashes (//) indicates a comment to the end of the line. Comments won't be processed by the software.
+
+Pattern "en" {                           // 'en' is the ISO country code for 'English'
+  GeneralInformation {                   // information about the pattern: optional                                      
+    Name: ""
+    Description: ""
+    Dimensions: ""
+    Gauge 'stockinette' {                // the finished object's gauge
+      StitchGauge: 3 stitchesPerInch     // alternatively use stitchesPerCentimeter
+      RowGauge: 3 rowsPerInch            // alternatively use rowsPerCentimeter
+    }
+  }
+  Supplies {                             // Supplies needed for the pattern (optional)
+    Yarns {                              // Yarns needed for the pattern (optional)
+      // The type of yarn to use (optional)
+      // You can have more than one type of yarn. Just add a line for each type.
+	  YarnType 'yarn-type1' [brand:"Cascade",category:"Fixation",weight:"worsted"] {
+		BallLength: 3 yd
+		BallWeight: 3 g
+	  }
+      // The amount of yarn needed (optional)
+      // To knit with multiple colors of the same type, add additional Yarn elements.
+	  Yarn 'yarn1' [typeref:'yarn-type1'] {  // make the typeref match the yarn type
+	    TotalLength: 1 yd                    // total length of this yarn for this project (ball length * number of balls needed)
+	    TotalWeight: 1 g                     // total weight of this yarn for this project (ball weight * number of balls needed)
+	    Color "Blue" [number:111]
+	  }
+	  Yarn 'yarn2' [typeref:'yarn-type1'] {  // a second color
+	    TotalLength: 2 yd
+	    TotalWeight: 2 g
+	    Color "Red" [number:112]
+	  }
+    }
+    // The needles needed for the project (optional)
+    // If not provided, a default needle will be used
+    Needles {
+      NeedleType 'needle-type1' circular {               // types of needles are: straight, circular, dpn
+        Size: 1 US
+      }
+      Needle 'needle1' [typeref:'needle-type1']          // the typeref should match the needle type
+      Needle 'needle2' [typeref:'needle-type1']          // a second needle
+    }
+  }
+  Directions {             
+      UseNeedle 'needle1'      // if more than one needle was specified in the needles section, you must first use one of them
+      CastOn 40 sts
+      Row 1: k to end
+      BindOff all sts
+  }
+
+}
