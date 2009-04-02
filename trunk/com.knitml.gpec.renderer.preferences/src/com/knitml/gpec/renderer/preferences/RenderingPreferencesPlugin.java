@@ -1,5 +1,7 @@
 package com.knitml.gpec.renderer.preferences;
 
+import static com.knitml.gpec.renderer.preferences.keys.PluginConstants.PLUGIN_ID;
+
 import java.util.Hashtable;
 
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
@@ -9,6 +11,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
+import com.knitml.gpec.renderer.preferences.listener.RenderingPreferenceChangeListener;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
 import com.knitml.gpec.renderer.preferences.service.impl.RenderingPreferencesServiceImpl;
 
@@ -18,15 +21,14 @@ import com.knitml.gpec.renderer.preferences.service.impl.RenderingPreferencesSer
  */
 public class RenderingPreferencesPlugin extends AbstractUIPlugin {
 
-	// The plug-in ID
-	public static final String PLUGIN_ID = "com.knitml.gpec.renderer.preferences";
-
 	// The shared instance
 	private static RenderingPreferencesPlugin plugin;
-	private IPreferenceChangeListener listener;
-	private IEclipsePreferences preferences;
-	private ServiceRegistration preferencesServiceRegistration;
+	
+	// stuff we hold onto so that we can clean up on stop() effectively
 	private RenderingPreferencesService preferencesService;
+	private ServiceRegistration preferencesServiceRegistration;
+	private IEclipsePreferences preferences;
+	private IPreferenceChangeListener listener;
 	
 	/*
 	 * (non-Javadoc)
@@ -36,11 +38,16 @@ public class RenderingPreferencesPlugin extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		preferences = (IEclipsePreferences) new InstanceScope().getNode(PLUGIN_ID);
-		preferencesService = new RenderingPreferencesServiceImpl(preferences);
+		preferencesService = new RenderingPreferencesServiceImpl();
 		preferencesServiceRegistration = context.registerService(RenderingPreferencesService.class.getName(), preferencesService, new Hashtable<Object, Object>());
 		listener = new RenderingPreferenceChangeListener(preferencesService); 
 		preferences.addPreferenceChangeListener(listener);
-		preferencesService.refreshConfiguration(preferences);
+
+//		renderingOptionsPostProcessorsTracker = new ServiceTracker(context, RenderingOptionsPostProcessor.class.getName(), null);
+//		renderingOptionsPostProcessorsTracker.open();
+		
+		preferencesService.refreshPreferences();
+		
 	}
 	
 	/*
@@ -64,5 +71,4 @@ public class RenderingPreferencesPlugin extends AbstractUIPlugin {
 	public static RenderingPreferencesPlugin getDefault() {
 		return plugin;
 	}
-	
 }

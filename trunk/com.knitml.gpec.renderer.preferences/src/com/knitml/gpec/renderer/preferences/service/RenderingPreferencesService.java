@@ -1,13 +1,15 @@
 package com.knitml.gpec.renderer.preferences.service;
 
-import org.osgi.service.prefs.Preferences;
+import org.eclipse.swt.graphics.FontData;
 
 import com.knitml.renderer.util.Configuration;
 
 public interface RenderingPreferencesService {
 	
-	Preferences getCurrentPreferences();
-	void refreshConfiguration(Preferences preferences);
+	void refreshPreferences();
 	Configuration retrieveConfiguration();
+	String getPreference(String key);
+	boolean getBooleanPreference(String key);
+	FontData[] getFontData();
 
 }

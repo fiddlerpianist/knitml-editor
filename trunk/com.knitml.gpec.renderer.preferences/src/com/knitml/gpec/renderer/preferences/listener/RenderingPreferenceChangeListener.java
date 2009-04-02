@@ -1,4 +1,4 @@
-package com.knitml.gpec.renderer.preferences;
+package com.knitml.gpec.renderer.preferences.listener;
 
 import org.eclipse.core.runtime.preferences.IEclipsePreferences.IPreferenceChangeListener;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences.PreferenceChangeEvent;
@@ -16,7 +16,7 @@ public class RenderingPreferenceChangeListener implements
 	}
 
 	public void preferenceChange(PreferenceChangeEvent event) {
-		this.service.refreshConfiguration(event.getNode());
+		this.service.refreshPreferences();
 	}
 
 }

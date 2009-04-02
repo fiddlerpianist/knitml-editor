@@ -3,6 +3,7 @@ package com.knitml.gpec.renderer.preferences;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.FontFieldEditor;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -43,6 +44,8 @@ public class BasePreferencePage extends FieldEditorPreferencePage implements
 						{ "English", Language.EN.name().toLowerCase() },
 						{ "Spanish", Language.ES.name().toLowerCase() },
 						{ "Default", "" } }, getFieldEditorParent()));
+		
+		addField(new FontFieldEditor(PreferenceKeys.FONT, "Font", getFieldEditorParent()));
 
 		addField(new BooleanFieldEditor(PreferenceKeys.SQUARE_GAUGE,
 				"Describe gauge as a s&quare", getFieldEditorParent()));
