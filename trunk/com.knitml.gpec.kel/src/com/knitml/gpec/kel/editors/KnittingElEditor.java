@@ -15,7 +15,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
-import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
@@ -24,9 +23,12 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -34,7 +36,6 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.ide.IDE;
-import org.osgi.service.prefs.Preferences;
 import org.springframework.core.io.ResourceLoader;
 
 import com.knitml.core.common.Parameters;
@@ -99,6 +100,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	private TextEditor editor;
 	private StyledText convertedXml;
 	private StyledText validatedXml;
+	private Font renderedPatternFont;
 
 	// only one of these will be used
 	private StyledText renderedPattern;
@@ -272,18 +274,17 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 
 	/**
 	 * Initializes the pattern view's main control. It will reuse an existing
-	 * control if it's of the correct type, otherwise it will destroy any
+	 * control if it's of the correct type, otherwise it will destroy an
 	 * existing control and create a new one.
 	 */
 	private void initializePatternViewControl() {
 		PatternControlType controlTypeToUse;
 		RenderingPreferencesService preferencesService = KelPlugin.getDefault()
 				.getRenderingPreferencesService();
-		Preferences preferences = preferencesService.getCurrentPreferences();
 		String textRendererFactoryName = BasicTextRendererFactory.class
 				.getName();
-		String rendererFactoryName = preferences.get(
-				PreferenceKeys.RENDERER_FACTORY, textRendererFactoryName);
+		String rendererFactoryName = preferencesService
+				.getPreference(PreferenceKeys.RENDERER_FACTORY);
 
 		if (rendererFactoryName.equals(textRendererFactoryName)) {
 			controlTypeToUse = PatternControlType.TEXT;
@@ -295,8 +296,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		// use
 		if (controlTypeToUse != controlInUse) {
 			disposePatternViewControls();
-			Control control = createPatternViewControl(controlTypeToUse,
-					preferences);
+			Control control = createPatternViewControl(controlTypeToUse);
 			setControl(PATTERN_PAGE, control);
 			controlInUse = controlTypeToUse;
 		}
@@ -311,10 +311,9 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	 * @param preferences
 	 * @return
 	 */
-	private Control createPatternViewControl(
-			PatternControlType controlTypeToUse, Preferences preferences) {
+	private Control createPatternViewControl(PatternControlType controlTypeToUse) {
 		if (controlTypeToUse == PatternControlType.TEXT) {
-			return createTextPatternViewControl(preferences);
+			return createTextPatternViewControl();
 		}
 		try {
 			// TODO could support Mozilla option at some point (when we
@@ -332,7 +331,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 									KelPlugin.PLUGIN_ID,
 									"Could not find suitable web browser on system. Will default to rendering HTML in a text window",
 									err));
-			return createTextPatternViewControl(preferences);
+			return createTextPatternViewControl();
 		}
 	}
 
@@ -343,15 +342,18 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	 * @param preferences
 	 * @return
 	 */
-	private Control createTextPatternViewControl(Preferences preferences) {
+	private Control createTextPatternViewControl() {
 		Composite composite = new Composite(getContainer(), SWT.NONE);
 		FillLayout layout = new FillLayout();
 		composite.setLayout(layout);
 		renderedPattern = new StyledText(composite, SWT.H_SCROLL | SWT.V_SCROLL);
 		renderedPattern.setEditable(false);
-		if (preferences.getBoolean(PreferenceKeys.CHART_GLOBALLY, false)) {
-			renderedPattern.setFont(JFaceResources.getTextFont());
-		}
+		RenderingPreferencesService preferencesService = KelPlugin.getDefault()
+				.getRenderingPreferencesService();
+		FontData[] fontData = preferencesService.getFontData();
+		renderedPatternFont = new Font(Display.getCurrent(), fontData);
+		renderedPattern.setFont(renderedPatternFont);
+
 		return composite;
 	}
 
@@ -363,6 +365,10 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		if (renderedPattern != null) {
 			renderedPattern.dispose();
 			renderedPattern = null;
+		}
+		if (renderedPatternFont != null) {
+			renderedPatternFont.dispose();
+			renderedPatternFont = null;
 		}
 	}
 
@@ -471,7 +477,16 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		if (renderingBrowser != null) {
 			renderingBrowser.setText(content);
 		} else {
+			RenderingPreferencesService preferencesService = KelPlugin
+					.getDefault().getRenderingPreferencesService();
+			FontData[] fontData = preferencesService.getFontData();
+			Font fontToUse = new Font(Display.getCurrent(), fontData);
+			renderedPattern.setFont(fontToUse);
 			renderedPattern.setText(content);
+			if (renderedPatternFont != null) {
+				renderedPatternFont.dispose();
+			}
+			renderedPatternFont = fontToUse;
 		}
 	}
 
