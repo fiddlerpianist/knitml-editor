@@ -16,5 +16,12 @@
             name="Operations">
       </page>
    </extension>
+   <extension
+         point="com.knitml.gpec.renderer.preferences.optionPostProcessors">
+      <optionPostProcessor
+            class="com.knitml.gpec.renderer.preferences.operations.impl.OptionsPostProcessorImpl"
+            id="com.knitml.gpec.renderer.preferences.operations.optionsPostProcessor">
+      </optionPostProcessor>
+   </extension>
 
 </plugin>
