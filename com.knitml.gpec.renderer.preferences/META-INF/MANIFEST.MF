@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
 Export-Package: com.knitml.gpec.renderer.preferences.keys;version="0.2.0",
- com.knitml.gpec.renderer.preferences.service;version="0.2.0";uses:="org.osgi.service.prefs,com.knitml.renderer.util"
+ com.knitml.gpec.renderer.preferences.listener;version="0.2.0";uses:="org.eclipse.core.runtime.preferences,com.knitml.gpec.renderer.preferences.service",
+ com.knitml.gpec.renderer.preferences.service;version="0.2.0";uses:="com.knitml.renderer.context,com.knitml.renderer.util"
 Import-Package: com.knitml.renderer;version="0.5.0",
  com.knitml.renderer.chart.advisor.impl;version="0.5.0",
  com.knitml.renderer.chart.stylesheet;version="0.5.0",

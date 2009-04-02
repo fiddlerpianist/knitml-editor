@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
+   <extension-point id="com.knitml.gpec.renderer.preferences.optionPostProcessors" name="optionPostProcessors" schema="schema/com.knitml.gpec.renderer.preferences.optionPostProcessors.exsd"/>
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
@@ -28,7 +29,7 @@
          <command
                commandId="org.eclipse.ui.window.preferences"
                id="com.knitml.gpec.renderer.preferencesOpen"
-               label="Rendering Preferences"
+               label="Preferences"
                style="push">
             <parameter
                   name="preferencePageId"

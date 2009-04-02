@@ -15,6 +15,8 @@ public class PreferenceKeys {
 
 	public static final String LANGUAGE = "language";
 	
+	public static final String FONT = "font";
+	
 	public static final String CHART_SYMBOL_PROVIDER = "chartSymbolProvider";
 	
 }
