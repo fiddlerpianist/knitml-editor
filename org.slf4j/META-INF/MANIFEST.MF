@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Slf4j Plug-in
+Bundle-Name: Slf4j Plug-in over Log4J
 Bundle-SymbolicName: org.slf4j
 Bundle-Version: 1.5.2
 Bundle-ClassPath: jcl-over-slf4j-1.5.2.jar,
@@ -32,3 +32,4 @@ Export-Package: org.apache.commons.logging;version="1.1.1",
  org.slf4j.helpers;version="1.5.2",
  org.slf4j.impl;version="1.5.2",
  org.slf4j.spi;version="1.5.2"
+Bundle-Vendor: KnitML
