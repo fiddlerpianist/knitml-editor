@@ -40,9 +40,27 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		action = ActionFactory.REFRESH.create(window);
 		register(action);
 
-		action = ActionFactory.PROPERTIES.create(window);
+		action = ActionFactory.SAVE.create(window);
 		register(action);
 
+		action = ActionFactory.SAVE_AS.create(window);
+		register(action);
+		
+		action = ActionFactory.SAVE_ALL.create(window);
+		register(action);
+
+		action = ActionFactory.REVERT.create(window);
+		register(action);
+		
+		action = ActionFactory.PROPERTIES.create(window);
+		register(action);
+		
+		action = ActionFactory.HELP_CONTENTS.create(window);
+		register(action);
+
+		action = ActionFactory.NEW_WIZARD_DROP_DOWN.create(window);
+		register(action);
+		
 	}
 
 }
