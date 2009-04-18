@@ -25,7 +25,7 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="menu:com.knitml.gpec.application.window?after=additions">
+            locationURI="menu:com.knitml.gpec.application.render">
          <command
                commandId="org.eclipse.ui.window.preferences"
                id="com.knitml.gpec.renderer.preferencesOpen"
