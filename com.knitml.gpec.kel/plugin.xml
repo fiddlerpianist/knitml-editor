@@ -8,7 +8,6 @@
             name="Knitting EL Editor"
             extensions="kel"
             icon="icons/kel_file_type.gif"
-            contributorClass="com.knitml.gpec.kel.editors.KnittingElEditorContributor"
             class="com.knitml.gpec.kel.editors.KnittingElEditor"
             id="com.knitml.gpec.kel.editors.KnittingElEditor">
       </editor>
@@ -16,11 +15,13 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
-            name="KnitML Pattern (KEL format)"
-            icon="icons/sample.gif"
             category="com.knitml.gpec.knitml"
             class="com.knitml.gpec.kel.wizards.KnittingElWizard"
-            id="com.knitml.gpec.kel.wizards.KnittingElWizard">
+            finalPerspective="com.knitml.gpec.perspective"
+            icon="icons/kel_file_type.gif"
+            id="com.knitml.gpec.kel.wizards.KnittingElWizard"
+            name="KnitML Pattern (KEL format)"
+            project="false">
       </wizard>
       <primaryWizard
             id="com.knitml.gpec.kel.wizards.KnittingElWizard">
@@ -32,13 +33,92 @@
             locationURI="menu:com.knitml.gpec.application.file.new?after=additions">
          <command
                commandId="com.knitml.gpec.kel.commands.newKelFileWizard"
+               icon="icons/kel_file_type.gif"
+               label="KnitML Pattern (KEL)"
                style="push">
          </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?before=additions">
+         <menu
+               id="com.knitml.gpec.menu.edit"
+               label="Edit">
+            <command
+                  commandId="org.eclipse.ui.edit.undo"
+                  label="Undo"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.redo"
+                  label="Redo"
+                  style="push">
+            </command>
+            <separator
+                  name="com.knitml.gpec.kel.separator1"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.edit.cut"
+                  label="Cut"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.copy"
+                  label="Copy"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.paste"
+                  label="Paste"
+                  style="push">
+            </command>
+            <separator
+                  name="com.knitml.gpec.kel.separator2"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.edit.delete"
+                  label="Delete"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.selectAll"
+                  label="Select All"
+                  style="push">
+            </command>
+            <separator
+                  name="com.knitml.gpec.kel.separator3"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.edit.findReplace"
+                  label="Find/Replace..."
+                  style="push">
+            </command>
+            <separator
+                  name="com.knitml.gpec.kel.separator4"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.edit.addBookmark"
+                  label="Add Bookmark..."
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="com.knitml.gpec.application.render"
+               label="Render">
+         </menu>
       </menuContribution>
       <menuContribution
             locationURI="popup:com.knitml.gpec.menu.new?before=project-additions">
          <command
                commandId="com.knitml.gpec.kel.commands.newKelFileWizard"
+               icon="icons/kel_file_type.gif"
+               label="KnitML Pattern (KEL)"
                style="push">
          </command>
       </menuContribution>
@@ -46,12 +126,15 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            categoryId="com.knitml.gpec.kel.commands.category"
+            categoryId="com.knitml.gpec.commands.category"
             defaultHandler="com.knitml.gpec.kel.handlers.NewKelFileWizardHandler"
             description="KnitML File (KEL Format)"
             id="com.knitml.gpec.kel.commands.newKelFileWizard"
             name="KnitML File (KEL Format)">
       </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
    </extension>
 
 </plugin>
