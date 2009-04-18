@@ -12,6 +12,7 @@ import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.internal.ide.IDEInternalWorkbenchImages;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.model.WorkbenchAdapterBuilder;
 import org.osgi.framework.Bundle;
@@ -34,6 +35,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		configurer.setSaveAndRestore(true);
 		final String ICONS_PATH = "icons/full/";
 		final String PATH_OBJECT = ICONS_PATH + "obj16/";
+		final String WIZBAN_OBJECT = ICONS_PATH + "wizban/";
 		Bundle ideBundle = Platform.getBundle(IDEWorkbenchPlugin.IDE_WORKBENCH);
 		declareWorkbenchImage(configurer, ideBundle,
 				IDE.SharedImages.IMG_OBJ_PROJECT, PATH_OBJECT + "prj_obj.gif",
@@ -41,6 +43,9 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		declareWorkbenchImage(configurer, ideBundle,
 				IDE.SharedImages.IMG_OBJ_PROJECT_CLOSED, PATH_OBJECT
 						+ "cprj_obj.gif", true);
+		declareWorkbenchImage(configurer, ideBundle,
+				IDEInternalWorkbenchImages.IMG_DLGBAN_SAVEAS_DLG, WIZBAN_OBJECT
+						+ "saveas_wiz.png", true);
 	}
 
 	public void preStartup() {
