@@ -110,3 +110,4 @@ Export-Package: org.aopalliance.aop;version="1.0.0",
 Import-Package: org.apache.commons.logging;version="1.1.1",
  org.apache.commons.logging.impl;version="1.1.1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Vendor: KnitML
