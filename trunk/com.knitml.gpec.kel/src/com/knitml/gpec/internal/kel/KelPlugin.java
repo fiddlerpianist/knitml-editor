@@ -1,5 +1,6 @@
 package com.knitml.gpec.internal.kel;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -37,7 +38,6 @@ public class KelPlugin extends AbstractUIPlugin {
 		renderingServiceTracker = new ServiceTracker(context, RenderingService.class.getName(), null);
 		renderingServiceTracker.open();
 		plugin = this;
-		
 	}
 
 	/*
