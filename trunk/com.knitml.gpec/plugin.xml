@@ -27,7 +27,7 @@
             name="KnitML Pattern Editor">
          <property
                name="windowImages"
-               value="icons/alt_window_16.gif,icons/alt_window_32.gif,icons/alt_window_48.gif">
+               value="icons/window_16.png,icons/window_32.png,icons/window_48.png">
          </property>
          <property
                name="appName"
