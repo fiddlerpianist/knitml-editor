@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry exported="true" kind="lib" path="collections-generic-4.01.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-collections-3.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-io-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="commons-lang-2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="groovy-all-1.5.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="jibx-extras-1.1.6a.jar"/>
-	<classpathentry exported="true" kind="lib" path="jibx-run-1.1.6a.jar"/>
-	<classpathentry exported="true" kind="lib" path="jscience-4.3.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="stax-api-1.0.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="wstx-asl-3.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="collections-generic-4.01.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="commons-collections-3.2.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="commons-io-1.4.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="commons-lang-2.3.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="groovy-all-1.5.7.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jibx-extras-1.1.6a.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jibx-run-1.1.6a.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="jscience-4.3.1.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="stax-api-1.0.1.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="wstx-asl-3.2.1.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
