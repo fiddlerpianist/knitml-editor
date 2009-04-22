@@ -77,3 +77,4 @@ Export-Package: groovy.inspect,
  org.jibx.extras;version="1.1.6.a",
  org.jibx.runtime;version="1.1.6.a",
  org.jibx.runtime.impl;version="1.1.6.a"
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
