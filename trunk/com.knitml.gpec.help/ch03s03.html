@@ -1,0 +1,89 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Improving the Pattern</title><meta content="DocBook XSL-NS Stylesheets V1.73.2" name="generator"><link rel="start" href="index.html" title="The KnitML User's Guide"><link rel="up" href="ch03.html" title="Chapter&nbsp;3.&nbsp;The Knitting Expression Language"><link rel="prev" href="ch03s02.html" title="Writing a Simple Pattern"><link rel="next" href="ch04.html" title="Chapter&nbsp;4.&nbsp;The XML Pattern"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Improving the Pattern</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="ch03s02.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;3.&nbsp;The Knitting Expression Language</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="ch04.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N10242"></a>Improving the Pattern</h2></div></div></div><p>Our simple square pattern renders fine. There are, however, a couple of quirks that we
+          can eliminate. The first is that there are not line breaks where you would expect them to
+          be in a traditional pattern. You can fix this by adding section elements to break the
+          pattern up into logical paragraphs.</p><p><pre class="programlisting">Pattern 'en' {
+...
+    Section {
+      CastOn 24 'long-tail'
+    }
+    Section {
+      Instruction 'stockinette-st' {
+        Row: k to end
+        Row: p to end
+      }
+      Repeat 'stockinette-st' until measures 4 in
+    }
+    Section {
+      Row: BindOff all sts
+    }
+  }
+}</pre>The
+          renderer will produce:</p><p><pre class="programlisting">...
+Directions
+----------
+Using the long-tail method, cast on 24 stitches.
+
+Row 1: Knit
+Row 2: Purl
+Repeat rows 1-2 for 4 in.
+
+Row 25: Bind off all stitches</pre>Here's
+          another thought. A pattern designer may want to define more than one instruction group in
+          the pattern. Think about knitting a sock, for instance. There are separate instructions
+          for knitting the cuff, leg, heel flap, heel turn, gusset, foot, and toe. Being able to add
+          headers to each instruction group would be very useful.</p><p>You can add instruction groups in the directions and label them.</p><p><pre class="programlisting">pattern 'en' {
+...
+    <span class="emphasis"><em>InstructionGroup [label:'Cast On'] {</em></span>
+      CastOn 24 'long-tail'
+<span class="emphasis"><em>    }
+    InstructionGroup [label:'Make the Square'] {
+</em></span>      Instruction 'stockinette-st' {
+        Row: k to end
+        Row: p to end
+      }
+      Repeat 'stockinette-st' until measures 4 in
+<span class="emphasis"><em>    }
+    InstructionGroup [label:'Finish It Off!'] {
+</em></span>      Row: bindOff all sts
+<span class="emphasis"><em>    }
+</em></span>...
+}</pre>This
+          would look like:</p><pre class="programlisting">Directions
+----------
+Cast On
+-------
+Using the long-tail method, cast on 24 stitches.
+
+Make The Square
+---------------
+Row 1: Knit
+Row 2: Purl
+Repeat rows 1-2 for 4 in.
+
+Finish It Off!
+--------------
+Row 25: bind off all stitches</pre><p>Another quirk is that you probably would not see the bind off row expressed as Row 25.
+          To reset the row count for this instruction group, add the keyword
+          <code class="code">resetRowCount</code> to the definition:</p><p><pre class="programlisting">Pattern 'en' {
+...
+    InstructionGroup [label:'Finish It Off!'] resetRowCount {
+      Row: BindOff all sts
+    }
+...
+}</pre>This
+          will produce:</p><p><pre class="programlisting">Finish It Off!
+--------------
+Row 1: Bind off all stitches</pre>Alternatively,
+          you may not want the row numbered at all, in which case you can do this:</p><p><pre class="programlisting">Pattern 'en' {
+...
+    InstructionGroup [label:'Finish It Off!'] {
+      NextRow: BindOff all sts
+    }
+...
+}</pre>and
+          you will get:</p><p>
+          <pre class="programlisting">...
+Finish It Off!
+--------------
+Next Row: Bind off all stitches</pre>
+        </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="ch03s02.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="ch03.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="ch04.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Writing a Simple Pattern&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;4.&nbsp;The XML Pattern</td></tr></table></div></body></html>
