@@ -59,6 +59,7 @@ Project (http://www.springframework.org).
       <plugin id="com.knitml.gpec.help"/>
       <plugin id="com.knitml.gpec.kel"/>
       <plugin id="com.knitml.gpec.renderer.preferences"/>
+      <plugin id="com.knitml.gpec.renderer.preferences.operations"/>
       <plugin id="com.knitml.libs"/>
       <plugin id="com.knitml.logging.config" fragment="true"/>
       <plugin id="com.knitml.renderer.service"/>
