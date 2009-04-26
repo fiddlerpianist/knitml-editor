@@ -5,11 +5,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: KnitML Libs Plug-in
 Bundle-SymbolicName: com.knitml.libs
 Bundle-Version: 0.5.0
-Bundle-ClassPath: knitml-core-0.5.0-SNAPSHOT.jar,
- knitml-el-0.5.0-SNAPSHOT.jar,
- knitml-knitting-engine-0.5.0-SNAPSHOT.jar,
- knitml-validation-0.5.0-SNAPSHOT.jar,
- knitml-pattern-renderer-0.5.0-SNAPSHOT.jar
+Bundle-ClassPath: knitml-core-0.5.0.jar,
+ knitml-el-0.5.0.jar,
+ knitml-knitting-engine-0.5.0.jar,
+ knitml-pattern-renderer-0.5.0.jar,
+ knitml-validation-0.5.0.jar
 Bundle-Vendor: KnitML
 Export-Package: com.knitml.core.common;version="0.5.0";uses:="com.knitml.core.model,org.jibx.runtime.impl,com.knitml.core.model.header",
  com.knitml.core.model;version="0.5.0";
