@@ -42,6 +42,7 @@ public class BasePreferencePage extends FieldEditorPreferencePage implements
 		addField(new ComboFieldEditor(PreferenceKeys.LANGUAGE, "Language",
 				new String[][] {
 						{ "English", Language.EN.name().toLowerCase() },
+						{ "French", Language.FR.name().toLowerCase() },
 						{ "Spanish", Language.ES.name().toLowerCase() },
 						{ "Default", "" } }, getFieldEditorParent()));
 		
