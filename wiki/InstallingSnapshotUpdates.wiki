@@ -1,9 +1,12 @@
 #summary How to Install Snapshot Updates for the KnitML Editor
 
-= Instructions =
+If you want the latest and greatest updates to the KnitML Core Tools without having to wait for the next version of KnitML Pattern Editor, this document tells you what you need to do.
 
-  * Unzip the snapshot update (ZIP file) into the editor's plugin directory. For instance, if you installed the editor at C:\gpec-0.2.0, unzip it into C:\gpec-0.2.0\plugins. Make sure you use folder names when you unzip.
-  * The next time you run the editor, run it with the -clean option. You can either create a shortcut from the executable file and add the "-clean" option to it, or you can open a shell window in the editor's home directory and run it by typing:
+= Instructions =
+  * Download the snapshot update from this site. Click on the "Downloads" tab and find the latest one. They are not platform dependent, which means that it does not matter whether you are running Windows, Mac OS, or Linux. The snapshot update will work for all of them.
+  * Unzip the downloaded file into _KnitML Pattern Editor Home_/plugins, where _KnitML Pattern Editor Home_ is where you originally installed the KnitML Pattern Editor. For example, if you installed the Pattern Editor into C:\gpec-0.2.0, unzip the snapshot update into C:\gpec-0.2.0\plugins.
+  * The next time you run the editor, run it with the -clean option. You can do this by either creating a shortcut from the executable file and adding the "-clean" option to it, or by opening a shell window in the editor's home directory and running it by typing:
 {{{
   knitmlEditor -clean
 }}}
+You only need to do this once.
