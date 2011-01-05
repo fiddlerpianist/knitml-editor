@@ -13,7 +13,7 @@ If you want the latest and greatest updates to the KnitML Core Tools without hav
 Note: for Mac OS, you need to navigate to the knitmlEditor.app/Contents/MacOS directory to execute this command:
 {{{
   MyComputer:gpec-0.2.0 fiddlerpianist$ cd knitmlEditor.app/Contents/MacOS/
-  MyComputer;MacOS fiddlerpianist$ ./knitmlEditor -clean
+  MyComputer:MacOS fiddlerpianist$ ./knitmlEditor -clean
 }}}
 
 
