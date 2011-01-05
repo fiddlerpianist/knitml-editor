@@ -8,7 +8,8 @@ If you want the latest and greatest updates to the KnitML Core Tools without hav
   * The next time you run the editor, run it with the -clean option. You can do this by either creating a shortcut from the executable file and adding the "-clean" option to it, or by opening a shell window in the editor's home directory and running it by typing:
 {{{
   knitmlEditor -clean
-}}}Note: for Mac OS, you need to navigate to the knitmlEditor.app/Contents/MacOS directory to execute this command:
+}}}
+  * Note: for Mac OS, you need to navigate to the knitmlEditor.app/Contents/MacOS directory to execute the clean command:
 {{{
   MyComputer:gpec-0.2.0 fiddlerpianist$ cd knitmlEditor.app/Contents/MacOS/
   MyComputer:MacOS fiddlerpianist$ ./knitmlEditor -clean
