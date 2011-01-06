@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KnitML Renderer Preferences Operations Plug-in
 Bundle-SymbolicName: com.knitml.gpec.renderer.preferences.operations;singleton:=true
-Bundle-Version: 0.2.0
+Bundle-Version: 0.2.1
 Bundle-Activator: com.knitml.gpec.renderer.preferences.operations.Activator
 Bundle-Vendor: KnitML
 Require-Bundle: org.eclipse.ui,

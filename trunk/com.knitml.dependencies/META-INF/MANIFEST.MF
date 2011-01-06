@@ -2,14 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KnitML Plugin Dependencies
 Bundle-SymbolicName: com.knitml.dependencies
-Bundle-Version: 0.5.0
+Bundle-Version: 0.6.0.CI-20110104
 Bundle-ClassPath: collections-generic-4.01.jar,
  commons-collections-3.2.jar,
  commons-io-1.4.jar,
  commons-lang-2.3.jar,
- groovy-all-1.5.7.jar,
- jibx-extras-1.1.6a.jar,
- jibx-run-1.1.6a.jar,
+ groovy-all-1.6.7.jar,
+ jibx-extras-1.2.1.jar,
+ jibx-run-1.2.1.jar,
  jscience-4.3.1.jar,
  stax-api-1.0.1.jar,
  wstx-asl-3.2.1.jar
@@ -74,7 +74,7 @@ Export-Package: groovy.inspect,
  org.codehaus.groovy.runtime.metaclass,
  org.codehaus.groovy.runtime.typehandling,
  org.codehaus.groovy.runtime.wrappers,
- org.jibx.extras;version="1.1.6.a",
- org.jibx.runtime;version="1.1.6.a",
- org.jibx.runtime.impl;version="1.1.6.a"
+ org.jibx.extras;version="1.2.1",
+ org.jibx.runtime;version="1.2.1",
+ org.jibx.runtime.impl;version="1.2.1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

@@ -6,11 +6,11 @@
 	<classpathentry exported="true" kind="lib" path="commons-collections-3.2.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="commons-io-1.4.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="commons-lang-2.3.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
-	<classpathentry exported="true" kind="lib" path="groovy-all-1.5.7.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
-	<classpathentry exported="true" kind="lib" path="jibx-extras-1.1.6a.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
-	<classpathentry exported="true" kind="lib" path="jibx-run-1.1.6a.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="jscience-4.3.1.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="stax-api-1.0.1.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
 	<classpathentry exported="true" kind="lib" path="wstx-asl-3.2.1.jar" sourcepath="com.knitml.dependenciessrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="groovy-all-1.6.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="jibx-extras-1.2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="jibx-run-1.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
