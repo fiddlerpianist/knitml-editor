@@ -1,0 +1,47 @@
+Pattern "en" {
+  GeneralInformation {                                      
+    Name: ""
+    Description: ""
+    Dimensions: ""
+    Gauge 'stockinette' {
+      StitchGauge: 3 stitchesPerInch
+      RowGauge: 3 rowsPerInch
+    }
+  }
+  Supplies {
+    Yarns {
+	  YarnType 'yarn-type1' [brand:"Cascade",category:"Fixation",weight:"worsted"] {
+		BallLength: 3 yd
+		BallWeight: 3 g
+	  }
+	  Yarn 'yarn1' [typeref:'yarn-type1'] {
+	    TotalLength: 1 yd                  
+	    TotalWeight: 1 g                   
+	    Color "Blue" [number:111]          
+	  }
+	  Yarn 'yarn2' [typeref:'yarn-type1'] {
+	    TotalLength: 2 yd
+	    TotalWeight: 2 g
+	    Color "Red" [number:112]
+	  }
+    }
+    Needles {
+      NeedleType 'needle-type1' circular {
+        Size: 1 US
+      }
+      Needle 'needle1' withLabel "Needle 1" [typeref:'needle-type1']
+      Needle 'needle2' withLabel "Needle 2" [typeref:'needle-type1']
+    }
+    Accessories                                
+  }
+  Directions {             
+      UseNeedle 'needle1'
+      CastOn 40 sts
+      Instruction 'st-st' {
+        Row 1: k to end
+        Row 2: p to end
+      }
+      Repeat 'st-st' for 3 in
+      NextRow: BindOff all sts
+  }
+}

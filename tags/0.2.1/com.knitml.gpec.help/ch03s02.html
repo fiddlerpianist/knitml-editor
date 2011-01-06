@@ -1,0 +1,191 @@
+<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Writing a Simple Pattern</title><meta content="DocBook XSL-NS Stylesheets V1.73.2" name="generator"><link rel="start" href="index.html" title="The KnitML User's Guide"><link rel="up" href="ch03.html" title="Chapter&nbsp;3.&nbsp;The Knitting Expression Language"><link rel="prev" href="ch03.html" title="Chapter&nbsp;3.&nbsp;The Knitting Expression Language"><link rel="next" href="ch03s03.html" title="Improving the Pattern"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Writing a Simple Pattern</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="ch03.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;3.&nbsp;The Knitting Expression Language</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="ch03s03.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N101C3"></a>Writing a Simple Pattern</h2></div></div></div><p>For this example, we will compose the KnitML pattern using the KnittingEL syntax. The
+          pattern is for a simple 4x4 in square knitted in stockinette stitch.</p><p>Create a file name <code class="code">simple-square.kel</code>. We will start by defining the
+            <code class="code">pattern</code> element, the root element for all KnitML patterns. Since we're not
+          internationalizing this pattern, we'll specify that it was written in <code class="code">'en'</code>
+          (the ISO-639 Language Code for English).<pre class="programlisting">Pattern 'en' {}</pre></p><p>Next, we'll add some header information about the pattern to a
+            <code class="code">generalInformation</code> element within the <code class="code">pattern</code>
+          element.<pre class="programlisting">Pattern 'en' {
+  GeneralInformation {}
+}</pre></p><p>Let's give the pattern a name. Name, description, author, etc. go under
+            <code class="code">generalInformation</code>. Anything that should be interpreted as a literal value
+          (for instance, a string of text) should be in single quotes.</p><p>
+          <pre class="programlisting">Pattern 'en' {
+  GeneralInformation {
+    Name: 'Simple Square'
+    Description: 'A simple square'
+    Dimensions: '4 in by 4 in'
+  }
+}</pre>
+        </p><p>Gauge also goes here. We'll indicate that the gauge swatch should be knit in
+          stockinette at 6 stitches to the inch and 6 rows to the inch.</p><p><pre class="programlisting">Pattern 'en' {
+  GeneralInformation {
+    Name: 'Simple Square'
+    Description: 'A simple square'
+    Dimensions: '4 in by 4 in'
+    Gauge 'stockinette' {
+      StitchGauge: 6 stitchesPerInch
+      RowGauge: 6 rowsPerInch
+    }
+  }
+}</pre>The
+          colon after the function name is optional. It increases readability in this case<sup>[<a href="#ftn.N101EF" name="N101EF" class="footnote">2</a>]</sup>.</p><p>Let's move on to the next section. We also need some supplies to knit this pattern.
+          Generally a knitter needs needles and yarn, and needs to know what type of each the
+          pattern calls for. In this case, we're not particularly picky about the yarn (as long as
+          it is plausible for obtaining gauge). The only thing we are going to specify is that the
+          weight should be worsted. Likewise, we are going to specify using a size US 4 circular
+          needle of any length.</p><p><pre class="programlisting">Pattern 'en' {
+  GeneralInformation { ... }
+  Supplies {
+    Yarns {
+      YarnType 'the-yarn' [weight:'worsted']
+    }
+    Needles {
+      needleType 'size-4' circular { size: 4 US }
+      needle 'the-needle' [typeref:'size-4']
+    }
+  }
+}</pre>First
+          we added a <code class="code">yarns</code> sub-element to the supplies element. This is where the yarns
+          that will be used in the pattern are defined. Both yarn types (e.g. brand, weight, etc.)
+          and yarn colors of a specific type may appear. In this case, we are only using one type of
+          yarn (with an identifier of 'worsted-weight-yarn' so that we can refer to it later in the
+          pattern if need be). As we don't care about color, there are no <code class="code">yarn</code> elements
+          to define.</p><p>Similarly, we have a needles element where all of the needles that will be used in the
+          pattern are defined. Both needle types (e.g. DPN, circular, and other attributes) and
+          number of needles of a particular needle type must be defined. Here we define one needle
+          type we're identifying as 'size-4'. It's a circular needle ('circular') and its size is US
+          4. We also define that we need one needle of type 'size-4' and we're going to call that
+          needle 'the-needle' (since this project only uses one needle).</p><p>Now we will add directions.</p><p><pre class="programlisting">Pattern 'en' {
+  ...
+  Directions {}
+}</pre>Since our gauge
+          is 6 stitches to the inch and we want to knit a 4-inch square, the first thing to do is to
+          cast on 24 stitches (6 times 4). You can specify a cast-on method if desired. In this
+          case, we'll specify that the knitter should use the long-tail cast on.</p><p>
+          <pre class="programlisting">Pattern 'en' {
+  ...
+  Directions {
+    CastOn 24 'long-tail'
+  }
+}</pre>
+        </p><p>Stockinette stitch is a two-row repeat when knitting flat. The first row is all knit,
+          and the second is all purled.</p><p><pre class="programlisting">Pattern 'en' {
+  ...
+  Directions {
+    CastOn 24 'long-tail'
+    Row 1: k to end
+    Row 2: p to end
+  }
+}</pre>Since
+          the project's dimensions should be 4 inches tall as well as wide, we don't want to have to
+          write out 22 more rows of the same two rows. So we will declare rows 1 and 2 to be an
+          instruction, give that instruction an identifier ('stockinette-st'), and then repeat it a
+          certain number of times. In this case, we will repeat the two stockinette rows until the
+          project measures 4 inches. KnitML also calculates row numbers for you if not provided, so
+          we will remove them.</p><p><pre class="programlisting">Pattern 'en' {
+  ...
+  Directions {
+    CastOn 24 'long-tail'
+    Instruction 'stockinette-st' {
+      Row: k to end
+      Row: p to end
+    }
+    Repeat 'stockinette-st' until measures 4 in
+  }
+}</pre>
+          <code class="code">until measures</code> are keywords which inform the KnittingEL processor to
+          construct the particular XML form when an instruction is repeated to a measurement. There
+          are various other keywords in the KnittingEL. See the appendix for a list of them.</p><p>Now that we've reached 4 inches, we will finish the project by binding off all
+          stitches.</p><p><pre class="programlisting">Pattern 'en' {
+  ...
+  Directions {
+    CastOn 24 'long-tail'
+    Instruction 'stockinette-repeat' {
+      Row: k to end
+      Row: p to end
+    }
+    Repeat 'stockinette-st' until measures 4 in
+    Row: BindOff all sts
+  }
+}
+</pre>That's
+          all there is to it! The complete pattern looks like this:</p><p><pre class="programlisting">Pattern 'en' {
+  GeneralInformation {
+    Name: 'Simple Square'
+    Description: 'A simple square'
+    Dimensions: '4 in by 4 in'
+    Gauge 'stockinette' {
+      StitchGauge: 6 stitchesPerInch
+      RowGauge: 6 rowsPerInch
+    }
+  }
+  Supplies {
+    Yarns {
+      YarnType 'the-yarn' [weight:'worsted']
+    }
+    Needles {
+      NeedleType 'size-4' circular { size: 4 US }
+      Needle 'the-needle' [typeref:'size-4']
+    }
+  }
+  Directions {
+    CastOn 24 'long-tail'
+    Instruction 'stockinette-st' {
+      Row: k to end
+      Row: p to end
+    }
+    Repeat 'stockinette-st' until measures 4 in
+    Row: BindOff all sts
+  }
+}
+</pre>If
+          you run this through the basic text rendering program, you'll get this:</p><p>
+          <pre class="programlisting">Simple Square
+A simple square
+
+Stitch Gauge: 6 st/in
+Row Gauge: 6 row/in
+
+Yarn:
+    worsted weight
+
+Needles:
+    1 circular needle size 4 US (3.5 mm)
+
+Directions
+----------
+Using the long-tail method, cast on 24 stitches.
+Row 1: Knit
+Row 2: Purl
+Repeat rows 1-2 for 4 in.
+Row 25: Bind off all stitches</pre>
+        </p><p>This may not appear to be worth all of the trouble, but keep a few things in mind.
+          First of all, the pattern has been "test knit." This means If there were too many or two
+          few stitches for any given row, the validator would raise an error. This can be very
+          helpful because it can catch certain kinds of errata immediately. The validator also fills
+          in missing information as it's being knit. Notice that all of the rows have been assigned numbers.<sup>[<a href="#ftn.N1022D" name="N1022D" class="footnote">3</a>]</sup></p><p>Second, note that our needle size was automatically converted to metric. There are
+          various options on the pattern renderer that will allow you to use the system of units
+          most familiar to you, regardless of what the original pattern was written in. (Note that
+          the pattern renderer does not currently support these options, but it will in a future
+          release.)</p><p>Here is the gauge specification in metric:</p><p><pre class="programlisting">Simple Square
+A simple square
+
+Stitch Gauge: 2.4 st/cm
+Row Gauge: 2.4 row/cm
+...</pre>Also
+          note that, even though we specified that the pattern is written in English, this pattern
+          can (for the most part) be rendered in another language very easily. Simply setting the
+          renderer to use Spanish (using pattern conventions from Spain) produces this result:</p><p>
+          <pre class="programlisting">...
+Instrucciones
+-------------
+Usando el montado doble, monta 24 puntos.
+Hilera 1: Todo del derecho
+Hilera 2: Todo del reves
+Repite hileras 1-2 hasta que la pieza mida 4 in.
+...</pre>
+        </p><p>Note that the header information (i.e. the parts of the pattern written in English)
+          would always be written in English unless you internationalized them. See <a class="xref" href="ch05.html" title="Chapter&nbsp;5.&nbsp;Internationalization">Chapter&nbsp;5, <i>Internationalization</i></a> for more information.</p><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a href="#N101EF" name="ftn.N101EF" class="para">2</a>] </sup>Note that using a colon here has a slightly different implication than using it
+              with the <code class="code">row</code> family of functions, as was previously discussed.</p></div><div class="footnote"><p><sup>[<a href="#N1022D" name="ftn.N1022D" class="para">3</a>] </sup>Also note that the bind off row is labeled as Row 25. That's because the pattern's
+              row gauge is set to 6 rows per inch, and the repeat was done for 4 inches. That would
+              make the next row knit row 25.</p></div></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="ch03.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="ch03.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="ch03s03.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Chapter&nbsp;3.&nbsp;The Knitting Expression Language&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Improving the Pattern</td></tr></table></div></body></html>
