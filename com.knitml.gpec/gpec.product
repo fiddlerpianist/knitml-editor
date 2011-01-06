@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.4"?>
 
-<product name="KnitML Pattern Editor" id="com.knitml.gpec.product" application="com.knitml.gpec.application" version="0.2.0" useFeatures="false">
+<product name="KnitML Pattern Editor" id="com.knitml.gpec.product" application="com.knitml.gpec.application" version="0.2.1" useFeatures="false">
 
    <aboutInfo>
       <image path="icons/about.gif"/>
