@@ -29,7 +29,7 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.ide.IDE;
 
 import com.knitml.core.common.Parameters;
-import com.knitml.el.GroovyKnitProgram;
+import com.knitml.el.KelProgram;
 import com.knitml.gpec.internal.kel.KelPlugin;
 import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
@@ -291,7 +291,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	protected boolean convertKel() {
 		Reader editorReader = new StringReader(editor.getDocumentProvider()
 				.getDocument(editor.getEditorInput()).get());
-		GroovyKnitProgram converter = new GroovyKnitProgram();
+		KelProgram converter = new KelProgram();
 		Parameters parameters = new Parameters();
 		parameters.setCheckSyntax(false);
 		parameters.setReader(editorReader);

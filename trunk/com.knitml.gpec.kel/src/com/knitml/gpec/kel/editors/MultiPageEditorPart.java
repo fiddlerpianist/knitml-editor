@@ -80,6 +80,7 @@ import org.eclipse.ui.services.IServiceLocator;
  * 
  * @see org.eclipse.ui.part.MultiPageEditorActionBarContributor
  */
+@SuppressWarnings({ "deprecation", "restriction", "unchecked", "rawtypes" })
 public abstract class MultiPageEditorPart extends EditorPart {
 	
 	/**

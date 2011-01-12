@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KnitML Rendering Service Plug-in
 Bundle-SymbolicName: com.knitml.renderer.service
-Bundle-Version: 0.6.0.CI-20110104
+Bundle-Version: 0.6.0.CI-20110111
 Bundle-Activator: com.knitml.renderer.service.Activator
 Bundle-Vendor: KnitML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -14,5 +14,5 @@ Import-Package: com.knitml.core.common;version="0.6.0",
  com.knitml.renderer.context;version="0.6.0",
  com.knitml.renderer.program;version="0.6.0",
  org.jibx.runtime;version="1.2.1",
- org.osgi.framework;version="1.4.0"
-Export-Package: com.knitml.renderer.service;version="0.6.0.CI-20110104"
+ org.osgi.framework;version="1.5.0"
+Export-Package: com.knitml.renderer.service;version="0.6.0.CI-20110111"

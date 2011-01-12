@@ -51,6 +51,7 @@ import org.eclipse.ui.services.IServiceScopes;
  * an instance of this class. This class may be instantiated or subclassed.
  * </p>
  */
+@SuppressWarnings({ "deprecation", "restriction", "rawtypes" })
 public class MultiPageEditorSite implements IEditorSite, INestable {
 
 	/**
