@@ -14,7 +14,6 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.ide.IDEInternalWorkbenchImages;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
-import org.eclipse.ui.internal.ide.model.WorkbenchAdapterBuilder;
 import org.osgi.framework.Bundle;
 
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
@@ -49,7 +48,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 	}
 
 	public void preStartup() {
-		WorkbenchAdapterBuilder.registerAdapters();
+		IDE.registerAdapters();
 	}
 
 	private void declareWorkbenchImage(IWorkbenchConfigurer configurer_p,
