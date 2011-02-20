@@ -1,5 +1,7 @@
-<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</title><meta content="DocBook XSL-NS Stylesheets V1.73.2" name="generator"><link rel="start" href="index.html" title="The KnitML User's Guide"><link rel="up" href="index.html" title="The KnitML User's Guide"><link rel="prev" href="apa.html" title="Appendix&nbsp;A.&nbsp;The Specification"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="apa.html">Prev</a>&nbsp;</td><th align="center" width="60%">&nbsp;</th><td align="right" width="20%">&nbsp;</td></tr></table><hr></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="N10392"></a>Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</h2></div></div></div><p>
-      <div class="table"><a name="el-function-table"></a><p class="title"><b>Table&nbsp;B.1.&nbsp;Defined Expression Language Functions</b></p><div class="table-contents"><table summary="Defined Expression Language Functions" width="100%" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Function</th><th align="left">Parameters</th><th align="left">Description</th><th align="left">Example</th><th align="left">XML Equivalent</th></tr></thead><tbody><tr><td align="left">applyNextRow</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"><link rel="home" href="index.html" title="The KnitML User's Guide"><link rel="up" href="index.html" title="The KnitML User's Guide"><link rel="prev" href="apa.html" title="Appendix&nbsp;A.&nbsp;The Specification"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apa.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;</td></tr></table><hr></div><div class="appendix" title="Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference"><div class="titlepage"><div><div><h2 class="title"><a name="d0e887"></a>Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</h2></div></div></div><p>
+      </p><div class="table"><a name="el-function-table"></a><p class="title"><b>Table&nbsp;B.1.&nbsp;Defined Expression Language Functions</b></p><div class="table-contents"><table summary="Defined Expression Language Functions" width="100%" border="1"><colgroup><col align="left" class="Function"><col align="left" class="Parameters"><col align="left" class="Description"><col align="left" class="Example"><col align="left" class="XML Equivalent"></colgroup><thead><tr><th align="left">Function</th><th align="left">Parameters</th><th align="left">Description</th><th align="left">Example</th><th align="left">XML Equivalent</th></tr></thead><tbody><tr><td align="left">applyNextRow</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
               </td><td align="left">Use the next row for the given block instruction</td><td align="left">
                 <code class="code">applyNextRow 'my'</code>
               </td><td align="left">
@@ -51,6 +53,10 @@
                 <pre class="programlisting">&lt;cast-on
   count-as-row="false"&gt;
 35&lt;/cast-on&gt;</pre>
+              </td></tr><tr><td align="left">cdd</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a></td><td align="left">Center double decrease</td><td align="left">
+                <code class="code">cdd 2</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="cdd"&gt;2&lt;/double-decrease&gt;</code>
               </td></tr><tr><td align="left">co / CO</td><td align="left">(same as castOn)</td><td align="left">alias for castOn</td><td align="left">
                 <code class="code">co 35</code>
               </td><td align="left">
@@ -261,6 +267,10 @@ k3 tbl</pre>
                 <code class="code">k2tog</code>
               </td><td align="left">
                 <code class="code">&lt;decrease type="k2tog"/&gt;</code>
+              </td></tr><tr><td align="left">k3tog</td><td align="left">(none)</td><td align="left">Knit next three stitches together</td><td align="left">
+                <code class="code">k3tog</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="k3tog"/&gt;</code>
               </td></tr><tr><td align="left">kfb</td><td align="left">(none)</td><td align="left">Knit to the front and back of the next stitch.</td><td align="left">
                 <code class="code">kfb</code>
               </td><td align="left">
@@ -369,10 +379,18 @@ k3 tbl</pre>
                 <pre class="programlisting">&lt;repeat until="end"&gt;
   &lt;purl/&gt;
 &lt;/repeat&gt;</pre>
-              </td></tr><tr><td align="left">p2tog</td><td align="left">(none)</td><td align="left">Purl next two stitches together</td><td align="left">
+              </td></tr><tr><td align="left">p2tog</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a> (optional)</td><td align="left">Purl next two stitches together</td><td align="left">
                 <code class="code">p2tog</code>
               </td><td align="left">
                 <code class="code">&lt;decrease type="p2tog"/&gt;</code>
+              </td></tr><tr><td align="left">p3tog</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a> (optional)</td><td align="left">Purl next three stitches together</td><td align="left">
+                <code class="code">p3tog</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="p3tog"/&gt;</code>
+              </td></tr><tr><td align="left">passPreviousStitchOver</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a> (optional)</td><td align="left">Pass the stitch worked 2 stitches ago over the stitch just worked.</td><td align="left">
+                <code class="code">passPreviousStitchOver</code>
+              </td><td align="left">
+                <code class="code">&lt;pass-previous-stitch-over/&gt;</code>
               </td></tr><tr><td align="left">pattern</td><td align="left">languageCode as <a class="link" href="apb.html#string-type">String</a> (optional)</td><td align="left">The pattern written in the specified ISO language code</td><td align="left">
                 <code class="code">pattern 'en' {...}</code>
               </td><td align="left">
@@ -403,6 +421,10 @@ k3 tbl</pre>
                 <code class="code">pm</code>
               </td><td align="left">
                 <code class="code">&lt;place-marker/&gt;</code>
+              </td></tr><tr><td align="left">ppso</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a> (optional)</td><td align="left">Alias for passPreviousStitchOver</td><td align="left">
+                <code class="code">ppso</code>
+              </td><td align="left">
+                <code class="code">&lt;pass-previous-stitch-over/&gt;</code>
               </td></tr><tr><td align="left">purl</td><td align="left">(same as p)</td><td align="left">alias for p</td><td align="left">
                 <code class="code">purl 10</code>
               </td><td align="left">
@@ -452,13 +474,14 @@ k3 tbl</pre>
                 <code class="code">round {...}</code>
               </td><td align="left">
                 <code class="code">&lt;row type="round"&gt;...&lt;/row&gt;</code>
-              </td></tr><tr><td rowspan="5" align="left">row</td><td rowspan="5" align="left">
+              </td></tr><tr><td rowspan="6" align="left">row</td><td rowspan="6" align="left">
                 <p>yarnRef as <a class="link" href="apb.html#idref-type">IDREF</a>, number as <a class="link" href="apb.html#integer-type">Integer</a>, numbers as List&lt;Integer&gt;,
                     <span class="emphasis"><em>informSide</em></span>, <span class="emphasis"><em>doNotAssignNumber</em></span>,
+                    <span class="emphasis"><em>and (all|following) (even|odd) (rows|rounds)</em></span>,
                   xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
                 </p>
                 <p>(all parameters optional)</p>
-              </td><td rowspan="5" align="left">A row in the pattern</td><td align="left">
+              </td><td rowspan="6" align="left">A row in the pattern</td><td align="left">
                 <code class="code">row 'y1' 1 {...}</code>
               </td><td align="left">
                 <code class="code">&lt;row yarn-ref="y1" number="1"&gt;...&lt;/row&gt;</code>
@@ -466,6 +489,10 @@ k3 tbl</pre>
                 <code class="code">row [1,3,5] {...}</code>
               </td><td align="left">
                 <code class="code">&lt;row number="1 3 5"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td align="left">
+                <code class="code">row 1 and following odd rows {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row number="1" subsequent="odd"&gt;...&lt;/row&gt;</code>
               </td></tr><tr><td align="left">
                 <code class="code">row doNotAssignNumber {...}</code>
               </td><td align="left">
@@ -484,6 +511,10 @@ k3 tbl</pre>
               </td><td align="left">
                 <pre class="programlisting">&lt;row-gauge unit="row/in"&gt;3.5
                   &lt;/row-gauge&gt;</pre>
+              </td></tr><tr><td align="left">s2kp</td><td align="left">(same as cdd)</td><td align="left">Center double decrease</td><td align="left">
+                <code class="code">s2kp</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="cdd"/&gt;</code>
               </td></tr><tr><td align="left">section</td><td align="left">
                 <span class="emphasis"><em>resetRowCount</em></span> (optional)</td><td align="left">A logical grouping of operations in a pattern. Can be interpreted as a
                 paragraph. The resetRowCount parameter sets the next row back to row 1.</td><td align="left">
@@ -531,6 +562,10 @@ k3 tbl</pre>
                 <code class="code">ssk</code>
               </td><td align="left">
                 <code class="code">&lt;decrease type="ssk"/&gt;</code>
+              </td></tr><tr><td align="left">sssk</td><td align="left">(none)</td><td align="left">Slip-slip-slip-knit</td><td align="left">
+                <code class="code">sssk</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="sssk"/&gt;</code>
               </td></tr><tr><td rowspan="4" align="left">state</td><td rowspan="4" align="left">stitchNumber as <a class="link" href="apb.html#integer-type">Integer</a>,
                 stitches as <a class="link" href="apb.html#stitch-type">Stitch</a>, stateDescription as <a class="link" href="apb.html#state-description-type">StateDescription...</a> (all parameters
                 optional in any order) </td><td rowspan="4" align="left">State the number of stitches left in the row, or state the number
@@ -592,7 +627,7 @@ state unworked</pre>
                 <code class="code">stitchHolder 'sh1'</code>
               </td><td align="left">
                 <pre class="programlisting">&lt;stitch-holder id="sh1"/&gt;</pre>
-              </td></tr><tr><td align="left"><code class="code">stitchHolder 'sh1' withKey  withLabel "Stitch Holder 1"</code></td><td align="left">
+              </td></tr><tr><td align="left"><code class="code">stitchHolder 'sh1' withKey withLabel "Stitch Holder 1"</code></td><td align="left">
                 <pre class="programlisting">&lt;stitch-holder id="sh1"
   message-key="stitch-holder.sh1"
   label="Stitch Holder 1"/&gt;</pre>
@@ -618,7 +653,7 @@ state unworked</pre>
               </td></tr><tr><td align="left">useNeedle</td><td align="left">
                 <span class="emphasis"><em>quietly</em></span> (optional), needle as <a class="link" href="apb.html#idref-type">IDREF</a>
               </td><td align="left">Use the specified needle for knitting. "Quietly" indicates that this is a
-                directive for the computer, not something that should be rendererd in a pattern.</td><td align="left">
+                directive for the computer, not something that should be rendered in a pattern.</td><td align="left">
                 <code class="code">useNeedle 'n1' quietly</code>
               </td><td align="left">
                 <pre class="programlisting">&lt;use-needles silent="true"&gt;
@@ -638,6 +673,21 @@ state unworked</pre>
                 <code class="code">usingNeedle 'needle1' {...}</code>
               </td><td align="left">
                 <code class="code">&lt;using-needle ref="needle1"&gt; ... &lt;/using-needle&gt;</code>
+              </td></tr><tr><td rowspan="2" align="left">work</td><td rowspan="2" align="left">
+                <p><span class="emphasis"><em>even</em></span>, <span class="italic">for</span>, number as
+                    <a class="link" href="apb.html#integer-type">Integer</a>, stitches as <a class="link" href="apb.html#stitch-type">Stitch</a>, <span class="emphasis"><em>with</em></span>, yarnRef as
+                    <a class="link" href="apb.html#idref-type">IDREF</a>, repeatSpec as <a class="link" href="apb.html#repeat-type">Repeat</a></p>
+                <p>(all parameters optional)</p>
+              </td><td rowspan="2" align="left">Knit stitches which had been knit in the previous row, and purl
+                stitches which had been purled in the previous row. This instruction does not
+                increase or decrease.</td><td align="left">
+                <code class="code">work even for 5 sts</code>
+              </td><td align="left">
+                <code class="code">&lt;using-needle ref="needle1"&gt; ... &lt;/using-needle&gt;</code>
+              </td></tr><tr><td align="left"><code class="code">work to end</code></td><td align="left">
+                <pre class="programlisting">&lt;repeat until="end"&gt;
+  &lt;work-even/&gt;
+&lt;/repeat&gt;</pre>
               </td></tr><tr><td align="left">yarn</td><td align="left">
                 <p>id as <a class="link" href="apb.html#id-type">ID</a>, <span class="emphasis"><em>withKey</em></span>,
                     <span class="emphasis"><em>withLabel</em></span>, label as <a class="link" href="apb.html#string-type">String</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
@@ -660,15 +710,15 @@ state unworked</pre>
                 <code class="code">yo</code>
               </td><td align="left">
                 <code class="code">&lt;increase type="yo"/&gt;</code>
-              </td></tr></tbody></table></div></div><br class="table-break">
+              </td></tr></tbody></table></div></div><p><br class="table-break">
     </p><p><a name="dot-notation-explanation"></a>The ... notation indicates that there may be any number
-      of individual parameters with this name and type.</p><p>Whether or not the function is defined in <a class="xref" href="apb.html#el-function-table" title="Table&nbsp;B.1.&nbsp;Defined Expression Language Functions">Table&nbsp;B.1, &ldquo;Defined Expression Language Functions&rdquo;</a>, you can
+      of individual parameters with this name and type.</p><p>Whether or not the function is defined in <a class="xref" href="apb.html#el-function-table" title="Table&nbsp;B.1.&nbsp;Defined Expression Language Functions">Table&nbsp;B.1, &#8220;Defined Expression Language Functions&#8221;</a>, you can
       use the following syntax to define any XML element:</p><p>
-      <pre class="programlisting"><span class="emphasis"><em>elementName</em></span> [<span class="emphasis"><em>attr1</em></span>:'<span class="emphasis"><em>attr1value</em></span>',<span class="emphasis"><em>attr2</em></span>:'<span class="emphasis"><em>attr2value</em></span>'...] { <span class="emphasis"><em>body</em></span> }</pre>
+      </p><pre class="programlisting"><span class="emphasis"><em>elementName</em></span> [<span class="emphasis"><em>attr1</em></span>:'<span class="emphasis"><em>attr1value</em></span>',<span class="emphasis"><em>attr2</em></span>:'<span class="emphasis"><em>attr2value</em></span>'...] { <span class="emphasis"><em>body</em></span> }</pre><p>
     </p><p>When an element or attribute name has a hyphen in it (such as
       <code class="code">instruction-group</code>), it must be in single quotes for the processor to interpret it
       correctly.</p><p>The following table shows a few examples of custom functions:</p><p>
-      <div class="table"><a name="custom-function-example-table"></a><p class="title"><b>Table&nbsp;B.2.&nbsp;Custom Function Examples</b></p><div class="table-contents"><table summary="Custom Function Examples" border="1"><colgroup><col><col></colgroup><thead><tr><th>KnittingEL</th><th>XML</th></tr></thead><tbody><tr><td>
+      </p><div class="table"><a name="custom-function-example-table"></a><p class="title"><b>Table&nbsp;B.2.&nbsp;Custom Function Examples</b></p><div class="table-contents"><table summary="Custom Function Examples" border="1"><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th>KnittingEL</th><th>XML</th></tr></thead><tbody><tr><td>
                 <pre class="programlisting">author {
   'first-name' Jonathan
   'last-name' Whitall
@@ -710,10 +760,10 @@ state unworked</pre>
                 <pre class="programlisting">&lt;tree age="150" size="big"&gt;
   &lt;name&gt;Old Faithful&lt;/name&gt;
 &lt;/tree&gt;</pre>
-              </td></tr></tbody></table></div></div><br class="table-break">
+              </td></tr></tbody></table></div></div><p><br class="table-break">
     </p><p>Use the pre-defined functions whenever possible, but there may be times when you need
       maximum flexibility to express the resulting XML.</p><p>
-      <div class="table"><a name="N10D14"></a><p class="title"><b>Table&nbsp;B.3.&nbsp;Expression Language Data Types</b></p><div class="table-contents"><table summary="Expression Language Data Types" border="1"><colgroup><col><col><col></colgroup><thead><tr><th>Type</th><th>Form</th><th>Example</th></tr></thead><tbody><tr><td><a name="cross-type"></a>Cross</td><td>
+      </p><div class="table"><a name="d0e3338"></a><p class="title"><b>Table&nbsp;B.3.&nbsp;Expression Language Data Types</b></p><div class="table-contents"><table summary="Expression Language Data Types" border="1"><colgroup><col class="c1"><col class="c2"><col class="newCol3"></colgroup><thead><tr><th>Type</th><th>Form</th><th>Example</th></tr></thead><tbody><tr><td><a name="cross-type"></a>Cross</td><td>
                 <code class="code">('inFrontOf' | 'behind')</code>
               </td><td>
                 <code class="code">inFrontOf</code>
@@ -747,16 +797,19 @@ state unworked</pre>
                 <code class="code">('circ' | 'circular' | 'straight' | 'dpn')</code>
               </td><td>
                 <code class="code">circ</code>
-              </td></tr><tr><td rowspan="3"><a name="repeat-type"></a>Repeat</td><td rowspan="3">
-                <code class="code">('to'?, <a class="link" href="apb.html#integer-type">Integer</a>?, 'before'?, <a class="link" href="apb.html#until-type">Until</a>)</code> in any order</td><td>
+              </td></tr><tr><td rowspan="4"><a name="repeat-type"></a>Repeat</td><td rowspan="4">
+                <code class="code">('to'?, <a class="link" href="apb.html#integer-type">Integer</a>?, 'before'|'from'?,
+                    <a class="link" href="apb.html#until-type">Until</a>)</code> in any order</td><td>
                 <code class="code">to 2 before end</code>
               </td></tr><tr><td>
-                <code class="code">to end</code>
+                <code class="code">to 2 from end</code>
               </td></tr><tr><td>
-                <code class="code">8 times</code>
-              </td></tr><tr><td rowspan="4"><a name="repeat-inst-type"></a>RepeatInst</td><td rowspan="4">
+                <code class="code">to end</code>
+              </td></tr><tr><td><code class="code">8 times</code></td></tr><tr><td rowspan="5"><a name="repeat-inst-type"></a>RepeatInst</td><td rowspan="5">
                 <code class="code">('until'?, <a class="link" href="apb.html#until-inst-type">UntilInst</a>, (<a class="link" href="apb.html#decimal-type">Decimal</a> | <a class="link" href="apb.html#integer-type">Integer</a>)?, <a class="link" href="apb.html#stitch-type">Stitch</a>?, <a class="link" href="apb.html#length-unit-type">LengthUnit</a>?)</code> in any order</td><td>
                 <code class="code">until measures 4.5 in</code>
+              </td></tr><tr><td>
+                <code class="code">for 4.5 in</code>
               </td></tr><tr><td>
                 <code class="code">until 20 stitches remain</code>
               </td></tr><tr><td>
@@ -792,8 +845,8 @@ state unworked</pre>
               </td><td>
                 <code class="code">marker</code>
               </td></tr><tr><td><a name="until-inst-type"></a>UntilInst</td><td>
-                <code class="code">('measures' | 'desiredLength' | 'remain' | 'remains' |
-                'additionalTimes')</code>
+                <code class="code">('measures' | 'desiredLength' | 'remain' | 'remains' | 'additionalTimes' |
+                  'for')</code>
               </td><td>
                 <code class="code">desiredLength</code>
               </td></tr><tr><td><a name="weight-unit-type"></a>WeightUnit</td><td>
@@ -812,5 +865,5 @@ state unworked</pre>
                 <code class="code">('wyif' | 'wyib')</code>
               </td><td>
                 <code class="code">wyif</code>
-              </td></tr></tbody></table></div></div><br class="table-break">
-    </p></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="apa.html">Prev</a>&nbsp;</td><td align="center" width="20%">&nbsp;</td><td align="right" width="40%">&nbsp;</td></tr><tr><td valign="top" align="left" width="40%">Appendix&nbsp;A.&nbsp;The Specification&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;</td></tr></table></div></body></html>
+              </td></tr></tbody></table></div></div><p><br class="table-break">
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apa.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;</td></tr><tr><td width="40%" align="left" valign="top">Appendix&nbsp;A.&nbsp;The Specification&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;</td></tr></table></div></body></html>
