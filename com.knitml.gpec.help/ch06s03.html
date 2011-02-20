@@ -1,4 +1,6 @@
-<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Adding Support for a New Language</title><meta content="DocBook XSL-NS Stylesheets V1.73.2" name="generator"><link rel="start" href="index.html" title="The KnitML User's Guide"><link rel="up" href="ch06.html" title="Chapter&nbsp;6.&nbsp;Customizing the Pattern Renderer"><link rel="prev" href="ch06s02.html" title="Personalizing Patterns"><link rel="next" href="ch07.html" title="Chapter&nbsp;7.&nbsp;Integrating with APIs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Adding Support for a New Language</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="ch06s02.html">Prev</a>&nbsp;</td><th align="center" width="60%">Chapter&nbsp;6.&nbsp;Customizing the Pattern Renderer</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="ch07.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adding-support-for-a-new-language"></a>Adding Support for a New Language</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="N1030C"></a>Configuring your Environment</h3></div></div></div><p>To add a new language to the renderer, copy
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Adding Support for a New Language</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"><link rel="home" href="index.html" title="The KnitML User's Guide"><link rel="up" href="ch06.html" title="Chapter&nbsp;6.&nbsp;Customizing the Pattern Renderer"><link rel="prev" href="ch06s02.html" title="Personalizing Patterns"><link rel="next" href="ch07.html" title="Chapter&nbsp;7.&nbsp;Integrating with APIs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Adding Support for a New Language</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06s02.html">Prev</a>&nbsp;</td><th width="60%" align="center">Chapter&nbsp;6.&nbsp;Customizing the Pattern Renderer</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch07.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Adding Support for a New Language"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adding-support-for-a-new-language"></a>Adding Support for a New Language</h2></div></div></div><div class="sect2" title="Configuring your Environment"><div class="titlepage"><div><div><h3 class="title"><a name="d0e755"></a>Configuring your Environment</h3></div></div></div><p>To add a new language to the renderer, copy
               <code class="code">KNITML_HOME/conf/local-operations.properties</code> to a file named
               <code class="code">operations.properties</code> in the same directory. Next, tell the pattern
             renderer to use the local <code class="code">operations</code> resource bundle rather than the one
@@ -8,13 +10,13 @@
             the <code class="code">messageSource.basename</code> property.</p><p>Next, open the <code class="code">operations.properties</code> file you just created and
             translate the values (to the right of the equal signs) to the target language. The name
             of each entry aims to be fairly intuitive. Ine the case of more complex entries, a
-            comment (a line starting with <code class="code">#</code>) appears above the entry.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="N1032E"></a>Handling Plurals</h3></div></div></div><p>In short, every language has a set of plural forms. Many western languages use one
+            comment (a line starting with <code class="code">#</code>) appears above the entry.</p></div><div class="sect2" title="Handling Plurals"><div class="titlepage"><div><div><h3 class="title"><a name="d0e789"></a>Handling Plurals</h3></div></div></div><p>In short, every language has a set of plural forms. Many western languages use one
             form for the number 1, and a second form for everything else. This is by no means
             universal. Chinese, for instance, has only one plural form, while Scottish Gaelic has
             three and Irish has five! While there is no standard for dealing with this issue,
             Mozilla has developed a very practical approach to solving the problem, therefore we
-            will adopt the same strategy here. Consult <a class="link" href="https://developer.mozilla.org/en/Localization_and_Plurals">Localization
-              and Plurals</a> to determine your language's plural rule number.<sup>[<a href="#ftn.N10337" name="N10337" class="footnote">6</a>]</sup>. Once you have determined the plural rule number to use, set the number as
+            will adopt the same strategy here. Consult <a class="link" href="https://developer.mozilla.org/en/Localization_and_Plurals" target="_top">Localization
+              and Plurals</a> to determine your language's plural rule number.<sup>[<a name="d0e797" href="#ftn.d0e797" class="footnote">6</a>]</sup>. Once you have determined the plural rule number to use, set the number as
             the value of the <code class="code">knitml.pattern-renderer.plural-rule</code> property at the top of
             the file. </p><p>Each entry in the <code class="code">operations</code> file that ends with <code class="code">.$$$</code>
             indicates that the value should be pluralized. Each plural form is specified between
@@ -35,16 +37,16 @@
             names: <code class="code">operation.cross-stitches.front.$$0</code> (tied to the pluralization of the
             first parameter) and <code class="code">operation.cross-stitches.front.$$1</code> (tied to the
             pluralization of the second parameter). In the property file, it looks like this:</p><p>
-            <pre class="programlisting">...front.$$0=cross next stitch;cross next {0} stitches
-...front.$$1= over {1} stitch; over {1} stitches</pre>
+            </p><pre class="programlisting">...front.$$0=cross next stitch;cross next {0} stitches
+...front.$$1= over {1} stitch; over {1} stitches</pre><p>
           </p><p>The renderer concatenates both values together, using the <code class="code">$$0</code> entry,
             then the <code class="code">$$1</code> entry. If you want to specify a different order of
             concatenation, you can do that with a <code class="code">$$order</code> parameter as follows:</p><p>
-            <pre class="programlisting">...front.$$0= cross next stitch; cross next {0} stitches
+            </p><pre class="programlisting">...front.$$0= cross next stitch; cross next {0} stitches
 ...front.$$1=Over {1} stitch,;Over {1} stitches,
-...front.$$order=10</pre>
+...front.$$order=10</pre><p>
           </p><p>This specifies that the <code class="code">$$1</code> entry renders first, then the
             <code class="code">$$0</code>, so it will render something like <code class="code">Over 1 stitch, cross next 2
               stitches</code>.</p><p>A <code class="code">$$order</code> value of <code class="code">01</code> in this case is the same as the
-            default behavior (which is what happens if you do not provide the property).</p></div><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a href="#N10337" name="ftn.N10337" class="para">6</a>] </sup>Most Western languages use plural rule #1. French uses either rule #1 or rule
-                #2, depending on the region.</p></div></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="ch06s02.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="ch06.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="ch07.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Personalizing Patterns&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Chapter&nbsp;7.&nbsp;Integrating with APIs</td></tr></table></div></body></html>
+            default behavior (which is what happens if you do not provide the property).</p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.d0e797" href="#d0e797" class="para">6</a>] </sup>Most Western languages use plural rule #1. French uses either rule #1 or rule
+                #2, depending on the region.</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06s02.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Personalizing Patterns&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Integrating with APIs</td></tr></table></div></body></html>

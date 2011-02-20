@@ -1,4 +1,6 @@
-<html><head><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Chapter&nbsp;3.&nbsp;The Knitting Expression Language</title><meta content="DocBook XSL-NS Stylesheets V1.73.2" name="generator"><link rel="start" href="index.html" title="The KnitML User's Guide"><link rel="up" href="pt02.html" title="Part&nbsp;II.&nbsp;Writing KnitML Patterns"><link rel="prev" href="pt02.html" title="Part&nbsp;II.&nbsp;Writing KnitML Patterns"><link rel="next" href="ch03s02.html" title="Writing a Simple Pattern"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table summary="Navigation header" width="100%"><tr><th align="center" colspan="3">Chapter&nbsp;3.&nbsp;The Knitting Expression Language</th></tr><tr><td align="left" width="20%"><a accesskey="p" href="pt02.html">Prev</a>&nbsp;</td><th align="center" width="60%">Part&nbsp;II.&nbsp;Writing KnitML Patterns</th><td align="right" width="20%">&nbsp;<a accesskey="n" href="ch03s02.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="N10104"></a>Chapter&nbsp;3.&nbsp;The Knitting Expression Language</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch03.html#N10107">Overview</a></span></dt><dt><span class="sect1"><a href="ch03s02.html">Writing a Simple Pattern</a></span></dt><dt><span class="sect1"><a href="ch03s03.html">Improving the Pattern</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="N10107"></a>Overview</h2></div></div></div><p>The Knitting Expression Language (formerly known as GroovyKnit) is based on the Groovy
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;3.&nbsp;The Knitting Expression Language</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"><link rel="home" href="index.html" title="The KnitML User's Guide"><link rel="up" href="pt02.html" title="Part&nbsp;II.&nbsp;Writing KnitML Patterns"><link rel="prev" href="pt02.html" title="Part&nbsp;II.&nbsp;Writing KnitML Patterns"><link rel="next" href="ch03s02.html" title="Writing a Simple Pattern"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;3.&nbsp;The Knitting Expression Language</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="pt02.html">Prev</a>&nbsp;</td><th width="60%" align="center">Part&nbsp;II.&nbsp;Writing KnitML Patterns</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch03s02.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;3.&nbsp;The Knitting Expression Language"><div class="titlepage"><div><div><h2 class="title"><a name="d0e246"></a>Chapter&nbsp;3.&nbsp;The Knitting Expression Language</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="ch03.html#d0e249">Overview</a></span></dt><dt><span class="sect1"><a href="ch03s02.html">Writing a Simple Pattern</a></span></dt><dt><span class="sect1"><a href="ch03s03.html">Improving the Pattern</a></span></dt></dl></div><div class="sect1" title="Overview"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e249"></a>Overview</h2></div></div></div><p>The Knitting Expression Language (formerly known as GroovyKnit) is based on the Groovy
           programming language and GroovyMarkup architecture
             (<code class="uri">http://groovy.codehaus.org/GroovyMarkup</code>). Elements are specified by name,
           and sub-elements go between curly braces following the name. So this in KnittingEL:</p><pre class="programlisting">pattern {
@@ -12,24 +14,24 @@
           transforms its name to <code class="code">general-information</code>, as you cannot use dashed names in
           KnittingEL without quoting them. So while you could also do the following to achieve the
           same result, it's not quite as readable.</p><p>
-          <pre class="programlisting">pattern {
+          </p><pre class="programlisting">pattern {
   'general-information'
-}</pre>
-        </p><p>See <a class="xref" href="apb.html#el-function-table" title="Table&nbsp;B.1.&nbsp;Defined Expression Language Functions">Table&nbsp;B.1, &ldquo;Defined Expression Language Functions&rdquo;</a> for a complete list of KnittingEL
+}</pre><p>
+        </p><p>See <a class="xref" href="apb.html#el-function-table" title="Table&nbsp;B.1.&nbsp;Defined Expression Language Functions">Table&nbsp;B.1, &#8220;Defined Expression Language Functions&#8221;</a> for a complete list of KnittingEL
           functions.</p><p>You have the option to capitalize the first letter of any and all KnittingEL
           functions. So the following would produce the same XML:</p><p>
-          <pre class="programlisting">Pattern {
+          </p><pre class="programlisting">Pattern {
   GeneralInformation
-}</pre>
-        </p><p>In many cases, this is more readable.</p><p>To specify an XML element's value as text, simply include it as a parameter. This:</p><p><pre class="programlisting">row {
+}</pre><p>
+        </p><p>In many cases, this is more readable.</p><p>To specify an XML element's value as text, simply include it as a parameter. This:</p><pre class="programlisting">row {
   knit (3)
-}</pre>Becomes:</p><p>
-          <pre class="programlisting">&lt;row&gt;
+}</pre><p>Becomes:</p><p>
+          </p><pre class="programlisting">&lt;row&gt;
   &lt;knit&gt;3&lt;/knit&gt;
-&lt;/row&gt;</pre>
+&lt;/row&gt;</pre><p>
         </p><p>Note that any of the samples below will produce the same XML as above (this is not an
           exhaustive list of possibilities):</p><p>
-          <pre class="programlisting">row {
+          </p><pre class="programlisting">row {
   knit 3
 }
 
@@ -43,15 +45,15 @@ row { k 3 }
 
 row { k3 }
 
-Row: k3</pre>
+Row: k3</pre><p>
         </p><p>The first three examples show that line placement inside of curly braces isn't
           crucial, as long as the method name and its arguments (which occur before the curly
-          braces) are on the same line<sup>[<a href="#ftn.N1014A" name="N1014A" class="footnote">1</a>]</sup>. The last three examples use k as a shorthand for knit. <code class="code">k</code> is a
+          braces) are on the same line<sup>[<a name="d0e315" href="#ftn.d0e315" class="footnote">1</a>]</sup>. The last three examples use k as a shorthand for knit. <code class="code">k</code> is a
           defined KnittingEL function which expands to the <code class="code">knit</code> element. The KnittingEL
           parser is smart enough to recognize that, since <code class="code">k3</code> ends with a number, the
           number belongs as an argument to the <code class="code">k</code> method rather than part of the method
           name.</p><p>To express several knitting operations in a row, you can write them in any of the
-          following ways:</p><p><pre class="programlisting">row {
+          following ways:</p><pre class="programlisting">row {
   knit 3
   purl 3
 }
@@ -62,19 +64,19 @@ row ( k3, p3 }
 
 row: k3, p3
 
-Row: k3, p3</pre>And
+Row: k3, p3</pre><p>And
           you'll get this:</p><p>
-          <pre class="programlisting">&lt;row&gt;
+          </p><pre class="programlisting">&lt;row&gt;
   &lt;knit&gt;3&lt;/knit&gt;
   &lt;purl&gt;3&lt;/purl&gt;
-&lt;/row&gt;</pre>
+&lt;/row&gt;</pre><p>
         </p><p>Note that you can use the <code class="code">:</code> syntax to define a row instead of the brace
           notation, in which case the entire row must be defined on the same line. If you have a
           more complex row to define that needs to be split into multiple lines, use the
           <code class="code">{}</code>s instead.</p><p>You can use the : syntax for any of the following functions: <code class="code">row</code>,
             <code class="code">round</code>, <code class="code">nextRow</code>, <code class="code">nextRound</code>, <code class="code">shortRow</code>.
           The <code class="code">:</code> syntax used with other functions exists for language purposes only and
-          is simply ignored (producing the same effect as if it were omitted).</p><p>KnittingEL also defines shorthands for common operations. Here are a few:</p><div class="informaltable"><table border="0"><colgroup><col><col></colgroup><thead><tr><th>KnittingEL</th><th>XML</th></tr></thead><tbody><tr><td>
+          is simply ignored (producing the same effect as if it were omitted).</p><p>KnittingEL also defines shorthands for common operations. Here are a few:</p><div class="informaltable"><table border="0"><colgroup><col class="KnittingEL"><col class="XML"></colgroup><thead><tr><th>KnittingEL</th><th>XML</th></tr></thead><tbody><tr><td>
                   <pre class="programlisting">row { k to end }</pre>
                 </td><td>
                   <pre class="programlisting">&lt;row&gt;
@@ -96,12 +98,12 @@ Row: k3, p3</pre>And
 &lt;/row&gt;</pre>
                 </td></tr></tbody></table></div><p>An element's attributes appear before the curly braces in a series of name/value pairs
           in a bracket (called a Map):</p><p>
-          <pre class="programlisting">yarnType [brand:'Cotton Classic', weight:'worsted'] { ... }</pre>
+          </p><pre class="programlisting">yarnType [brand:'Cotton Classic', weight:'worsted'] { ... }</pre><p>
         </p><p>It's very common for an element to have an ID attribute, so there is often a function
           shorthand. For example, the following three lines are equivalent:</p><p>
-          <pre class="programlisting">yarnType 'my-yarn' [brand:'Cotton Classic', weight:'worsted']
+          </p><pre class="programlisting">yarnType 'my-yarn' [brand:'Cotton Classic', weight:'worsted']
 yarnType [id:'my-yarn', brand:'Cotton Classic', weight:'worsted']
-&lt;yarn-type id="my-yarn" brand="Cotton Classic" weight="worsted"/&gt;</pre>
-        </p></div><div class="footnotes"><br><hr align="left" width="100"><div class="footnote"><p><sup>[<a href="#N1014A" name="ftn.N1014A" class="para">1</a>] </sup>Even parameters can be on a different line if parentheses are explicitly
+&lt;yarn-type id="my-yarn" brand="Cotton Classic" weight="worsted"/&gt;</pre><p>
+        </p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.d0e315" href="#d0e315" class="para">1</a>] </sup>Even parameters can be on a different line if parentheses are explicitly
               specified. Map arguments delineated by [] can also be split across lines. However, a
-              row which uses the colon syntax must be completely defined on the same line.</p></div></div></div><div class="navfooter"><hr><table summary="Navigation footer" width="100%"><tr><td align="left" width="40%"><a accesskey="p" href="pt02.html">Prev</a>&nbsp;</td><td align="center" width="20%"><a accesskey="u" href="pt02.html">Up</a></td><td align="right" width="40%">&nbsp;<a accesskey="n" href="ch03s02.html">Next</a></td></tr><tr><td valign="top" align="left" width="40%">Part&nbsp;II.&nbsp;Writing KnitML Patterns&nbsp;</td><td align="center" width="20%"><a accesskey="h" href="index.html">Home</a></td><td valign="top" align="right" width="40%">&nbsp;Writing a Simple Pattern</td></tr></table></div></body></html>
+              row which uses the colon syntax must be completely defined on the same line.</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="pt02.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="pt02.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch03s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Part&nbsp;II.&nbsp;Writing KnitML Patterns&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Writing a Simple Pattern</td></tr></table></div></body></html>
