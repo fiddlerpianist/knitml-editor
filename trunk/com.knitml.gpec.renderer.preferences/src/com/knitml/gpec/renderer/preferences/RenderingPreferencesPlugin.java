@@ -37,9 +37,9 @@ public class RenderingPreferencesPlugin extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		preferences = (IEclipsePreferences) new InstanceScope().getNode(PLUGIN_ID);
+		preferences = (IEclipsePreferences) InstanceScope.INSTANCE.getNode(PLUGIN_ID);
 		preferencesService = new RenderingPreferencesServiceImpl();
-		preferencesServiceRegistration = context.registerService(RenderingPreferencesService.class.getName(), preferencesService, new Hashtable<Object, Object>());
+		preferencesServiceRegistration = context.registerService(RenderingPreferencesService.class.getName(), preferencesService, new Hashtable<String, Object>());
 		listener = new RenderingPreferenceChangeListener(preferencesService); 
 		preferences.addPreferenceChangeListener(listener);
 

@@ -18,7 +18,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext context) throws Exception {
 		// register the service
-		renderingService = context.registerService(RenderingService.class.getName(), new RenderingServiceImpl(), new Hashtable<Object,Object>());
+		renderingService = context.registerService(RenderingService.class.getName(), new RenderingServiceImpl(), new Hashtable<String,Object>());
 	}
 	
 	/*
