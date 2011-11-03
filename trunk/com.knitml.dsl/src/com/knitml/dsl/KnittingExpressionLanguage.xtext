@@ -1,0 +1,82 @@
+grammar com.knitml.dsl.KnittingExpressionLanguage hidden(WS, ML_COMMENT, SL_COMMENT)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate knittingExpressionLanguage "http://www.knitml.com/dsl/KnittingExpressionLanguage"
+
+Pattern:
+	LF* elements+=BlockOperation+ LF*;
+
+BlockOperation:
+	(Instruction | Row | Message);
+
+Instruction:
+	'Instruction' label=ID? (('{' LF* rows+=Row+ '}' LF) | (':' LF rows+=Row+ LF));
+
+Row:
+	nextRow?='Next'? (shortRow?='Short'? & longRow?='Long'?)
+	label=('Row' | 'Round' | 'Rows' | 'Rounds')
+	(range=Range | (number+=INT (',' number+=INT)*
+	('and' 'all'? subsequent=('even' | 'odd') ('rows' | 'rounds')?)?))?
+	(side=('WS' | 'RS')? & ('with' yarnRef=ID)?)
+	('(' (','? inform?='inform' 'side'?)? (','? reset?='reset' 'count'?)? ')')?
+	':' LF? operations+=InlineOperation (','
+	operations+=InlineOperation)* => LF?;
+
+Message:
+	message=STRING LF;
+
+	// Inline Operations
+InlineOperation:
+	(Knit | Purl | Slip | Repeat);
+
+Knit:
+	('K' | 'k' | 'Knit' | 'knit') {Knit} number=INT? ('st' | 'sts')? (together?=('tog')? & throughTrailingLoop?=('tbl' |
+	'ttl')?) ('with' yarnRef=ID)? ('to'? repeat=RepeatSpec)?;
+
+Purl:
+	('P' | 'p' | 'Purl' | 'purl') {Purl} number=INT? ('st' | 'sts')? (together?=('tog')? & throughTrailingLoop?=('tbl' |
+	'ttl')?) ('with' yarnRef=ID)? ('to'? repeat=RepeatSpec)?;
+
+Slip:
+	{Slip} reverse?=('Rev' | 'Reverse' | 'rev' | 'reverse')? ('Sl' | 'sl' | 'Slip' | 'slip') ((number=INT ('st' | 'sts')?)
+	| 'next st')? (knitwise?=('kw' | 'knitwise') | purlwise?=('pw' | 'purlwise'))? yarnPosition=('wyif' | 'wyib')?;
+
+RepeatSpec:
+	(toEnd?=('end') | toMarker?=('marker') | (value=INT ('st' | 'sts')? beforeEnd?=('before end')) | (value=INT ('st' |
+	'sts')? beforeGap?=('before gap')) | (value=INT ('st' | 'sts')? beforeMarker?=('before marker')) | (value=INT
+	times?=('times')));
+
+Repeat:
+	(('Repeat' | 'repeat') '[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' 'to'? spec=RepeatSpec) |
+	('[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' (',' ('Repeat' | 'repeat'))? 'to'?
+	spec=RepeatSpec);
+
+	// lower-level data types
+Range:
+	min=INT '-' max=INT;
+
+	// Terminals
+terminal ID:
+	'^'? ('a'..'z' | 'A'..'Z')+;
+
+terminal INT returns ecore::EIntegerObject:
+	('0'..'9')+;
+
+terminal STRING:
+	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | '"'))* '"' | "'" ('\\' ('b' | 't' | 'n' |
+	'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
+
+terminal ML_COMMENT:
+	'/*'->'*/';
+
+terminal SL_COMMENT:
+	'//' !('\n' | '\r')* ('\r'? '\n')?;
+
+terminal LF:
+	(EOF | ('\r'? '\n'));
+
+terminal WS:
+	(' ' | '\t')+;
+
+terminal ANY_OTHER:
+	.;
