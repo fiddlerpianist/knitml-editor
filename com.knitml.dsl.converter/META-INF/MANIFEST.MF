@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.knitml.dsl.converter.tests
+Bundle-Vendor: KnitML
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: com.knitml.dsl.converter.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.knitml.dsl,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext,
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext.junit,
+ org.junit4
+Import-Package: org.apache.commons.lang,
+ org.apache.commons.logging,
+ org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
