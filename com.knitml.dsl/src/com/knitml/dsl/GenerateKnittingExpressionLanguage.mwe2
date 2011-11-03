@@ -5,7 +5,7 @@ import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
 var grammarURI = "classpath:/com/knitml/dsl/KnittingExpressionLanguage.xtext"
-var file.extensions = "kel"
+var file.extensions = "kelp"
 var projectName = "com.knitml.dsl"
 var runtimeProject = "../${projectName}"
 

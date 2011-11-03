@@ -127,11 +127,7 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	
 	/**
 	 * Constraint:
-	 *     (label=ID? (rows+=Row+ | rows+=Row+))
-	 *
-	 * Features:
-	 *    label[0, 1]
-	 *    rows[0, *]
+	 *     (id=ID label=STRING? ((hasKey?='key' messageKey=STRING?)? (shape='round' | shape='flat')? rowCount=INT?)? (rows+=Row+ | rows+=Row+))
 	 */
 	protected void sequence_Instruction(EObject context, Instruction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -141,13 +137,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (number=INT? together?='tog'? (throughTrailingLoop?='tbl' | throughTrailingLoop?='ttl')? yarnRef=ID? repeat=RepeatSpec?)
-	 *
-	 * Features:
-	 *    number[0, 1]
-	 *    together[0, 1]
-	 *    throughTrailingLoop[0, 2]
-	 *    yarnRef[0, 1]
-	 *    repeat[0, 1]
 	 */
 	protected void sequence_Knit(EObject context, Knit semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -157,9 +146,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     message=STRING
-	 *
-	 * Features:
-	 *    message[1, 1]
 	 */
 	protected void sequence_Message(EObject context, Message semanticObject) {
 		if(errorAcceptor != null) {
@@ -176,9 +162,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     elements+=BlockOperation+
-	 *
-	 * Features:
-	 *    elements[1, *]
 	 */
 	protected void sequence_Pattern(EObject context, Pattern semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -188,13 +171,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (number=INT? together?='tog'? (throughTrailingLoop?='tbl' | throughTrailingLoop?='ttl')? yarnRef=ID? repeat=RepeatSpec?)
-	 *
-	 * Features:
-	 *    number[0, 1]
-	 *    together[0, 1]
-	 *    throughTrailingLoop[0, 2]
-	 *    yarnRef[0, 1]
-	 *    repeat[0, 1]
 	 */
 	protected void sequence_Purl(EObject context, Purl semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -204,10 +180,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	/**
 	 * Constraint:
 	 *     (min=INT max=INT)
-	 *
-	 * Features:
-	 *    min[1, 1]
-	 *    max[1, 1]
 	 */
 	protected void sequence_Range(EObject context, Range semanticObject) {
 		if(errorAcceptor != null) {
@@ -234,75 +206,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	 *         (value=INT beforeMarker?='before marker') | 
 	 *         (value=INT times?='times')
 	 *     )
-	 *
-	 * Features:
-	 *    toEnd[0, 1]
-	 *         EXCLUDE_IF_SET toMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeEnd
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeGap
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET times
-	 *    toMarker[0, 1]
-	 *         EXCLUDE_IF_SET toEnd
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeEnd
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeGap
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET times
-	 *    value[0, 4]
-	 *         EXCLUDE_IF_SET toEnd
-	 *         EXCLUDE_IF_SET toMarker
-	 *    beforeEnd[0, 1]
-	 *         EXCLUDE_IF_UNSET value
-	 *         MANDATORY_IF_SET value
-	 *         EXCLUDE_IF_SET toEnd
-	 *         EXCLUDE_IF_SET toMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeGap
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET times
-	 *    beforeGap[0, 1]
-	 *         EXCLUDE_IF_UNSET value
-	 *         MANDATORY_IF_SET value
-	 *         EXCLUDE_IF_SET toEnd
-	 *         EXCLUDE_IF_SET toMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeEnd
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET times
-	 *    beforeMarker[0, 1]
-	 *         EXCLUDE_IF_UNSET value
-	 *         MANDATORY_IF_SET value
-	 *         EXCLUDE_IF_SET toEnd
-	 *         EXCLUDE_IF_SET toMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeEnd
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeGap
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET times
-	 *    times[0, 1]
-	 *         EXCLUDE_IF_UNSET value
-	 *         MANDATORY_IF_SET value
-	 *         EXCLUDE_IF_SET toEnd
-	 *         EXCLUDE_IF_SET toMarker
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeEnd
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeGap
-	 *         EXCLUDE_IF_SET value
-	 *         EXCLUDE_IF_SET beforeMarker
 	 */
 	protected void sequence_RepeatSpec(EObject context, RepeatSpec semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -315,10 +218,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	 *         (operations+=InlineOperation operations+=InlineOperation* spec=RepeatSpec) | 
 	 *         (operations+=InlineOperation operations+=InlineOperation* spec=RepeatSpec)
 	 *     )
-	 *
-	 * Features:
-	 *    operations[0, *]
-	 *    spec[0, 2]
 	 */
 	protected void sequence_Repeat(EObject context, Repeat semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -339,27 +238,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	 *         operations+=InlineOperation 
 	 *         operations+=InlineOperation*
 	 *     )
-	 *
-	 * Features:
-	 *    nextRow[0, 1]
-	 *    shortRow[0, 1]
-	 *    longRow[0, 1]
-	 *    label[0, 4]
-	 *    range[0, 1]
-	 *         EXCLUDE_IF_SET number
-	 *         EXCLUDE_IF_SET number
-	 *         EXCLUDE_IF_SET subsequent
-	 *         EXCLUDE_IF_SET subsequent
-	 *    number[0, *]
-	 *         EXCLUDE_IF_SET range
-	 *    subsequent[0, 2]
-	 *         EXCLUDE_IF_UNSET number
-	 *         EXCLUDE_IF_SET range
-	 *    side[0, 2]
-	 *    yarnRef[0, 1]
-	 *    inform[0, 1]
-	 *    reset[0, 1]
-	 *    operations[1, *]
 	 */
 	protected void sequence_Row(EObject context, Row semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -374,17 +252,6 @@ public class AbstractKnittingExpressionLanguageSemanticSequencer extends Abstrac
 	 *         (knitwise?='kw' | knitwise?='knitwise' | purlwise?='pw' | purlwise?='purlwise')? 
 	 *         (yarnPosition='wyif' | yarnPosition='wyib')?
 	 *     )
-	 *
-	 * Features:
-	 *    reverse[0, 4]
-	 *    number[0, 1]
-	 *    knitwise[0, 2]
-	 *         EXCLUDE_IF_SET purlwise
-	 *         EXCLUDE_IF_SET purlwise
-	 *    purlwise[0, 2]
-	 *         EXCLUDE_IF_SET knitwise
-	 *         EXCLUDE_IF_SET knitwise
-	 *    yarnPosition[0, 2]
 	 */
 	protected void sequence_Slip(EObject context, Slip semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

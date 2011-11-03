@@ -228,7 +228,7 @@ public class KnittingExpressionLanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getInstruction_Label()
+  public EAttribute getInstruction_Id()
   {
     return (EAttribute)instructionEClass.getEStructuralFeatures().get(0);
   }
@@ -238,9 +238,59 @@ public class KnittingExpressionLanguagePackageImpl extends EPackageImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getInstruction_Label()
+  {
+    return (EAttribute)instructionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getInstruction_HasKey()
+  {
+    return (EAttribute)instructionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getInstruction_MessageKey()
+  {
+    return (EAttribute)instructionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getInstruction_Shape()
+  {
+    return (EAttribute)instructionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getInstruction_RowCount()
+  {
+    return (EAttribute)instructionEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getInstruction_Rows()
   {
-    return (EReference)instructionEClass.getEStructuralFeatures().get(1);
+    return (EReference)instructionEClass.getEStructuralFeatures().get(6);
   }
 
   /**
@@ -759,7 +809,12 @@ public class KnittingExpressionLanguagePackageImpl extends EPackageImpl implemen
     blockOperationEClass = createEClass(BLOCK_OPERATION);
 
     instructionEClass = createEClass(INSTRUCTION);
+    createEAttribute(instructionEClass, INSTRUCTION__ID);
     createEAttribute(instructionEClass, INSTRUCTION__LABEL);
+    createEAttribute(instructionEClass, INSTRUCTION__HAS_KEY);
+    createEAttribute(instructionEClass, INSTRUCTION__MESSAGE_KEY);
+    createEAttribute(instructionEClass, INSTRUCTION__SHAPE);
+    createEAttribute(instructionEClass, INSTRUCTION__ROW_COUNT);
     createEReference(instructionEClass, INSTRUCTION__ROWS);
 
     rowEClass = createEClass(ROW);
@@ -864,7 +919,12 @@ public class KnittingExpressionLanguagePackageImpl extends EPackageImpl implemen
     initEClass(blockOperationEClass, BlockOperation.class, "BlockOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(instructionEClass, Instruction.class, "Instruction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getInstruction_Id(), ecorePackage.getEString(), "id", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getInstruction_Label(), ecorePackage.getEString(), "label", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getInstruction_HasKey(), ecorePackage.getEBoolean(), "hasKey", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getInstruction_MessageKey(), ecorePackage.getEString(), "messageKey", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getInstruction_Shape(), ecorePackage.getEString(), "shape", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getInstruction_RowCount(), ecorePackage.getEIntegerObject(), "rowCount", null, 0, 1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getInstruction_Rows(), this.getRow(), null, "rows", null, 0, -1, Instruction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rowEClass, Row.class, "Row", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -26,7 +26,7 @@ public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittin
 	}
 	
 	@Override
-	public com.knitml.core.model.directions.block.Row convert(com.knitml.dsl.knittingExpressionLanguage.Row emfRow) {
+	public Row convert(com.knitml.dsl.knittingExpressionLanguage.Row emfRow) {
 		def row = new Row()
 		if (!emfRow.number.empty) {
 			row.numbers = emfRow.number

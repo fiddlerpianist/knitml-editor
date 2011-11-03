@@ -38,7 +38,9 @@ public class KnittingExpressionLanguageParser extends AbstractContentAssistParse
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getBlockOperationAccess().getAlternatives(), "rule__BlockOperation__Alternatives");
-					put(grammarAccess.getInstructionAccess().getAlternatives_2(), "rule__Instruction__Alternatives_2");
+					put(grammarAccess.getInstructionAccess().getShapeAlternatives_2_2_1_0(), "rule__Instruction__ShapeAlternatives_2_2_1_0");
+					put(grammarAccess.getInstructionAccess().getAlternatives_2_3_2(), "rule__Instruction__Alternatives_2_3_2");
+					put(grammarAccess.getInstructionAccess().getAlternatives_3(), "rule__Instruction__Alternatives_3");
 					put(grammarAccess.getRowAccess().getLabelAlternatives_2_0(), "rule__Row__LabelAlternatives_2_0");
 					put(grammarAccess.getRowAccess().getAlternatives_3(), "rule__Row__Alternatives_3");
 					put(grammarAccess.getRowAccess().getSubsequentAlternatives_3_1_2_2_0(), "rule__Row__SubsequentAlternatives_3_1_2_2_0");
@@ -68,8 +70,12 @@ public class KnittingExpressionLanguageParser extends AbstractContentAssistParse
 					put(grammarAccess.getRepeatAccess().getAlternatives_1_4_1(), "rule__Repeat__Alternatives_1_4_1");
 					put(grammarAccess.getPatternAccess().getGroup(), "rule__Pattern__Group__0");
 					put(grammarAccess.getInstructionAccess().getGroup(), "rule__Instruction__Group__0");
-					put(grammarAccess.getInstructionAccess().getGroup_2_0(), "rule__Instruction__Group_2_0__0");
+					put(grammarAccess.getInstructionAccess().getGroup_2(), "rule__Instruction__Group_2__0");
 					put(grammarAccess.getInstructionAccess().getGroup_2_1(), "rule__Instruction__Group_2_1__0");
+					put(grammarAccess.getInstructionAccess().getGroup_2_2(), "rule__Instruction__Group_2_2__0");
+					put(grammarAccess.getInstructionAccess().getGroup_2_3(), "rule__Instruction__Group_2_3__0");
+					put(grammarAccess.getInstructionAccess().getGroup_3_0(), "rule__Instruction__Group_3_0__0");
+					put(grammarAccess.getInstructionAccess().getGroup_3_1(), "rule__Instruction__Group_3_1__0");
 					put(grammarAccess.getRowAccess().getGroup(), "rule__Row__Group__0");
 					put(grammarAccess.getRowAccess().getGroup_3_1(), "rule__Row__Group_3_1__0");
 					put(grammarAccess.getRowAccess().getGroup_3_1_1(), "rule__Row__Group_3_1_1__0");
@@ -99,9 +105,14 @@ public class KnittingExpressionLanguageParser extends AbstractContentAssistParse
 					put(grammarAccess.getRepeatAccess().getGroup_1_4(), "rule__Repeat__Group_1_4__0");
 					put(grammarAccess.getRangeAccess().getGroup(), "rule__Range__Group__0");
 					put(grammarAccess.getPatternAccess().getElementsAssignment_1(), "rule__Pattern__ElementsAssignment_1");
-					put(grammarAccess.getInstructionAccess().getLabelAssignment_1(), "rule__Instruction__LabelAssignment_1");
-					put(grammarAccess.getInstructionAccess().getRowsAssignment_2_0_2(), "rule__Instruction__RowsAssignment_2_0_2");
-					put(grammarAccess.getInstructionAccess().getRowsAssignment_2_1_2(), "rule__Instruction__RowsAssignment_2_1_2");
+					put(grammarAccess.getInstructionAccess().getIdAssignment_1_0(), "rule__Instruction__IdAssignment_1_0");
+					put(grammarAccess.getInstructionAccess().getLabelAssignment_1_1(), "rule__Instruction__LabelAssignment_1_1");
+					put(grammarAccess.getInstructionAccess().getHasKeyAssignment_2_1_1(), "rule__Instruction__HasKeyAssignment_2_1_1");
+					put(grammarAccess.getInstructionAccess().getMessageKeyAssignment_2_1_2(), "rule__Instruction__MessageKeyAssignment_2_1_2");
+					put(grammarAccess.getInstructionAccess().getShapeAssignment_2_2_1(), "rule__Instruction__ShapeAssignment_2_2_1");
+					put(grammarAccess.getInstructionAccess().getRowCountAssignment_2_3_1(), "rule__Instruction__RowCountAssignment_2_3_1");
+					put(grammarAccess.getInstructionAccess().getRowsAssignment_3_0_2(), "rule__Instruction__RowsAssignment_3_0_2");
+					put(grammarAccess.getInstructionAccess().getRowsAssignment_3_1_2(), "rule__Instruction__RowsAssignment_3_1_2");
 					put(grammarAccess.getRowAccess().getNextRowAssignment_0(), "rule__Row__NextRowAssignment_0");
 					put(grammarAccess.getRowAccess().getShortRowAssignment_1_0(), "rule__Row__ShortRowAssignment_1_0");
 					put(grammarAccess.getRowAccess().getLongRowAssignment_1_1(), "rule__Row__LongRowAssignment_1_1");
@@ -150,6 +161,7 @@ public class KnittingExpressionLanguageParser extends AbstractContentAssistParse
 					put(grammarAccess.getRepeatAccess().getSpecAssignment_1_6(), "rule__Repeat__SpecAssignment_1_6");
 					put(grammarAccess.getRangeAccess().getMinAssignment_0(), "rule__Range__MinAssignment_0");
 					put(grammarAccess.getRangeAccess().getMaxAssignment_2(), "rule__Range__MaxAssignment_2");
+					put(grammarAccess.getInstructionAccess().getUnorderedGroup_1(), "rule__Instruction__UnorderedGroup_1");
 					put(grammarAccess.getRowAccess().getUnorderedGroup_1(), "rule__Row__UnorderedGroup_1");
 					put(grammarAccess.getRowAccess().getUnorderedGroup_4(), "rule__Row__UnorderedGroup_4");
 					put(grammarAccess.getKnitAccess().getUnorderedGroup_4(), "rule__Knit__UnorderedGroup_4");

@@ -34,8 +34,46 @@
     </type>
     <alternatives xsi:type="xtext:Group">
       <elements xsi:type="xtext:Keyword" value="Instruction"/>
-      <elements xsi:type="xtext:Assignment" cardinality="?" feature="label" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
+      <elements xsi:type="xtext:UnorderedGroup">
+        <elements xsi:type="xtext:Assignment" feature="id" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="label" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="//@rules.14"/>
+        </elements>
+      </elements>
+      <elements xsi:type="xtext:Group" cardinality="?">
+        <elements xsi:type="xtext:Keyword" value="("/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="with"/>
+          <elements xsi:type="xtext:Assignment" feature="hasKey" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="key"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" cardinality="?" feature="messageKey" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="//@rules.14"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" cardinality="?" value=","/>
+          <elements xsi:type="xtext:Assignment" feature="shape" operator="=">
+            <terminal xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Keyword" value="round"/>
+              <elements xsi:type="xtext:Keyword" value="flat"/>
+            </terminal>
+          </elements>
+          <elements xsi:type="xtext:Keyword" cardinality="?" value="shape"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" cardinality="?" value=","/>
+          <elements xsi:type="xtext:Assignment" feature="rowCount" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="//@rules.13"/>
+          </elements>
+          <elements xsi:type="xtext:Alternatives" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="rows"/>
+            <elements xsi:type="xtext:Keyword" value="rounds"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=")"/>
       </elements>
       <elements xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Group">
@@ -45,7 +83,7 @@
             <terminal xsi:type="xtext:RuleCall" rule="//@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Keyword" value="}"/>
-          <elements xsi:type="xtext:RuleCall" rule="//@rules.17"/>
+          <elements xsi:type="xtext:RuleCall" cardinality="?" predicated="true" rule="//@rules.17"/>
         </elements>
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Keyword" value=":"/>

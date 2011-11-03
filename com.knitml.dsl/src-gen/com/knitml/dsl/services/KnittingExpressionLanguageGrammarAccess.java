@@ -72,80 +72,187 @@ public class KnittingExpressionLanguageGrammarAccess extends AbstractGrammarElem
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Instruction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cInstructionKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cLabelAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cLabelIDTerminalRuleCall_1_0 = (RuleCall)cLabelAssignment_1.eContents().get(0);
-		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
-		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
-		private final RuleCall cLFTerminalRuleCall_2_0_1 = (RuleCall)cGroup_2_0.eContents().get(1);
-		private final Assignment cRowsAssignment_2_0_2 = (Assignment)cGroup_2_0.eContents().get(2);
-		private final RuleCall cRowsRowParserRuleCall_2_0_2_0 = (RuleCall)cRowsAssignment_2_0_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_2_0_3 = (Keyword)cGroup_2_0.eContents().get(3);
-		private final RuleCall cLFTerminalRuleCall_2_0_4 = (RuleCall)cGroup_2_0.eContents().get(4);
-		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
-		private final Keyword cColonKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
-		private final RuleCall cLFTerminalRuleCall_2_1_1 = (RuleCall)cGroup_2_1.eContents().get(1);
-		private final Assignment cRowsAssignment_2_1_2 = (Assignment)cGroup_2_1.eContents().get(2);
-		private final RuleCall cRowsRowParserRuleCall_2_1_2_0 = (RuleCall)cRowsAssignment_2_1_2.eContents().get(0);
-		private final RuleCall cLFTerminalRuleCall_2_1_3 = (RuleCall)cGroup_2_1.eContents().get(3);
+		private final UnorderedGroup cUnorderedGroup_1 = (UnorderedGroup)cGroup.eContents().get(1);
+		private final Assignment cIdAssignment_1_0 = (Assignment)cUnorderedGroup_1.eContents().get(0);
+		private final RuleCall cIdIDTerminalRuleCall_1_0_0 = (RuleCall)cIdAssignment_1_0.eContents().get(0);
+		private final Assignment cLabelAssignment_1_1 = (Assignment)cUnorderedGroup_1.eContents().get(1);
+		private final RuleCall cLabelSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cLabelAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cWithKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cHasKeyAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final Keyword cHasKeyKeyKeyword_2_1_1_0 = (Keyword)cHasKeyAssignment_2_1_1.eContents().get(0);
+		private final Assignment cMessageKeyAssignment_2_1_2 = (Assignment)cGroup_2_1.eContents().get(2);
+		private final RuleCall cMessageKeySTRINGTerminalRuleCall_2_1_2_0 = (RuleCall)cMessageKeyAssignment_2_1_2.eContents().get(0);
+		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
+		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
+		private final Assignment cShapeAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
+		private final Alternatives cShapeAlternatives_2_2_1_0 = (Alternatives)cShapeAssignment_2_2_1.eContents().get(0);
+		private final Keyword cShapeRoundKeyword_2_2_1_0_0 = (Keyword)cShapeAlternatives_2_2_1_0.eContents().get(0);
+		private final Keyword cShapeFlatKeyword_2_2_1_0_1 = (Keyword)cShapeAlternatives_2_2_1_0.eContents().get(1);
+		private final Keyword cShapeKeyword_2_2_2 = (Keyword)cGroup_2_2.eContents().get(2);
+		private final Group cGroup_2_3 = (Group)cGroup_2.eContents().get(3);
+		private final Keyword cCommaKeyword_2_3_0 = (Keyword)cGroup_2_3.eContents().get(0);
+		private final Assignment cRowCountAssignment_2_3_1 = (Assignment)cGroup_2_3.eContents().get(1);
+		private final RuleCall cRowCountINTTerminalRuleCall_2_3_1_0 = (RuleCall)cRowCountAssignment_2_3_1.eContents().get(0);
+		private final Alternatives cAlternatives_2_3_2 = (Alternatives)cGroup_2_3.eContents().get(2);
+		private final Keyword cRowsKeyword_2_3_2_0 = (Keyword)cAlternatives_2_3_2.eContents().get(0);
+		private final Keyword cRoundsKeyword_2_3_2_1 = (Keyword)cAlternatives_2_3_2.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_2_4 = (Keyword)cGroup_2.eContents().get(4);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Group cGroup_3_0 = (Group)cAlternatives_3.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_3_0_0 = (Keyword)cGroup_3_0.eContents().get(0);
+		private final RuleCall cLFTerminalRuleCall_3_0_1 = (RuleCall)cGroup_3_0.eContents().get(1);
+		private final Assignment cRowsAssignment_3_0_2 = (Assignment)cGroup_3_0.eContents().get(2);
+		private final RuleCall cRowsRowParserRuleCall_3_0_2_0 = (RuleCall)cRowsAssignment_3_0_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_0_3 = (Keyword)cGroup_3_0.eContents().get(3);
+		private final RuleCall cLFTerminalRuleCall_3_0_4 = (RuleCall)cGroup_3_0.eContents().get(4);
+		private final Group cGroup_3_1 = (Group)cAlternatives_3.eContents().get(1);
+		private final Keyword cColonKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final RuleCall cLFTerminalRuleCall_3_1_1 = (RuleCall)cGroup_3_1.eContents().get(1);
+		private final Assignment cRowsAssignment_3_1_2 = (Assignment)cGroup_3_1.eContents().get(2);
+		private final RuleCall cRowsRowParserRuleCall_3_1_2_0 = (RuleCall)cRowsAssignment_3_1_2.eContents().get(0);
+		private final RuleCall cLFTerminalRuleCall_3_1_3 = (RuleCall)cGroup_3_1.eContents().get(3);
 		
 		//Instruction:
-		//	"Instruction" label=ID? ("{" LF* rows+=Row+ "}" LF | ":" LF rows+=Row+ LF);
+		//	"Instruction" (id=ID & label=STRING?) ("(" ("with" hasKey?="key" messageKey=STRING?)? (","? shape=("round" | "flat")
+		//	"shape"?)? (","? rowCount=INT ("rows" | "rounds")?)? ")")? ("{" LF* rows+=Row+ "}" => LF? | ":" LF rows+=Row+ LF);
 		public ParserRule getRule() { return rule; }
 
-		//"Instruction" label=ID? ("{" LF* rows+=Row+ "}" LF | ":" LF rows+=Row+ LF)
+		//"Instruction" (id=ID & label=STRING?) ("(" ("with" hasKey?="key" messageKey=STRING?)? (","? shape=("round" | "flat")
+		//"shape"?)? (","? rowCount=INT ("rows" | "rounds")?)? ")")? ("{" LF* rows+=Row+ "}" => LF? | ":" LF rows+=Row+ LF)
 		public Group getGroup() { return cGroup; }
 
 		//"Instruction"
 		public Keyword getInstructionKeyword_0() { return cInstructionKeyword_0; }
 
-		//label=ID?
-		public Assignment getLabelAssignment_1() { return cLabelAssignment_1; }
+		//id=ID & label=STRING?
+		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
+
+		//id=ID
+		public Assignment getIdAssignment_1_0() { return cIdAssignment_1_0; }
 
 		//ID
-		public RuleCall getLabelIDTerminalRuleCall_1_0() { return cLabelIDTerminalRuleCall_1_0; }
+		public RuleCall getIdIDTerminalRuleCall_1_0_0() { return cIdIDTerminalRuleCall_1_0_0; }
 
-		//"{" LF* rows+=Row+ "}" LF | ":" LF rows+=Row+ LF
-		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		//label=STRING?
+		public Assignment getLabelAssignment_1_1() { return cLabelAssignment_1_1; }
 
-		//"{" LF* rows+=Row+ "}" LF
-		public Group getGroup_2_0() { return cGroup_2_0; }
+		//STRING
+		public RuleCall getLabelSTRINGTerminalRuleCall_1_1_0() { return cLabelSTRINGTerminalRuleCall_1_1_0; }
 
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2_0_0() { return cLeftCurlyBracketKeyword_2_0_0; }
+		//("(" ("with" hasKey?="key" messageKey=STRING?)? (","? shape=("round" | "flat") "shape"?)? (","? rowCount=INT ("rows" |
+		//"rounds")?)? ")")?
+		public Group getGroup_2() { return cGroup_2; }
 
-		//LF*
-		public RuleCall getLFTerminalRuleCall_2_0_1() { return cLFTerminalRuleCall_2_0_1; }
+		//"("
+		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
 
-		//rows+=Row+
-		public Assignment getRowsAssignment_2_0_2() { return cRowsAssignment_2_0_2; }
-
-		//Row
-		public RuleCall getRowsRowParserRuleCall_2_0_2_0() { return cRowsRowParserRuleCall_2_0_2_0; }
-
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_2_0_3() { return cRightCurlyBracketKeyword_2_0_3; }
-
-		//LF
-		public RuleCall getLFTerminalRuleCall_2_0_4() { return cLFTerminalRuleCall_2_0_4; }
-
-		//":" LF rows+=Row+ LF
+		//("with" hasKey?="key" messageKey=STRING?)?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//":"
-		public Keyword getColonKeyword_2_1_0() { return cColonKeyword_2_1_0; }
+		//"with"
+		public Keyword getWithKeyword_2_1_0() { return cWithKeyword_2_1_0; }
 
-		//LF
-		public RuleCall getLFTerminalRuleCall_2_1_1() { return cLFTerminalRuleCall_2_1_1; }
+		//hasKey?="key"
+		public Assignment getHasKeyAssignment_2_1_1() { return cHasKeyAssignment_2_1_1; }
+
+		//"key"
+		public Keyword getHasKeyKeyKeyword_2_1_1_0() { return cHasKeyKeyKeyword_2_1_1_0; }
+
+		//messageKey=STRING?
+		public Assignment getMessageKeyAssignment_2_1_2() { return cMessageKeyAssignment_2_1_2; }
+
+		//STRING
+		public RuleCall getMessageKeySTRINGTerminalRuleCall_2_1_2_0() { return cMessageKeySTRINGTerminalRuleCall_2_1_2_0; }
+
+		//(","? shape=("round" | "flat") "shape"?)?
+		public Group getGroup_2_2() { return cGroup_2_2; }
+
+		//","?
+		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
+
+		//shape=("round" | "flat")
+		public Assignment getShapeAssignment_2_2_1() { return cShapeAssignment_2_2_1; }
+
+		//"round" | "flat"
+		public Alternatives getShapeAlternatives_2_2_1_0() { return cShapeAlternatives_2_2_1_0; }
+
+		//"round"
+		public Keyword getShapeRoundKeyword_2_2_1_0_0() { return cShapeRoundKeyword_2_2_1_0_0; }
+
+		//"flat"
+		public Keyword getShapeFlatKeyword_2_2_1_0_1() { return cShapeFlatKeyword_2_2_1_0_1; }
+
+		//"shape"?
+		public Keyword getShapeKeyword_2_2_2() { return cShapeKeyword_2_2_2; }
+
+		//(","? rowCount=INT ("rows" | "rounds")?)?
+		public Group getGroup_2_3() { return cGroup_2_3; }
+
+		//","?
+		public Keyword getCommaKeyword_2_3_0() { return cCommaKeyword_2_3_0; }
+
+		//rowCount=INT
+		public Assignment getRowCountAssignment_2_3_1() { return cRowCountAssignment_2_3_1; }
+
+		//INT
+		public RuleCall getRowCountINTTerminalRuleCall_2_3_1_0() { return cRowCountINTTerminalRuleCall_2_3_1_0; }
+
+		//("rows" | "rounds")?
+		public Alternatives getAlternatives_2_3_2() { return cAlternatives_2_3_2; }
+
+		//"rows"
+		public Keyword getRowsKeyword_2_3_2_0() { return cRowsKeyword_2_3_2_0; }
+
+		//"rounds"
+		public Keyword getRoundsKeyword_2_3_2_1() { return cRoundsKeyword_2_3_2_1; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_2_4() { return cRightParenthesisKeyword_2_4; }
+
+		//"{" LF* rows+=Row+ "}" => LF? | ":" LF rows+=Row+ LF
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
+		//"{" LF* rows+=Row+ "}" => LF?
+		public Group getGroup_3_0() { return cGroup_3_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3_0_0() { return cLeftCurlyBracketKeyword_3_0_0; }
+
+		//LF*
+		public RuleCall getLFTerminalRuleCall_3_0_1() { return cLFTerminalRuleCall_3_0_1; }
 
 		//rows+=Row+
-		public Assignment getRowsAssignment_2_1_2() { return cRowsAssignment_2_1_2; }
+		public Assignment getRowsAssignment_3_0_2() { return cRowsAssignment_3_0_2; }
 
 		//Row
-		public RuleCall getRowsRowParserRuleCall_2_1_2_0() { return cRowsRowParserRuleCall_2_1_2_0; }
+		public RuleCall getRowsRowParserRuleCall_3_0_2_0() { return cRowsRowParserRuleCall_3_0_2_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3_0_3() { return cRightCurlyBracketKeyword_3_0_3; }
+
+		//=> LF?
+		public RuleCall getLFTerminalRuleCall_3_0_4() { return cLFTerminalRuleCall_3_0_4; }
+
+		//":" LF rows+=Row+ LF
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//":"
+		public Keyword getColonKeyword_3_1_0() { return cColonKeyword_3_1_0; }
 
 		//LF
-		public RuleCall getLFTerminalRuleCall_2_1_3() { return cLFTerminalRuleCall_2_1_3; }
+		public RuleCall getLFTerminalRuleCall_3_1_1() { return cLFTerminalRuleCall_3_1_1; }
+
+		//rows+=Row+
+		public Assignment getRowsAssignment_3_1_2() { return cRowsAssignment_3_1_2; }
+
+		//Row
+		public RuleCall getRowsRowParserRuleCall_3_1_2_0() { return cRowsRowParserRuleCall_3_1_2_0; }
+
+		//LF
+		public RuleCall getLFTerminalRuleCall_3_1_3() { return cLFTerminalRuleCall_3_1_3; }
 	}
 
 	public class RowElements extends AbstractParserRuleElementFinder {
@@ -1236,7 +1343,8 @@ public class KnittingExpressionLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Instruction:
-	//	"Instruction" label=ID? ("{" LF* rows+=Row+ "}" LF | ":" LF rows+=Row+ LF);
+	//	"Instruction" (id=ID & label=STRING?) ("(" ("with" hasKey?="key" messageKey=STRING?)? (","? shape=("round" | "flat")
+	//	"shape"?)? (","? rowCount=INT ("rows" | "rounds")?)? ")")? ("{" LF* rows+=Row+ "}" => LF? | ":" LF rows+=Row+ LF);
 	public InstructionElements getInstructionAccess() {
 		return (pInstruction != null) ? pInstruction : (pInstruction = new InstructionElements());
 	}
