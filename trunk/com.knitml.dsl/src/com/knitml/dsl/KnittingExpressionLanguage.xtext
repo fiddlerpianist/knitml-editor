@@ -10,7 +10,13 @@ BlockOperation:
 	(Instruction | Row | Message);
 
 Instruction:
-	'Instruction' label=ID? (('{' LF* rows+=Row+ '}' LF) | (':' LF rows+=Row+ LF));
+	'Instruction' (id=ID & label=STRING?)
+	('('
+	('with' hasKey?='key' messageKey=STRING?)?
+	(','? shape=('round' | 'flat') 'shape'?)?
+	(','? rowCount=INT ('rows' | 'rounds')?)?
+	')')?
+	(('{' LF* rows+=Row+ '}' => LF?) | (':' LF rows+=Row+ LF));
 
 Row:
 	nextRow?='Next'? (shortRow?='Short'? & longRow?='Long'?)

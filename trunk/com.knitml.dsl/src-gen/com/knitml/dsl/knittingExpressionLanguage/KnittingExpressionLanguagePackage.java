@@ -118,13 +118,58 @@ public interface KnittingExpressionLanguagePackage extends EPackage
   int INSTRUCTION = 2;
 
   /**
+   * The feature id for the '<em><b>Id</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTRUCTION__ID = BLOCK_OPERATION_FEATURE_COUNT + 0;
+
+  /**
    * The feature id for the '<em><b>Label</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int INSTRUCTION__LABEL = BLOCK_OPERATION_FEATURE_COUNT + 0;
+  int INSTRUCTION__LABEL = BLOCK_OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Has Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTRUCTION__HAS_KEY = BLOCK_OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Message Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTRUCTION__MESSAGE_KEY = BLOCK_OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Shape</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTRUCTION__SHAPE = BLOCK_OPERATION_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Row Count</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INSTRUCTION__ROW_COUNT = BLOCK_OPERATION_FEATURE_COUNT + 5;
 
   /**
    * The feature id for the '<em><b>Rows</b></em>' containment reference list.
@@ -133,7 +178,7 @@ public interface KnittingExpressionLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTRUCTION__ROWS = BLOCK_OPERATION_FEATURE_COUNT + 1;
+  int INSTRUCTION__ROWS = BLOCK_OPERATION_FEATURE_COUNT + 6;
 
   /**
    * The number of structural features of the '<em>Instruction</em>' class.
@@ -142,7 +187,7 @@ public interface KnittingExpressionLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int INSTRUCTION_FEATURE_COUNT = BLOCK_OPERATION_FEATURE_COUNT + 2;
+  int INSTRUCTION_FEATURE_COUNT = BLOCK_OPERATION_FEATURE_COUNT + 7;
 
   /**
    * The meta object id for the '{@link com.knitml.dsl.knittingExpressionLanguage.impl.RowImpl <em>Row</em>}' class.
@@ -709,6 +754,17 @@ public interface KnittingExpressionLanguagePackage extends EPackage
   EClass getInstruction();
 
   /**
+   * Returns the meta object for the attribute '{@link com.knitml.dsl.knittingExpressionLanguage.Instruction#getId <em>Id</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Id</em>'.
+   * @see com.knitml.dsl.knittingExpressionLanguage.Instruction#getId()
+   * @see #getInstruction()
+   * @generated
+   */
+  EAttribute getInstruction_Id();
+
+  /**
    * Returns the meta object for the attribute '{@link com.knitml.dsl.knittingExpressionLanguage.Instruction#getLabel <em>Label</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -718,6 +774,50 @@ public interface KnittingExpressionLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getInstruction_Label();
+
+  /**
+   * Returns the meta object for the attribute '{@link com.knitml.dsl.knittingExpressionLanguage.Instruction#isHasKey <em>Has Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Has Key</em>'.
+   * @see com.knitml.dsl.knittingExpressionLanguage.Instruction#isHasKey()
+   * @see #getInstruction()
+   * @generated
+   */
+  EAttribute getInstruction_HasKey();
+
+  /**
+   * Returns the meta object for the attribute '{@link com.knitml.dsl.knittingExpressionLanguage.Instruction#getMessageKey <em>Message Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Message Key</em>'.
+   * @see com.knitml.dsl.knittingExpressionLanguage.Instruction#getMessageKey()
+   * @see #getInstruction()
+   * @generated
+   */
+  EAttribute getInstruction_MessageKey();
+
+  /**
+   * Returns the meta object for the attribute '{@link com.knitml.dsl.knittingExpressionLanguage.Instruction#getShape <em>Shape</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Shape</em>'.
+   * @see com.knitml.dsl.knittingExpressionLanguage.Instruction#getShape()
+   * @see #getInstruction()
+   * @generated
+   */
+  EAttribute getInstruction_Shape();
+
+  /**
+   * Returns the meta object for the attribute '{@link com.knitml.dsl.knittingExpressionLanguage.Instruction#getRowCount <em>Row Count</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Row Count</em>'.
+   * @see com.knitml.dsl.knittingExpressionLanguage.Instruction#getRowCount()
+   * @see #getInstruction()
+   * @generated
+   */
+  EAttribute getInstruction_RowCount();
 
   /**
    * Returns the meta object for the containment reference list '{@link com.knitml.dsl.knittingExpressionLanguage.Instruction#getRows <em>Rows</em>}'.
@@ -1311,12 +1411,52 @@ public interface KnittingExpressionLanguagePackage extends EPackage
     EClass INSTRUCTION = eINSTANCE.getInstruction();
 
     /**
+     * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INSTRUCTION__ID = eINSTANCE.getInstruction_Id();
+
+    /**
      * The meta object literal for the '<em><b>Label</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EAttribute INSTRUCTION__LABEL = eINSTANCE.getInstruction_Label();
+
+    /**
+     * The meta object literal for the '<em><b>Has Key</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INSTRUCTION__HAS_KEY = eINSTANCE.getInstruction_HasKey();
+
+    /**
+     * The meta object literal for the '<em><b>Message Key</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INSTRUCTION__MESSAGE_KEY = eINSTANCE.getInstruction_MessageKey();
+
+    /**
+     * The meta object literal for the '<em><b>Shape</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INSTRUCTION__SHAPE = eINSTANCE.getInstruction_Shape();
+
+    /**
+     * The meta object literal for the '<em><b>Row Count</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute INSTRUCTION__ROW_COUNT = eINSTANCE.getInstruction_RowCount();
 
     /**
      * The meta object literal for the '<em><b>Rows</b></em>' containment reference list feature.

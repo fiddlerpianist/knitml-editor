@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: com.knitml.dsl.converter.tests
+Bundle-Name: com.knitml.dsl.converter
 Bundle-Vendor: KnitML
 Bundle-Version: 1.0.0
-Bundle-SymbolicName: com.knitml.dsl.converter.tests; singleton:=true
+Bundle-SymbolicName: com.knitml.dsl.converter; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.knitml.dsl,
  org.eclipse.core.runtime,

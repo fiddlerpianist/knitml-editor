@@ -5,21 +5,25 @@
     nsURI="http://www.knitml.com/dsl/KnittingExpressionLanguage" nsPrefix="knittingExpressionLanguage">
   <eClassifiers xsi:type="ecore:EClass" name="Pattern">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
-        eType="ecore:EClass platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//BlockOperation"
-        containment="true"/>
+        eType="#//BlockOperation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BlockOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Instruction" eSuperTypes="platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//BlockOperation">
+  <eClassifiers xsi:type="ecore:EClass" name="Instruction" eSuperTypes="#//BlockOperation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="rows" upperBound="-1" eType="ecore:EClass platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//Row"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rowCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rows" upperBound="-1" eType="#//Row"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Row" eSuperTypes="platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//BlockOperation">
+  <eClassifiers xsi:type="ecore:EClass" name="Row" eSuperTypes="#//BlockOperation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nextRow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortRow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="longRow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="range" eType="ecore:EClass platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//Range"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="range" eType="#//Range"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
@@ -29,30 +33,29 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inform" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="ecore:EClass platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//InlineOperation"
-        containment="true"/>
+        eType="#//InlineOperation" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//BlockOperation">
+  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//BlockOperation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InlineOperation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Knit" eSuperTypes="platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//InlineOperation">
+  <eClassifiers xsi:type="ecore:EClass" name="Knit" eSuperTypes="#//InlineOperation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="together" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughTrailingLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="yarnRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="repeat" eType="ecore:EClass platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//RepeatSpec"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="repeat" eType="#//RepeatSpec"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Purl" eSuperTypes="platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//InlineOperation">
+  <eClassifiers xsi:type="ecore:EClass" name="Purl" eSuperTypes="#//InlineOperation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="together" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughTrailingLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="yarnRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="repeat" eType="ecore:EClass platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//RepeatSpec"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="repeat" eType="#//RepeatSpec"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Slip" eSuperTypes="platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//InlineOperation">
+  <eClassifiers xsi:type="ecore:EClass" name="Slip" eSuperTypes="#//InlineOperation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reverse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="knitwise" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -68,11 +71,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beforeMarker" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="times" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//InlineOperation">
+  <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="#//InlineOperation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="ecore:EClass platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//InlineOperation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="spec" eType="ecore:EClass platform:/resource/com.knitml.dsl/src-gen/com/knitml/dsl/KnittingExpressionLanguage.ecore#//RepeatSpec"
+        eType="#//InlineOperation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spec" eType="#//RepeatSpec"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Range">
