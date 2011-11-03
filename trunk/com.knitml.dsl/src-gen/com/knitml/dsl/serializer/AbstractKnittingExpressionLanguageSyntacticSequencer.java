@@ -242,7 +242,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     ('rounds' | 'rows')?
+	 *     ('rows' | 'rounds')?
 	 */
 	protected void emit_Instruction___RoundsKeyword_2_3_2_1_or_RowsKeyword_2_3_2_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -250,7 +250,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     'k' | 'Knit' | 'K' | 'knit'
+	 *     'Knit' | 'k' | 'knit' | 'K'
 	 */
 	protected void emit_Knit_KKeyword_0_0_or_KKeyword_0_1_or_KnitKeyword_0_2_or_KnitKeyword_0_3(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -274,7 +274,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     ('st' | 'sts')?
+	 *     ('sts' | 'st')?
 	 */
 	protected void emit_Knit___StKeyword_3_0_or_StsKeyword_3_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -298,7 +298,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     'p' | 'purl' | 'P' | 'Purl'
+	 *     'P' | 'p' | 'purl' | 'Purl'
 	 */
 	protected void emit_Purl_PKeyword_0_0_or_PKeyword_0_1_or_PurlKeyword_0_2_or_PurlKeyword_0_3(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -330,7 +330,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     ('sts' | 'st')?
+	 *     ('st' | 'sts')?
 	 */
 	protected void emit_RepeatSpec___StKeyword_2_1_0_or_StsKeyword_2_1_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -338,7 +338,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     ('st' | 'sts')?
+	 *     ('sts' | 'st')?
 	 */
 	protected void emit_RepeatSpec___StKeyword_3_1_0_or_StsKeyword_3_1_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -378,7 +378,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     (',' ('Repeat' | 'repeat'))?
+	 *     (',' ('repeat' | 'Repeat'))?
 	 */
 	protected void emit_Repeat___CommaKeyword_1_4_0___RepeatKeyword_1_4_1_0_or_RepeatKeyword_1_4_1_1____q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -466,7 +466,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     'sl' | 'Slip' | 'Sl' | 'slip'
+	 *     'slip' | 'Sl' | 'sl' | 'Slip'
 	 */
 	protected void emit_Slip_SlKeyword_2_0_or_SlKeyword_2_1_or_SlipKeyword_2_2_or_SlipKeyword_2_3(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -474,7 +474,7 @@ public class AbstractKnittingExpressionLanguageSyntacticSequencer extends Abstra
 	
 	/**
 	 * Syntax:
-	 *     ('st' | 'sts')?
+	 *     ('sts' | 'st')?
 	 */
 	protected void emit_Slip___StKeyword_3_0_1_0_or_StsKeyword_3_0_1_1__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
