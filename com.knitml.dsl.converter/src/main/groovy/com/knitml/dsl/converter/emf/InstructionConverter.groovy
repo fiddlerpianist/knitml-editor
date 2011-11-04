@@ -28,17 +28,17 @@ public class InstructionConverter implements DomainModelConverter<com.knitml.dsl
 
 	@Override
 	public Instruction convert(com.knitml.dsl.knittingExpressionLanguage.Instruction emfInstruction) {
-		def id = emfInstruction.id
+		def id = emfInstruction.name
 		def label = emfInstruction.label
 		def messageKey = null
-		if (emfInstruction.hasKey) {
-			if (emfInstruction.messageKey == null) {
+		if (emfInstruction.withKey != null) {
+			if (emfInstruction.withKey.messageKey == null) {
 				// can specify "with key" without the key,
 				// which defaults to the literal 'instruction.'
 				//with the supplied ID
-				messageKey = 'instruction.' + emfInstruction.id
+				messageKey = 'instruction.' + emfInstruction.name
 			} else {
-				messageKey = emfInstruction.messageKey
+				messageKey = emfInstruction.withKey.messageKey
 			}
 		}
 		def rowCount = emfInstruction.rowCount

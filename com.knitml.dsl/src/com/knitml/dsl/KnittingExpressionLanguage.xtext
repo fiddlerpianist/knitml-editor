@@ -7,12 +7,12 @@ Pattern:
 	LF* elements+=BlockOperation+ LF*;
 
 BlockOperation:
-	(Instruction | Row | Message);
+	(Instruction | Row | RepeatInstruction | Message);
 
 Instruction:
-	'Instruction' (id=ID & label=STRING?)
+	'Instruction' name=ID label=STRING?
 	('('
-	('with' hasKey?='key' messageKey=STRING?)?
+	(withKey=WithKey)?
 	(','? shape=('round' | 'flat') 'shape'?)?
 	(','? rowCount=INT ('rows' | 'rounds')?)?
 	')')?
@@ -27,9 +27,6 @@ Row:
 	('(' (','? inform?='inform' 'side'?)? (','? reset?='reset' 'count'?)? ')')?
 	':' LF? operations+=InlineOperation (','
 	operations+=InlineOperation)* => LF?;
-
-Message:
-	message=STRING LF;
 
 	// Inline Operations
 InlineOperation:
@@ -57,7 +54,17 @@ Repeat:
 	('[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' (',' ('Repeat' | 'repeat'))? 'to'?
 	spec=RepeatSpec);
 
+RepeatInstruction:
+	'Repeat' instruction=[Instruction] => LF?;
+
+Message:
+	message=STRING ('(' withKey=WithKey ')')? => LF?;
+	
 	// lower-level data types
+WithKey:
+	{WithKey}
+	'with' 'key' messageKey=STRING?;
+
 Range:
 	min=INT '-' max=INT;
 
@@ -75,8 +82,10 @@ terminal STRING:
 terminal ML_COMMENT:
 	'/*'->'*/';
 
+	//terminal SL_COMMENT:
+//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 terminal SL_COMMENT:
-	'//' !('\n' | '\r')* ('\r'? '\n')?;
+	'--' !('\n' | '\r')* ('\r'? '\n')?;
 
 terminal LF:
 	(EOF | ('\r'? '\n'));
