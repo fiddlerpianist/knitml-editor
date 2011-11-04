@@ -4,7 +4,7 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate knittingExpressionLanguage "http://www.knitml.com/dsl/KnittingExpressionLanguage"
 
 Pattern:
-	LF* elements+=BlockOperation+ LF*;
+	LF* elements+=BlockOperation (LF* elements+=BlockOperation)* LF*;
 
 BlockOperation:
 	(Instruction | Row | RepeatInstruction | Message);
@@ -16,7 +16,7 @@ Instruction:
 	(','? shape=('round' | 'flat') 'shape'?)?
 	(','? rowCount=INT ('rows' | 'rounds')?)?
 	')')?
-	(('{' LF* rows+=Row+ '}' => LF?) | (':' LF rows+=Row+ LF));
+	(('{' LF* rows+=Row (LF* rows+=Row)* LF* '}' => LF?) | (':' LF rows+=Row+ LF));
 
 Row:
 	nextRow?='Next'? (shortRow?='Short'? & longRow?='Long'?)
@@ -55,11 +55,21 @@ Repeat:
 	spec=RepeatSpec);
 
 RepeatInstruction:
-	'Repeat' instruction=[Instruction] => LF?;
+	('Repeat' | 'repeat') instruction=[Instruction]
+	(('until'|'for') desiredLength?='desired length' |
+	('until' value=INT ('st' | 'sts') remain?='remain') |
+// TODO: difficult! (value=INT ('st' | 'sts') remainOnNeedles?='remain on' ('needle' | 'needles')) |
+// TODO: UNTIL_EQUALS
+	('until measures'|'for') value=INT measure=('in' | 'ins') |
+	(value=INT additionalTimes?=('additional' | 'more') 'times')
+	)
+	// UNTIL_MEASURES, ADDITIONAL_TIMES, UNTIL_EQUALS };
+
+	=> LF?;
 
 Message:
 	message=STRING ('(' withKey=WithKey ')')? => LF?;
-	
+
 	// lower-level data types
 WithKey:
 	{WithKey}
