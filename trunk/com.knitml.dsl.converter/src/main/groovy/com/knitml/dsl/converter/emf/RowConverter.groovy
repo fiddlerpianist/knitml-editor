@@ -8,23 +8,15 @@ import com.knitml.core.common.RowDefinitionScope
 import com.knitml.core.common.Side
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.directions.Operation
 import com.knitml.core.model.directions.block.Row
 
 public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Row> {
 
 	@Inject
 	protected DomainModelConverterLocator<EObject> locator
+	@Inject
+	protected EmfHelper emfHelper
 
-	protected List<Operation> convertChildren(List emfOperations) {
-		List<Operation> operations = []
-		for (def emfOperation : emfOperations) {
-			Operation operation = locator.locateConverter(emfOperation).convert(emfOperation)
-			operations << operation
-		}
-		return operations
-	}
-	
 	@Override
 	public Row convert(com.knitml.dsl.knittingExpressionLanguage.Row emfRow) {
 		def row = new Row()
@@ -67,7 +59,7 @@ public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittin
 		}
 		row.informSide = emfRow.inform
 		row.yarnIdRef = emfRow.yarnRef
-		row.operations = convertChildren (emfRow.operations)
+		row.operations = emfHelper.convertOperations (emfRow.operations)
 		return row
 	}
 }

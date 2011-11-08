@@ -15,6 +15,10 @@ Require-Bundle: com.knitml.dsl,
  org.junit4,
  org.eclipse.ui.workbench;resolution:=optional,
  com.knitml.core
-Import-Package: org.apache.log4j,
- org.apache.commons.logging
+Import-Package: javax.measure,
+ javax.measure.converter,
+ javax.measure.quantity,
+ javax.measure.unit,
+ org.apache.commons.logging,
+ org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

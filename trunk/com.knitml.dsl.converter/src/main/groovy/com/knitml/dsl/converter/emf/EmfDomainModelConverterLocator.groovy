@@ -1,40 +1,48 @@
-package com.knitml.dsl.converter.emf;
+package com.knitml.dsl.converter.emf
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EObject
 
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.knitml.core.converter.DomainModelConverter;
-import com.knitml.core.converter.DomainModelConverterLocator;
-import com.knitml.dsl.converter.emf.exception.ConverterNotFoundException;
+import com.google.inject.Inject
+import com.google.inject.Injector
+import com.google.inject.Singleton
+import com.knitml.core.converter.DomainModelConverter
+import com.knitml.core.converter.DomainModelConverterLocator
+import com.knitml.dsl.converter.emf.exception.ConverterNotFoundException
 
+@Singleton
 public class EmfDomainModelConverterLocator implements
-		DomainModelConverterLocator<EObject> {
-	
+DomainModelConverterLocator<EObject> {
+
 	@Inject
-	protected Injector injector; 
+	protected Injector injector
+	
+	private Map converters = [:]
+
+	private findConverter(Class interf) {
+		String targetName = this.class.package.name + "." + interf.simpleName + "Converter"
+		if (converters.get(targetName) != null) {
+			return converters.get(targetName)
+		}
+		try {
+			def converterClass = Class.forName(targetName)
+			if (!DomainModelConverter.class.isAssignableFrom(converterClass)) {
+				throw new ConverterNotFoundException("Could not find a converter for type " + interf.name)
+			}
+			def converter = converterClass.newInstance()
+			injector.injectMembers(converter)
+			converters.put(targetName, converter)
+			return converter
+		} catch (Exception ex) {
+			throw new ConverterNotFoundException(ex);
+		}
+	}
 
 	@Override
-	public DomainModelConverter<EObject> locateConverter(
-			EObject sourceModel) {
+	public DomainModelConverter<EObject> locateConverter(EObject sourceModel) {
 		// iterate through each interface this object implements
-		for (Class<?> interf : sourceModel.class.interfaces) {
-			if (interf.package.name.equals("com.knitml.dsl.knittingExpressionLanguage")) {
-				try {
-					Class<DomainModelConverter<EObject>> converterClass = (Class<DomainModelConverter<EObject>>) Class
-							.forName(this.class.package.name
-									+ "." + interf.getSimpleName()
-									+ "Converter");
-					if (!DomainModelConverter.class
-							.isAssignableFrom(converterClass)) {
-						throw new ConverterNotFoundException("Could not find a converter for type " + interf.name);
-					}
-					DomainModelConverter<EObject> converter = converterClass.newInstance();
-					injector.injectMembers(converter);
-					return converter;
-				} catch (Exception ex) {
-					throw new ConverterNotFoundException(ex);
-				}
+		for (Class<?> interfaceName : sourceModel.class.interfaces) {
+			if (interfaceName.package.name.equals("com.knitml.dsl.knittingExpressionLanguage")) {
+				return findConverter (interfaceName)
 			}
 		}
 		throw new ConverterNotFoundException("Could not find an appropriate interface to convert " + sourceModel.class.name);

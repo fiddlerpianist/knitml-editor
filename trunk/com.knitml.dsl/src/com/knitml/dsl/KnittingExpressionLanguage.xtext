@@ -6,6 +6,7 @@ generate knittingExpressionLanguage "http://www.knitml.com/dsl/KnittingExpressio
 Pattern:
 	LF* elements+=BlockOperation (LF* elements+=BlockOperation)* LF*;
 
+	// block operations
 BlockOperation:
 	(Instruction | Row | RepeatInstruction | Message);
 
@@ -28,52 +29,60 @@ Row:
 	':' LF? operations+=InlineOperation (','
 	operations+=InlineOperation)* => LF?;
 
-	// Inline Operations
-InlineOperation:
-	(Knit | Purl | Slip | Repeat);
-
-Knit:
-	('K' | 'k' | 'Knit' | 'knit') {Knit} number=INT? ('st' | 'sts')? (together?=('tog')? & throughTrailingLoop?=('tbl' |
-	'ttl')?) ('with' yarnRef=ID)? ('to'? repeat=RepeatSpec)?;
-
-Purl:
-	('P' | 'p' | 'Purl' | 'purl') {Purl} number=INT? ('st' | 'sts')? (together?=('tog')? & throughTrailingLoop?=('tbl' |
-	'ttl')?) ('with' yarnRef=ID)? ('to'? repeat=RepeatSpec)?;
-
-Slip:
-	{Slip} reverse?=('Rev' | 'Reverse' | 'rev' | 'reverse')? ('Sl' | 'sl' | 'Slip' | 'slip') ((number=INT ('st' | 'sts')?)
-	| 'next st')? (knitwise?=('kw' | 'knitwise') | purlwise?=('pw' | 'purlwise'))? yarnPosition=('wyif' | 'wyib')?;
-
-RepeatSpec:
-	(toEnd?=('end') | toMarker?=('marker') | (value=INT ('st' | 'sts')? beforeEnd?=('before end')) | (value=INT ('st' |
-	'sts')? beforeGap?=('before gap')) | (value=INT ('st' | 'sts')? beforeMarker?=('before marker')) | (value=INT
-	times?=('times')));
-
-Repeat:
-	(('Repeat' | 'repeat') '[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' 'to'? spec=RepeatSpec) |
-	('[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' (',' ('Repeat' | 'repeat'))? 'to'?
-	spec=RepeatSpec);
-
 RepeatInstruction:
 	('Repeat' | 'repeat') instruction=[Instruction]
-	(('until'|'for') desiredLength?='desired length' |
+	(('for' desiredLength?='desired length') |
 	('until' value=INT ('st' | 'sts') remain?='remain') |
-// TODO: difficult! (value=INT ('st' | 'sts') remainOnNeedles?='remain on' ('needle' | 'needles')) |
-// TODO: UNTIL_EQUALS
-	('until measures'|'for') value=INT measure=('in' | 'ins') |
-	(value=INT additionalTimes?=('additional' | 'more') 'times')
-	)
-	// UNTIL_MEASURES, ADDITIONAL_TIMES, UNTIL_EQUALS };
-
+	// TODO: difficult! (value=INT ('st' | 'sts') remainOnNeedles?='remain on' ('needle' | 'needles')) |
+	// TODO: UNTIL_EQUALS
+	(('for' | ('until' 'measures')) (value=INT | decimalValue=DECIMAL) unit=UnitOfMeasure) |
+	(value=INT additionalTimes?=('additional' | 'more') 'times'))
 	=> LF?;
 
 Message:
 	message=STRING ('(' withKey=WithKey ')')? => LF?;
 
+	// Inline Operations
+InlineOperation:
+	(Knit | Purl | Slip | Repeat | BindOff);
+
+Knit:
+	('K' | 'k' | 'Knit' | 'knit') {Knit} number=INT? StitchLiteral? (together?=('tog')? & throughTrailingLoop?=('tbl' |
+	'ttl')?) ('with' yarnRef=ID)? ('to'? repeat=RepeatSpec)?;
+
+Purl:
+	('P' | 'p' | 'Purl' | 'purl') {Purl} number=INT? StitchLiteral? (together?=('tog')? & throughTrailingLoop?=('tbl' |
+	'ttl')?) ('with' yarnRef=ID)? ('to'? repeat=RepeatSpec)?;
+
+Slip:
+	{Slip} reverse?=('Rev' | 'Reverse' | 'rev' | 'reverse')? ('Sl' | 'sl' | 'Slip' | 'slip') ((number=INT StitchLiteral?)
+	| 'next st')? wise=Wise? yarnPosition=('wyif' | 'wyib')?;
+
+Repeat:
+	(('Repeat' | 'repeat') '[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' 'to'? spec=RepeatSpec)
+	| ('[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' (',' ('Repeat' | 'repeat'))? 'to'?
+	spec=RepeatSpec);
+
+BindOff:
+	('Bind off' | 'bind off' | 'BO' | 'bo') (all?='all' | value=INT) StitchLiteral? wise=Wise? ('with' yarnRef=ID)?;
+
+RepeatSpec:
+	(toEnd?=('end') | toMarker?=('marker') | (value=INT StitchLiteral? beforeEnd?=('before end')) | (value=INT
+	StitchLiteral? beforeGap?=('before gap')) | (value=INT StitchLiteral? beforeMarker?=('before marker')) | (value=INT
+	times?=('times')));
+
 	// lower-level data types
+enum UnitOfMeasure:
+	INCH='in' | INCH='ins' | INCH='inch' | INCH='inches' | CM='cm' | CM='cms' | CM='centimeter' | CM='centimeters';
+
+enum Wise:
+	NONE='default' | KNITWISE='kw' | KNITWISE='knitwise' | PURLWISE='pw' | PURLWISE='purlwise';
+
+StitchLiteral returns ecore::EString:
+	'st' | 'sts' | 'stitch' | 'stitches';
+
 WithKey:
-	{WithKey}
-	'with' 'key' messageKey=STRING?;
+	{WithKey} 'with' 'key' messageKey=STRING?;
 
 Range:
 	min=INT '-' max=INT;
@@ -81,6 +90,9 @@ Range:
 	// Terminals
 terminal ID:
 	'^'? ('a'..'z' | 'A'..'Z')+;
+
+terminal DECIMAL returns ecore::EDoubleObject:
+	('0'..'9')+ '.' ('0'..'9')+;
 
 terminal INT returns ecore::EIntegerObject:
 	('0'..'9')+;
