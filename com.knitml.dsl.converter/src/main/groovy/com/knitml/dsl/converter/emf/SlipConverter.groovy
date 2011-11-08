@@ -18,12 +18,15 @@ public class SlipConverter implements DomainModelConverter<com.knitml.dsl.knitti
 	@Override
 	public InlineOperation convert(com.knitml.dsl.knittingExpressionLanguage.Slip emfSlip) {
 		Wise wise = null
-		YarnPosition yarnPosition = null
-		if (emfSlip.knitwise) {
-			wise = Wise.KNITWISE
-		} else if (emfSlip.purlwise) {
-			wise = Wise.PURLWISE
+		switch (emfSlip.wise) {
+			case com.knitml.dsl.knittingExpressionLanguage.Wise.KNITWISE:
+				wise = Wise.KNITWISE
+				break;
+			case com.knitml.dsl.knittingExpressionLanguage.Wise.PURLWISE:
+				wise = Wise.PURLWISE
+				break;
 		}
+		YarnPosition yarnPosition = null
 		if (emfSlip?.yarnPosition.equals('wyib')) {
 			yarnPosition = YarnPosition.BACK
 		} else if (emfSlip?.yarnPosition.equals('wyif')) {

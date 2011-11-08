@@ -5,15 +5,36 @@ Bundle-Vendor: KnitML
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: com.knitml.dsl.converter; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: com.knitml.dsl,
- org.eclipse.core.runtime,
- org.eclipse.xtext,
- org.eclipse.xtext.junit4,
- org.eclipse.xtext.junit,
- org.junit4
-Import-Package: org.apache.commons.lang,
+Import-Package: com.google.inject,
+ com.knitml.core.common,
+ com.knitml.core.converter,
+ com.knitml.core.model,
+ com.knitml.core.model.directions,
+ com.knitml.core.model.directions.block,
+ com.knitml.core.model.directions.expression,
+ com.knitml.core.model.directions.information,
+ com.knitml.core.model.directions.inline,
+ com.knitml.core.model.header,
+ com.knitml.core.units,
+ com.knitml.dsl,
+ com.knitml.dsl.converter,
+ com.knitml.dsl.converter.emf,
+ com.knitml.dsl.converter.emf.exception,
+ com.knitml.dsl.knittingExpressionLanguage,
+ com.knitml.dsl.knittingExpressionLanguage.impl,
+ com.knitml.dsl.knittingExpressionLanguage.util,
+ javax.measure,
+ javax.measure.converter,
+ javax.measure.quantity,
+ javax.measure.unit,
+ org.apache.commons.lang,
  org.apache.commons.logging,
- org.apache.log4j
+ org.apache.log4j,
+ org.eclipse.emf.common.notify,
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext,
+ org.eclipse.xtext.linking,
+ org.eclipse.xtext.linking.impl
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: com.knitml.dsl.converter;uses:="com.knitml.dsl,com.google.inject",
  com.knitml.dsl.converter.emf;

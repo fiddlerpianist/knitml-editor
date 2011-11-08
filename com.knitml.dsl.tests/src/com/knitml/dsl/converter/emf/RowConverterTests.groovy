@@ -1,10 +1,7 @@
 package com.knitml.dsl.converter.emf
-import static com.google.inject.Key.get
 import static org.hamcrest.CoreMatchers.*
 import static org.junit.Assert.*
 
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.parser.IParser
 import org.junit.Test
 
 import com.knitml.core.common.KnittingShape
