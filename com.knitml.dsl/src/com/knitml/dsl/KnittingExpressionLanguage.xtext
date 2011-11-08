@@ -8,7 +8,12 @@ Pattern:
 
 	// block operations
 BlockOperation:
-	(Instruction | Row | RepeatInstruction | Message);
+	(CastOn | Instruction | Row | RepeatInstruction | Message);
+
+CastOn:
+	('Cast on' | 'cast on' | 'CO' | 'co') value=INT StitchLiteral? ('with' yarnRef=ID)?
+	('using the' style=ID 'method')?
+	(countAsRow?='(count as row)')?;
 
 Instruction:
 	'Instruction' name=ID label=STRING?
@@ -89,7 +94,7 @@ Range:
 
 	// Terminals
 terminal ID:
-	'^'? ('a'..'z' | 'A'..'Z')+;
+	'^'? ('a'..'z' | 'A'..'Z' | '-')+;
 
 terminal DECIMAL returns ecore::EDoubleObject:
 	('0'..'9')+ '.' ('0'..'9')+;
