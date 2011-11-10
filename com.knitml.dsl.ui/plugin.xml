@@ -6,18 +6,18 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="kelp"
             id="com.knitml.dsl.KnittingExpressionLanguage"
-            name="KnittingExpressionLanguage Editor">
+            name="Knitting Expression Language Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
@@ -26,7 +26,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="com.knitml.dsl.KnittingExpressionLanguage.validate">
          <activeWhen>
             <reference
@@ -50,21 +50,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="com.knitml.dsl.KnittingExpressionLanguage"
-            name="KnittingExpressionLanguage">
+            name="Expression Language">
             <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
         </page>
         <page
             category="com.knitml.dsl.KnittingExpressionLanguage"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="com.knitml.dsl.KnittingExpressionLanguage.coloring"
             name="Syntax Coloring">
             <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
         </page>
         <page
             category="com.knitml.dsl.KnittingExpressionLanguage"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="com.knitml.dsl.KnittingExpressionLanguage.templates"
             name="Templates">
             <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
@@ -73,7 +73,7 @@
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="com.knitml.dsl.KnittingExpressionLanguage"
             name="KnittingExpressionLanguage">
             <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
@@ -87,7 +87,7 @@
         point="org.eclipse.ui.keywords">
         <keyword
             id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"
-            label="KnittingExpressionLanguage"/>
+            label="Expression Language"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
@@ -124,7 +124,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
@@ -139,55 +139,24 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="kelp">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="kelp">
         </resourceServiceProvider>
     </extension>
 
 
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
-   </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            category="com.knitml.dsl.KnittingExpressionLanguage"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="com.knitml.dsl.KnittingExpressionLanguage.compiler.preferencePage"
-            name="Compiler">
-            <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
-        </page>
-    </extension>
-    <extension
-            point="org.eclipse.ui.propertyPages">
-        <page
-            category="com.knitml.dsl.KnittingExpressionLanguage"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="com.knitml.dsl.KnittingExpressionLanguage.compiler.propertyPage"
-            name="Compiler">
-            <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
-            <enabledWhen>
-	            <adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
-        </page>
-    </extension>
-
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
@@ -220,14 +189,25 @@
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.xtext.projectwiz"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectWizard"
+            id="com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectWizard"
+            name="KnittingExpressionLanguage Project"
+            project="true">
+      </wizard>
    </extension>
 
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
-			class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -252,7 +232,7 @@
    <extension point="org.eclipse.ui.preferencePages">
 	    <page
 	        category="com.knitml.dsl.KnittingExpressionLanguage"
-	        class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
 	        id="com.knitml.dsl.KnittingExpressionLanguage.refactoring"
 	        name="Refactoring">
 	        <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
@@ -261,19 +241,19 @@
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="com.knitml.dsl.KnittingExpressionLanguage.compare.contentViewers"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="kelp">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="com.knitml.dsl.KnittingExpressionLanguage.compare.contentMergeViewers"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="kelp" label="KnittingExpressionLanguage Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="com.knitml.dsl.KnittingExpressionLanguage.editors.documentProviders"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
             extensions="kelp">
     </provider>
   </extension>

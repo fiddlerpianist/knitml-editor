@@ -2,7 +2,6 @@ package com.knitml.dsl.converter;
 
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.linking.impl.Linker;
 
 import com.knitml.core.converter.DomainModelConverterLocator;
 import com.knitml.dsl.converter.emf.EmfDomainModelConverterLocator;
@@ -19,10 +18,6 @@ public class KnittingExpressionLanguageRuntimeModule extends com.knitml.dsl.Knit
 
 	public Class<? extends EmfHelper> bindEmfHelper() {
 		return EmfHelper.class;
-	}
-
-	public Class<? extends org.eclipse.xtext.linking.ILinker> bindILinker() {
-		return Linker.class;
 	}
 
 }
