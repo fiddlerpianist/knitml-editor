@@ -152,37 +152,6 @@
 
 
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
-   </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            category="com.knitml.dsl.KnittingExpressionLanguage"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="com.knitml.dsl.KnittingExpressionLanguage.compiler.preferencePage"
-            name="Compiler">
-            <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
-        </page>
-    </extension>
-    <extension
-            point="org.eclipse.ui.propertyPages">
-        <page
-            category="com.knitml.dsl.KnittingExpressionLanguage"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="com.knitml.dsl.KnittingExpressionLanguage.compiler.propertyPage"
-            name="Compiler">
-            <keywordReference id="com.knitml.dsl.ui.keyword_KnittingExpressionLanguage"/>
-            <enabledWhen>
-	            <adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
-        </page>
-    </extension>
-
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">
@@ -222,6 +191,17 @@
       <markerResolutionGenerator
             class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.xtext.projectwiz"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectWizard"
+            id="com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectWizard"
+            name="KnittingExpressionLanguage Project"
+            project="true">
+      </wizard>
    </extension>
 
    	<!-- Rename Refactoring -->

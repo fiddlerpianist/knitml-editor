@@ -6,7 +6,7 @@
 «ENDDEFINE»
 
 «DEFINE model FOR KnittingExpressionLanguageProjectInfo»
-«FILE "src/model/Model.kel"-»
+«FILE "src/model/Model.kelp"-»
 /*
  * This is an example model
  */

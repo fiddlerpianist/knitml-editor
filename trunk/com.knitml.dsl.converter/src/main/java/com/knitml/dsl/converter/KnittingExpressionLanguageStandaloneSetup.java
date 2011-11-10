@@ -1,5 +1,7 @@
 package com.knitml.dsl.converter;
 
+import static com.google.inject.util.Modules.override;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -15,7 +17,7 @@ public class KnittingExpressionLanguageStandaloneSetup extends com.knitml.dsl.Kn
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new KnittingExpressionLanguageRuntimeModule());
+		return Guice.createInjector(override(new KnittingExpressionLanguageRuntimeModule()).with(new StandaloneOverrideModule()));
 	}
 	
 	
