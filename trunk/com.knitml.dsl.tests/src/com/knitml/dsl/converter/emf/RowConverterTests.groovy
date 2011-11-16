@@ -9,6 +9,8 @@ import com.knitml.core.common.RowDefinitionScope
 import com.knitml.core.common.Side
 import com.knitml.core.converter.DomainModelConverterLocator
 import com.knitml.core.model.directions.block.Row
+import com.knitml.core.model.directions.information.Message
+import com.knitml.core.model.directions.information.NumberOfStitches
 
 class RowConverterTests extends AbstractConverterTests {
 
@@ -35,7 +37,7 @@ class RowConverterTests extends AbstractConverterTests {
 			assertThat it[2].numbers, is (expected)
 			expected = [6] 
 			assertThat it[3].numbers, is (expected)
-			expected = [] 
+			expected = null
 			assertThat it[4].numbers, is (expected)
 			assertThat it[5].numbers, is (expected)
 			assertThat it[5].type, is (KnittingShape.ROUND)
@@ -119,4 +121,43 @@ class RowConverterTests extends AbstractConverterTests {
 		}
 	}
 
+	@Test
+	void rowWithStateSts() {
+		com.knitml.core.model.Pattern pattern = convert '''
+			Row: knit, state sts
+		'''
+		((Row) pattern.directions.operations[0]).with {
+			assertThat followupInformation?.details, not (null)
+			assertThat followupInformation.details[0], instanceOf (NumberOfStitches)
+			assertThat followupInformation.details[0].number, is (null)
+			assertThat followupInformation.details[0].inform, is (true)
+		}
+	}
+
+	@Test
+	void rowWithMessage() {
+		com.knitml.core.model.Pattern pattern = convert '''
+			Row: knit, "This row will look funny."
+		'''
+		((Row) pattern.directions.operations[0]).with {
+			assertThat followupInformation?.details, not (null)
+			assertThat followupInformation.details[0], instanceOf (Message)
+			assertThat followupInformation.details[0].label, is ("This row will look funny.")
+		}
+	}
+
+	@Test
+	void rowWithState5StsAndMessage() {
+		com.knitml.core.model.Pattern pattern = convert '''
+			Row: knit to end, state 5 sts, "This row will look funny."
+		'''
+		((Row) pattern.directions.operations[0]).with {
+			assertThat followupInformation?.details, not (null)
+			assertThat followupInformation.details[0], instanceOf (NumberOfStitches)
+			assertThat followupInformation.details[0].number, is (5)
+			assertThat followupInformation.details[0].inform, is (false)
+			assertThat followupInformation.details[1], instanceOf (Message)
+			assertThat followupInformation.details[1].label, is ("This row will look funny.")
+		}
+	}
 }

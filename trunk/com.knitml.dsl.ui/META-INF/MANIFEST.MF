@@ -37,14 +37,16 @@ Import-Package: com.knitml.core.common,
  com.knitml.gpec.renderer.preferences.service,
  com.knitml.renderer.chart,
  com.knitml.renderer.chart.symbol,
+ com.knitml.renderer.common;version="0.6.0.BUILD-SNAPSHOT",
  com.knitml.renderer.context,
  com.knitml.renderer.impl.basic,
  com.knitml.renderer.service,
  com.knitml.renderer.util,
  org.apache.commons.logging,
  org.apache.log4j;version="1.2.16",
+ org.slf4j,
  org.springframework.core.io
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: com.knitml.dsl.ui.contentassist.antlr,
  com.knitml.dsl.ui.internal
-Bundle-Activator: com.knitml.dsl.ui.internal.KnittingExpressionLanguageWithConverterActivator
+Bundle-Activator: com.knitml.dsl.ui.internal.KnittingExpressionLanguageUIPlugin

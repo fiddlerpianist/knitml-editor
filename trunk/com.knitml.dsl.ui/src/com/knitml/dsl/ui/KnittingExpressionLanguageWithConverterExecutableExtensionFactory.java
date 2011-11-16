@@ -9,12 +9,12 @@ public class KnittingExpressionLanguageWithConverterExecutableExtensionFactory
 
 	@Override
 	protected Bundle getBundle() {
-		return com.knitml.dsl.ui.internal.KnittingExpressionLanguageWithConverterActivator.getInstance().getBundle();
+		return com.knitml.dsl.ui.internal.KnittingExpressionLanguageUIPlugin.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return com.knitml.dsl.ui.internal.KnittingExpressionLanguageWithConverterActivator.getInstance().getInjector("com.knitml.dsl.KnittingExpressionLanguage");
+		return com.knitml.dsl.ui.internal.KnittingExpressionLanguageUIPlugin.getInstance().getInjector("com.knitml.dsl.KnittingExpressionLanguage");
 	}
 
 }

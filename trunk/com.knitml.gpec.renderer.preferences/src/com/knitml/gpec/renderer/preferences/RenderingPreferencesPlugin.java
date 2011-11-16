@@ -26,7 +26,7 @@ public class RenderingPreferencesPlugin extends AbstractUIPlugin {
 	
 	// stuff we hold onto so that we can clean up on stop() effectively
 	private RenderingPreferencesService preferencesService;
-	private ServiceRegistration preferencesServiceRegistration;
+	private ServiceRegistration<RenderingPreferencesService> preferencesServiceRegistration;
 	private IEclipsePreferences preferences;
 	private IPreferenceChangeListener listener;
 	
@@ -39,7 +39,7 @@ public class RenderingPreferencesPlugin extends AbstractUIPlugin {
 		plugin = this;
 		preferences = (IEclipsePreferences) InstanceScope.INSTANCE.getNode(PLUGIN_ID);
 		preferencesService = new RenderingPreferencesServiceImpl();
-		preferencesServiceRegistration = context.registerService(RenderingPreferencesService.class.getName(), preferencesService, new Hashtable<String, Object>());
+		preferencesServiceRegistration = context.registerService(RenderingPreferencesService.class, preferencesService, new Hashtable<String, Object>());
 		listener = new RenderingPreferenceChangeListener(preferencesService); 
 		preferences.addPreferenceChangeListener(listener);
 

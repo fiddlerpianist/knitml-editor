@@ -1,16 +1,13 @@
 package com.knitml.dsl.ui.editor;
 
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.IOException;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -25,14 +22,15 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.ide.IDE;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
-import com.knitml.core.common.Parameters;
+import com.google.inject.Injector;
 import com.knitml.core.converter.DomainModelConverterLocator;
-import com.knitml.core.model.Pattern;
+import com.knitml.dsl.converter.emf.exception.ConversionException;
+import com.knitml.dsl.knittingExpressionLanguage.Pattern;
 import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
 import com.knitml.renderer.impl.basic.BasicTextRendererFactory;
@@ -41,16 +39,42 @@ import com.knitml.renderer.impl.basic.BasicTextRendererFactory;
  * An example showing how to create a multi-page editor. This example has 3
  * pages:
  * <ul>
- * <li>page 0 contains a the KEL editor
- * <li>page 1 shows the XML equivalent (i.e. converted XML)
- * <li>page 2 shows the final rendered pattern (using workspace preferences)
+ * <li>page 0 contains the DSL editor
+ * <li>page 1 shows the final rendered pattern (using workspace preferences)
  * </ul>
  */
-public class KnittingElEditor extends MultiPageEditorPart implements
+public class KnittingPatternEditor extends MultiPageEditorPart implements
 		IResourceChangeListener {
 
-	protected final int PATTERN_PAGE = 1;
+	protected static final int PATTERN_PAGE = 1;
 
+	/** The text editor used in page 0. */
+	@Inject
+	private XtextEditor editor;
+	@Inject
+	private DomainModelConverterLocator<EObject> converterLocator;
+	@Inject
+	private RenderingPreferencesService preferencesService;
+	@Inject
+	private IResourceForEditorInputFactory resourceFactory;
+	@Inject
+	private Injector injector;
+	
+	private IWorkspace workspace;
+	private PatternViewControlContainer patternViewContainer;
+
+	// switch which indicates which control we are currently using
+	private PatternControlType controlInUse = null;
+
+	/**
+	 * Creates a multi-page editor
+	 */
+	@Inject
+	public KnittingPatternEditor(IWorkspace workspace) {
+		workspace.addResourceChangeListener(this);
+		this.workspace = workspace;
+	}
+	
 	/**
 	 * Only overridden because the superclass made this method (and the
 	 * container variable) private instead of protected. In our case, we want
@@ -75,27 +99,6 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		return newContainer;
 	}
 
-	/** The text editor used in page 0. */
-	@Inject
-	private XtextEditor editor;
-	@Inject
-	private DomainModelConverterLocator<EObject> converterLocator;
-	@Inject
-	private IWorkspace workspace;
-	@Inject
-	private RenderingPreferencesService preferencesService;
-
-	private PatternViewControlContainer patternViewContainer;
-	// switch which indicates which control we are currently using
-	private PatternControlType controlInUse;
-
-	/**
-	 * Creates a multi-page editor
-	 */
-	public KnittingElEditor() {
-		workspace.addResourceChangeListener(this);
-	}
-
 	protected void createKelpPage() {
 		try {
 			int index = addPage(editor, getEditorInput());
@@ -109,9 +112,8 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 
 	protected void createPatternPage() {
 		int index = addPage(null);
-		this.patternViewContainer = new PatternViewControlContainer(
-				getContainer(), (XtextEditor) getEditor(0), preferencesService,
-				converterLocator);
+		patternViewContainer = new PatternViewControlContainer(getContainer(), editor.getResource());
+		injector.injectMembers(patternViewContainer);
 		setPageText(index, "Pattern View");
 	}
 
@@ -125,7 +127,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 
 	/**
 	 * Initializes the pattern view's main control. It will reuse an existing
-	 * control if it's of the correct type, otherwise it will destroy an
+	 * control if it's of the correct type, otherwise it will destroy the
 	 * existing control and create a new one.
 	 */
 	protected void initializePatternViewControl() {
@@ -158,9 +160,8 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	 */
 	public void dispose() {
 		workspace.removeResourceChangeListener(this);
-		this.patternViewContainer.dispose();
-		editor.dispose();
-		super.dispose();
+		patternViewContainer.dispose();
+		super.dispose(); // will also dispose the XtextEditor
 	}
 
 	/**
@@ -180,14 +181,6 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		editor.doSaveAs();
 		setPageText(0, editor.getTitle());
 		setInput(editor.getEditorInput());
-	}
-
-	/*
-	 * (non-Javadoc) Method declared on IEditorPart
-	 */
-	public void gotoMarker(IMarker marker) {
-		setActivePage(0);
-		IDE.gotoMarker(getEditor(0), marker);
 	}
 
 	/**
@@ -213,44 +206,25 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 	 * Calculates the contents of page 2 when the it is activated.
 	 */
 	protected void pageChange(int newPageIndex) {
-		if (newPageIndex == 0) {
-			converted = false;
-			validated = false;
-			rendered = false;
-		} else if (newPageIndex == PATTERN_PAGE) {
-			Pattern pattern = convertKelp();
-
+		if (newPageIndex == PATTERN_PAGE) {
+			com.knitml.core.model.Pattern pattern = convertKelp();
 			initializePatternViewControl();
-			patternViewContainer.renderPattern();
-			// KnittingElPatternRendererJob renderPatternJob = new
-			// KnittingElPatternRendererJob(
-			// this.patternViewContainer);
-			// renderPatternJob.setUser(true);
-			// renderPatternJob.schedule();
+			patternViewContainer.render(pattern);
 		}
 		super.pageChange(newPageIndex);
 	}
 
-	protected Pattern convertKelp() {
-//		EObject emfDomainModel = ((XtextResource) editor.getResource())
-//				.getParseResult().getRootASTElement();
-		editor.
-
+	protected com.knitml.core.model.Pattern convertKelp() {
+		Resource emfResource = resourceFactory.createResource(editor.getEditorInput());
 		try {
-			convertedXml.setText(converter.convertToXml(parameters));
-			converted = true;
-		} catch (Exception ex) {
-			StringWriter stringError = new StringWriter();
-			PrintWriter pw = new PrintWriter(stringError);
-			ex.printStackTrace(pw);
-			convertedXml.setText("Could not convert text to XML: exception is "
-					+ stringError.toString());
-			converted = false;
+			emfResource.load(null);
+		} catch (IOException ex) {
+			throw new ConversionException(ex);
 		}
-		return converted;
+		Pattern emfModel = (Pattern) emfResource.getContents().get(0);
+		return (com.knitml.core.model.Pattern) converterLocator.locateConverter(emfModel).convert(emfModel);
 	}
 
-//	public void resourceChanged(final IResourceChangeEvent event) {
-//	}
-
+	public void resourceChanged(final IResourceChangeEvent event) {
+	}
 }
