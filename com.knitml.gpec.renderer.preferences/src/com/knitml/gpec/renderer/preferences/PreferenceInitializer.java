@@ -22,7 +22,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	 * initializeDefaultPreferences()
 	 */
 	public void initializeDefaultPreferences() {
-		Preferences preferences = new DefaultScope().getNode(PLUGIN_ID);
+		Preferences preferences = DefaultScope.INSTANCE.getNode(PLUGIN_ID);
 		preferences.putBoolean(PreferenceKeys.CHART_GLOBALLY, false);
 		preferences.put(PreferenceKeys.RENDERER_FACTORY, HtmlRendererFactory.class.getName());
 		preferences.put(PreferenceKeys.SYSTEM_OF_UNITS, "");

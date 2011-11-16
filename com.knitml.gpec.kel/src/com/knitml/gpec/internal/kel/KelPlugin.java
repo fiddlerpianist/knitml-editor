@@ -17,9 +17,9 @@ public class KelPlugin extends AbstractUIPlugin {
 
 	// The shared instance
 	private static KelPlugin plugin;
-	private ServiceTracker preferencesServiceTracker;
-	private ServiceTracker renderingServiceTracker;
-	
+	private ServiceTracker<RenderingPreferencesService, RenderingPreferencesService> preferencesServiceTracker;
+	private ServiceTracker<RenderingService, RenderingService> renderingServiceTracker;
+
 	/**
 	 * The constructor
 	 */
@@ -28,20 +28,28 @@ public class KelPlugin extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		preferencesServiceTracker = new ServiceTracker(context, RenderingPreferencesService.class.getName(), null);
+		preferencesServiceTracker = new ServiceTracker<RenderingPreferencesService, RenderingPreferencesService>(
+				context, RenderingPreferencesService.class, null);
 		preferencesServiceTracker.open();
-		renderingServiceTracker = new ServiceTracker(context, RenderingService.class.getName(), null);
+		renderingServiceTracker = new ServiceTracker<RenderingService, RenderingService>(
+				context, RenderingService.class, null);
 		renderingServiceTracker.open();
 		plugin = this;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
 		renderingServiceTracker.close();
@@ -54,18 +62,19 @@ public class KelPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance
-	 *
+	 * 
 	 * @return the shared instance
 	 */
 	public static KelPlugin getDefault() {
 		return plugin;
 	}
-	
+
 	public RenderingPreferencesService getRenderingPreferencesService() {
-		return (RenderingPreferencesService)preferencesServiceTracker.getService();
+		return (RenderingPreferencesService) preferencesServiceTracker
+				.getService();
 	}
-	
+
 	public RenderingService getRenderingService() {
-		return (RenderingService)renderingServiceTracker.getService();
+		return (RenderingService) renderingServiceTracker.getService();
 	}
 }

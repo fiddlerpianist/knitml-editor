@@ -6,7 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:com.knitml.dsl.ui.editor.KnittingPatternEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="kelp"

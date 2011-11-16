@@ -4,9 +4,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
@@ -17,37 +15,42 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ResourceLoader;
 
+import com.google.inject.Inject;
 import com.knitml.core.common.Parameters;
-import com.knitml.core.converter.DomainModelConverterLocator;
+import com.knitml.core.model.Pattern;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
 import com.knitml.renderer.chart.symbol.NoSymbolFoundException;
+import com.knitml.renderer.common.RenderingException;
 import com.knitml.renderer.context.Options;
 import com.knitml.renderer.service.RenderingService;
 import com.knitml.renderer.util.Configuration;
 
-public class PatternViewControlContainer {
+class PatternViewControlContainer {
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(PatternViewControlContainer.class);
+
+	@Inject
+	private RenderingPreferencesService renderingPreferencesService;
+	@Inject
+	private RenderingService renderingService;
+	// inputs for this controller
+	private Composite parentContainer; // the multi-page editor
+	private IResource source; // the resource which contains the DSL text (i.e.,
+								// abstraction of a file)
+
+	// objects involved in display
 	private Font renderedPatternFont;
-	// only one of these will be used
 	private StyledText renderedPattern;
 	private Browser renderingBrowser;
 
-	private Composite parentContainer;
-	private XtextEditor editor;
-	private RenderingPreferencesService preferencesService;
-	private DomainModelConverterLocator<EObject> converterLocator;
-
-	public PatternViewControlContainer(Composite parentContainer,
-			XtextEditor editor, RenderingPreferencesService preferencesService,
-			DomainModelConverterLocator<EObject> converterLocator) {
+	PatternViewControlContainer(Composite parentContainer, IResource source) {
 		this.parentContainer = parentContainer;
-		this.editor = editor;
-		this.preferencesService = preferencesService;
-		this.converterLocator = converterLocator;
+		this.source = source;
 	}
 
 	/**
@@ -65,20 +68,10 @@ public class PatternViewControlContainer {
 			return createTextPatternViewControl();
 		}
 		try {
-			// TODO could support Mozilla option at some point (when we
-			// embed an XULRunner)
 			renderingBrowser = new Browser(parentContainer, SWT.NONE);
 			return renderingBrowser;
 		} catch (SWTError err) {
-			// create fallback text view controls
-//			KelPlugin
-//					.getDefault()
-//					.getLog()
-//					.log(new Status(
-//							IStatus.WARNING,
-//							KelPlugin.PLUGIN_ID,
-//							"Could not find suitable web browser on system. Will default to rendering HTML in a text window",
-//							err));
+			logger.warn("Could not find suitable web browser on system. Will default to rendering HTML in a text window");
 			return createTextPatternViewControl();
 		}
 	}
@@ -96,47 +89,39 @@ public class PatternViewControlContainer {
 		composite.setLayout(layout);
 		renderedPattern = new StyledText(composite, SWT.H_SCROLL | SWT.V_SCROLL);
 		renderedPattern.setEditable(false);
-		FontData[] fontData = preferencesService.getFontData();
+		FontData[] fontData = renderingPreferencesService.getFontData();
 		renderedPatternFont = new Font(Display.getCurrent(), fontData);
 		renderedPattern.setFont(renderedPatternFont);
-
 		return composite;
 	}
 
-	public void renderPattern() {
-		String pattern = doRenderPattern();
+	public void render(Pattern patternModel) {
+		String pattern = doRenderPattern(patternModel);
 		writeContentToPatternPage(pattern);
 	}
 
-	protected String doRenderPattern() {
-		XtextResource resource = (XtextResource)this.editor.getDocument().get
-		EObject emfModel = resource.getParseResult().getRootASTElement();
-		converterLocator.locateConverter(emfModel).convert(emfModel);
-
-		Configuration configuration = preferencesService.retrieveConfiguration();
+	protected String doRenderPattern(Pattern patternModel) {
+		Configuration configuration = renderingPreferencesService
+				.retrieveConfiguration();
 		Options options = configuration.getOptions();
 
 		// modify the options to load pattern messages from the current
 		// directory
 		ResourceLoader workspaceResourceLoader = new WorkspaceContainerResourceLoader(
-				resource.getParent());
+				source.getParent());
 		options.setPatternMessageResourceLoader(workspaceResourceLoader);
 
 		Parameters parameters = new Parameters();
 		parameters.setCheckSyntax(false);
-		//parameters.setReader(new StringReader(convertedXml.getText()));
-		parameters.setPattern(pattern);
+		parameters.setPattern(patternModel);
 		Writer renderedPatternWriter = new StringWriter();
 		parameters.setWriter(renderedPatternWriter);
 
-		RenderingService renderingService = KelPlugin.getDefault()
-				.getRenderingService();
-
 		try {
-			renderingService.renderPattern(parameters, configuration
-					.getRendererFactory(), options);
+			renderingService.renderPattern(parameters,
+					configuration.getRendererFactory(), options);
 			return renderedPatternWriter.toString();
-		} catch (Exception ex) {
+		} catch (RenderingException ex) {
 			Throwable cause = ex;
 			while (cause.getCause() != null) {
 				cause = cause.getCause();
@@ -151,6 +136,12 @@ public class PatternViewControlContainer {
 				return "Could not render pattern: exception is "
 						+ stringError.toString();
 			}
+		} catch (Exception ex) {
+			StringWriter stringError = new StringWriter();
+			PrintWriter pw = new PrintWriter(stringError);
+			ex.printStackTrace(pw);
+			return "Could not render pattern: exception is "
+					+ stringError.toString();
 		}
 	}
 
@@ -158,7 +149,7 @@ public class PatternViewControlContainer {
 		if (renderingBrowser != null) {
 			renderingBrowser.setText(pattern);
 		} else {
-			FontData[] fontData = preferencesService.getFontData();
+			FontData[] fontData = renderingPreferencesService.getFontData();
 			Font fontToUse = new Font(Display.getCurrent(), fontData);
 			renderedPattern.setFont(fontToUse);
 			renderedPattern.setText(pattern);
@@ -188,8 +179,9 @@ public class PatternViewControlContainer {
 		this.disposeRenderingControls();
 		// not managed by this object
 		this.parentContainer = null;
-		this.editor = null;
-		this.preferencesService = null;
+		this.source = null;
+		this.renderingPreferencesService = null;
+		this.renderingService = null;
 	}
 
 }

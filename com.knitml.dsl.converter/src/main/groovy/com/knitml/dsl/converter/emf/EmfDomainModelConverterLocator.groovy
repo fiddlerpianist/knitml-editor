@@ -18,13 +18,13 @@ DomainModelConverterLocator<EObject> {
 	
 	private Map converters = [:]
 
-	private findConverter(Class interf) {
+	public findConverter(Class interf) {
 		String targetName = this.class.package.name + "." + interf.simpleName + "Converter"
 		if (converters.get(targetName) != null) {
 			return converters.get(targetName)
 		}
 		try {
-			def converterClass = Class.forName(targetName)
+			def converterClass = this.class.classLoader.loadClass(targetName)
 			if (!DomainModelConverter.class.isAssignableFrom(converterClass)) {
 				throw new ConverterNotFoundException("Could not find a converter for type " + interf.name)
 			}

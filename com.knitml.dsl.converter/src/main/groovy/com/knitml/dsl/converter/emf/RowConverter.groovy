@@ -9,6 +9,9 @@ import com.knitml.core.common.Side
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
 import com.knitml.core.model.directions.block.Row
+import com.knitml.core.model.directions.information.Information
+import com.knitml.core.model.directions.information.Message
+import com.knitml.core.model.directions.information.NumberOfStitches
 
 public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Row> {
 
@@ -60,6 +63,21 @@ public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittin
 		row.informSide = emfRow.inform
 		row.yarnIdRef = emfRow.yarnRef
 		row.operations = emfHelper.convertOperations (emfRow.operations)
+		
+		if (emfRow.stateStitches || emfRow.followupMessage != null) {
+			row.followupInformation = new Information()
+			row.followupInformation.details = []
+			if (emfRow.stateStitches) {
+				def numberOfStitches = new NumberOfStitches()
+				numberOfStitches.number = emfRow.numberToState
+				numberOfStitches.inform = (emfRow.numberToState == null)
+				row.followupInformation.details << numberOfStitches
+			}
+			if (emfRow.followupMessage != null) {
+				def message = new Message(emfRow.followupMessage)
+				row.followupInformation.details << message
+			}
+		}
 		return row
 	}
 }

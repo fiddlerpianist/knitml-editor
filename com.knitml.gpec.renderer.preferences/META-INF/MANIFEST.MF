@@ -9,7 +9,8 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
-Export-Package: com.knitml.gpec.renderer.preferences.keys;version="0.2.2",
+Export-Package: com.knitml.gpec.renderer.preferences,
+ com.knitml.gpec.renderer.preferences.keys;version="0.2.2",
  com.knitml.gpec.renderer.preferences.listener;version="0.2.2";uses:="org.eclipse.core.runtime.preferences,com.knitml.gpec.renderer.preferences.service",
  com.knitml.gpec.renderer.preferences.service;version="0.2.2";uses:="com.knitml.renderer.context,com.knitml.renderer.util"
 Import-Package: com.knitml.renderer;version="0.6.0",

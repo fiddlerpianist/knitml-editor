@@ -10,7 +10,7 @@ import com.knitml.renderer.service.impl.RenderingServiceImpl;
 
 public class Activator implements BundleActivator {
 
-	private ServiceRegistration renderingService;
+	private ServiceRegistration<RenderingService> renderingService;
 	
 	/*
 	 * (non-Javadoc)
@@ -18,7 +18,7 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext context) throws Exception {
 		// register the service
-		renderingService = context.registerService(RenderingService.class.getName(), new RenderingServiceImpl(), new Hashtable<String,Object>());
+		renderingService = context.registerService(RenderingService.class, new RenderingServiceImpl(), new Hashtable<String,Object>());
 	}
 	
 	/*
