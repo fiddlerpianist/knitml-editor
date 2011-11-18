@@ -8,6 +8,7 @@ import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
 import com.knitml.core.model.directions.block.Instruction
 import com.knitml.core.model.directions.block.InstructionGroup
+import com.knitml.dsl.converter.emf.helper.EmfHelper;
 
 /**
  * This converter is generic so that subclasses can extend it.

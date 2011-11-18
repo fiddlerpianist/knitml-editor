@@ -11,6 +11,7 @@ import com.knitml.core.model.Pattern
 import com.knitml.core.model.Version
 import com.knitml.core.model.directions.Directions
 import com.knitml.core.model.directions.Operation
+import com.knitml.dsl.converter.emf.helper.HeaderConverter;
 
 public class PatternConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Pattern> {
 

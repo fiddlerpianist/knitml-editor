@@ -1,8 +1,5 @@
 package com.knitml.dsl.converter.emf
 
-import javax.measure.Measurable
-import javax.measure.Measure
-
 import org.eclipse.emf.ecore.EObject
 
 import com.google.inject.Inject
@@ -10,7 +7,9 @@ import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
 import com.knitml.core.model.directions.block.RepeatInstruction
 import com.knitml.core.model.directions.block.RepeatInstruction.Until
+import com.knitml.core.units.KnittingMeasure
 import com.knitml.core.units.Units
+import com.knitml.dsl.converter.emf.helper.EmfHelper;
 
 public class RepeatInstructionConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.RepeatInstruction> {
 
@@ -35,7 +34,7 @@ public class RepeatInstructionConverter implements DomainModelConverter<com.knit
 		} else if (emfRepeatInstruction.unit != null) {
 			def valueToUse = emfRepeatInstruction.value == null ? emfRepeatInstruction.decimalValue : emfRepeatInstruction.value
 			repeat.until = Until.UNTIL_MEASURES
-			repeat.value = Measure.valueOf valueToUse, Units.valueOf(emfRepeatInstruction.unit.literal)
+			repeat.value = KnittingMeasure.valueOf valueToUse, Units.valueOf(emfRepeatInstruction.unit.literal)
 		}
 		return repeat
 	}

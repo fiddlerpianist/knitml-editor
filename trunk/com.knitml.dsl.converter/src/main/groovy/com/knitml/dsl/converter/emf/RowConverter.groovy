@@ -12,6 +12,7 @@ import com.knitml.core.model.directions.block.Row
 import com.knitml.core.model.directions.information.Information
 import com.knitml.core.model.directions.information.Message
 import com.knitml.core.model.directions.information.NumberOfStitches
+import com.knitml.dsl.converter.emf.helper.EmfHelper;
 
 public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Row> {
 

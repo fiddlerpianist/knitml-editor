@@ -26,8 +26,8 @@ Header:
 	needleTypes+=NeedleType LF
 	(needleTypes+=NeedleType LF)*)? &
 	('Yarn:' LF
-	singleYarnWithYarnTypes+=SingleYarnWithYarnType LF
-	(singleYarnWithYarnTypes+=SingleYarnWithYarnType LF)*)? &
+	yarnTypes+=SingleYarnType LF
+	(yarnTypes+=SingleYarnType LF)*)? &
 	('Accessories:' accessories=STRING LF)?);
 
 NeedleType:
@@ -50,30 +50,18 @@ Needle:
 //	(','? 'weight' weight=(ID | STRING))? &
 //	(','? lengthValue=INT lengthUnit=LengthUnit 'long'?)?) LF
 //	yarns+=Yarn (LF? yarn+=Yarn)*;
-SingleYarnWithYarnType:
-	((weightValue=INT weightUnit=WeightUnit) |
-	(lengthValue=INT lengthUnit=LengthUnit) |
-	(weightValue=INT weightUnit=WeightUnit
-	'(' lengthValue=INT lengthUnit=LengthUnit ')'))
-	'of'
-	((brand=STRING) |
-	(brand=STRING category=STRING) |
-	(brand=STRING category=STRING subcategory=STRING) |
-	weight=(ID | STRING) 'weight' 'yarn'?)
-	('#' (catalogId=(ID | STRING) | catalogNumber=INT))?
+SingleYarnType:
+	(weightValue=INT weightUnit=WeightUnit)?
+	('(' lengthValue=INT lengthUnit=LengthUnit ')')?
+	'of'?
+	(brand=(ID | STRING))?
 	('('
-	(weight=(ID | STRING) 'weight')?
-	(','? ('ball' | 'skein') 'weight: ' ballWeightValue=INT ballWeightUnit=WeightUnit)?
-	(','? ('ball' | 'skein') 'length: ' ballLengthValue=INT ballLengthUnit=LengthUnit)?
-	(','? 'yarn'? 'thickness: ' thicknessValue=INT thicknessUnit=ThicknessUnit)?
+	('(' 'name' category=(ID | STRING) ')')?
+	(',' 'line' subcategory=(ID | STRING))?
+	(','? '#' (catalogId=(ID | STRING) | catalogNumber=INT))?
+	(','? 'weight' weight=(ID | STRING))?
 	')')?
-	('in' color=YarnColor)?
-	('named' name=ID)?
-	withKey=WithKey?;
-
-YarnColor:
-	colorName=(ID | STRING)
-	('(' colorNumber=INT ')')?;
+	LF yarns+=Yarn (LF? yarn+=Yarn)*;
 
 Yarn:
 	name=ID label=STRING ('(' withKey=WithKey ')')?;
@@ -177,15 +165,11 @@ enum Language:
 	EN='English' | ES='Spanish' | FR='French';
 
 enum LengthUnit:
-	INCH='in' | CM='cm' | YARD='yd' | METER='m' | INCH='ins' | INCH='inch' | INCH='inches' | CM='cms' | CM='centimeter' |
-	CM='centimeters' | YARD='yds';
+	INCH='in' | CM='cm' | INCH='ins' | INCH='inch' | INCH='inches' | CM='cms' | CM='centimeter' | CM='centimeters';
 
 enum WeightUnit:
 	GRAM='g' | OUNCE='oz' | GRAM='gram' | GRAM='grams' | OUNCE='ounce' | OUNCE='ounces';
 
-enum ThicknessUnit:
-	WRAPS_PER_INCH='wrap/in' | WRAPS_PER_CENTIMETER='wrap/cm' | WRAPS_PER_INCH='wraps/in' | WRAPS_PER_INCH='wraps/inch' | WRAPS_PER_INCH='wpi' | WRAPS_PER_CENTIMETER='wraps/cm';
-	
 enum StitchGaugeUnit:
 	STITCHES_PER_INCH='st/in' | STITCHES_PER_CENTIMETER='st/cm' |
 	STITCHES_PER_INCH='sts/in' | STITCHES_PER_CENTIMETER='sts/cm';

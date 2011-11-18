@@ -23,9 +23,9 @@ class MessageConverterTests extends AbstractConverterTests {
 	}
 
 	@Test
-	void messageUseKeyQuoted() {
+	void messageKeyQuoted() {
 		Pattern pattern = convert '''
-			"The next row will look funny." (use key 'msg-1')
+			"The next row will look funny." (key 'msg-1')
 		'''
 		((Information) pattern.directions.operations[0]).with {
 			assertThat details[0], instanceOf (Message)
@@ -35,9 +35,9 @@ class MessageConverterTests extends AbstractConverterTests {
 	}
 	
 	@Test
-	void messageUseKeyAsId() {
+	void messageKeyAsId() {
 		Pattern pattern = convert '''
-			"The next row will look funny." (use key messageOne)
+			"The next row will look funny." (key messageOne)
 		'''
 		((Information) pattern.directions.operations[0]).with {
 			assertThat details[0], instanceOf (Message)

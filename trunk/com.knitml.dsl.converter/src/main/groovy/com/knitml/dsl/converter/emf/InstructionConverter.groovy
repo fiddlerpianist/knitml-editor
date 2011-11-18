@@ -8,6 +8,7 @@ import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
 import com.knitml.core.model.directions.Operation
 import com.knitml.core.model.directions.block.Instruction
+import com.knitml.dsl.converter.emf.helper.EmfHelper;
 
 public class InstructionConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Instruction> {
 
