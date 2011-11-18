@@ -1,4 +1,4 @@
-package com.knitml.dsl.converter.emf
+package com.knitml.dsl.converter.emf.helper
 
 import java.util.List
 
