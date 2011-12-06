@@ -58,47 +58,6 @@ class KnitConverterTests extends AbstractConverterTests {
 		}
 	}
 
-	@Test
-	void k2tog() {
-		Pattern pattern = convert 'Row: k2tog'
-		((Decrease) pattern.directions.operations[0].operations[0]).with {
-			assertThat type, is (DecreaseType.K2TOG)
-			assertThat numberOfTimes, is (null)
-			assertThat yarnIdRef, is (null)
-		}
-	}
-
-	@Test
-	void k2togTbl() {
-		Pattern pattern = convert 'Row: k2tog tbl'
-		((Decrease) pattern.directions.operations[0].operations[0]).with {
-			assertThat type, is (DecreaseType.K2TOG_TBL)
-			assertThat numberOfTimes, is (null)
-			assertThat yarnIdRef, is (null)
-		}
-	}
-	
-	@Test
-	void k3tog() {
-		Pattern pattern = convert 'Row: k3tog'
-		((DoubleDecrease) pattern.directions.operations[0].operations[0]).with {
-			assertThat type, is (DecreaseType.K3TOG)
-			assertThat numberOfTimes, is (null)
-			assertThat yarnIdRef, is (null)
-		}
-	}
-	
-	@Test
-	void k2tog2Times() {
-		Pattern pattern = convert 'Row: k2tog 2 times'
-		((Repeat) pattern.directions.operations[0].operations[0]).with {
-			assertThat until, is (Until.TIMES)
-			assertThat value, is (2)
-			assertThat operations[0], instanceOf (Decrease)
-			assertThat operations[0].type, is (DecreaseType.K2TOG)
-			assertThat operations[0].numberOfTimes, is (null)
-		}
-	}
 
 	/**
 	 * Not fully supported
@@ -114,14 +73,6 @@ class KnitConverterTests extends AbstractConverterTests {
 	}
 	
 	
-	/**
-	 * Not currently supported
-	 */
-	@Test(expected=ConversionException)
-	void k4tog() {
-		Pattern pattern = convert 'Row: k4tog'
-	}
-
 	@Test
 	void kToEnd() {
 		Pattern pattern = convert 'Row: k to end'

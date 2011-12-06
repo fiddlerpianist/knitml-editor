@@ -4,9 +4,11 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.knitml.core.common.KnittingShape;
+import com.knitml.core.common.KnittingShape
 import com.knitml.core.model.directions.block.Instruction
+import com.knitml.core.model.directions.inline.InlineInstruction
 import com.knitml.core.model.directions.inline.Knit
+import com.knitml.core.model.directions.inline.Purl
 import com.knitml.dsl.converter.emf.exception.ConversionException
 
 class InstructionConverterTests extends AbstractConverterTests {
@@ -60,4 +62,30 @@ class InstructionConverterTests extends AbstractConverterTests {
 		'''
 	}
 
+	@Test
+	void basicInlineInstruction() {
+		com.knitml.core.model.Pattern pattern = convert '''
+		Row: instruction one: [k, p]
+		'''
+		((InlineInstruction) pattern.directions.operations[0].operations[0]).with {
+			assertThat id, is ('one')
+			assertThat label, is (null)
+			assertThat messageKey, is (null)
+			assertThat it.operations[0], instanceOf (Knit)
+			assertThat it.operations[1], instanceOf (Purl)
+		}
+	}
+	@Test
+	void fullInlineInstruction() {
+		com.knitml.core.model.Pattern pattern = convert '''
+		Row: instruction one "Number One" (with key): [k, p]
+		'''
+		((InlineInstruction) pattern.directions.operations[0].operations[0]).with {
+			assertThat id, is ('one')
+			assertThat label, is ("Number One")
+			assertThat messageKey, is ("inline-instruction.one")
+			assertThat it.operations[0], instanceOf (Knit)
+			assertThat it.operations[1], instanceOf (Purl)
+		}
+	}
 }

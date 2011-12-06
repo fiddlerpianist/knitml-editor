@@ -28,7 +28,8 @@ class SectionConverterTests extends AbstractConverterTests {
 		Repeat needmore for 3 inches
 
 		Next Row: bind off all sts
-		"Sit back and enjoy your finished work!"'''
+		"Sit back and enjoy your finished work!"
+		'''
 		((List<Section>) pattern.directions.operations).with {
 			assertThat size(), is (3)
 			assertThat it[0], instanceOf (Section)

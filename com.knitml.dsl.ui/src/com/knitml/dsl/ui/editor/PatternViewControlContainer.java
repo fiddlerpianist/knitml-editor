@@ -3,7 +3,12 @@ package com.knitml.dsl.ui.editor;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
@@ -22,6 +27,12 @@ import org.springframework.core.io.ResourceLoader;
 import com.google.inject.Inject;
 import com.knitml.core.common.Parameters;
 import com.knitml.core.model.Pattern;
+import com.knitml.core.model.directions.block.Instruction;
+import com.knitml.core.model.directions.block.InstructionGroup;
+import com.knitml.core.model.directions.block.RepeatInstruction;
+import com.knitml.core.model.directions.block.Row;
+import com.knitml.core.model.directions.block.Section;
+import com.knitml.engine.common.KnittingEngineException;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
 import com.knitml.renderer.chart.symbol.NoSymbolFoundException;
 import com.knitml.renderer.common.RenderingException;
@@ -121,20 +132,19 @@ class PatternViewControlContainer {
 			renderingService.renderPattern(parameters,
 					configuration.getRendererFactory(), options);
 			return renderedPatternWriter.toString();
+		} catch (KnittingEngineException ex) {
+			return handleKnittingException(ex);
 		} catch (RenderingException ex) {
 			Throwable cause = ex;
 			while (cause.getCause() != null) {
 				cause = cause.getCause();
 			}
 			if (cause instanceof NoSymbolFoundException) {
-				return "The system is unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
+				return "Unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
 						+ cause.getMessage();
 			} else {
-				StringWriter stringError = new StringWriter();
-				PrintWriter pw = new PrintWriter(stringError);
-				ex.printStackTrace(pw);
-				return "Could not render pattern: exception is "
-						+ stringError.toString();
+				return "Could not render pattern because of the following: "
+						+ ex.getMessage();
 			}
 		} catch (Exception ex) {
 			StringWriter stringError = new StringWriter();
@@ -143,6 +153,77 @@ class PatternViewControlContainer {
 			return "Could not render pattern: exception is "
 					+ stringError.toString();
 		}
+	}
+
+	private String handleKnittingException(KnittingEngineException ex) {
+		Throwable cause = ex;
+		while (cause.getCause() != null) {
+			cause = cause.getCause();
+		}
+		StringBuilder message = new StringBuilder();
+		message.append("There is a problem with the pattern that prevents it from being successfully knit. ");
+		if (ex.getOffendingOperation() != null) {
+			message.append("Unable to \"" + ex.getOffendingOperation()
+					+ "\" because of the following error: ");
+		} else {
+			message.append("The following error occurred while test knitting: ");
+		}
+		message.append(createPhraseFromExceptionClass(cause.getClass()))
+				.append(" (").append(cause.getMessage()).append(").")
+				.append(newLine()).append("The issue is located in ")
+				.append(getLocationString(ex));
+		return message.toString();
+	}
+
+	public String getLocationString(KnittingEngineException ex) {
+		List<String> strings = new ArrayList<String>(6);
+		if (ex.getLocationBreadcrumb() != null) {
+			List<Object> locationBreadcrumb = ex.getLocationBreadcrumb();
+			ListIterator<Object> lit = locationBreadcrumb.listIterator();
+			while (lit.hasNext()) {
+				Object item = lit.next();
+				if (item instanceof Row) {
+					// Row object is used as a marker; it's not the real
+					// executing row
+					Row row = (Row) item;
+					strings.add("row " + row.getNumbers()[0]);
+				} else if (item instanceof Instruction) {
+					if (lit.hasNext()
+							&& locationBreadcrumb.get(lit.nextIndex()) instanceof RepeatInstruction) {
+						Object repeatValue = ((RepeatInstruction) lit.next())
+								.getValue();
+						strings.add("repeat " + repeatValue
+								+ " of instruction '"
+								+ ((Instruction) item).getId() + "'");
+					} else {
+						Instruction instruction = (Instruction) item;
+						strings.add("instruction '" + instruction.getId() + "'");
+					}
+				} else if (item instanceof Section) {
+					Section section = (Section) item;
+					strings.add("section " + section.getNumber());
+				} else if (item instanceof InstructionGroup) {
+					InstructionGroup group = (InstructionGroup) item;
+					strings.add("group '" + group.getId() + "'");
+				}
+			}
+		}
+		return StringUtils.join(strings.toArray(), ", ");
+	}
+
+	private String newLine() {
+		// a bit of a hack, but it works!
+		return (renderingBrowser != null ? "<br />" : System
+				.getProperty("line.separator"));
+	}
+
+	protected String createPhraseFromExceptionClass(Class<?> clazz) {
+		String[] words = StringUtils.splitByCharacterTypeCamelCase(clazz
+				.getSimpleName());
+		if (words[words.length - 1].equalsIgnoreCase("Exception")) {
+			words = (String[]) ArrayUtils.remove(words, words.length - 1);
+		}
+		return StringUtils.join(words, ' ');
 	}
 
 	protected void writeContentToPatternPage(String pattern) {

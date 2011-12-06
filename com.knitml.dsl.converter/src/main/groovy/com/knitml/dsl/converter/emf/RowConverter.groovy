@@ -62,7 +62,7 @@ public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittin
 			row.subsequent = RowDefinitionScope.ODD
 		}
 		row.informSide = emfRow.inform
-		row.yarnIdRef = emfRow.yarnRef
+		row.yarnIdRef = emfRow.yarnRef?.name
 		row.operations = emfHelper.convertOperations (emfRow.operations)
 		
 		if (emfRow.stateStitches || emfRow.followupMessage != null) {
