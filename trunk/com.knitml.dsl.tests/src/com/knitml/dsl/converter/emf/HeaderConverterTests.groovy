@@ -138,7 +138,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 	}
 
 	@Test
-	void singleYarnWithYarnTypes() {
+	void singleYarnWithYarnTypesNoBrandInfo() {
 		com.knitml.core.model.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
@@ -146,34 +146,59 @@ class HeaderConverterTests extends AbstractConverterTests {
 			50g of worsted weight yarn
 			75yd of worsted weight
 			50g (75yd) of worsted weight yarn 
-			50g (75m) of "Lorna's Laces" (worsted weight)  
-			50g (75yd) of "Lorna's Laces" #"123F" (worsted weight, ball weight: 25g, ball length: 100yd)  
-			50g (75yd) of "Lorna's Laces" "Shepherd Sock" #ABCD (worsted weight, ball weight: 25g, ball length: 100yd)  
-			50g (75yd) of "Lorna's Laces" "Shepherd Sock" "Vintage" #123 (worsted weight, ball weight: 50g, ball length: 100yd, thickness: 12 wpi) in Red (202) named RedYarn
 			50g (75yd) of worsted weight yarn named A 
 
 		Row: knit
 		'''
-		assertThat pattern.supplies.yarnTypes.size(), is (8)
-		assertThat pattern.supplies.yarns.size(), is (8)
+		assertThat pattern.supplies.yarnTypes.size(), is (4)
+		assertThat pattern.supplies.yarns.size(), is (4)
 		pattern.supplies.yarnTypes[0].with {
+			assertThat it.id, not (null)
 			assertThat it.weight, is ('worsted')
 			assertThat it.yarns[0].totalWeight.longValue(GRAM), is (50L)
 		}
 		pattern.supplies.yarnTypes[1].with {
+			assertThat it.id, not (null)
 			assertThat it.yarns[0].totalLength.longValue(YARD), is (75L)
 		}
 		pattern.supplies.yarnTypes[2].with {
+			assertThat it.id, not (null)
 			assertThat it.yarns[0].totalWeight.longValue(GRAM), is (50L)
 			assertThat it.yarns[0].totalLength.longValue(YARD), is (75L)
 		}
 		pattern.supplies.yarnTypes[3].with {
+			assertThat it.id, not (null)
+			assertThat it.weight, is ('worsted')
+			assertThat it.yarns[0].color, is (null)
+			assertThat it.yarns[0].id, is ('A')
+			assertThat it.yarns[0].symbol, is ('A')
+			assertThat it.yarns[0].label, is ('A')
+		}
+	}
+	@Test
+	void singleYarnWithYarnTypesWithBrandInfo() {
+		com.knitml.core.model.Pattern pattern = convert '''
+		Pattern name: "Thing"
+		Description: "Thing 2"
+		Yarn:
+			50g (75m) of "Lorna's Laces" (worsted weight)  
+			50g (75yd) of "Lorna's Laces" #"123F" (worsted weight, ball weight: 25g, ball length: 100yd)  
+			50g (75yd) of "Lorna's Laces" "Shepherd Sock" #ABCD (worsted weight, ball weight: 25g, ball length: 100yd)  
+			50g (75yd) of "Lorna's Laces" "Shepherd Sock" "Vintage" #123 (worsted weight, ball weight: 50g, ball length: 100yd, thickness: 12 wpi) in Red (202) named RedYarn
+
+		Row: knit
+		'''
+		assertThat pattern.supplies.yarnTypes.size(), is (4)
+		assertThat pattern.supplies.yarns.size(), is (4)
+		pattern.supplies.yarnTypes[0].with {
+			assertThat it.id, not (null)
 			assertThat it.brand, is ("Lorna's Laces")
 			assertThat it.category, is (null)
 			assertThat it.subcategory, is (null)
 			assertThat it.yarns[0].totalLength.longValue(METER), is (75L)
 		}
-		pattern.supplies.yarnTypes[4].with {
+		pattern.supplies.yarnTypes[1].with {
+			assertThat it.id, not (null)
 			assertThat it.brand, is ("Lorna's Laces")
 			assertThat it.catalogId, is ('123F')
 			assertThat it.weight, is ('worsted')
@@ -182,13 +207,15 @@ class HeaderConverterTests extends AbstractConverterTests {
 			assertThat it.yarns[0].totalWeight.longValue(GRAM), is (50L)
 			assertThat it.yarns[0].totalLength.longValue(YARD), is (75L)
 		}
-		pattern.supplies.yarnTypes[5].with {
+		pattern.supplies.yarnTypes[2].with {
+			assertThat it.id, not (null)
 			assertThat it.brand, is ("Lorna's Laces")
 			assertThat it.category, is ("Shepherd Sock")
 			assertThat it.subcategory, is (null)
 			assertThat it.catalogId, is ('ABCD')
 		}
-		pattern.supplies.yarnTypes[6].with {
+		pattern.supplies.yarnTypes[3].with {
+			assertThat it.id, not (null)
 			assertThat it.brand, is ("Lorna's Laces")
 			assertThat it.category, is ("Shepherd Sock")
 			assertThat it.subcategory, is ("Vintage")
@@ -200,12 +227,50 @@ class HeaderConverterTests extends AbstractConverterTests {
 			assertThat it.yarns[0].symbol, is ('RedYarn')
 			assertThat it.yarns[0].label, is ('RedYarn')
 		}
-		pattern.supplies.yarnTypes[7].with {
-			assertThat it.weight, is ('worsted')
-			assertThat it.yarns[0].color, is (null)
-			assertThat it.yarns[0].id, is ('A')
-			assertThat it.yarns[0].symbol, is ('A')
-			assertThat it.yarns[0].label, is ('A')
+	}
+
+	@Test
+	void multipleYarnsPerYarnType() {
+		com.knitml.core.model.Pattern pattern = convert '''
+		Pattern name: "Thing"
+		Description: "Thing 2"
+		Yarn:
+			"Lorna's Laces"
+				50g (75yd) in Red (203): A
+				50g in Blue: B
+				in Green: yarn C
+			50g of "Purly Gates" (lace weight)
+
+		Row: knit
+		'''
+		assertThat pattern.supplies.yarnTypes.size(), is (2)
+		assertThat pattern.supplies.yarns.size(), is (4)
+		pattern.supplies.yarnTypes[0].with {
+			assertThat it.id, not (null)
+			assertThat it.brand, is ("Lorna's Laces")
+			assertThat it.category, is (null)
+			assertThat it.subcategory, is (null)
+		}
+		pattern.supplies.yarnTypes[1].with {
+			assertThat it.id, not (null)
+			assertThat it.brand, is ("Purly Gates")
+			assertThat it.weight, is ('lace')
+			assertThat it.yarns[0].totalWeight.longValue(GRAM), is (50L)
+			assertThat it.yarns[0].totalLength, is (null)
 		}
 	}
+
+	@Test
+	void yarnWithoutWeight() {
+		com.knitml.core.model.Pattern pattern = convert '''
+		Pattern name: "Thing"
+		Description: "Thing 2"
+		Yarn: worsted weight yarn
+
+		Row: knit
+		'''
+		assertThat pattern.supplies.yarnTypes.size(), is (1)
+		assertThat pattern.supplies.yarns.size(), is (1)
+	}
+
 }

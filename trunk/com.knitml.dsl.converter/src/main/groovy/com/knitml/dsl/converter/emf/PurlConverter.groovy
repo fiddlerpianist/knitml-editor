@@ -8,6 +8,7 @@ import com.knitml.core.common.LoopToWork
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.model.directions.InlineOperation
 import com.knitml.core.model.directions.inline.Decrease
+import com.knitml.core.model.directions.inline.DoubleDecrease
 import com.knitml.core.model.directions.inline.Purl
 import com.knitml.core.model.directions.inline.Repeat
 import com.knitml.core.model.directions.inline.Repeat.Until
@@ -24,12 +25,13 @@ public class PurlConverter implements DomainModelConverter<com.knitml.dsl.knitti
 
 		if (emfPurl.together) {
 			// actually a decrease in the model
-			purl = new Decrease()
 			switch (emfPurl.number) {
 				case 2:
+					purl = new Decrease()
 					purl.type = emfPurl?.throughTrailingLoop ? DecreaseType.P2TOG_TBL: DecreaseType.P2TOG
 					break;
 				case 3:
+					purl = new DoubleDecrease()
 					if (emfPurl?.throughTrailingLoop) {
 						log.warn("p3tog through trailing loop not supported by the model; changing to p3tog")
 					}

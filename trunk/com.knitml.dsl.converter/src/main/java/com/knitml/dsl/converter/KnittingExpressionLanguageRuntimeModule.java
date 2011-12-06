@@ -20,4 +20,9 @@ public class KnittingExpressionLanguageRuntimeModule extends com.knitml.dsl.Knit
 		return EmfHelper.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends com.knitml.dsl.validation.KnittingExpressionLanguageJavaValidator> bindKnittingExpressionLanguageJavaValidator() {
+		return com.knitml.dsl.validation.KnittingExpressionLanguageJavaValidator.class;
+	}
+	
 }

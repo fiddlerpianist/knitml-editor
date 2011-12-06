@@ -34,7 +34,7 @@ public class RepeatInstructionConverter implements DomainModelConverter<com.knit
 		} else if (emfRepeatInstruction.unit != null) {
 			def valueToUse = emfRepeatInstruction.value == null ? emfRepeatInstruction.decimalValue : emfRepeatInstruction.value
 			repeat.until = Until.UNTIL_MEASURES
-			repeat.value = KnittingMeasure.valueOf valueToUse, Units.valueOf(emfRepeatInstruction.unit.literal)
+			repeat.value = KnittingMeasure.valueOf(String.valueOf(valueToUse), Units.valueOf(emfRepeatInstruction.unit.literal))
 		}
 		return repeat
 	}

@@ -16,10 +16,12 @@ import com.knitml.core.units.KnittingMeasure
 import com.knitml.core.units.Units
 import com.knitml.dsl.knittingExpressionLanguage.Header
 
-class HeaderConverter {
+class HeaderExtractor {
 	
 	@Inject
 	private YarnTypeExtractor yarnTypeExtractor
+	@Inject
+	private EmfHelper emfHelper
 
 	GeneralInformation extractGeneralInformation(Header emfHeader) {
 		def genInfo = new GeneralInformation()
@@ -40,7 +42,7 @@ class HeaderConverter {
 				valueToUse = emfGauge.stitchDecimalValue
 			}
 			if (valueToUse != null) {
-				genInfo.gauge.stitchGauge = KnittingMeasure.valueOf valueToUse, Units.valueOf(emfGauge.stitchUnit.literal)
+				genInfo.gauge.stitchGauge = KnittingMeasure.valueOf(String.valueOf(valueToUse), Units.valueOf(emfGauge.stitchUnit.literal))
 			}
 			// row gauge
 			valueToUse = emfGauge.rowValue
@@ -48,7 +50,7 @@ class HeaderConverter {
 				valueToUse = emfGauge.rowDecimalValue
 			}
 			if (valueToUse != null) {
-				genInfo.gauge.rowGauge = KnittingMeasure.valueOf valueToUse, Units.valueOf(emfGauge.rowUnit.literal)
+				genInfo.gauge.rowGauge = KnittingMeasure.valueOf(String.valueOf(valueToUse), Units.valueOf(emfGauge.rowUnit.literal))
 			}
 		}
 		if (emfHeader.author != null)  {
@@ -76,10 +78,10 @@ class HeaderConverter {
 				supplies.needleTypes << needleType
 			}
 		}
-		if (emfHeader.singleYarnWithYarnTypes != null) {
+		if (emfHeader.yarnTypes != null) {
 			supplies.yarnTypes = []
-			emfHeader.singleYarnWithYarnTypes.each {
-				def yarnType = yarnTypeExtractor.extractSingleYarnWithYarnType(it)
+			emfHeader.yarnTypes.each {
+				def yarnType = yarnTypeExtractor.extractYarnType(it)
 				supplies.yarns.addAll(yarnType.yarns)
 				supplies.yarnTypes << yarnType
 			}
@@ -88,7 +90,7 @@ class HeaderConverter {
 		return supplies
 	}
 
-	NeedleType extractNeedleType(com.knitml.dsl.knittingExpressionLanguage.NeedleType it) {
+	private NeedleType extractNeedleType(com.knitml.dsl.knittingExpressionLanguage.NeedleType it) {
 		NeedleType needleType = new NeedleType()
 		// brand
 		needleType.brand = it.brand
@@ -101,11 +103,11 @@ class HeaderConverter {
 			valueToUse = it.sizeZerosValue
 		}
 		if (valueToUse != null) {
-			needleType.needleSize = KnittingMeasure.valueOf valueToUse, Units.valueOf(it.sizeUnit.literal)
+			needleType.needleSize = KnittingMeasure.valueOf (String.valueOf(valueToUse), Units.valueOf(it.sizeUnit.literal))
 		}
 		// length
 		if (it.lengthValue != null) {
-			needleType.length = KnittingMeasure.valueOf it.lengthValue, Units.valueOf(it.lengthUnit.literal)
+			needleType.length = KnittingMeasure.valueOf (String.valueOf(it.lengthValue), Units.valueOf(it.lengthUnit.literal))
 		}
 		// style
 		needleType.style = NeedleStyle.valueOf(it.style.name)
@@ -125,6 +127,7 @@ class HeaderConverter {
 					needle.messageKey = it.withKey.messageKey
 				}
 			}
+			emfHelper.addNeedle(needle)
 			needleType.needles << needle
 		}
 		return needleType

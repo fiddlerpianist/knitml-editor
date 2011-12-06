@@ -8,8 +8,7 @@ import org.junit.Test
 import com.knitml.core.model.Pattern
 import com.knitml.core.model.directions.block.Instruction
 import com.knitml.core.model.directions.block.InstructionRef
-import com.knitml.core.model.directions.block.RepeatInstruction
-import com.knitml.core.model.directions.block.RepeatInstruction.Until
+import com.knitml.core.model.directions.inline.InlineInstructionRef
 
 
 class InstructionRefConverterTests extends AbstractConverterTests {
@@ -39,4 +38,16 @@ class InstructionRefConverterTests extends AbstractConverterTests {
 			assertThat it.ref, instanceOf (Instruction)
 		}
 	}
+	
+	@Test
+	void workShorthandInlineInstruction() {
+		Pattern pattern = convert '''
+			Row 1: instruction Shorthand: [p, k]
+			Row 2: k, Shorthand
+		'''
+		((InlineInstructionRef) pattern.directions.operations[1].operations[1]).with {
+			assertThat it.referencedInstruction.id, is ('Shorthand')
+		}
+	}
+
 }

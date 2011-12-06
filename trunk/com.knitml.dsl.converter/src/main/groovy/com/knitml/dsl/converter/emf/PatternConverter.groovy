@@ -11,14 +11,17 @@ import com.knitml.core.model.Pattern
 import com.knitml.core.model.Version
 import com.knitml.core.model.directions.Directions
 import com.knitml.core.model.directions.Operation
-import com.knitml.dsl.converter.emf.helper.HeaderConverter;
+import com.knitml.dsl.converter.emf.helper.EmfHelper
+import com.knitml.dsl.converter.emf.helper.HeaderExtractor
 
 public class PatternConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Pattern> {
 
 	@Inject
 	protected DomainModelConverterLocator<EObject> locator
 	@Inject
-	protected HeaderConverter headerConverter
+	protected HeaderExtractor headerConverter
+	@Inject
+	protected EmfHelper emfHelper
 
 	@Override
 	public Pattern convert(com.knitml.dsl.knittingExpressionLanguage.Pattern emfPattern) {
@@ -44,14 +47,7 @@ public class PatternConverter implements DomainModelConverter<com.knitml.dsl.kni
 			pattern.supplies = headerConverter.extractSupplies(emfPattern.header)
 		}
 
-		List<Operation> operations = []
-		// iterate through each object in the operation list
-		for (def emfOperation : emfOperations) {
-			Operation operation = locator.locateConverter(emfOperation).convert(emfOperation)
-			operations << operation
-		}
-
-		pattern.directions.operations = operations
+		pattern.directions.operations = emfHelper.convertOperations(emfOperations)
 		return pattern
 	}
 

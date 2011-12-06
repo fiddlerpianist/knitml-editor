@@ -17,6 +17,10 @@ class RowConverterTests extends AbstractConverterTests {
 	@Test
 	void basicRows() {
 		com.knitml.core.model.Pattern pattern = convert '''
+			Pattern name:  "My Pattern" 
+			Description:  "My Description" 
+			Yarn: 50g of worsted weight named A
+
 			Row 1: knit
 			Row 2: knit
 			Rows 3-5: knit
@@ -51,7 +55,7 @@ class RowConverterTests extends AbstractConverterTests {
 		com.knitml.core.model.Pattern pattern = convert '''
 			Row RS: knit
 			Row WS: knit
-			Row (inform side): knit
+			Row (state side): knit
 			Row 4 and all even rows: knit
 			Row 5 and all odd rows: knit
 		'''
@@ -77,11 +81,10 @@ class RowConverterTests extends AbstractConverterTests {
 			Next Short Long Row: knit
 			Row (reset): knit
 			Row (reset count): knit
-			Row (inform): knit
-			Row (inform side): knit
-			Row (inform side, reset count): knit
-			Row (inform, reset): knit
-			Row (inform reset): knit
+			Row (state side): knit
+			Row (state side, reset count): knit
+			Row (state side, reset): knit
+			Row (state side reset): knit
 		''' 
 		((List<Row>) pattern.directions.operations).with {
 			assertThat it[0].shortRow, is (false)
@@ -102,8 +105,6 @@ class RowConverterTests extends AbstractConverterTests {
 			assertThat it[10].informSide, is (true)
 			assertThat it[11].resetRowCount, is (true)
 			assertThat it[11].informSide, is (true)
-			assertThat it[12].resetRowCount, is (true)
-			assertThat it[12].informSide, is (true)
 		}
 	}
 

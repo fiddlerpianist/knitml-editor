@@ -19,7 +19,7 @@ DomainModelConverterLocator<EObject> {
 	private Map converters = [:]
 
 	public findConverter(Class interf) {
-		String targetName = this.class.package.name + "." + interf.simpleName + "Converter"
+		String targetName = this.class.package.name + "." + interf.simpleName + "Converter" //$NON-NLS-1$ //$NON-NLS-2$
 		if (converters.get(targetName) != null) {
 			return converters.get(targetName)
 		}
@@ -41,7 +41,7 @@ DomainModelConverterLocator<EObject> {
 	public DomainModelConverter<EObject> locateConverter(EObject sourceModel) {
 		// iterate through each interface this object implements
 		for (Class<?> interfaceName : sourceModel.class.interfaces) {
-			if (interfaceName.package.name.equals("com.knitml.dsl.knittingExpressionLanguage")) {
+			if (interfaceName.package.name.equals("com.knitml.dsl.knittingExpressionLanguage")) { //$NON-NLS-1$
 				return findConverter (interfaceName)
 			}
 		}
