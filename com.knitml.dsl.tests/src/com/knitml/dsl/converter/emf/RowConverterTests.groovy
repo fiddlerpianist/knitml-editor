@@ -123,6 +123,34 @@ class RowConverterTests extends AbstractConverterTests {
 	}
 
 	@Test
+	void rowRangesMixedWithNumbers() {
+		com.knitml.core.model.Pattern pattern = convert '''
+			Rows 1-3,5: knit
+			Rounds 4,6-9: knit
+		'''
+		((List<Row>) pattern.directions.operations).with {
+			int[] expected = [1,2,3,5]
+			assertThat it[0].numbers, is (expected)
+			expected = [4,6,7,8,9]
+			assertThat it[1].numbers, is (expected)
+		}
+	}
+
+	@Test
+	void rowNumbersOutOfOrder() {
+		com.knitml.core.model.Pattern pattern = convert '''
+			Rows 5,1-3: knit
+			Rounds 6-9,4: knit
+		'''
+		((List<Row>) pattern.directions.operations).with {
+			int[] expected = [1,2,3,5]
+			assertThat it[0].numbers, is (expected)
+			expected = [4,6,7,8,9]
+			assertThat it[1].numbers, is (expected)
+		}
+	}
+
+	@Test
 	void rowWithStateSts() {
 		com.knitml.core.model.Pattern pattern = convert '''
 			Row: knit, state sts

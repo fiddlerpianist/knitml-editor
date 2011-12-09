@@ -19,7 +19,7 @@ import com.knitml.core.model.header.Yarn
 import com.knitml.dsl.converter.OperationContainer
 import com.knitml.dsl.knittingExpressionLanguage.RepeatSpec
 
-@Singleton
+@Singleton // FIXME This should be a pre-thread scope, not a singleton. Use Guice's SimpleScope for this instead.
 public class EmfHelper {
 
 	static final Log log = LogFactory.getLog(EmfHelper)
@@ -31,6 +31,17 @@ public class EmfHelper {
 	private Map<String, InlineInstruction> inlineInstructionMap = [:]
 	private Map<String, Needle> needleMap = [:]
 	private Map<String, Yarn> yarnMap = [:]
+
+	private Map<Operation, EObject> operationToEmfTraceMap = new HashMap<Operation, EObject>(500)
+
+	public void reset() {
+		// FIXME we won't need this method once the correct scope is implemented
+		instructionMap = [:]
+		inlineInstructionMap = [:]
+		needleMap = [:]
+		yarnMap = [:]
+		operationToEmfTraceMap = new HashMap<Operation, EObject>(500)
+	}
 
 	void addInstruction(Instruction modelInstruction) {
 		instructionMap.put(modelInstruction.id, modelInstruction)
@@ -95,11 +106,17 @@ public class EmfHelper {
 			if (operation instanceof OperationContainer) {
 				operation.siblingOperations.each {
 					operations << it
-				}	
+					operationToEmfTraceMap.put(it, emfOperation)
+				}
 			} else {
 				operations << operation
+				operationToEmfTraceMap.put(operation, emfOperation)
 			}
 		}
 		return operations
+	}
+	
+	EObject getEObjectForOperation(Operation operation) {
+		operationToEmfTraceMap.get(operation)
 	}
 }

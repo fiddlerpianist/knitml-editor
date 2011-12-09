@@ -40,7 +40,14 @@ class KnitConverterTests extends AbstractConverterTests {
 
 	@Test
 	void knit5WithA() {
-		Pattern pattern = convert 'Row: knit 5 with A'
+		Pattern pattern = convert '''
+			Pattern name: "Thing"
+			Description: "Thing 2"
+			Yarn: worsted weight yarn
+				in red: A
+
+			Row: knit 5 with A
+		'''
 		((Knit) pattern.directions.operations[0].operations[0]).with {
 			assertThat loopToWork, is (null)
 			assertThat numberOfTimes, is (5)
