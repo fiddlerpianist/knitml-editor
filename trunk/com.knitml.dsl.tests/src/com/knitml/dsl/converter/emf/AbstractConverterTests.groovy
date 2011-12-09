@@ -31,7 +31,7 @@ abstract protected class AbstractConverterTests {
 	protected Pattern convert (String input) {
 		XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet)
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, true)
-		Resource resource = resourceSet.createResource(URI.createURI("dummy:/dummy.kelp"))
+		Resource resource = resourceSet.createResource(URI.createURI("dummy:/dummy.kel2"))
 		InputStream is = new ByteArrayInputStream(input.bytes)
 		resource.load(is, resourceSet.loadOptions)
 

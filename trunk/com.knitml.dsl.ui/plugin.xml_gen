@@ -9,7 +9,7 @@
             class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="kelp"
+            extensions="kel2"
             id="com.knitml.dsl.KnittingExpressionLanguage"
             name="KnittingExpressionLanguage Editor">
         </editor>
@@ -140,13 +140,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="kelp">
+			type="kel2">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="kelp">
+            uriExtension="kel2">
         </resourceServiceProvider>
     </extension>
 
@@ -242,19 +242,19 @@
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="com.knitml.dsl.KnittingExpressionLanguage.compare.contentViewers"
             class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="kelp">
+            extensions="kel2">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="com.knitml.dsl.KnittingExpressionLanguage.compare.contentMergeViewers"
             class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="kelp" label="KnittingExpressionLanguage Compare">
+            extensions="kel2" label="KnittingExpressionLanguage Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="com.knitml.dsl.KnittingExpressionLanguage.editors.documentProviders"
             class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="kelp">
+            extensions="kel2">
     </provider>
   </extension>
 

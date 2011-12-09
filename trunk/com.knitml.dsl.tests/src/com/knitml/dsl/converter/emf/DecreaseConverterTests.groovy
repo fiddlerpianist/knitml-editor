@@ -12,6 +12,7 @@ import com.knitml.core.model.Pattern
 import com.knitml.core.model.directions.inline.Decrease
 import com.knitml.core.model.directions.inline.DoubleDecrease
 import com.knitml.core.model.directions.inline.Knit
+import com.knitml.core.model.directions.inline.PassPreviousStitchOver;
 import com.knitml.core.model.directions.inline.Repeat
 import com.knitml.core.model.directions.inline.Repeat.Until
 import com.knitml.dsl.converter.emf.exception.ConversionException
@@ -171,4 +172,19 @@ class DecreaseConverterTests extends AbstractConverterTests {
 		Pattern pattern = convert 'Row: k4tog'
 	}
 
+	@Test
+	void ppso() {
+		Pattern pattern = convert 'Row: ppso'
+		((PassPreviousStitchOver) pattern.directions.operations[0].operations[0]).with {
+			assertThat numberOfTimes, is (null)
+		}
+	}
+
+	@Test
+	void ppso3Times() {
+		Pattern pattern = convert 'Row: ppso 3 times'
+		((PassPreviousStitchOver) pattern.directions.operations[0].operations[0]).with {
+			assertThat numberOfTimes, is (3)
+		}
+	}
 }

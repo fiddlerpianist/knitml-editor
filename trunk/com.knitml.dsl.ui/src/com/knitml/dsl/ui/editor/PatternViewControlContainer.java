@@ -27,6 +27,7 @@ import org.springframework.core.io.ResourceLoader;
 import com.google.inject.Inject;
 import com.knitml.core.common.Parameters;
 import com.knitml.core.model.Pattern;
+import com.knitml.core.model.directions.DiscreteInlineOperation;
 import com.knitml.core.model.directions.block.Instruction;
 import com.knitml.core.model.directions.block.InstructionGroup;
 import com.knitml.core.model.directions.block.RepeatInstruction;
@@ -160,9 +161,12 @@ class PatternViewControlContainer {
 		while (cause.getCause() != null) {
 			cause = cause.getCause();
 		}
+		if (!(cause instanceof KnittingEngineException)) {
+			throw new RuntimeException(cause);
+		}
 		StringBuilder message = new StringBuilder();
 		message.append("There is a problem with the pattern that prevents it from being successfully knit. ");
-		if (ex.getOffendingOperation() != null) {
+		if (ex.getOffendingOperation() instanceof DiscreteInlineOperation) {
 			message.append("Unable to \"" + ex.getOffendingOperation()
 					+ "\" because of the following error: ");
 		} else {

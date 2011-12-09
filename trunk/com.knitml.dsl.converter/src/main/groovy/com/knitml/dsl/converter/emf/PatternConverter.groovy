@@ -25,6 +25,7 @@ public class PatternConverter implements DomainModelConverter<com.knitml.dsl.kni
 
 	@Override
 	public Pattern convert(com.knitml.dsl.knittingExpressionLanguage.Pattern emfPattern) {
+		emfHelper.reset()
 		Pattern pattern = null
 		if (emfPattern.operations?.size() > 0) {
 			pattern = process(emfPattern, emfPattern.operations)

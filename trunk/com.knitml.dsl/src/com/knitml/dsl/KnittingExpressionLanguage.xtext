@@ -8,9 +8,9 @@ Pattern:
 	LF*
 	(((header=Header LF+)? operations+=BlockOperation (LF* operations+=BlockOperation)*) |
 	('PARAGRAPHS' LF+ (header=Header LF+)?
-	((sections+=Section (LF+ sections+=Section)*) |
+	((sections+=Section (LF+ sections+=Section)*) |  
 	(instructionGroups+=InstructionGroupWithSections (LF+ instructionGroups+=InstructionGroupWithSections)*))) |
-	((header=Header LF+)? instructionGroups+=InstructionGroup (LF* instructionGroups+=InstructionGroup)*))
+	('GROUPS' LF+ (header=Header LF+)? instructionGroups+=InstructionGroup (LF* instructionGroups+=InstructionGroup)*))
 	LF*;
 
 	// Header elements
@@ -29,7 +29,11 @@ Header:
 	('Yarn:' LF?
 	yarnTypes+=YarnType LF
 	(yarnTypes+=YarnType LF)*)? &
-	('Accessories:' accessories=STRING LF)?);
+	('Accessories:' accessories=STRING LF)? &
+	('Instructions:' LF	instructions+=(InstructionDefinitionRule|InlineInstructionDefinitionRule)+)?
+	)
+	
+;
 
 YarnType:
 	(SingleYarnWithYarnType | MultipleYarnsWithYarnType);
@@ -98,6 +102,16 @@ Gauge:
 	(stitchValue=INT | stitchDecimalValue=DECIMAL) stitchUnit=StitchGaugeUnit (',' (rowValue=INT |
 	rowDecimalValue=DECIMAL) rowUnit=RowGaugeUnit)?;
 
+InstructionDefinitionRule returns Instruction:
+	'Instruction' name=ID label=STRING? ('(' (withKey=WithKey)? (','? shape=('round' | 'flat') 'shape'?) (','?
+	rowCount=INT ('rows' | 'rounds')?)? ')')? ':' LF
+	rows+=Row+;
+
+InlineInstructionDefinitionRule returns InlineInstruction:
+	name=ID label=STRING? (withKey=WithKey)?':' LF?
+	operations+=InlineDefinitionOperation (',' operations+=InlineDefinitionOperation)* => LF?;
+
+	// directions elements
 Section:
 	elements+=BlockOperation+;
 
@@ -111,8 +125,9 @@ InstructionGroupWithSections:
 
 	// block operations
 BlockOperation:
-	(UseNeedles | UseSilentNeedles | ArrangeStitches | CastOn | Instruction | InstructionRef | Row | RepeatInstruction |
-	Message | JoinInRound | BeginKnittingNewShape | LabelNeedle | Graft );
+	(UseNeedles | UseSilentNeedles | ArrangeStitches | CastOn | InstructionRule | InstructionRef | Row | RepeatInstruction
+	|
+	Message | JoinInRound | BeginKnittingNewShape | LabelNeedle | Graft);
 
 UseNeedles:
 	'Use' needles+=[Needle] (',' needles+=[Needle])* => LF?;
@@ -132,10 +147,18 @@ CastOn:
 	('Cast on' | 'CO' | 'co') value=INT StitchLiteral? ('with' yarnRef=ID)? ('using' 'the' style=ID 'method')?
 	(countAsRow?='(count as row)')? => LF?;
 
-Instruction:
+InstructionRule returns Instruction:
 	'Instruction' name=ID label=STRING? ('(' (withKey=WithKey)? (','? shape=('round' | 'flat') 'shape'?)? (','?
 	rowCount=INT ('rows' | 'rounds')?)? ')')? (('{' LF* rows+=Row (LF* rows+=Row)* LF* '}' => LF?) | (':' LF rows+=Row+
 	LF));
+
+Instruction:
+	name=ID
+	label=STRING
+	withKey=WithKey
+	shape=STRING
+	rowCount=INT
+	rows+=Row;
 
 InstructionRef:
 	'Work' instruction=[Instruction] 'instruction'?;
@@ -144,9 +167,12 @@ MergedInstruction:
 	'Merge' instruction1=[Instruction] 'instruction'? 'with' instruction2=[Instruction] 'at' 'row';
 
 Row:
-	nextRow?='Next'? (shortRow?='Short'? & longRow?='Long'?) label=('Row' | 'Round' | 'Rows' | 'Rounds') (range=Range |
-	(number+=INT (',' number+=INT)* ('and' 'all'? subsequent=('even' | 'odd') ('rows' | 'rounds')?)?))? (side=('WS' |
-	'RS')? & ('with' yarnRef=[Yarn])?) ('(' (','? inform?='state' 'side')? (','? reset?='reset' 'count'?)? ')')? ':' LF?
+	nextRow?='Next'? (shortRow?='Short'? & longRow?='Long'?) label=('Row' | 'Round' | 'Rows' | 'Rounds')
+	((range+=Range | number+=INT) (',' (range+=Range | number+=INT))*
+	('and' 'all'? subsequent=('even' | 'odd') ('rows' | 'rounds')?)?)?
+	(side=('WS' | 'RS')? &
+	('with' yarnRef=[Yarn])?) ('(' (','? inform?='state' 'side')? (','? reset?='reset' 'count'?)?
+	')')? ':' LF?
 	((operations+=InlineOperation (',' LF? operations+=InlineOperation)*) | (operations+=UsingNeedle (LF
 	operations+=UsingNeedle)*)) (',' LF? stateStitches?='state' numberToState=INT? StitchLiteral?)? (',' LF?
 	followupMessage=STRING)? => LF?;
@@ -157,7 +183,7 @@ RepeatInstruction:
 	// TODO: difficult! (value=INT ('st' | 'sts') remainOnNeedles?='remain on' ('needle' | 'needles')) |
 	// TODO: UNTIL_EQUALS
 	(('for' | ('until' 'measures')) (value=INT | decimalValue=DECIMAL) unit=LengthUnit) | (value=INT
-	additionalTimes?=('additional' | 'more') 'times')) => LF?;
+	additionalTimes?=('additional' | 'more') TimesLiteral)) => LF?;
 
 Message:
 	label=STRING ('(' 'key'? messageKey=(ID | STRING) ')')? => LF;
@@ -171,41 +197,49 @@ BeginKnittingNewShape:
 	('in' 'the' shape='round')) => LF;
 
 LabelNeedle:
-	'Label' needle=[Needle] 'as' label=STRING ('(' withKey=WithKey ')')?
-;
+	'Label' needle=[Needle] 'as' label=STRING ('(' withKey=WithKey ')')?;
 
 Graft:
-	'Graft' 'together'? (StitchLiteral 'from')? firstNeedle=[Needle] 'and' secondNeedle=[Needle] => LF?	
-;	
+	'Graft' 'together'? (StitchLiteral 'from')? firstNeedle=[Needle] 'and' secondNeedle=[Needle] => LF?;
+	
 	// Inline Operations
-InlineOperation:
+InlineDefinitionOperation:
 	(InlinePickUpStitches |
-	Knit | Purl | Slip | Decrease | DoubleDecrease |
+	Knit | Purl | Slip |
+	Decrease | DoubleDecrease | PassPreviousStitchOver |
+	Increase |
 	PlaceMarker | RemoveMarker | EndOfRow |
-	InlineInstruction | InlineInstructionRef |
 	Repeat | BindOff | Turn);
 
+InlineOperation:
+	(InlineDefinitionOperation | InlineInstructionRule | InlineInstructionRef);
+
 InlinePickUpStitches:
-	'pick' 'up' number=INT StitchLiteral? wise=Wise? ('with'? yarnRef=[Yarn])?
-;
+	'pick' 'up' number=INT StitchLiteral? wise=Wise? ('with'? yarnRef=[Yarn])?;
 
 Knit:
 	('K' | 'k' | 'Knit' | 'knit') {Knit} number=INT? StitchLiteral? (together?=('tog')? & throughTrailingLoop?=('tbl' |
-	'ttl')?) ('with' yarnRef=ID)? ('to'? repeat=RepeatSpec)?;
+	'ttl')?) ('with'? yarnRef=[Yarn])? ('to'? repeat=RepeatSpec)?;
 
 Purl:
 	('P' | 'p' | 'Purl' | 'purl') {Purl} number=INT? StitchLiteral? (together?=('tog')? & throughTrailingLoop?=('tbl' |
-	'ttl')?) ('with' yarnRef=ID)? ('to'? repeat=RepeatSpec)?;
+	'ttl')?) ('with'? yarnRef=[Yarn])? ('to'? repeat=RepeatSpec)?;
 
 Slip:
 	{Slip} reverse?=('Rev' | 'Reverse' | 'rev' | 'reverse')? ('Sl' | 'sl' | 'Slip' | 'slip') ((number=INT StitchLiteral?)
 	| 'next st')? wise=Wise? yarnPosition=('wyif' | 'wyib')?;
 
 Decrease:
-	type=DecreaseType (number=INT 'times'?)? ('with'? yarnRef=[Yarn])?;
+	type=DecreaseType (number=INT TimesLiteral?)? ('with'? yarnRef=[Yarn])?;
 
 DoubleDecrease:
-	type=DoubleDecreaseType (number=INT 'times'?)? ('with'? yarnRef=[Yarn])?;
+	type=DoubleDecreaseType (number=INT TimesLiteral?)? ('with'? yarnRef=[Yarn])?;
+
+PassPreviousStitchOver:
+	{PassPreviousStitchOver} 'ppso' (number=INT TimesLiteral?)?;
+
+Increase:
+	type=IncreaseType (number=INT TimesLiteral?)? ('with'? yarnRef=[Yarn])?;
 
 PlaceMarker:
 	{PlaceMarker} (('place' 'marker') | 'pm');
@@ -216,9 +250,15 @@ RemoveMarker:
 EndOfRow:
 	{EndOfRow} ('end' 'of' ('row' | 'round'));
 
-InlineInstruction:
+InlineInstructionRule returns InlineInstruction:
 	'instruction' name=ID label=STRING? ('(' (withKey=WithKey) ')')? ':' LF?
 	'[' operations+=InlineOperation (',' operations+=InlineOperation)* ']';
+
+InlineInstruction:
+	name=ID
+	label=STRING
+	withKey=WithKey
+	operations+=InlineOperation;
 
 InlineInstructionRef:
 	referencedInstruction=[InlineInstruction];
@@ -234,7 +274,7 @@ BindOff:
 RepeatSpec:
 	(toEnd?=('end') | toMarker?=('marker') | (value=INT StitchLiteral? beforeEnd?=('before end')) | (value=INT
 	StitchLiteral? beforeGap?=('before gap')) | (value=INT StitchLiteral? beforeMarker?=('before marker')) | (value=INT
-	times?=('times')));
+	times?=(TimesLiteral)));
 
 Turn:
 	{Turn} 'turn' (stateUnworked?='(' 'state' number=INT? 'unworked' StitchLiteral? ')')?;
@@ -248,6 +288,10 @@ enum DecreaseType:
 
 enum DoubleDecreaseType:
 	SSSK='sssk' | CDD='cdd' | SK2P='sk2p' | CDD='s2kp';
+
+enum IncreaseType:
+	M1='m1' | M1P='m1p' | M1A='m1a' | M1T='m1t' | M1L='m1l' | M1R='m1r' | M1LP='m1lp' | M1RP='m1rp' | KLL='kll' |
+	KRL='krl' | PLL='pll' | PRL='prl' | KFB='kfb' | PFB='pfb' | MOSS='moss' | DECORATIVE='decorative' | YO='yo';
 
 enum Language:
 	EN='English' | ES='Spanish' | FR='French';
@@ -288,6 +332,9 @@ enum Wise:
 
 StitchLiteral returns ecore::EString:
 	'st' | 'sts' | 'stitch' | 'stitches';
+
+TimesLiteral returns ecore::EString:
+	'time' | 'times';
 
 WithKey:
 	{WithKey} 'with' 'key' messageKey=STRING?;

@@ -24,26 +24,28 @@ public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittin
 	@Override
 	public Row convert(com.knitml.dsl.knittingExpressionLanguage.Row emfRow) {
 		def row = new Row()
-		if (!emfRow.number.empty) {
-			row.numbers = emfRow.number
-		} else if (emfRow.range != null) {
-			int min = emfRow.range.min
-			int max = emfRow.range.max
+		def rowNumbers = [] 
+		emfRow.number?.each {
+			rowNumbers << it
+		}
+		emfRow.range?.each {
+			int min = it.min
+			int max = it.max
 			if (min <= max) {
 				def len = max-min+1
-				int[] rowNumbers = new int[len]
 				for (int i = 0; i < len; i++) {
-					rowNumbers[i] = min + i
+					rowNumbers << min + i
 				}
-				row.numbers = rowNumbers
 			}
 		}
+		rowNumbers.sort()
+		row.numbers = rowNumbers.size() == 0 ? null : rowNumbers.toArray()
+
 		if (emfRow.label != null) {
 			if (emfRow.label.toLowerCase().startsWith('round')) {
 				row.type = KnittingShape.ROUND
 			}
 		}
-		
 		row.resetRowCount = emfRow.reset
 		row.shortRow = emfRow.shortRow
 		row.longRow = emfRow.longRow
@@ -79,6 +81,6 @@ public class RowConverter implements DomainModelConverter<com.knitml.dsl.knittin
 				row.followupInformation.details << message
 			}
 		}
-		return row
+		return new Row(row, row.operations)
 	}
 }

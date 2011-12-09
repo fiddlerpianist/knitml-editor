@@ -17,6 +17,8 @@ class InstructionGroupConverterTests extends AbstractConverterTests {
 	@Test
 	void basicInstructionGroup() {
 		com.knitml.core.model.Pattern pattern = convert '''
+		GROUPS
+
 		Group cast-on:
 		Row: knit
 		'''
@@ -32,6 +34,8 @@ class InstructionGroupConverterTests extends AbstractConverterTests {
 	@Test
 	void instructionGroupWithLabelAndResetCountApplied() {
 		com.knitml.core.model.Pattern pattern = convert '''
+		GROUPS
+
 		Group cast-on "Set up your work" (with key, reset count):
 		Row: knit
 		'''
@@ -47,6 +51,8 @@ class InstructionGroupConverterTests extends AbstractConverterTests {
 	@Test
 	void instructionGroupNoParagraphs() {
 		com.knitml.core.model.Pattern pattern = convert '''
+		GROUPS
+
 		Group cast-on "Setup your work":
 		Cast on 20
 
