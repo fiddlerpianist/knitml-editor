@@ -3,10 +3,12 @@ package com.knitml.dsl.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 
 import com.knitml.dsl.ui.folding.KnittingExpressionLanguageFoldingRegionProvider;
 import com.knitml.dsl.ui.folding.KnittingExpressionLanguageLocationInFileProvider;
 import com.knitml.dsl.ui.internal.KnittingExpressionLanguageUIPlugin;
+import com.knitml.dsl.ui.syntaxcoloring.KnittingExpressionLanguageHighlightingConfiguration;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
 import com.knitml.renderer.service.RenderingService;
 
@@ -35,4 +37,7 @@ public class KnittingExpressionLanguageUiModule extends com.knitml.dsl.ui.Abstra
 		return KnittingExpressionLanguageLocationInFileProvider.class;
 	}
 	
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return KnittingExpressionLanguageHighlightingConfiguration.class;
+	}
 }

@@ -6,6 +6,7 @@
 	<extension point="org.eclipse.ui.editors">
 		<editor
 			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:com.knitml.dsl.ui.editor.KnittingPatternEditor"
+			icon="icons/kel_file_type.gif"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="true" extensions="kel2" id="com.knitml.dsl.KnittingExpressionLanguage"
 			name="Knitting Expression Language Editor">

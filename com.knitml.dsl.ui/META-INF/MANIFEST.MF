@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.knitml.dsl.ui
 Bundle-Vendor: KnitML
-Bundle-Version: 1.0.0
+Bundle-Version: 0.3.0.M1
 Bundle-SymbolicName: com.knitml.dsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: com.knitml.dsl;visibility:=reexport,

@@ -107,12 +107,46 @@ class PatternViewControlContainer {
 		return composite;
 	}
 
-	public void render(Pattern patternModel) {
-		String pattern = doRenderPattern(patternModel);
-		writeContentToPatternPage(pattern);
+	public Pattern render(Pattern patternModel) {
+		Pattern renderedPattern = null;
+		Writer writer = new StringWriter();
+		String errors = null;
+		try {
+			renderedPattern = doRenderPattern(patternModel, writer);
+			// return renderedPatternWriter.toString();
+		} catch (KnittingEngineException ex) {
+			errors = handleKnittingException(ex);
+		} catch (RenderingException ex) {
+			Throwable cause = ex;
+			while (cause.getCause() != null) {
+				cause = cause.getCause();
+			}
+			if (cause instanceof NoSymbolFoundException) {
+				errors = "Unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
+						+ cause.getMessage();
+			} else {
+				errors = "Could not render pattern because of the following: "
+						+ ex.getMessage();
+			}
+		} catch (Exception ex) {
+			StringWriter stringError = new StringWriter();
+			PrintWriter pw = new PrintWriter(stringError);
+			ex.printStackTrace(pw);
+			errors = "Could not render pattern: exception is "
+					+ stringError.toString();
+		}
+		if (errors != null) {
+			writeContentToPatternPage(errors);
+			return null;
+		} else {
+			writeContentToPatternPage(writer.toString());
+			return renderedPattern;
+		}
 	}
 
-	protected String doRenderPattern(Pattern patternModel) {
+	protected Pattern doRenderPattern(Pattern patternModel,
+			Writer renderedPatternWriter) throws KnittingEngineException,
+			RenderingException {
 		Configuration configuration = renderingPreferencesService
 				.retrieveConfiguration();
 		Options options = configuration.getOptions();
@@ -126,34 +160,10 @@ class PatternViewControlContainer {
 		Parameters parameters = new Parameters();
 		parameters.setCheckSyntax(false);
 		parameters.setPattern(patternModel);
-		Writer renderedPatternWriter = new StringWriter();
 		parameters.setWriter(renderedPatternWriter);
 
-		try {
-			renderingService.renderPattern(parameters,
-					configuration.getRendererFactory(), options);
-			return renderedPatternWriter.toString();
-		} catch (KnittingEngineException ex) {
-			return handleKnittingException(ex);
-		} catch (RenderingException ex) {
-			Throwable cause = ex;
-			while (cause.getCause() != null) {
-				cause = cause.getCause();
-			}
-			if (cause instanceof NoSymbolFoundException) {
-				return "Unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
-						+ cause.getMessage();
-			} else {
-				return "Could not render pattern because of the following: "
-						+ ex.getMessage();
-			}
-		} catch (Exception ex) {
-			StringWriter stringError = new StringWriter();
-			PrintWriter pw = new PrintWriter(stringError);
-			ex.printStackTrace(pw);
-			return "Could not render pattern: exception is "
-					+ stringError.toString();
-		}
+		return renderingService.renderPattern(parameters,
+				configuration.getRendererFactory(), options);
 	}
 
 	private String handleKnittingException(KnittingEngineException ex) {
@@ -190,7 +200,9 @@ class PatternViewControlContainer {
 					// Row object is used as a marker; it's not the real
 					// executing row
 					Row row = (Row) item;
-					strings.add("row " + row.getNumbers()[0]);
+					if (row.getNumbers() != null) {
+						strings.add("row " + row.getNumbers()[0]);
+					}
 				} else if (item instanceof Instruction) {
 					if (lit.hasNext()
 							&& locationBreadcrumb.get(lit.nextIndex()) instanceof RepeatInstruction) {
