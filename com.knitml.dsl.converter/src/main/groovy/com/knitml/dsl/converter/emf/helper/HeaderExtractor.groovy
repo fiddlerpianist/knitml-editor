@@ -6,18 +6,20 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 
 import com.google.inject.Inject
 import com.knitml.core.common.NeedleStyle
+import com.knitml.core.model.Identifiable
 import com.knitml.core.model.header.Author
 import com.knitml.core.model.header.Gauge
 import com.knitml.core.model.header.GeneralInformation
 import com.knitml.core.model.header.Needle
 import com.knitml.core.model.header.NeedleType
+import com.knitml.core.model.header.StitchHolder;
 import com.knitml.core.model.header.Supplies
 import com.knitml.core.units.KnittingMeasure
 import com.knitml.core.units.Units
 import com.knitml.dsl.knittingExpressionLanguage.Header
 
 class HeaderExtractor {
-	
+
 	@Inject
 	private YarnTypeExtractor yarnTypeExtractor
 	@Inject
@@ -70,7 +72,7 @@ class HeaderExtractor {
 
 	Supplies extractSupplies(Header emfHeader) {
 		Supplies supplies = new Supplies()
-		if (emfHeader.needleTypes != null) {
+		if (!emfHeader.needleTypes.isEmpty()) {
 			supplies.needleTypes = []
 			emfHeader.needleTypes.each {
 				def needleType = extractNeedleType(it)
@@ -78,12 +80,18 @@ class HeaderExtractor {
 				supplies.needleTypes << needleType
 			}
 		}
-		if (emfHeader.yarnTypes != null) {
+		if (!emfHeader.yarnTypes.isEmpty()) {
 			supplies.yarnTypes = []
 			emfHeader.yarnTypes.each {
 				def yarnType = yarnTypeExtractor.extractYarnType(it)
 				supplies.yarns.addAll(yarnType.yarns)
 				supplies.yarnTypes << yarnType
+			}
+		}
+		if (!emfHeader.stitchHolders.isEmpty()) {
+			supplies.stitchHolders = []
+			emfHeader.stitchHolders.each {
+				supplies.stitchHolders << extractStitchHolder(it)
 			}
 		}
 		supplies.afterPropertiesSet()
@@ -115,21 +123,40 @@ class HeaderExtractor {
 
 		// needles defined using this type
 		it.needles.each {
-			Needle needle = new Needle()
-			needle.id = it.name
+			//Needle needle = new Needle()
+			String id = it.name
 			// bi-directional relationship
-			needle.type = needleType
-			needle.label = it.label
+			def type = needleType
+			def label = it.label
+			def messageKey = null
 			if (it.withKey != null) {
 				if (it.withKey.messageKey == null) {
-					needle.messageKey = 'needle.' + needle.id
+					messageKey = 'needle.' + id
 				} else {
-					needle.messageKey = it.withKey.messageKey
+					messageKey = it.withKey.messageKey
 				}
 			}
+			Needle needle = new Needle(id, type, label, messageKey)
 			emfHelper.addNeedle(needle)
 			needleType.needles << needle
 		}
 		return needleType
+	}
+
+	private StitchHolder extractStitchHolder(com.knitml.dsl.knittingExpressionLanguage.StitchHolder it) {
+		StitchHolder holder = new StitchHolder()
+		holder.id = it.name
+		holder.label = it.label
+		def messageKey = null
+		if (it.withKey != null) {
+			if (it.withKey.messageKey == null) {
+				messageKey = 'stitch-holder.' + holder.id
+			} else {
+				messageKey = it.withKey.messageKey
+			}
+		}
+		holder.messageKey = messageKey
+		emfHelper.addStitchHolder(holder)
+		return holder
 	}
 }

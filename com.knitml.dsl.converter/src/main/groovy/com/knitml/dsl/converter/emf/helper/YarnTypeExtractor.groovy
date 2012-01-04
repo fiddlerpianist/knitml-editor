@@ -53,6 +53,9 @@ class YarnTypeExtractor {
 		yarn.id = yarnOrYarnType.name
 		yarn.symbol = yarn.id
 		yarn.label = yarn.id
+		if (yarn.id == null) {
+			yarn.id = EcoreUtil.generateUUID()
+		}
 		((WeightAndLengthSpec)(yarnOrYarnType.quantitySpec))?.with {
 			if (lengthValue != null) {
 				yarn.totalLength = KnittingMeasure.valueOf(String.valueOf(lengthValue), Units.valueOf(lengthUnit.literal))

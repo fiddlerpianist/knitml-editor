@@ -15,7 +15,7 @@ public class CastOnConverter implements DomainModelConverter<com.knitml.dsl.knit
 
 	@Override
 	public CastOn convert(com.knitml.dsl.knittingExpressionLanguage.CastOn emfCastOn) {
-		def castOn = new CastOn(emfCastOn.value, emfCastOn.yarnRef, emfCastOn.style)
+		def castOn = new CastOn(emfCastOn.value, emfCastOn.yarnRef?.name, emfCastOn.style)
 		if (emfCastOn.countAsRow) {
 			castOn.countAsRow = emfCastOn.countAsRow
 		}

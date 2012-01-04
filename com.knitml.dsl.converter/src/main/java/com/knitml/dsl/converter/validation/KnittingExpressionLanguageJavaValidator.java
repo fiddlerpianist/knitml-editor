@@ -21,6 +21,7 @@ import com.knitml.core.model.directions.block.RepeatInstruction;
 import com.knitml.dsl.converter.emf.helper.EmfHelper;
 import com.knitml.dsl.knittingExpressionLanguage.Instruction;
 import com.knitml.dsl.knittingExpressionLanguage.Pattern;
+import com.knitml.engine.common.GenericKnittingEngineException;
 import com.knitml.engine.common.KnittingEngineException;
 import com.knitml.validation.ValidationProgram;
 import com.knitml.validation.common.InvalidStructureException;
@@ -35,12 +36,14 @@ public class KnittingExpressionLanguageJavaValidator extends
 
 	@Check(NORMAL)
 	public void checkInstruction(Instruction instruction) {
-		com.knitml.core.model.directions.block.Instruction modelInstruction = (com.knitml.core.model.directions.block.Instruction) locator
-				.locateConverter(instruction).convert(instruction);
-		try {
-			createExpandedRows(modelInstruction);
-		} catch (InvalidStructureException ex) {
-			error(ex.getMessage(), null);
+		if (!instruction.isMerged()) {
+			com.knitml.core.model.directions.block.Instruction modelInstruction = (com.knitml.core.model.directions.block.Instruction) locator
+					.locateConverter(instruction).convert(instruction);
+			try {
+				createExpandedRows(modelInstruction);
+			} catch (InvalidStructureException ex) {
+				error(ex.getMessage(), null);
+			}
 		}
 	}
 
@@ -50,6 +53,8 @@ public class KnittingExpressionLanguageJavaValidator extends
 				.locateConverter(pattern).convert(pattern);
 		try {
 			testKnitPattern(modelPattern);
+		} catch (GenericKnittingEngineException ex) {
+			// fall through, as we can't really report helpfully on this error
 		} catch (KnittingEngineException ex) {
 			KnittingEngineException root = findRootKnittingEngineException(ex);
 			Integer repeatCount = null;
@@ -70,7 +75,8 @@ public class KnittingExpressionLanguageJavaValidator extends
 			default:
 				break;
 			}
-			StringBuilder message = new StringBuilder(startsWithVowel ? "An " : "A ");
+			StringBuilder message = new StringBuilder(startsWithVowel ? "An "
+					: "A ");
 			message.append(errorName);
 			message.append(" error occurred ");
 			if (root.getMessage() != null) {
@@ -91,8 +97,7 @@ public class KnittingExpressionLanguageJavaValidator extends
 		}
 	}
 
-	private void testKnitPattern(
-			com.knitml.core.model.Pattern pattern)
+	private void testKnitPattern(com.knitml.core.model.Pattern pattern)
 			throws KnittingEngineException {
 		ValidationProgram program = new ValidationProgram(true);
 		Parameters parameters = new Parameters();
@@ -103,7 +108,8 @@ public class KnittingExpressionLanguageJavaValidator extends
 			if (!(ex instanceof InvalidStructureException)) {
 				throw ex;
 			}
-			// else swallow the exception, assuming that another EValidator will pick it up somewhere
+			// else swallow the exception, assuming that another EValidator will
+			// pick it up somewhere
 		} catch (SAXException ex) {
 			// shouldn't happen as we're not using the patterns that throw this
 			// exception
