@@ -40,7 +40,7 @@
          </property>
          <property
                name="aboutText"
-               value="KnitML Pattern Editor&#x0A;&#x0A;Version: 0.2.0&#x0A;&#x0A;(c) Copyright KnitML contributors and others 2008, 2009.  All rights reserved.&#x0A;Visit http://www.knitml.com/&#x0A;&#x0A;This product includes software developed by&#x0A;the Eclipse Foundation (http://www.eclipse.org).&#x0A;&#x0A;This product includes software developed by&#x0A;the Apache Software Foundation (http://www.apache.org).&#x0A;&#x0A;This product includes software developed by the Spring Framework&#x0A;Project (http://www.springframework.org).">
+               value="KnitML Pattern Editor&#x0A;&#x0A;Version: 0.3.0&#x0A;&#x0A;(c) Copyright KnitML contributors and others 2008, 2009, 2010, 2011.  All rights reserved.&#x0A;Visit http://www.knitml.com/&#x0A;&#x0A;This product includes software developed by&#x0A;the Eclipse Foundation (http://www.eclipse.org).&#x0A;&#x0A;This product includes software developed by&#x0A;the Apache Software Foundation (http://www.apache.org).&#x0A;&#x0A;This product includes software developed by the Spring Framework&#x0A;Project (http://www.springframework.org).">
          </property>
          <property
                name="startupForegroundColor"
@@ -69,7 +69,7 @@
                   label="New">
                <command
                      commandId="com.knitml.gpec.commands.newKnitmlProjectWizard"
-                     icon="icons/alt_window_16.gif"
+                     icon="icons/window_16.png"
                      label="KnitML Project"
                      style="push">
                </command>

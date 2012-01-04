@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?pde version="3.4"?>
+<?pde version="3.5"?>
 
-<product name="KnitML Pattern Editor" id="com.knitml.gpec.product" application="com.knitml.gpec.application" version="0.2.1" useFeatures="false">
+<product name="KnitML Pattern Editor" id="com.knitml.gpec.product" application="com.knitml.gpec.application" version="0.3.0.M1" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="icons/about.gif"/>
       <text>
          KnitML Pattern Editor
 
-Version: 0.2.0
+Version: 0.3.0
 
-(c) Copyright KnitML contributors and others 2008, 2009.  All rights reserved.
+(c) Copyright KnitML contributors and others 2008, 2009, 2010, 2011.  All rights reserved.
 Visit http://www.knitml.com/
 
 This product includes software developed by
@@ -38,7 +38,7 @@ Project (http://www.springframework.org).
       startupProgressRect="332,275,225,15"
       startupMessageRect="332,252,225,20"
       startupForegroundColor="000000" />
-   <launcher name="knitmlEditor">
+   <launcher name="knitml-editor">
       <macosx icon="/com.knitml.gpec/icons/launch_icon.icns"/>
       <solaris/>
       <win useIco="true">
@@ -53,53 +53,84 @@ Project (http://www.springframework.org).
    </vm>
 
    <plugins>
+      <plugin id="ch.qos.logback.classic"/>
+      <plugin id="ch.qos.logback.core"/>
+      <plugin id="ch.qos.logback.slf4j" fragment="true"/>
+      <plugin id="com.google.collect"/>
+      <plugin id="com.google.guava"/>
+      <plugin id="com.google.inject"/>
       <plugin id="com.ibm.icu"/>
-      <plugin id="com.knitml.dependencies"/>
-      <plugin id="com.knitml.gpec"/>
-      <plugin id="com.knitml.gpec.help"/>
-      <plugin id="com.knitml.gpec.kel"/>
-      <plugin id="com.knitml.gpec.renderer.preferences"/>
-      <plugin id="com.knitml.gpec.renderer.preferences.operations"/>
-      <plugin id="com.knitml.libs"/>
-      <plugin id="com.knitml.logging.config" fragment="true"/>
-      <plugin id="com.knitml.renderer.service"/>
+      <plugin id="com.knitml.core" version="0.6.0.M1"/>
+      <plugin id="com.knitml.dependencies" version="0.6.0.M1"/>
+      <plugin id="com.knitml.dsl" version="0.3.0.M1"/>
+      <plugin id="com.knitml.dsl.converter" version="0.3.0.M1"/>
+      <plugin id="com.knitml.dsl.ui" version="0.3.0.M1"/>
+      <plugin id="com.knitml.el" version="0.6.0.M1"/>
+      <plugin id="com.knitml.engine" version="0.6.0.M1"/>
+      <plugin id="com.knitml.gpec" version="0.3.0.M1"/>
+      <plugin id="com.knitml.gpec.help" version="0.3.0.M1"/>
+      <plugin id="com.knitml.gpec.kel" version="0.3.0.M1"/>
+      <plugin id="com.knitml.gpec.renderer.preferences" version="0.3.0.M1"/>
+      <plugin id="com.knitml.gpec.renderer.preferences.operations" version="0.3.0.M1"/>
+      <plugin id="com.knitml.logging.config" version="0.3.0.M1" fragment="true"/>
+      <plugin id="com.knitml.renderer" version="0.6.0.M1"/>
+      <plugin id="com.knitml.renderer.service" version="0.6.0.M1"/>
+      <plugin id="com.knitml.validation" version="0.6.0.M1"/>
+      <plugin id="com.ning.async-http-client"/>
       <plugin id="com.springsource.org.aopalliance"/>
-      <plugin id="com.springsource.org.apache.log4j"/>
-      <plugin id="com.springsource.slf4j.api"/>
-      <plugin id="com.springsource.slf4j.log4j" fragment="true"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
-      <plugin id="org.apache.ant"/>
+      <plugin id="javax.xml"/>
+      <plugin id="log4j.over.slf4j" version="1.6.1"/>
+      <plugin id="org.antlr.runtime"/>
+      <plugin id="org.apache.commons.cli"/>
       <plugin id="org.apache.commons.el"/>
+      <plugin id="org.apache.commons.lang"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.jasper"/>
+      <plugin id="org.apache.log4j"/>
       <plugin id="org.apache.lucene"/>
       <plugin id="org.apache.lucene.analysis"/>
-      <plugin id="org.eclipse.ant.core"/>
+      <plugin id="org.apache.lucene.core"/>
+      <plugin id="org.apache.xerces"/>
+      <plugin id="org.apache.xml.resolver"/>
+      <plugin id="org.apache.xml.serializer"/>
+      <plugin id="org.codehaus.groovy.frameworkadapter" fragment="true"/>
+      <plugin id="org.eclipse.compare"/>
+      <plugin id="org.eclipse.compare.core"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
+      <plugin id="org.eclipse.core.databinding.observable"/>
+      <plugin id="org.eclipse.core.databinding.property"/>
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filebuffers"/>
       <plugin id="org.eclipse.core.filesystem"/>
+      <plugin id="org.eclipse.core.filesystem.aix.ppc" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.hpux.ia64_32" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.ppc" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
-      <plugin id="org.eclipse.core.net"/>
-      <plugin id="org.eclipse.core.net.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.net.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.resources"/>
-      <plugin id="org.eclipse.core.resources.compatibility" fragment="true"/>
       <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
+      <plugin id="org.eclipse.debug.core"/>
+      <plugin id="org.eclipse.debug.ui"/>
+      <plugin id="org.eclipse.emf.common"/>
+      <plugin id="org.eclipse.emf.common.ui"/>
+      <plugin id="org.eclipse.emf.ecore"/>
+      <plugin id="org.eclipse.emf.ecore.edit"/>
+      <plugin id="org.eclipse.emf.ecore.xmi"/>
+      <plugin id="org.eclipse.emf.edit"/>
+      <plugin id="org.eclipse.emf.edit.ui"/>
+      <plugin id="org.eclipse.emf.mwe.core"/>
+      <plugin id="org.eclipse.emf.mwe2.runtime"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.http.jetty"/>
@@ -107,38 +138,71 @@ Project (http://www.springframework.org).
       <plugin id="org.eclipse.equinox.http.servlet"/>
       <plugin id="org.eclipse.equinox.jsp.jasper"/>
       <plugin id="org.eclipse.equinox.jsp.jasper.registry"/>
+      <plugin id="org.eclipse.equinox.p2.core"/>
+      <plugin id="org.eclipse.equinox.p2.engine"/>
+      <plugin id="org.eclipse.equinox.p2.metadata"/>
+      <plugin id="org.eclipse.equinox.p2.metadata.repository"/>
+      <plugin id="org.eclipse.equinox.p2.repository"/>
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
       <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
       <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.equinox.security.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.help.base"/>
       <plugin id="org.eclipse.help.ui"/>
       <plugin id="org.eclipse.help.webapp"/>
+      <plugin id="org.eclipse.jdt.compiler.apt" fragment="true"/>
+      <plugin id="org.eclipse.jdt.compiler.tool" fragment="true"/>
+      <plugin id="org.eclipse.jdt.core"/>
+      <plugin id="org.eclipse.jdt.core.manipulation"/>
+      <plugin id="org.eclipse.jdt.debug"/>
+      <plugin id="org.eclipse.jdt.launching"/>
+      <plugin id="org.eclipse.jdt.ui"/>
+      <plugin id="org.eclipse.jem.util"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.jface.text"/>
+      <plugin id="org.eclipse.ltk.core.refactoring"/>
+      <plugin id="org.eclipse.ltk.ui.refactoring"/>
+      <plugin id="org.eclipse.m2e.archetype.common"/>
+      <plugin id="org.eclipse.m2e.core"/>
+      <plugin id="org.eclipse.m2e.core.ui"/>
+      <plugin id="org.eclipse.m2e.logback.appender" fragment="true"/>
+      <plugin id="org.eclipse.m2e.maven.indexer"/>
+      <plugin id="org.eclipse.m2e.maven.runtime"/>
+      <plugin id="org.eclipse.m2e.model.edit"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.osgi.util"/>
+      <plugin id="org.eclipse.search"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
+      <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.aix.ppc" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.aix.ppc64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
       <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.aix.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.motif.hpux.ia64_32" fragment="true"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.wpf.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.team.core"/>
+      <plugin id="org.eclipse.team.ui"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.carbon" fragment="true"/>
+      <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
+      <plugin id="org.eclipse.ui.console"/>
       <plugin id="org.eclipse.ui.editors"/>
       <plugin id="org.eclipse.ui.forms"/>
       <plugin id="org.eclipse.ui.ide"/>
-      <plugin id="org.eclipse.ui.intro"/>
       <plugin id="org.eclipse.ui.navigator"/>
       <plugin id="org.eclipse.ui.navigator.resources"/>
       <plugin id="org.eclipse.ui.views"/>
@@ -146,12 +210,36 @@ Project (http://www.springframework.org).
       <plugin id="org.eclipse.ui.win32" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
-      <plugin id="org.eclipse.update.configurator"/>
-      <plugin id="org.eclipse.update.core"/>
-      <plugin id="org.eclipse.update.core.linux" fragment="true"/>
-      <plugin id="org.eclipse.update.core.win32" fragment="true"/>
-      <plugin id="org.eclipse.update.ui"/>
-      <plugin id="org.mortbay.jetty"/>
+      <plugin id="org.eclipse.wst.common.core"/>
+      <plugin id="org.eclipse.wst.common.emf"/>
+      <plugin id="org.eclipse.wst.common.environment"/>
+      <plugin id="org.eclipse.wst.common.frameworks"/>
+      <plugin id="org.eclipse.wst.common.project.facet.core"/>
+      <plugin id="org.eclipse.wst.common.uriresolver"/>
+      <plugin id="org.eclipse.wst.sse.core"/>
+      <plugin id="org.eclipse.wst.validation"/>
+      <plugin id="org.eclipse.wst.xml.core"/>
+      <plugin id="org.eclipse.wst.xsd.core"/>
+      <plugin id="org.eclipse.xpand"/>
+      <plugin id="org.eclipse.xsd"/>
+      <plugin id="org.eclipse.xtend"/>
+      <plugin id="org.eclipse.xtext"/>
+      <plugin id="org.eclipse.xtext.builder"/>
+      <plugin id="org.eclipse.xtext.common.types"/>
+      <plugin id="org.eclipse.xtext.common.types.ui"/>
+      <plugin id="org.eclipse.xtext.logging" fragment="true"/>
+      <plugin id="org.eclipse.xtext.ui"/>
+      <plugin id="org.eclipse.xtext.ui.codetemplates"/>
+      <plugin id="org.eclipse.xtext.ui.codetemplates.ui"/>
+      <plugin id="org.eclipse.xtext.ui.shared"/>
+      <plugin id="org.eclipse.xtext.util"/>
+      <plugin id="org.eclipse.xtext.xbase.lib"/>
+      <plugin id="org.eclipse.xtext.xtend2.lib"/>
+      <plugin id="org.hamcrest.core"/>
+      <plugin id="org.jboss.netty"/>
+      <plugin id="org.jsr305"/>
+      <plugin id="org.junit"/>
+      <plugin id="org.slf4j.api"/>
       <plugin id="org.springframework.aop"/>
       <plugin id="org.springframework.beans"/>
       <plugin id="org.springframework.context"/>
@@ -161,5 +249,6 @@ Project (http://www.springframework.org).
    <features>
       <feature id="com.knitml.gpec.feature" version="1.0.0"/>
    </features>
+
 
 </product>

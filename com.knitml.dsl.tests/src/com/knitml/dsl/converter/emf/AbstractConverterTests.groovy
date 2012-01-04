@@ -27,8 +27,12 @@ abstract protected class AbstractConverterTests {
 
 	@Inject Injector injector
 	@Inject DomainModelConverterLocator<EObject> converterLocator
+	private static final String LINE_SEPARATOR = System.getProperty("line.separator")
 
 	protected Pattern convert (String input) {
+		if (!input.trim().startsWith("PARAGRAPHS")) {
+			input = "NO PARAGRAPHS" + LINE_SEPARATOR + LINE_SEPARATOR + input + LINE_SEPARATOR
+		}
 		XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet)
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, true)
 		Resource resource = resourceSet.createResource(URI.createURI("dummy:/dummy.kel2"))

@@ -40,7 +40,6 @@ class InstructionConverterTests extends AbstractConverterTests {
 		Instruction SunnyDayStitch "Sunny Day Stitch" (with key, round shape, 2 rounds):
 			Row: knit
 			Row: knit
-		
 		'''
 		((Instruction) pattern.directions.operations[0]).with {
 			assertThat it, instanceOf (Instruction)
@@ -58,8 +57,7 @@ class InstructionConverterTests extends AbstractConverterTests {
 	void instructionWithColonWithoutLineFeed() {
 		com.knitml.core.model.Pattern pattern = convert '''
 		Instruction one:
-			Row: knit
-		'''
+			Row: knit'''
 	}
 
 	@Test

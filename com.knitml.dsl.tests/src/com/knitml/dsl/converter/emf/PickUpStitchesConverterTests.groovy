@@ -7,7 +7,7 @@ import org.junit.Test
 
 import com.knitml.core.common.Wise
 import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.block.CastOn
+import com.knitml.core.model.directions.block.PickUpStitches
 import com.knitml.core.model.directions.inline.InlinePickUpStitches
 
 
@@ -34,6 +34,32 @@ class PickUpStitchesConverterTests extends AbstractConverterTests {
 			Row: pick up 10 sts pw with A
 		''' 
 		((InlinePickUpStitches) pattern.directions.operations[0].operations[0]).with {
+			assertThat it.numberOfTimes, is (10)
+			assertThat it.yarnIdRef, is ('A')
+			assertThat it.type, is (Wise.PURLWISE)
+		}
+	}
+	@Test
+	void pickUp10Sts() {
+		Pattern pattern = convert '''
+			Pick up 10 sts
+		''' 
+		((PickUpStitches) pattern.directions.operations[0]).with {
+			assertThat it.numberOfTimes, is (10)
+			assertThat it.yarnIdRef, is (null)
+			assertThat it.type, is (Wise.KNITWISE)
+		}
+	}
+	@Test
+	void pickUp10StsPurlwiseWithYarnA() {
+		Pattern pattern = convert '''
+			Pattern name: "Thing"
+			Description: "Thing 2"
+			Yarn: 50g of worsted weight yarn named A
+
+			Pick up 10 sts pw with A
+		''' 
+		((PickUpStitches) pattern.directions.operations[0]).with {
 			assertThat it.numberOfTimes, is (10)
 			assertThat it.yarnIdRef, is ('A')
 			assertThat it.type, is (Wise.PURLWISE)
