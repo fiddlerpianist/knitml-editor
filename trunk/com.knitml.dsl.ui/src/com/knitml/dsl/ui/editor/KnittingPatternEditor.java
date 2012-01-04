@@ -2,10 +2,12 @@ package com.knitml.dsl.ui.editor;
 
 import java.io.IOException;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.ErrorDialog;
@@ -58,7 +60,7 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 	private IResourceForEditorInputFactory resourceFactory;
 	@Inject
 	private Injector injector;
-	
+
 	private IWorkspace workspace;
 	private PatternViewControlContainer patternViewContainer;
 
@@ -73,7 +75,7 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 		workspace.addResourceChangeListener(this);
 		this.workspace = workspace;
 	}
-	
+
 	/**
 	 * Only overridden because the superclass made this method (and the
 	 * container variable) private instead of protected. In our case, we want
@@ -98,7 +100,7 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 		return newContainer;
 	}
 
-	protected void createKelpPage() {
+	protected void createKel2Page() {
 		try {
 			int index = addPage(editor, getEditorInput());
 			setPageText(index, "Code View");
@@ -111,7 +113,8 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 
 	protected void createPatternPage() {
 		int index = addPage(null);
-		patternViewContainer = new PatternViewControlContainer(getContainer(), editor.getResource());
+		patternViewContainer = new PatternViewControlContainer(getContainer(),
+				editor.getResource());
 		injector.injectMembers(patternViewContainer);
 		setPageText(index, "Pattern View");
 	}
@@ -120,7 +123,7 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 	 * Creates the pages of the multi-page editor.
 	 */
 	protected void createPages() {
-		createKelpPage();
+		createKel2Page();
 		createPatternPage();
 	}
 
@@ -206,22 +209,33 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 	 */
 	protected void pageChange(int newPageIndex) {
 		if (newPageIndex == PATTERN_PAGE) {
-			com.knitml.core.model.Pattern pattern = convertKelp();
+			com.knitml.core.model.Pattern pattern = convertFromEmf();
 			initializePatternViewControl();
-			patternViewContainer.render(pattern);
+			com.knitml.core.model.Pattern processedPattern = patternViewContainer
+					.render(pattern);
+			if (processedPattern != null) {
+				IResource resource = (IResource) getEditorInput().getAdapter(
+						IResource.class);
+				Job job = new WriteKnitMLJob(resource, processedPattern);
+				injector.injectMembers(job);
+				job.setRule(resource != null ? resource.getParent() : null);
+				job.schedule();
+			}
 		}
 		super.pageChange(newPageIndex);
 	}
 
-	protected com.knitml.core.model.Pattern convertKelp() {
-		Resource emfResource = resourceFactory.createResource(editor.getEditorInput());
+	protected com.knitml.core.model.Pattern convertFromEmf() {
+		Resource emfResource = resourceFactory.createResource(editor
+				.getEditorInput());
 		try {
 			emfResource.load(null);
 		} catch (IOException ex) {
 			throw new ConversionException(ex);
 		}
 		Pattern emfModel = (Pattern) emfResource.getContents().get(0);
-		return (com.knitml.core.model.Pattern) converterLocator.locateConverter(emfModel).convert(emfModel);
+		return (com.knitml.core.model.Pattern) converterLocator
+				.locateConverter(emfModel).convert(emfModel);
 	}
 
 	public void resourceChanged(final IResourceChangeEvent event) {
