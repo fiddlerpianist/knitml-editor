@@ -9,12 +9,13 @@ import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.knitml.core.converter.DomainModelConverterLocator
+import com.knitml.core.model.Identifiable
 import com.knitml.core.model.directions.Operation
-import com.knitml.core.model.directions.block.Instruction
 import com.knitml.core.model.directions.inline.InlineInstruction
 import com.knitml.core.model.directions.inline.Repeat
 import com.knitml.core.model.directions.inline.Repeat.Until
 import com.knitml.core.model.header.Needle
+import com.knitml.core.model.header.StitchHolder
 import com.knitml.core.model.header.Yarn
 import com.knitml.dsl.converter.OperationContainer
 import com.knitml.dsl.knittingExpressionLanguage.RepeatSpec
@@ -27,11 +28,12 @@ public class EmfHelper {
 	@Inject
 	DomainModelConverterLocator<EObject> locator
 
-	private Map<String, Instruction> instructionMap = [:]
+	private Map<String, Identifiable> instructionMap = [:]
 	private Map<String, InlineInstruction> inlineInstructionMap = [:]
 	private Map<String, Needle> needleMap = [:]
 	private Map<String, Yarn> yarnMap = [:]
-
+	private Map<String, StitchHolder> stitchHolderMap = [:]
+	
 	private Map<Operation, EObject> operationToEmfTraceMap = new HashMap<Operation, EObject>(500)
 
 	public void reset() {
@@ -40,14 +42,15 @@ public class EmfHelper {
 		inlineInstructionMap = [:]
 		needleMap = [:]
 		yarnMap = [:]
+		stitchHolderMap = [:]
 		operationToEmfTraceMap = new HashMap<Operation, EObject>(500)
 	}
 
-	void addInstruction(Instruction modelInstruction) {
+	void addInstruction(Identifiable modelInstruction) {
 		instructionMap.put(modelInstruction.id, modelInstruction)
 	}
 
-	Instruction getInstruction(String id) {
+	Identifiable getInstruction(String id) {
 		instructionMap.get(id)
 	}
 
@@ -75,10 +78,20 @@ public class EmfHelper {
 		}
 	}
 
+	StitchHolder getStitchHolder(String id) {
+		stitchHolderMap.get(id)
+	}
+
+	void addStitchHolder(StitchHolder modelStitchHolder) {
+		if (modelStitchHolder.id != null) {
+			stitchHolderMap.put(modelStitchHolder.id, modelStitchHolder)
+		}
+	}
+
 	Yarn getYarn(String id) {
 		yarnMap.get(id)
 	}
-
+	
 	@Override
 	Repeat processRepeatSpec(com.knitml.dsl.knittingExpressionLanguage.RepeatSpec emfRepeatSpec) {
 		def repeat = new Repeat()

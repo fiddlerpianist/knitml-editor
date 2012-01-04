@@ -22,9 +22,9 @@ public class BindOffConverter implements DomainModelConverter<com.knitml.dsl.kni
 			wise = Wise.PURLWISE
 		}
 		if (emfBindOff.all) {
-			return new BindOffAll(wise, emfBindOff.yarnRef, true)
+			return new BindOffAll(wise, emfBindOff.yarnRef?.name, true)
 		} else {
-			return new BindOff(emfBindOff.value, wise, emfBindOff.yarnRef)
+			return new BindOff(emfBindOff.value, wise, emfBindOff.yarnRef?.name)
 		}
 	}
 }
