@@ -1,5 +1,13 @@
 package com.knitml.renderer.service.impl;
 
+import java.io.IOException;
+import java.io.Writer;
+
+import org.jibx.runtime.BindingDirectory;
+import org.jibx.runtime.IBindingFactory;
+import org.jibx.runtime.IMarshallingContext;
+import org.jibx.runtime.JiBXException;
+
 import com.knitml.core.common.Parameters;
 import com.knitml.core.model.Pattern;
 import com.knitml.engine.common.KnittingEngineException;
@@ -25,6 +33,28 @@ public class RenderingServiceImpl implements RenderingService {
 		} catch (Exception ex) {
 			throw new RenderingException(ex);
 		}
+	}
+
+	public void serializePattern(Pattern pattern, Writer writer)
+			throws IOException {
+		if (writer != null) {
+			try {
+				IBindingFactory factory = BindingDirectory
+						.getFactory(Pattern.class);
+				IMarshallingContext mctx = factory.createMarshallingContext();
+				mctx.setOutput(writer);
+				mctx.getXmlWriter().setIndentSpaces(2, null, ' ');
+				mctx.getXmlWriter().writeXMLDecl("1.0", "UTF-8", null); //$NON-NLS-1$ //$NON-NLS-2$
+				mctx.marshalDocument(pattern);
+			} catch (JiBXException ex) {
+				throw new RuntimeException(ex);
+			} finally {
+				if (writer != null) {
+					writer.close();
+				}
+			}
+		}
+		
 	}
 	
 }

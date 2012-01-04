@@ -272,5 +272,31 @@ class HeaderConverterTests extends AbstractConverterTests {
 		assertThat pattern.supplies.yarnTypes.size(), is (1)
 		assertThat pattern.supplies.yarns.size(), is (1)
 	}
+	
+	@Test
+	void stitchHolders() {
+		com.knitml.core.model.Pattern pattern = convert '''
+		Pattern name: "Thing"
+		Description: "Thing 2"
+		Stitch Holders:
+			Holder-A
+			Holder-B "Holder B" (with key)
+			Holder-C (with key 'HolderC')
+
+		Row: knit
+		'''
+		assertThat pattern.supplies, not (null)
+		assertThat pattern.supplies.stitchHolders.size(), is (3)
+		assertThat pattern.supplies.stitchHolders[0].id, is ('Holder-A')
+		assertThat pattern.supplies.stitchHolders[0].label, is (null)
+		assertThat pattern.supplies.stitchHolders[0].messageKey, is (null)
+		assertThat pattern.supplies.stitchHolders[1].id, is ('Holder-B')
+		assertThat pattern.supplies.stitchHolders[1].label, is ('Holder B')
+		assertThat pattern.supplies.stitchHolders[1].messageKey, is ('stitch-holder.Holder-B')
+		assertThat pattern.supplies.stitchHolders[2].id, is ('Holder-C')
+		assertThat pattern.supplies.stitchHolders[2].label, is (null)
+		assertThat pattern.supplies.stitchHolders[2].messageKey, is ('HolderC')
+	}
+
 
 }

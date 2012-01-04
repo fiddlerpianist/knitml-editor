@@ -28,6 +28,10 @@ class BindOffConverterTests extends AbstractConverterTests {
 	@Test
 	void bindOffAllStsWithA() {
 		Pattern pattern = convert '''
+			Pattern name: "Thing"
+			Description: "Thing 2"
+			Yarn: 50g of worsted weight yarn named A
+
 			Row 1: knit
 			Next Row: bind off all sts with A
 		''' 
@@ -76,6 +80,10 @@ class BindOffConverterTests extends AbstractConverterTests {
 	@Test
 	void BO3stWithA() {
 		Pattern pattern = convert '''
+			Pattern name: "Thing"
+			Description: "Thing 2"
+			Yarn: 50g of worsted weight yarn named A
+
 			Row 1: knit
 			Next Row: BO 3 sts with A 
 		''' 

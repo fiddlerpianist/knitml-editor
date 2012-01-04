@@ -10,6 +10,7 @@ import com.knitml.core.model.directions.block.DeclareFlatKnitting
 import com.knitml.core.model.directions.block.DeclareRoundKnitting
 import com.knitml.core.model.directions.block.JoinInRound
 import com.knitml.core.model.directions.inline.DesignateEndOfRow
+import com.knitml.core.model.directions.inline.NoStitch
 import com.knitml.core.model.directions.inline.PlaceMarker
 import com.knitml.core.model.directions.inline.RemoveMarker
 
@@ -78,5 +79,17 @@ class VerySimpleConverterTests extends AbstractConverterTests {
 	void endOfRound() {
 		Pattern pattern = convert 'Row: end of round'
 		assertThat pattern.directions.operations[0].operations[0], instanceOf (DesignateEndOfRow)
+	}
+	@Test
+	void noStitch() {
+		Pattern pattern = convert 'Row: ns'
+		assertThat pattern.directions.operations[0].operations[0], instanceOf (NoStitch)
+		assertThat pattern.directions.operations[0].operations[0].numberOfStitches, is (null)
+	}
+	@Test
+	void noStitchWithValue() {
+		Pattern pattern = convert 'Row: ns10'
+		assertThat pattern.directions.operations[0].operations[0], instanceOf (NoStitch)
+		assertThat pattern.directions.operations[0].operations[0].numberOfStitches, is (10)
 	}
 }

@@ -10,6 +10,7 @@ import com.knitml.core.common.Wise
 import com.knitml.core.common.YarnPosition
 import com.knitml.core.model.Pattern
 import com.knitml.core.model.directions.inline.Slip
+import com.knitml.core.model.directions.inline.SlipToStitchHolder;
 
 class SlipConverterTests extends AbstractConverterTests {
 
@@ -81,6 +82,22 @@ class SlipConverterTests extends AbstractConverterTests {
 			assertThat type, is (Wise.PURLWISE)
 			assertThat yarnPosition, is (null)
 			assertThat direction, is (SlipDirection.FORWARD)
+		}
+	}
+	@Test
+	void slNext10StsToHolder() {
+		Pattern pattern = convert '''
+			Pattern name: "Thing"
+			Description: "Thing 2"
+			Stitch Holders:
+				Holder-A "Holder A"
+
+			Row: slip next 10 sts to Holder-A
+		'''
+		((SlipToStitchHolder) pattern.directions.operations[0].operations[0]).with {
+			assertThat numberOfStitches, is (10)
+			assertThat stitchHolder.id, is ('Holder-A')
+			assertThat stitchHolder.label, is ('Holder A')
 		}
 	}
 }
