@@ -2,11 +2,9 @@
 #labels Phase-Support
 
 = Introduction =
-
 Here is a crash course tutorial for the new editor.
 
 = Install an Example =
-
 From the File menu, select "New..." which will pop up a dialog box (it might take a moment). Click on the + sign next to the Examples folder in the list, select the example you want to look at, click the Next button, then Finish. If you don't already have a pattern open, the example pattern will open up in the editor.
 
 The current examples are:
@@ -18,7 +16,45 @@ The current examples are:
   * a sweater (Banff by Jenna Wilson)
 
 = Working with Patterns =
+== The Outline ==
+== Formatting ==
+Control-Shift-F will format the pattern with proper indentation and spacing.
+== Errors ==
+If the computer can't understand your pattern, you'll get one or more red X marks with a circle in them on the left margin.
 
-To format the pattern, use Control-Shift-F will automatically indent the entire pattern. This can be helpful if you're getting errors a
+== Other controls ==
+Control-F: find / replace
+Control-C: copy
+Control-X: cut
+Control-V: paste
+
+= Elements of the Pattern =
+== The Header ==
+Each pattern has a header section which contains information such as the name of the pattern, a description, and the author. It also contains information about what is needed to knit the pattern (needles, yarn, stitch holders, etc.)
+
+== The Directions ==
+=== Starting Out ===
+Most patterns start with a cast on. For instance, to start with 20 stitches, you would type:
+
+`Cast on 20 sts`
+
+If you use more than one needle in the pattern, however, you might first need to indicate which needles to start with:
+
+`Use Needle-One`
+
+If it's obvious to the knitter which needle to use and you are just telling the computer (remember, computers are incredibly dumb), you can put it in parentheses:
+
+`(Use Needle-One)`
+
+When you use the two next to each other:
+{{{
+(Use Needle-One)
+Cast on 20 sts
+}}}
+this will look something like "Using Needle One, cast on 20 stitches" when the final (i.e., rendered) pattern is produced.
+
+
+=== Rows ===
+
 
 If you're not sure what to type next, try Control-Space. 
