@@ -1,0 +1,24 @@
+#summary Tutorial of the Editor
+#labels Phase-Support
+
+= Introduction =
+
+Here is a crash course tutorial for the new editor.
+
+= Install an Example =
+
+From the File menu, select "New..." which will pop up a dialog box (it might take a moment). Click on the + sign next to the Examples folder in the list, select the example you want to look at, click the Next button, then Finish. If you don't already have a pattern open, the example pattern will open up in the editor.
+
+The current examples are:
+  * a simple pattern
+  * a stitch sampler
+  * a basic sock
+  * an advanced sock
+  * a lace shawl (Foliage by Emilee Mooney)
+  * a sweater (Banff by Jenna Wilson)
+
+= Working with Patterns =
+
+To format the pattern, use Control-Shift-F will automatically indent the entire pattern. This can be helpful if you're getting errors a
+
+If you're not sure what to type next, try Control-Space. 
