@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KnitML Renderer Preferences Operations Plug-in
+Bundle-SymbolicName: com.knitml.gpec.renderer.preferences.operations;singleton:=true
+Bundle-Version: 0.3.0.M1
+Bundle-Activator: com.knitml.gpec.renderer.preferences.operations.Activator
+Bundle-Vendor: KnitML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: com.knitml.gpec.renderer.preferences.listener;version="0.2.2",
+ com.knitml.gpec.renderer.preferences.service;version="0.2.2",
+ com.knitml.renderer.context;version="0.6.0",
+ org.springframework.context;version="2.5.6",
+ org.springframework.context.support;version="2.5.6",
+ org.springframework.core.io;version="2.5.6"
+Bundle-ActivationPolicy: lazy
