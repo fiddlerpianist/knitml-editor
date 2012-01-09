@@ -191,6 +191,29 @@ Instruction Sunny-Day (20 rows):
 }}}
 As a pattern designer, you want to be careful about preserving readability for your users, so use such complex constructions carefully and judiciously.
 
+You can repeat previously defined instructions:
+{{{
+Instruction Stockinette "St st":
+	Row: knit to end
+	Row: purl to end
+
+Repeat Stockinette 3 more times
+}}}
+{{{
+Instruction Stockinette "St st":
+	Row: knit to end
+	Row: purl to end
+
+Repeat Stockinette for 4.5 in
+}}}
+{{{
+Instruction Decreasing-Stockinette:
+	Row: k2tog, knit to end
+	Row: p2tog, purl to end
+
+Repeat Decreasing-Stockinette until 10 st remain
+}}}
+
 ==== Special Consideration for Instructions ====
 Instructions are terminated *by a blank line*. Rows 1 and 2 are part of the Stockinette instruction, but row 3 is not.
 {{{
