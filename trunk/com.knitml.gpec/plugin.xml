@@ -65,15 +65,11 @@
          <menu
                id="com.knitml.gpec.application.file"
                label="File">
-            <menu
-                  commandId="org.eclipse.ui.file.newQuickMenu"
-                  id="com.knitml.gpec.application.file.new"
-                  label="New">
-               <separator
-                     name="additions"
-                     visible="false">
-               </separator>
-            </menu>
+            <command
+                  commandId="org.eclipse.ui.newWizard"
+                  label="New..."
+                  style="push">
+            </command>
             <separator
                   name="beforeClose"
                   visible="true">
