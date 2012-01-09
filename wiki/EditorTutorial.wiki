@@ -2,7 +2,7 @@
 #labels Phase-Support
 
 = Introduction =
-Here is a crash course tutorial for the new editor.
+Here is a crash course tutorial for writing patterns in the KnitML Pattern Editor.
 
 = Install an Example =
 From the File menu, select "New..." which will pop up a dialog box (it might take a moment). Click on the + sign next to the Examples folder in the list, select the example you want to look at, click the Next button, then Finish. If you don't already have a pattern open, the example pattern will open in the editor.
@@ -19,15 +19,21 @@ The current examples are:
 == The Outline ==
 == Formatting ==
 Control-Shift-F will format the pattern with proper indentation and spacing.
+== Suggestions ==
+If you're not sure what to type next, try typing Control-Space anywhere in the pattern. This will give you suggestions 
+
 == Errors ==
-If the computer can't understand your pattern, you'll get one or more red X marks with a circle in them on the left margin. If you mouse over this error, 
+If the computer can't understand your pattern, you'll get one or more red X marks with a circle in them on the left margin. If you move your mouse over one of these marks, a little bubble will pop up with description of the error. If a light bulb appears underneath the red X, the editor has some suggestions for fixing the error.
+
+Some errors, such as structural grammar errors, can occur as you type. Some errors (such as errors that occur when test knitting the pattern) occur only when you save the pattern.
 
 == Other controls ==
 These are common editor controls that work in the editor:
-Control-F: find / replace
-Control-C: copy
-Control-X: cut
-Control-V: paste
+Control-S: save the pattern
+Control-F: find / replace text
+Control-C: copy text
+Control-X: cut text
+Control-V: paste text
 Right click (a.k.a. secondary click): pop-up menu with additional options
 
 
@@ -70,11 +76,22 @@ Cast on 20 sts
 }}}
 this will look something like "Using Needle One, cast on 20 stitches" when the final (i.e., rendered) pattern is produced.
 
-
 === Rows ===
+Directions which describe how to work stitches occur within a row.
+{{{
+Row 1: knit to end
+Row 2: knit to end
+Row 3: repeat [k2, p2] to end
+Row 4: repeat [k2, p2] to 2 before end, p2
+}}}
+
+You can define short rows:
+{{{
+Short Row: k10, turn
+Short Row: k10
+}}}
 
 
+Most directions in a knitting pattern are centered around where the working yarn is relative to the needles. 
 === Instructions ===
 An instruction is a group of rows that are meant to be worked together. By 
-
-If you're not sure what to type next, try Control-Space. 
