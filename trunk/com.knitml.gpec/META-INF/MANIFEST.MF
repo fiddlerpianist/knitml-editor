@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: KnitML GPEC Plug-in
+Bundle-Name: KnitML Pattern Editor Plug-in
 Bundle-SymbolicName: com.knitml.gpec;singleton:=true
 Bundle-Version: 0.3.0.M1
 Require-Bundle: org.eclipse.core.runtime,
@@ -8,20 +8,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.ui.ide,
  org.eclipse.ui.navigator,
- org.eclipse.ui.navigator.resources,
- com.knitml.core,
- com.knitml.dependencies,
- com.knitml.dsl,
- com.knitml.dsl.converter,
- com.knitml.dsl.ui,
- com.knitml.el,
- com.knitml.engine,
- com.knitml.gpec.help,
- com.knitml.gpec.kel,
- com.knitml.gpec.renderer.preferences,
- com.knitml.gpec.renderer.preferences.operations,
- com.knitml.renderer,
- com.knitml.renderer.service,
- com.knitml.validation
+ org.eclipse.ui.navigator.resources
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: KnitML
+Export-Package: com.knitml.gpec.builder
