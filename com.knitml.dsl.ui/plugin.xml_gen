@@ -192,18 +192,6 @@
             class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
-
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="org.eclipse.xtext.projectwiz"
-            class="com.knitml.dsl.ui.KnittingExpressionLanguageExecutableExtensionFactory:com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectWizard"
-            id="com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectWizard"
-            name="KnittingExpressionLanguage Project"
-            project="true">
-      </wizard>
-   </extension>
-
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
