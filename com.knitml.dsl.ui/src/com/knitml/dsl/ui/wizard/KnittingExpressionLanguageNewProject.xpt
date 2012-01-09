@@ -2,27 +2,14 @@
 
 «DEFINE main FOR KnittingExpressionLanguageProjectInfo»
 «EXPAND model FOR this»
-«EXPAND workflow FOR this»
 «ENDDEFINE»
 
 «DEFINE model FOR KnittingExpressionLanguageProjectInfo»
-«FILE "src/model/Model.kel2"-»
-/*
- * This is an example model
- */
-Hello Xtext!
+«FILE this.projectName + ".kel2"-»
+-- Here is a sample
+-- Use Ctrl-Space for suggestions
+Cast on 8 sts
+Row 1: knit to end
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE workflow FOR KnittingExpressionLanguageProjectInfo»
-«FILE "src/Generator.mwe2"-»
-module Generator
-
-var targetDir = "src-gen"
-var modelPath = "src/model"
-
-Workflow {
-	component = @workflow.KnittingExpressionLanguageGenerator auto-inject {}
-}
-«ENDFILE»
-«ENDDEFINE»
