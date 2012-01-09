@@ -60,23 +60,23 @@ Needles:
 
 }}}
 
-The header is completely optional, though if you need to specify yarn or needles used later in the pattern, they must be put in the header. If the header is present, the pattern name and description (in that order) are required.
+The header is optional, but if you need to specify yarn or needles used later in the pattern, they must be put in the header. If the header is present, the pattern name and description (in that order) are required.
 
 == The Directions ==
-=== Starting Out ===
-Most patterns start with a cast on of some sort. For instance, to cast on 20 stitches, you would type:
+=== Casting On ===
+Most patterns start with a cast on. For To cast on 20 stitches, for example, you would type:
 {{{
 Cast on 20 sts
 }}}
-If you use more than one needle in the pattern, however, you might first need to indicate which needles to start with:
+If you use more than one needle in the pattern, you first need to indicate which needles to start with:
 {{{
 Use Needle-One
 }}}
-If it's obvious to the knitter which needle to use and you are just telling the computer (remember, computers are incredibly dumb), you can put it in parentheses:
+If it's obvious to the knitter which needle to use and you are just telling the computer (computers are incredibly unintelligent, after all), you can put it in parentheses:
 {{{
 (Use Needle-One)
 }}}
-When you use the two next to each other:
+When you use the two directions next to each other:
 {{{
 (Use Needle-One)
 Cast on 20 sts
