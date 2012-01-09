@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
 <plugin>
 <extension
          id="application"
@@ -40,7 +42,7 @@
          </property>
          <property
                name="aboutText"
-               value="KnitML Pattern Editor&#x0A;&#x0A;Version: 0.3.0&#x0A;&#x0A;(c) Copyright KnitML contributors and others 2008, 2009, 2010, 2011.  All rights reserved.&#x0A;Visit http://www.knitml.com/&#x0A;&#x0A;This product includes software developed by&#x0A;the Eclipse Foundation (http://www.eclipse.org).&#x0A;&#x0A;This product includes software developed by&#x0A;the Apache Software Foundation (http://www.apache.org).&#x0A;&#x0A;This product includes software developed by the Spring Framework&#x0A;Project (http://www.springframework.org).">
+               value="KnitML Pattern Editor&#x0A;&#x0A;Version: 0.3.0.M1&#x0A;&#x0A;(c) Copyright KnitML contributors and others 2008, 2009, 2010, 2011, 2012.  All rights reserved.&#x0A;Visit http://www.knitml.com/&#x0A;&#x0A;This product includes software developed by&#x0A;the Eclipse Foundation (http://www.eclipse.org).&#x0A;&#x0A;This product includes software developed by&#x0A;the Apache Software Foundation (http://www.apache.org).&#x0A;&#x0A;This product includes software developed by the Spring Framework&#x0A;Project (http://www.springframework.org).">
          </property>
          <property
                name="startupForegroundColor"
@@ -67,12 +69,6 @@
                   commandId="org.eclipse.ui.file.newQuickMenu"
                   id="com.knitml.gpec.application.file.new"
                   label="New">
-               <command
-                     commandId="com.knitml.gpec.commands.newKnitmlProjectWizard"
-                     icon="icons/window_16.png"
-                     label="KnitML Project"
-                     style="push">
-               </command>
                <separator
                      name="additions"
                      visible="false">
@@ -180,6 +176,71 @@
                   tooltip="Exit the application">
             </command>
          </menu>
+         <menu
+               id="com.knitml.gpec.application.edit"
+               label="Edit">
+            <command
+                  commandId="org.eclipse.ui.edit.undo"
+                  label="Undo"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.redo"
+                  label="Redo"
+                  style="push">
+            </command>
+            <separator
+                  name="com.knitml.gpec.application.edit.separator1"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.edit.cut"
+                  label="Cut"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.copy"
+                  label="Copy"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.paste"
+                  label="Paste"
+                  style="push">
+            </command>
+            <separator
+                  name="com.knitml.gpec.application.edit.separator2"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.edit.delete"
+                  label="Delete"
+                  style="push">
+            </command>
+            <command
+                  commandId="org.eclipse.ui.edit.selectAll"
+                  label="Select All"
+                  style="push">
+            </command>
+            <separator
+                  name="com.knitml.gpec.application.edit.separator3"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.edit.findReplace"
+                  label="Find/Replace..."
+                  style="push">
+            </command>
+            <separator
+                  name="com.knitml.gpec.application.edit.separator4"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="org.eclipse.ui.edit.addBookmark"
+                  label="Add Bookmark..."
+                  style="push">
+            </command>
+         </menu>
          <separator
                name="additions"
                visible="false">
@@ -239,7 +300,7 @@
             </contentExtension>
          </includes>
       </viewerContentBinding>
-       <viewerActionBinding
+      <viewerActionBinding
             viewerId="com.knitml.gpec.navigatorView">
          <includes>
             <actionExtension
@@ -280,26 +341,6 @@
                visible="true">
          </view>
       </perspectiveExtension>
-   </extension>
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <category
-            id="com.knitml.gpec.knitml"
-            name="KnitML">
-      </category>
-      <wizard
-            canFinishEarly="false"
-            category="com.knitml.gpec.knitml"
-            class="com.knitml.gpec.wizards.KnitmlProjectWizard"
-            hasPages="true"
-            id="com.knitml.gpec.KnitmlProjectWizard"
-            name="KnitML Project"
-            preferredPerspectives="com.knitml.gpec.perspective"
-            project="true">
-      </wizard>
-      <primaryWizard
-            id="com.knitml.gpec.KnitmlProjectWizard">
-      </primaryWizard> 
    </extension>
    <extension
          id="knitmlBuilder"
@@ -351,6 +392,7 @@
 	         </enablement>
 		</actionProvider> 
 	</extension>
+      <!--
    <extension
          point="org.eclipse.ui.commands">
       <category
@@ -364,5 +406,6 @@
             id="com.knitml.gpec.commands.newKnitmlProjectWizard"
             name="KnitML Project">
       </command>
-   </extension>on>
+   </extension>
+      -->
 </plugin>
