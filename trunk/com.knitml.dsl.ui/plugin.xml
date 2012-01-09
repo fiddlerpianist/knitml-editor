@@ -105,7 +105,7 @@
 	<extension point="org.eclipse.ui.handlers">
 		<handler
 			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
-			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+			commandId="org.eclipse.ui.newWizard">
 			<activeWhen>
 				<reference definitionId="com.knitml.dsl.KnittingExpressionLanguage.Editor.opened">
 				</reference>
@@ -164,12 +164,15 @@
 		</markerResolutionGenerator>
 	</extension>
 
+	<!-- Wizards -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard category="org.eclipse.xtext.projectwiz"
-			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectWizard"
-			id="com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectWizard"
-			name="KnittingExpressionLanguage Project" project="true">
+			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectAndPatternWizard"
+			id="com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectAndPatternWizard"
+			name="Knitting Project" project="true" icon="icons/kel_file_type.gif">
 		</wizard>
+		<primaryWizard id="com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectAndPatternWizard">
+		</primaryWizard>
 	</extension>
 
 	<!-- Rename Refactoring -->
@@ -215,7 +218,7 @@
 		<viewer
 			id="com.knitml.dsl.KnittingExpressionLanguage.compare.contentMergeViewers"
 			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-			extensions="kel2" label="KnittingExpressionLanguage Compare">
+			extensions="kel2" label="Knitting Expression Language Compare">
 		</viewer>
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
@@ -225,5 +228,58 @@
 			extensions="kel2">
 		</provider>
 	</extension>
+
+<!-- menu contributions and things -->
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="com.knitml.gpec.application.render"
+               label="Render">
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:common.new.menu?before=top">
+         <command
+               commandId="com.knitml.dsl.ui.commands.newProjectWizard"
+               icon="icons/kel_file_type.gif"
+               label="Knitting Project"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+<!--   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="com.knitml.gpec.commands.category"
+            defaultHandler="com.knitml.dsl.ui.handlers.NewKelFileWizardHandler"
+            description="Knitting Pattern"
+            id="com.knitml.dsl.ui.commands.newKelFileWizard"
+            name="Knitting Pattern">
+      </command>
+   </extension>
+-->
+
+   <extension point="org.eclipse.ui.commands">
+	      <command description="Creates a new knitting project with pattern"
+				 id="com.knitml.dsl.ui.commands.newProjectWizard" name="Knitting Project"
+				 defaultHandler="com.knitml.dsl.ui.wizard.NewKnittingProjectWizardHandler">
+	 	</command>
+	</extension>
+	
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:com.knitml.gpec.application.file.new?before=additions">
+         <command
+               commandId="com.knitml.dsl.ui.commands.newProjectWizard"
+               icon="icons/kel_file_type.gif"
+               label="Knitting Project"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+
 
 </plugin>
