@@ -118,19 +118,23 @@ Workflow {
             fragment = junit.Junit4Fragment {}
 
             // project wizard (optional)
-             fragment = projectWizard.SimpleProjectWizardFragment {
-                  generatorProjectName = "${projectName}"
-                  modelFileExtension = file.extensions
-             }
+//            fragment = projectWizard.SimpleProjectWizardFragment {
+//                  generatorProjectName = "Knitting"
+//                  modelFileExtension = file.extensions
+//                  pluginProject = false
+//             }
 
-            // provides the necessary bindings for java types integration
-            fragment = types.TypesGeneratorFragment {}
+// remove JDT dependency
+//            // provides the necessary bindings for java types integration
+//            fragment = types.TypesGeneratorFragment {}
 
-            // generates the required bindings only if the grammar inherits from Xbase
-            fragment = xbase.XbaseGeneratorFragment {}
+// remove JDT dependency
+//            // generates the required bindings only if the grammar inherits from Xbase
+//            fragment = xbase.XbaseGeneratorFragment {}
 
-            // provides a preference page for template proposals
-            fragment = templates.CodetemplatesGeneratorFragment {}
+// remove JDT dependency
+//            // provides a preference page for template proposals
+//            fragment = templates.CodetemplatesGeneratorFragment {}
 
             // rename refactoring
             fragment = refactoring.RefactorElementNameFragment {}
