@@ -1,6 +1,6 @@
 #summary Tutorial of the Editor
 #labels Phase-Support
-#sidebar TableOfContents
+<wiki:toc max_depth="3" />
 
 = Introduction =
 Here is a crash course tutorial for writing patterns in the KnitML Pattern Editor.
@@ -17,28 +17,32 @@ The current examples are:
   * a sweater (Banff by Jenna Wilson)
 
 = Working with Patterns =
-== The Outline ==
+NOTE: when this guide describes control sequences (such as Control-Shift-F), on Macintosh the "control" key is the "Command" key.
+
+== Folding ==
+Each pattern has an internal structural outline. Because of this, it understands how to group certain elements defined in your pattern. You can fold up sections you're not interested in viewing by clicking on the + / - icons (with the little circles around them) on the left side of the pattern.
+
 == Formatting ==
-Control-Shift-F will format the pattern with proper indentation and spacing.
+Control-Shift-F will format the pattern with indentation and spacing which reflects the pattern's structure.
+
 == Suggestions ==
-If you're not sure what to type next, try typing Control-Space anywhere in the pattern. This will give you suggestions 
+If you're not sure what to type next, try typing Control-Space anywhere in the pattern. This will give you (hopefully) appropriate suggestions where your cursor is located. Keep in mind this is an area of development, so many of the suggestions may not be optimized yet.
 
 == Errors ==
-If the computer can't understand your pattern, you'll get one or more red X marks with a circle in them on the left margin. If you move your mouse over one of these marks, a little bubble will pop up with description of the error. If a light bulb appears underneath the red X, the editor has some suggestions for fixing the error.
+If the computer can't understand the pattern, you'll get one or more red X marks with a circle in them down the left side. If you move your mouse over one of these marks, a little bubble will pop up with description of the error. If a light bulb appears underneath the red X, the editor has some suggestions for fixing the error. You can click on the light bulb and select a suggestion (if appropriate).
 
-Some errors, such as structural grammar errors, can occur as you type. Some errors (such as errors that occur when test knitting the pattern) occur only when you save the pattern.
+Some errors, such as syntax errors, occur as you type. Some errors (such as errors that occur when test knitting the pattern) occur only when you save the pattern.
 
-== Other controls ==
-These are common editor controls that work in the editor:
+== Keystrokes ==
+These are common among many text editors.
 Control-S: save the pattern
-Control-F: find / replace text
-Control-C: copy text
-Control-X: cut text
-Control-V: paste text
+Control-F: find / replace
+Control-C: copy
+Control-X: cut
+Control-V: paste
 Right click (a.k.a. secondary click): pop-up menu with additional options
 
-
-= Elements of the Pattern =
+= Elements of a Pattern =
 == The Header ==
 Each pattern has a header section which contains information such as the name of the pattern, a description, and the author. It also contains information about what is needed to knit the pattern (needles, yarn, stitch holders, etc.)
 
@@ -156,19 +160,38 @@ Instruction Stockinette:
 	Row: knit to end
 	Row: purl to end
 }}}
-
-
-When rows are within instructions, you can define repeating row numbers:
-
+If you want to give the instruction a label (for rendering), add it after the name:
 {{{
-Instruction Sunny-Day:
-	Row 1-3: knit to end
-	Row 2: purl to end
-	Row 2: purl to end
+Instruction Stockinette "St st":
+	Row: knit to end
+	Row: purl to end
 }}}
 
 
-=== Special Consideration for Instructions ===
+When rows are defined within an instruction, you can define row number ranges:
+{{{
+Instruction Sunny-Day:
+	Row 1,3,5-7: knit to end
+	Row 2: purl to end
+	Row 4: p2tog, p to end
+}}}
+or odd / even designations (if you specify how many rows are in the instruction):
+{{{
+Instruction Sunny-Day (10 rows):
+	Row 1 and all odd rows: knit to end
+	Row 2 and all even rows: purl to end
+}}}
+or even something complex like this:
+{{{
+Instruction Sunny-Day (20 rows):
+	Row 1,3,5-7 and odd rows: knit to end
+	Row 2: purl to end
+	Row 4: p2tog, p to end
+	Row 8 and even rows: purl to end
+}}}
+As a pattern designer, you want to be careful about preserving readability for your users, so use such complex constructions carefully and judiciously.
+
+==== Special Consideration for Instructions ====
 Instructions are terminated *by a blank line*. Rows 1 and 2 are part of the Stockinette instruction, but row 3 is not.
 {{{
 Instruction Stockinette:
