@@ -1,5 +1,6 @@
 #summary Tutorial of the Editor
 #labels Phase-Support
+#sidebar TableOfContents
 
 = Introduction =
 Here is a crash course tutorial for writing patterns in the KnitML Pattern Editor.
