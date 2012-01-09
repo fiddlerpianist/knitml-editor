@@ -1,0 +1,869 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</title><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"><link rel="home" href="index.html" title="The KnitML User's Guide"><link rel="up" href="index.html" title="The KnitML User's Guide"><link rel="prev" href="apa.html" title="Appendix&nbsp;A.&nbsp;The Specification"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="apa.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;</td></tr></table><hr></div><div class="appendix" title="Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference"><div class="titlepage"><div><div><h2 class="title"><a name="d0e887"></a>Appendix&nbsp;B.&nbsp;Knitting Expression Language Reference</h2></div></div></div><p>
+      </p><div class="table"><a name="el-function-table"></a><p class="title"><b>Table&nbsp;B.1.&nbsp;Defined Expression Language Functions</b></p><div class="table-contents"><table summary="Defined Expression Language Functions" width="100%" border="1"><colgroup><col align="left" class="Function"><col align="left" class="Parameters"><col align="left" class="Description"><col align="left" class="Example"><col align="left" class="XML Equivalent"></colgroup><thead><tr><th align="left">Function</th><th align="left">Parameters</th><th align="left">Description</th><th align="left">Example</th><th align="left">XML Equivalent</th></tr></thead><tbody><tr><td align="left">applyNextRow</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">Use the next row for the given block instruction</td><td align="left">
+                <code class="code">applyNextRow 'my'</code>
+              </td><td align="left">
+                <code class="code">&lt;apply-next-row instruction-ref="my"/&gt;</code>
+              </td></tr><tr><td align="left">arrangeStitches</td><td align="left">needleSpec as <a class="link" href="apb.html#map-entry-type">MapEntry</a><a class="link" href="apb.html#dot-notation-explanation">...</a>
+              </td><td align="left">Arrange the stitches on the needles as specified, starting with the working
+                stitch.</td><td align="left">
+                <code class="code">arrangeStitches 'n1':10 'n2':12</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;arrange-stitches-on-needles&gt;
+  &lt;needle ref="n1"&gt;10&lt;/needle&gt;
+  &lt;needle ref="n2"&gt;12&lt;/needle&gt;
+&lt;/arrange-stitches-on-needles&gt;</pre>
+              </td></tr><tr><td align="left">ballWeight</td><td align="left">number as <a class="link" href="apb.html#decimal-type">Decimal</a>, weight as <a class="link" href="apb.html#weight-unit-type">WeightUnit</a>
+              </td><td align="left">The weight of a single ball of yarn. The colon is optional.</td><td align="left">
+                <code class="code">ballWeight: 50 g</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;ball-weight unit="g"&gt;50
+&lt;/ball-weight&gt;</pre>
+              </td></tr><tr><td rowspan="2" align="left">bindOff</td><td rowspan="2" align="left">
+                <p>
+                  <span class="emphasis"><em>(allStitches|all)</em></span> or number as <a class="link" href="apb.html#integer-type">Integer</a>, stitches as <a class="link" href="apb.html#stitch-type">Stitch</a> (optional), <span class="emphasis"><em>with</em></span>
+                  (optional), yarnRef as <a class="link" href="apb.html#idref-type">IDREF</a> (optional),
+                  wise as <a class="link" href="apb.html#wise-type">Wise</a> (optional)</p>
+              </td><td rowspan="2" align="left">Bind off either all of the stitches in the row / on the needle, or
+                the specified number. Use the specified yarn and wise, if provided.</td><td align="left">
+                <code class="code">bindOff 10 sts with 'y1' purlwise</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;bind-off yarn-ref="y1"
+          type="purlwise"&gt;10
+&lt;/bind-off&gt;</pre>
+              </td></tr><tr><td align="left">
+                <code class="code">bindOff all sts knitwise</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;bind-off-all type="knitwise"/&gt;</pre>
+              </td></tr><tr><td align="left">bo / BO</td><td align="left">(same as bindOff)</td><td align="left">alias for bindOff</td><td align="left"><code class="code">bo 20</code></td><td align="left">
+                <pre class="programlisting">&lt;bind-off&gt;
+20&lt;/bind-off&gt;</pre>
+              </td></tr><tr><td rowspan="2" align="left">castOn</td><td rowspan="2" align="left">number as <a class="link" href="apb.html#integer-type">Integer</a>, style
+                as <a class="link" href="apb.html#string-type">String</a>, <span class="emphasis"><em>countAsRow</em></span>,
+                stitches as <a class="link" href="apb.html#stitch-type">Stitch</a> xmlAttributes as <a class="link" href="apb.html#map-type">Map</a> (all parameters optional in any order)</td><td rowspan="2" align="left">Cast the number of stitches onto the current needle. If
+                  <span class="emphasis"><em>countAsRow</em></span> is specified, the cast on will be treated as a row
+                (e.g. if it's the first row in a flat pattern, the next row in the pattern will be
+                the wrong side).</td><td align="left">
+                <code class="code">castOn 35 sts</code>
+              </td><td align="left">
+                <code class="code">&lt;cast-on&gt;35&lt;/cast-on&gt;</code>
+              </td></tr><tr><td align="left"><code class="code">castOn 35 countAsRow</code></td><td align="left">
+                <pre class="programlisting">&lt;cast-on
+  count-as-row="false"&gt;
+35&lt;/cast-on&gt;</pre>
+              </td></tr><tr><td align="left">cdd</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a></td><td align="left">Center double decrease</td><td align="left">
+                <code class="code">cdd 2</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="cdd"&gt;2&lt;/double-decrease&gt;</code>
+              </td></tr><tr><td align="left">co / CO</td><td align="left">(same as castOn)</td><td align="left">alias for castOn</td><td align="left">
+                <code class="code">co 35</code>
+              </td><td align="left">
+                <code class="code">&lt;cast-on&gt;35&lt;/cast-on&gt;</code>
+              </td></tr><tr><td align="left">color</td><td align="left">
+                <p>name as <a class="link" href="apb.html#string-type">String</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+                </p>
+                <p>(all parameters optional)</p>
+              </td><td align="left">The color of the yarn.</td><td align="left">
+                <code class="code">color 'yellow' [number:127]</code>
+              </td><td align="left">
+                <code class="code">&lt;color name="yellow" number="127"/&gt;</code>
+              </td></tr><tr><td align="left">copyrightInfo</td><td align="left">(none)</td><td align="left">Copyright information about this pattern. Not currently defined.</td><td align="left">
+                <code class="code">copyrightInfo {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;copyright-info&gt; ... &lt;/copyright-info&gt;</code>
+              </td></tr><tr><td rowspan="2" align="left">cross</td><td rowspan="2" align="left">first as <a class="link" href="apb.html#integer-type">Integer</a>,
+                crossSpec as <a class="link" href="apb.html#cross-type">Cross</a>, next as <a class="link" href="apb.html#integer-type">Integer</a>
+              </td><td rowspan="2" align="left">Cross number of stitches specified by 'first' with number of
+                stitches specified by 'next' using the crossSpec</td><td align="left">
+                <code class="code">cross 2 inFrontOf 2</code>
+              </td><td align="left">
+                <code class="code">&lt;cross-stitches first="2" next"2" type="front" /&gt;</code>
+              </td></tr><tr><td align="left">
+                <code class="code">cross 2 behind 2</code>
+              </td><td align="left">
+                <code class="code">&lt;cross-stitches first="2" next"2" type="back" /&gt;</code>
+              </td></tr><tr><td align="left">crossStitches</td><td align="left">(same as cross)</td><td align="left">alias for cross</td><td align="left">
+                <code class="code">crossStitches 2 behind 2</code>
+              </td><td align="left">
+                <code class="code">&lt;cross-stitches first="2" next"2" type="back" /&gt;</code>
+              </td></tr><tr><td align="left">declareFlatKnitting</td><td align="left">
+                <span class="emphasis"><em>with</em></span>, side as <a class="link" href="apb.html#side-type">Side</a>,
+                  <span class="emphasis"><em>next</em></span> (all parameters optional except side)</td><td align="left">Start knitting flat. The next row facing is specified by the side parameter.</td><td align="left">
+                <code class="code">declareFlatKnitting with rightSide next</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;declare-flat-knitting
+  next-row-side="right"/&gt;</pre>
+              </td></tr><tr><td align="left">declareRoundKnitting</td><td align="left">(none)</td><td align="left">Start knitting in the round.</td><td align="left">
+                <code class="code">declareRoundKnitting</code>
+              </td><td align="left">
+                <code class="code">&lt;declare-round-knitting/&gt;</code>
+              </td></tr><tr><td align="left">designateEndOfRow</td><td align="left">(none)</td><td align="left">Signal that the last stitch worked is now the last stitch in the row.</td><td align="left">
+                <code class="code">designateEndOfRow</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;designate-end-of-row/&gt;</pre>
+              </td></tr><tr><td align="left">directions</td><td align="left">(none)</td><td align="left">The pattern directions</td><td align="left">
+                <code class="code">directions {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;directions&gt;...&lt;/directions&gt;</code>
+              </td></tr><tr><td align="left">directives</td><td align="left">(none)</td><td align="left">The pattern directives </td><td align="left">
+                <code class="code">directives {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;directives&gt;...&lt;/directives&gt;</code>
+              </td></tr><tr><td align="left">firstName</td><td align="left">name as <a class="link" href="apb.html#string-type">String</a>
+              </td><td align="left">The pattern designer's first name. Falls within the <code class="code">author</code>
+                element. The colon is optional.</td><td align="left">
+                <code class="code">firstName: 'Jonathan'</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;first-name&gt;Jonathan&lt;/first-name&gt;</pre>
+              </td></tr><tr><td align="left">forEachRowInInstruction</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">Apply the contained operations for every row in a given block instruction</td><td align="left">
+                <code class="code">forEachRowInInstruction 'my' {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;for-each-row-in-instruction ref="my"&gt; ...
+                  &lt;/for-each-row-in-instruction&gt;</code>
+              </td></tr><tr><td align="left">fromHolder</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">Work the enclosed stitches from the specified stitch holder</td><td align="left">
+                <pre class="programlisting">fromHolder 'sh1'{
+  p2, k to end
+}</pre>
+              </td><td align="left">
+                <pre class="programlisting">&lt;from-stitch-holder ref="sh1"&gt;
+  &lt;purl&gt;2&lt;/purl&gt;
+  &lt;repeat until="end"&gt;
+    &lt;knit/&gt;
+  &lt;/repeat&gt;
+&lt;/from-stitch-holder&gt;</pre>
+              </td></tr><tr><td align="left">gauge</td><td align="left">type as <a class="link" href="apb.html#string-type">String</a> (optional)</td><td align="left">A gauge element</td><td align="left">
+                <code class="code">gauge 'stockinette' {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;gauge type="stockinette"&gt; ... &lt;/gauge&gt;</code>
+              </td></tr><tr><td align="left">generalInformation</td><td align="left">languageCode as <a class="link" href="apb.html#string-type">String</a> (optional)</td><td align="left">The general information section written in the specified ISO language code</td><td align="left">
+                <code class="code">generalInformation 'en' {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;general-information xml:lang="en"&gt; ... &lt;/general-information&gt;</code>
+              </td></tr><tr><td align="left">graftTogether</td><td align="left">needles as <a class="link" href="apb.html#idref-type">IDREF</a><a class="link" href="apb.html#dot-notation-explanation">...</a>
+              </td><td align="left">Graft together all of the needles specified by the parameters</td><td align="left">
+                <code class="code">graftTogether 'n1' 'n2'</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;graft-together&gt;
+  &lt;needle ref="n1"/&gt;
+  &lt;needle ref="n2"/&gt;
+&lt;/graft-together&gt;</pre>
+              </td></tr><tr><td rowspan="2" align="left">inform</td><td rowspan="2" align="left">stitchNumber as <a class="link" href="apb.html#integer-type">Integer</a>,
+                stitches as <a class="link" href="apb.html#stitch-type">Stitch</a>, stateDescription as <a class="link" href="apb.html#state-description-type">StateDescription</a> (optional) </td><td rowspan="2" align="left">Renders the number of stitches on the needles. Functionality may
+                be expanded in the future.</td><td align="left">
+                <code class="code">inform 20 sts leftOnNeedles</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;information&gt;
+  &lt;number-of-stitches
+    number="20"
+    inform="true"/&gt;
+&lt;/information&gt;</pre>
+              </td></tr><tr><td align="left">
+                <code class="code">inform 20</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;information&gt;
+  &lt;number-of-stitches
+    number="20"
+    inform="true"/&gt;
+&lt;/information&gt;</pre>
+              </td></tr><tr><td align="left">informationalMessage</td><td align="left">messageKey as <a class="link" href="apb.html#string-type">String</a>
+              </td><td align="left">Provide textual information about the related part of the pattern</td><td align="left">
+                <code class="code">informationalMessage 'message.how-to-do-short-rows'</code>
+              </td><td align="left">
+                <code class="code">&lt;information&gt;&lt;message message-key = "message.how-to-do-short-rows"&gt; ...
+                  &lt;/message&gt; &lt;/information&gt;</code>
+              </td></tr><tr><td align="left">inlineInstruction</td><td align="left">
+                <p>id as <a class="link" href="apb.html#id-type">ID</a>, <span class="emphasis"><em>withKey</em></span>,
+                    <span class="emphasis"><em>withLabel</em></span>, label as <a class="link" href="apb.html#string-type">String</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+                </p>
+                <p>(all parameters except id optional)</p>
+              </td><td align="left">Define an inline instruction</td><td align="left">
+                <code class="code">inlineInstruction 'my' withKey withLabel 'Just do it' {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;inline-instruction id="my" message-key="inline-instruction.my" label="Just
+                  do it"&gt; ... &lt;/inline-instruction&gt;</code>
+              </td></tr><tr><td align="left">inlineInstructionRef</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">A reference to an inline instruction</td><td align="left">
+                <code class="code">inlineInstructionRef 'my'</code>
+              </td><td align="left">
+                <code class="code">&lt;inline-instruction-ref ref="my"/&gt;</code>
+              </td></tr><tr><td align="left">instruction</td><td align="left">
+                <p>id as <a class="link" href="apb.html#id-type">ID</a>, <span class="emphasis"><em>withKey</em></span>,
+                    <span class="emphasis"><em>withLabel</em></span>, label as <a class="link" href="apb.html#string-type">String</a>, shape as <a class="link" href="apb.html#shape-type">Shape</a>,
+                  xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+                </p>
+                <p>(all parameters except id optional)</p>
+              </td><td align="left">Define a block instruction</td><td align="left">
+                <code class="code">instruction 'my' withKey withLabel 'Just do it' round {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;instruction id="my" message-key="instruction.my" label="Just do it"
+                  shape="round"&gt; ... &lt;/instruction&gt;</code>
+              </td></tr><tr><td align="left">instructionDefinitions</td><td align="left">(none)</td><td align="left">Global instruction definitions defined in the header. Can be block
+                instructions, inline instructions, or merged instructions. Will appear in the legend
+                before the directions.</td><td align="left">
+                <code class="code">instructionDefinitions {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;instruction-definitions&gt; ... &lt;/instruction-definitions&gt;</code>
+              </td></tr><tr><td align="left">instructionGroup</td><td align="left">
+                <p>id as <a class="link" href="apb.html#id-type">ID</a>, <span class="emphasis"><em>withKey</em></span>,
+                    <span class="emphasis"><em>withLabel</em></span>, label as <a class="link" href="apb.html#string-type">String</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+                </p>
+                <p>(all parameters except id optional)</p>
+              </td><td align="left">Define a group of block operations</td><td align="left">
+                <code class="code">instructionGroup 'start' withKey withLabel 'Start Pattern' {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;instruction-group id="my" message-key="instruction-group.start"
+                  label="Start Pattern"&gt; ... &lt;/instruction-group&gt;</code>
+              </td></tr><tr><td align="left">instructionRef</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">A reference to a block instruction</td><td align="left">
+                <code class="code">instructionRef 'my'</code>
+              </td><td align="left">
+                <code class="code">&lt;instruction-ref ref="my"/&gt;</code>
+              </td></tr><tr><td align="left">joinInRound</td><td align="left">(none)</td><td align="left">Join active stitches in the round.</td><td align="left">
+                <code class="code">joinInRound</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;join-in-round/&gt;</pre>
+              </td></tr><tr><td rowspan="5" align="left">k</td><td rowspan="5" align="left">
+                <p>number as <a class="link" href="apb.html#integer-type">Integer</a>, yarnRef as <a class="link" href="apb.html#idref-type">IDREF</a>, loopToWork as LoopToWork, repeatSpec as
+                  Repeat, holderSpec as <a class="link" href="apb.html#holder-type">Holder</a></p>
+                <p>(all parameters optional)</p>
+              </td><td rowspan="5" align="left">Knit specified number of stitches</td><td align="left">
+                <pre class="programlisting">k10
+k 10</pre>
+              </td><td align="left">
+                <code class="code">&lt;knit&gt;10&lt;/knit&gt;</code>
+              </td></tr><tr><td align="left">
+                <pre class="programlisting">k to end
+k end</pre>
+              </td><td align="left">
+                <pre class="programlisting">&lt;repeat until="end"&gt;
+  &lt;knit/&gt;
+&lt;/repeat&gt;</pre>
+              </td></tr><tr><td align="left">
+                <pre class="programlisting">k 3 'y1'
+k3 'y1'
+k 3 with 'y1'</pre>
+              </td><td align="left">
+                <code class="code">&lt;knit yarn-ref="y1"&gt;3&lt;/knit&gt;</code>
+              </td></tr><tr><td align="left">
+                <pre class="programlisting">k to 2 sts before end
+k to 2 before end
+k 2 beforeEnd</pre>
+              </td><td align="left">
+                <pre class="programlisting">&lt;repeat until="before-end"
+        value="2"&gt;
+  &lt;knit/&gt;
+&lt;/repeat&gt;</pre>
+              </td></tr><tr><td align="left">
+                <pre class="programlisting">k 3 tbl
+k3 tbl</pre>
+              </td><td align="left">
+                <pre class="programlisting">&lt;knit loop-to-work="trailing"&gt;
+3&lt;/knit&gt;</pre>
+              </td></tr><tr><td align="left">k2tog</td><td align="left">(none)</td><td align="left">Knit next two stitches together</td><td align="left">
+                <code class="code">k2tog</code>
+              </td><td align="left">
+                <code class="code">&lt;decrease type="k2tog"/&gt;</code>
+              </td></tr><tr><td align="left">k3tog</td><td align="left">(none)</td><td align="left">Knit next three stitches together</td><td align="left">
+                <code class="code">k3tog</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="k3tog"/&gt;</code>
+              </td></tr><tr><td align="left">kfb</td><td align="left">(none)</td><td align="left">Knit to the front and back of the next stitch.</td><td align="left">
+                <code class="code">kfb</code>
+              </td><td align="left">
+                <code class="code">&lt;increase type="kfb"/&gt;</code>
+              </td></tr><tr><td align="left">knit</td><td align="left">(same as k)</td><td align="left">alias for k</td><td align="left">
+                <code class="code">knit 10</code>
+              </td><td align="left">
+                <code class="code">&lt;knit&gt;10&lt;/knit&gt;</code>
+              </td></tr><tr><td rowspan="2" align="left">labelNeedle</td><td rowspan="2" align="left">id as <a class="link" href="apb.html#id-type">ID</a>, with as <a class="link" href="apb.html#with-type">With</a>, newLabel as <a class="link" href="apb.html#string-type">String</a>
+              </td><td rowspan="2" align="left">labels a new needle with the newLabel parameter as either a
+                message key (if keyword is 'withKey') or a literal value (if keyword is 'withLabel')</td><td align="left">
+                <code class="code">labelNeedle 'n1' withKey 'needle.new-label'</code>
+              </td><td align="left">
+                <code class="code">&lt;label-needle ref="n1" message-key = "needle.new-label"/&gt;</code>
+              </td></tr><tr><td align="left">
+                <code class="code">labelNeedle 'n1' withLabel 'Instep Needle'</code>
+              </td><td align="left">
+                <code class="code">&lt;label-needle ref="n1" label = "Instep Needle"/&gt;</code>
+              </td></tr><tr><td align="left">lastName</td><td align="left">name as <a class="link" href="apb.html#string-type">String</a>
+              </td><td align="left">The pattern designer's last name. Falls within the <code class="code">author</code> element.
+                The colon is optional.</td><td align="left">
+                <code class="code">lastName: 'Whitall'</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;last-name&gt;Whitall&lt;/last-name&gt;</pre>
+              </td></tr><tr><td align="left">length</td><td align="left">number as <a class="link" href="apb.html#decimal-type">Decimal</a>, weight as <a class="link" href="apb.html#length-unit-type">LengthUnit</a>
+              </td><td align="left">The length of a needle. Usually only given for circular needles. The colon is
+                optional.</td><td align="left">
+                <code class="code">length: 32 in</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;length unit="in"&gt;32
+&lt;/length&gt;</pre>
+              </td></tr><tr><td align="left">M1</td><td align="left">(none)</td><td align="left">Make 1. This does not specify a technique for increasing.</td><td align="left">
+                <code class="code">M1</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;increase/&gt;</pre>
+              </td></tr><tr><td align="left">m1a</td><td align="left">(none)</td><td align="left">Make 1 away</td><td align="left">
+                <code class="code">m1a</code>
+              </td><td align="left">
+                <code class="code">&lt;increase type="m1a"/&gt;</code>
+              </td></tr><tr><td align="left">mergedInstruction</td><td align="left">
+                <p>id as <a class="link" href="apb.html#id-type">ID</a>, <span class="emphasis"><em>withKey</em></span>,
+                    <span class="emphasis"><em>withLabel</em></span>, label as <a class="link" href="apb.html#string-type">String</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+                </p>
+                <p>(all parameters except id optional)</p>
+              </td><td align="left">Merge two existing instructions together (see Nutkin2 for a better example)</td><td align="left">
+                <code class="code">mergedInstruction 'my' withKey withLabel 'Just do it' ['merge-point':'row',
+                  type:'physical'] {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;merged-instruction id="my" message-key="merged-instruction.my" label="Just
+                  do it" merge-point="row" type="physical"&gt; ... &lt;/merged-instruction&gt;</code>
+              </td></tr><tr><td align="left">messageSource</td><td align="left">source as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">Use the specified ID as a localized message source for the pattern</td><td align="left">
+                <code class="code">messageSource 'msgs'</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;message-sources&gt;
+  &lt;message-source&gt;msgs
+  &lt;/message-source&gt;
+&lt;/message-sources&gt;</pre>
+              </td></tr><tr><td align="left">messageSources</td><td align="left">sources as <a class="link" href="apb.html#idref-type">IDREF</a><a class="link" href="apb.html#dot-notation-explanation">...</a>
+              </td><td align="left">Use the specified IDs as internationalized message sources for the pattern.</td><td align="left">
+                <code class="code">messageSources 'header-msgs' 'body-msgs'</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;message-sources&gt;
+  &lt;message-source&gt;header-msgs
+  &lt;/message-source&gt;
+  &lt;message-source&gt;body-msgs
+  &lt;/message-source&gt;
+&lt;/message-sources&gt;</pre>
+              </td></tr><tr><td align="left">needle</td><td align="left">
+                <p>id as <a class="link" href="apb.html#id-type">ID</a>, <span class="emphasis"><em>withKey</em></span>,
+                    <span class="emphasis"><em>withLabel</em></span>, label as <a class="link" href="apb.html#string-type">String</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+                </p>
+                <p>(all parameters except id and typeref optional)</p>
+              </td><td align="left">A needle used in the pattern.</td><td align="left">
+                <code class="code">needle 'needle1' withKey withLabel 'Needle 1' [typeref:'size1'] {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;needle id="needle1" message-key="needle.needle1" label="Needle 1"
+                  typeref="size1"&gt; ... &lt;/needle&gt;</code>
+              </td></tr><tr><td align="left">needleType</td><td align="left">id as <a class="link" href="apb.html#id-type">ID</a>, needleStyle as <a class="link" href="apb.html#needle-type-type">NeedleType</a> (optional), xmlAttributes as
+                  <a class="link" href="apb.html#map-type">Map</a> (optional)</td><td align="left">Define a type of needle for use in the pattern.</td><td align="left">
+                <code class="code">needleType 'size1' circ [brand:'Addi Turbo']</code>
+              </td><td align="left">
+                <code class="code">&lt;needle-type id="size1" type="circular" brand="Addi Turbo"&gt; ...
+                  &lt;/needle-type&gt;</code>
+              </td></tr><tr><td align="left">nextRound</td><td align="left">(same as row)</td><td align="left">call row() with supplied parameters, adding ['assign-row-number':false] and
+                [type:'round'] to the xmlAttributes parameter</td><td align="left">
+                <code class="code">nextRound {...}</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;row assign-row-number="false"
+     type="round"&gt;
+...&lt;/row&gt;</pre>
+              </td></tr><tr><td align="left">nextRow</td><td align="left">(same as row)</td><td align="left">call row() with supplied parameters, adding ['assign-row-number':false] to the
+                xmlAttributes parameter</td><td align="left">
+                <code class="code">nextRow {...}</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;row assign-row-number="false"&gt;
+...&lt;/row&gt;</pre>
+              </td></tr><tr><td align="left">p</td><td align="left">
+                <p>number as <a class="link" href="apb.html#integer-type">Integer</a>, yarnRef as <a class="link" href="apb.html#idref-type">IDREF</a>, repeatSpec as <a class="link" href="apb.html#repeat-type">Repeat</a>
+                </p>
+                <p>(all parameters optional)</p>
+              </td><td align="left">Works the same as 'k' except that the XML element name is <code class="code">purl</code>
+              </td><td align="left">
+                <code class="code">p to end</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;repeat until="end"&gt;
+  &lt;purl/&gt;
+&lt;/repeat&gt;</pre>
+              </td></tr><tr><td align="left">p2tog</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a> (optional)</td><td align="left">Purl next two stitches together</td><td align="left">
+                <code class="code">p2tog</code>
+              </td><td align="left">
+                <code class="code">&lt;decrease type="p2tog"/&gt;</code>
+              </td></tr><tr><td align="left">p3tog</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a> (optional)</td><td align="left">Purl next three stitches together</td><td align="left">
+                <code class="code">p3tog</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="p3tog"/&gt;</code>
+              </td></tr><tr><td align="left">passPreviousStitchOver</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a> (optional)</td><td align="left">Pass the stitch worked 2 stitches ago over the stitch just worked.</td><td align="left">
+                <code class="code">passPreviousStitchOver</code>
+              </td><td align="left">
+                <code class="code">&lt;pass-previous-stitch-over/&gt;</code>
+              </td></tr><tr><td align="left">pattern</td><td align="left">languageCode as <a class="link" href="apb.html#string-type">String</a> (optional)</td><td align="left">The pattern written in the specified ISO language code</td><td align="left">
+                <code class="code">pattern 'en' {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;pattern xml:lang="en"&gt; ... &lt;/pattern&gt;</code>
+              </td></tr><tr><td rowspan="2" align="left">pickUp</td><td rowspan="2" align="left">
+                <p>number as <a class="link" href="apb.html#integer-type">Integer</a>, stitches as <a class="link" href="apb.html#stitch-type">Stitch</a>, yarnRef as <a class="link" href="apb.html#idref-type">IDREF</a>, wise as <a class="link" href="apb.html#wise-type">Wise</a>
+                </p>
+                <p>(all parameters except number optional)</p>
+              </td><td rowspan="2" align="left">Pick up the specified number of stitches. If wise is not
+                specified, defaults to knitwise. Renders as <code class="code">inline-pickup-stitches</code> if
+                within a row.</td><td align="left">
+                <code class="code">pickUp 10 sts 'y1' purlwise</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;pick-up-stitches type="purlwise"
+                  yarn-ref="y1"&gt;
+10&lt;/pick-up-stitches&gt;
+  </pre>
+              </td></tr><tr><td align="left">
+                <code class="code">pickUp 20</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;pick-up-stitches&gt;
+20&lt;/pick-up-stitches&gt;</pre>
+              </td></tr><tr><td align="left">placeMarker</td><td align="left">(same as pm)</td><td align="left">alias for pm</td><td align="left">
+                <code class="code">placeMarker</code>
+              </td><td align="left">
+                <code class="code">&lt;place-marker/&gt;</code>
+              </td></tr><tr><td align="left">pm</td><td align="left">(none)</td><td align="left">Place a marker at the working place in the pattern.</td><td align="left">
+                <code class="code">pm</code>
+              </td><td align="left">
+                <code class="code">&lt;place-marker/&gt;</code>
+              </td></tr><tr><td align="left">ppso</td><td align="left">number as <a class="link" href="apb.html#integer-type">Integer</a> (optional)</td><td align="left">Alias for passPreviousStitchOver</td><td align="left">
+                <code class="code">ppso</code>
+              </td><td align="left">
+                <code class="code">&lt;pass-previous-stitch-over/&gt;</code>
+              </td></tr><tr><td align="left">purl</td><td align="left">(same as p)</td><td align="left">alias for p</td><td align="left">
+                <code class="code">purl 10</code>
+              </td><td align="left">
+                <code class="code">&lt;purl&gt;10&lt;/purl&gt;</code>
+              </td></tr><tr><td align="left">ref</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">alias for inlineInstructionRef</td><td align="left">
+                <code class="code">ref 'my'</code>
+              </td><td align="left">
+                <code class="code">&lt;inline-instruction-ref ref="my"/&gt;</code>
+              </td></tr><tr><td align="left">removeMarker</td><td align="left">(none)</td><td align="left">Remove the marker at the working place in the pattern.</td><td align="left">
+                <code class="code">removeMarker</code>
+              </td><td align="left">
+                <code class="code">&lt;remove-marker/&gt;</code>
+              </td></tr><tr><td align="left">repeat</td><td align="left">repeatSpec as <a class="link" href="apb.html#repeat-type">Repeat</a>, xmlAttributes as
+                  <a class="link" href="apb.html#map-type">Map</a>
+              </td><td align="left">Repeat the enclosed inline instructions as many times as specified</td><td align="left">
+                <code class="code">repeat 3 times {...}</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;repeat until="times"
+        value="3"&gt; ...
+&lt;/repeat&gt;</pre>
+              </td></tr><tr><td rowspan="3" align="left">repeatInstruction / repeat</td><td rowspan="3" align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>, repeatSpec as
+                  <a class="link" href="apb.html#repeat-inst-type">RepeatInst</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+              </td><td rowspan="3" align="left">Repeat the referenced instruction as many times as specified</td><td align="left">
+                <code class="code">repeat 'inst1' until 20 sts remain</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;repeat-instruction ref="inst1"&gt;
+  &lt;until-stitches-remain&gt;20
+  &lt;/until-stitches-remain&gt;
+&lt;/repeat-instruction&gt;</pre>
+              </td></tr><tr><td align="left">
+                <code class="code">repeat 'inst1' until measures 4 in</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;repeat-instruction ref="inst1"&gt;
+  &lt;until-measures unit="in"&gt;4
+  &lt;/until-measures&gt;
+&lt;/repeat-instruction&gt;</pre>
+              </td></tr><tr><td align="left">
+                <code class="code">repeat 'inst1' 8 additionalTimes</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;repeat-instruction ref="inst1"&gt;
+  &lt;additional-times&gt;8
+  &lt;/additional-times&gt;
+&lt;/repeat-instruction&gt;</pre>
+              </td></tr><tr><td align="left">round</td><td align="left">(same as row)</td><td align="left">call row() with supplied parameters, adding [type:'round'] to the xmlAttributes
+                parameter</td><td align="left">
+                <code class="code">round {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row type="round"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td rowspan="6" align="left">row</td><td rowspan="6" align="left">
+                <p>yarnRef as <a class="link" href="apb.html#idref-type">IDREF</a>, number as <a class="link" href="apb.html#integer-type">Integer</a>, numbers as List&lt;Integer&gt;,
+                    <span class="emphasis"><em>informSide</em></span>, <span class="emphasis"><em>doNotAssignNumber</em></span>,
+                    <span class="emphasis"><em>and (all|following) (even|odd) (rows|rounds)</em></span>,
+                  xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+                </p>
+                <p>(all parameters optional)</p>
+              </td><td rowspan="6" align="left">A row in the pattern</td><td align="left">
+                <code class="code">row 'y1' 1 {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row yarn-ref="y1" number="1"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td align="left">
+                <code class="code">row [1,3,5] {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row number="1 3 5"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td align="left">
+                <code class="code">row 1 and following odd rows {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row number="1" subsequent="odd"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td align="left">
+                <code class="code">row doNotAssignNumber {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row assign-row-number="false"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td align="left">
+                <code class="code">row informSide {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row inform-side="true"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td align="left">
+                <code class="code">row [type:'flat', resetRowCount:true] {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row type="flat" reset-row-count="true"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td align="left">rowGauge</td><td align="left">number as <a class="link" href="apb.html#decimal-type">Decimal</a>, gauge as <a class="link" href="apb.html#row-gauge-unit-type">RowGaugeUnit</a>
+              </td><td align="left">The number of rows (vertically) per unit of measurement. The colon is optional.</td><td align="left">
+                <code class="code">rowGauge: 3.5 rowsPerInch</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;row-gauge unit="row/in"&gt;3.5
+                  &lt;/row-gauge&gt;</pre>
+              </td></tr><tr><td align="left">s2kp</td><td align="left">(same as cdd)</td><td align="left">Center double decrease</td><td align="left">
+                <code class="code">s2kp</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="cdd"/&gt;</code>
+              </td></tr><tr><td align="left">section</td><td align="left">
+                <span class="emphasis"><em>resetRowCount</em></span> (optional)</td><td align="left">A logical grouping of operations in a pattern. Can be interpreted as a
+                paragraph. The resetRowCount parameter sets the next row back to row 1.</td><td align="left">
+                <code class="code">section resetRowCount {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;section reset-row-count="true"&gt; ... &lt;/section&gt;</code>
+              </td></tr><tr><td align="left">shortRow</td><td align="left">(same as row)</td><td align="left">call row() with supplied parameters, adding <code class="code">[short:true]</code> to the
+                xmlAttributes parameter</td><td align="left">
+                <code class="code">shortRow 1 {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;row short="true" number="1"&gt;...&lt;/row&gt;</code>
+              </td></tr><tr><td rowspan="2" align="left">size</td><td rowspan="2" align="left">number as <a class="link" href="apb.html#decimal-type">Decimal</a> or <a class="link" href="apb.html#string-type">String</a>, size as <a class="link" href="apb.html#needle-size-type">NeedleSize</a>
+              </td><td rowspan="2" align="left">The size (i.e. thickness) of the needle.</td><td align="left">
+                <code class="code">size 3.0 mm</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;size unit="mm"&gt;3.0
+&lt;/size&gt;</pre>
+              </td></tr><tr><td align="left">
+                <code class="code">size '00' US</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;size unit="US"&gt;00
+&lt;/size&gt;</pre>
+              </td></tr><tr><td rowspan="5" align="left">sl</td><td rowspan="5" align="left">
+                <p><span class="emphasis"><em>next</em></span>, number as <a class="link" href="apb.html#integer-type">Integer</a>, stitches as <a class="link" href="apb.html#stitch-type">Stitch</a>, wise
+                  as <a class="link" href="apb.html#wise-type">Wise</a>, <span class="emphasis"><em>reverse |
+                  inReverse</em></span>, position as <a class="link" href="apb.html#yarn-position-type">YarnPosition</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a></p>
+                <p>(all parameters optional)</p>
+              </td><td rowspan="5" align="left">Slip the specified number of stitches</td><td align="left">
+                <code class="code">sl 5</code>
+              </td><td align="left">
+                <code class="code">&lt;slip&gt;5&lt;/slip&gt;</code>
+              </td></tr><tr><td align="left"><code class="code">sl 5 sts knitwise</code></td><td align="left">
+                <pre class="programlisting">&lt;slip type="knitwise"&gt;5
+&lt;/slip&gt;</pre>
+              </td></tr><tr><td align="left"><code class="code">sl next 5 sts to holder 'h1'</code></td><td align="left">
+                <pre class="programlisting">&lt;slip-to-stitch-holder ref="h1"&gt;5
+&lt;/slip-to-stitch-holder&gt;</pre>
+              </td></tr><tr><td align="left"><code class="code">sl 5 inReverse</code></td><td align="left">
+                <pre class="programlisting">&lt;slip direction="reverse"&gt;5
+&lt;/slip&gt;</pre>
+              </td></tr><tr><td align="left"><code class="code">sl 5 wyib</code></td><td align="left">
+                <pre class="programlisting">&lt;slip yarn-position="back"&gt;5
+&lt;/slip&gt;</pre>
+              </td></tr><tr><td align="left">ssk</td><td align="left">(none)</td><td align="left">Slip-slip-knit</td><td align="left">
+                <code class="code">ssk</code>
+              </td><td align="left">
+                <code class="code">&lt;decrease type="ssk"/&gt;</code>
+              </td></tr><tr><td align="left">sssk</td><td align="left">(none)</td><td align="left">Slip-slip-slip-knit</td><td align="left">
+                <code class="code">sssk</code>
+              </td><td align="left">
+                <code class="code">&lt;double-decrease type="sssk"/&gt;</code>
+              </td></tr><tr><td rowspan="4" align="left">state</td><td rowspan="4" align="left">stitchNumber as <a class="link" href="apb.html#integer-type">Integer</a>,
+                stitches as <a class="link" href="apb.html#stitch-type">Stitch</a>, stateDescription as <a class="link" href="apb.html#state-description-type">StateDescription...</a> (all parameters
+                optional in any order) </td><td rowspan="4" align="left">State the number of stitches left in the row, or state the number
+                of stitches which have yet to be worked for this row. If a number is specified, the
+                validator asserts that this number matches reality. Can be used at the end of a row
+                definition, in which case the element name will be
+                <code class="code">&lt;followup-information&gt;</code> instead of <code class="code">&lt;information&gt;</code>.</td><td align="left">
+                <pre class="programlisting">state 10 sts rem
+state 10 sts remain
+state 10 sts remaining
+state 10 sts left
+state 10 sts inRow
+state 10 sts onNeedles
+state 10 sts left onNeedles
+state 10 sts</pre>
+              </td><td align="left">
+                <pre class="programlisting">&lt;information&gt;
+  &lt;number-of-stitches
+     number="10"/&gt;
+&lt;/information&gt;</pre>
+              </td></tr><tr><td align="left">
+                <pre class="programlisting">state sts rem
+state rem sts
+state remaining sts
+state sts</pre>
+              </td><td align="left">
+                <pre class="programlisting">&lt;information&gt;
+  &lt;number-of-stitches/&gt;
+&lt;/information&gt;</pre>
+              </td></tr><tr><td align="left">
+                <pre class="programlisting">state 10 unworked sts
+state 10 sts unworked
+state 10 unworked</pre>
+              </td><td align="left">
+                <pre class="programlisting">&lt;information&gt;
+  &lt;number-of-unworked-stitches
+     number="10"/&gt;
+&lt;/information&gt;</pre>
+              </td></tr><tr><td align="left">
+                <pre class="programlisting">state unworked sts
+state sts unworked
+state unworked</pre>
+              </td><td align="left">
+                <pre class="programlisting">&lt;information&gt;
+  &lt;number-of-unworked-stitches/&gt;
+&lt;/information&gt;</pre>
+              </td></tr><tr><td align="left">stitchGauge</td><td align="left">number as <a class="link" href="apb.html#decimal-type">Decimal</a>, gauge as <a class="link" href="apb.html#stitch-gauge-unit-type">StitchGaugeUnit</a>
+              </td><td align="left">The number of stitches (horizontally) per unit of measurement. The colon is
+                optional.</td><td align="left">
+                <code class="code">stitchGauge: 3.5 stitchesPerInch</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;stitch-gauge unit="st/in"&gt;3.5
+&lt;/stitch-gauge&gt;</pre>
+              </td></tr><tr><td rowspan="2" align="left">stitchHolder</td><td rowspan="2" align="left">
+                <p>id as <a class="link" href="apb.html#id-type">ID</a>, <span class="emphasis"><em>withKey</em></span>,
+                    <span class="emphasis"><em>withLabel</em></span>, label as <a class="link" href="apb.html#string-type">String</a></p>
+                <p>(all parameters except id optional)</p>
+              </td><td rowspan="2" align="left">A stitch holder used in the pattern.</td><td align="left">
+                <code class="code">stitchHolder 'sh1'</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;stitch-holder id="sh1"/&gt;</pre>
+              </td></tr><tr><td align="left"><code class="code">stitchHolder 'sh1' withKey withLabel "Stitch Holder 1"</code></td><td align="left">
+                <pre class="programlisting">&lt;stitch-holder id="sh1"
+  message-key="stitch-holder.sh1"
+  label="Stitch Holder 1"/&gt;</pre>
+              </td></tr><tr><td align="left">thickness</td><td align="left">number as <a class="link" href="apb.html#decimal-type">Decimal</a>, thickness as <a class="link" href="apb.html#thickness-unit-type">ThicknessUnit</a>
+              </td><td align="left">The thickness of the yarn (wraps per unit of measurement). The colon is
+                optional.</td><td align="left">
+                <code class="code">thickness: 16 wrapsPerInch</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;thickness unit="wrap/in"&gt;
+16&lt;/thickness&gt;</pre>
+              </td></tr><tr><td align="left">totalLength</td><td align="left">number as <a class="link" href="apb.html#decimal-type">Decimal</a>, weight as <a class="link" href="apb.html#length-unit-type">LengthUnit</a>
+              </td><td align="left">The length of yarn required to complete the project. The colon is optional.</td><td align="left">
+                <code class="code">totalLength: 500 yd</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;total-length unit="g"&gt;50
+&lt;/total-length&gt;</pre>
+              </td></tr><tr><td align="left">totalWeight</td><td align="left">number as <a class="link" href="apb.html#decimal-type">Decimal</a>, weight as <a class="link" href="apb.html#weight-unit-type">WeightUnit</a>
+              </td><td align="left">The weight of yarn required to complete the project. The colon is optional.</td><td align="left">
+                <code class="code">totalWeight: 50 g</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;total-weight unit="g"&gt;50
+&lt;/total-weight&gt;</pre>
+              </td></tr><tr><td align="left">useNeedle</td><td align="left">
+                <span class="emphasis"><em>quietly</em></span> (optional), needle as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">Use the specified needle for knitting. "Quietly" indicates that this is a
+                directive for the computer, not something that should be rendered in a pattern.</td><td align="left">
+                <code class="code">useNeedle 'n1' quietly</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;use-needles silent="true"&gt;
+  &lt;needle ref="n1"/&gt;
+&lt;/use-needles&gt;</pre>
+              </td></tr><tr><td align="left">useNeedles</td><td align="left">
+                <span class="emphasis"><em>quietly</em></span> (optional), needles as <a class="link" href="apb.html#idref-type">IDREF</a><a class="link" href="apb.html#dot-notation-explanation">...</a>
+              </td><td align="left">Use the specified needles for knitting.</td><td align="left">
+                <code class="code">useNeedles 'n1' 'n2'</code>
+              </td><td align="left">
+                <pre class="programlisting">&lt;use-needles silent="true"&gt;
+  &lt;needle ref="n1"/&gt;
+  &lt;needle ref="n2"/&gt;
+&lt;/use-needles&gt;</pre>
+              </td></tr><tr><td align="left">usingNeedle</td><td align="left">ref as <a class="link" href="apb.html#idref-type">IDREF</a>
+              </td><td align="left">Using the specified needle, perform child operations</td><td align="left">
+                <code class="code">usingNeedle 'needle1' {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;using-needle ref="needle1"&gt; ... &lt;/using-needle&gt;</code>
+              </td></tr><tr><td rowspan="2" align="left">work</td><td rowspan="2" align="left">
+                <p><span class="emphasis"><em>even</em></span>, <span class="italic">for</span>, number as
+                    <a class="link" href="apb.html#integer-type">Integer</a>, stitches as <a class="link" href="apb.html#stitch-type">Stitch</a>, <span class="emphasis"><em>with</em></span>, yarnRef as
+                    <a class="link" href="apb.html#idref-type">IDREF</a>, repeatSpec as <a class="link" href="apb.html#repeat-type">Repeat</a></p>
+                <p>(all parameters optional)</p>
+              </td><td rowspan="2" align="left">Knit stitches which had been knit in the previous row, and purl
+                stitches which had been purled in the previous row. This instruction does not
+                increase or decrease.</td><td align="left">
+                <code class="code">work even for 5 sts</code>
+              </td><td align="left">
+                <code class="code">&lt;using-needle ref="needle1"&gt; ... &lt;/using-needle&gt;</code>
+              </td></tr><tr><td align="left"><code class="code">work to end</code></td><td align="left">
+                <pre class="programlisting">&lt;repeat until="end"&gt;
+  &lt;work-even/&gt;
+&lt;/repeat&gt;</pre>
+              </td></tr><tr><td align="left">yarn</td><td align="left">
+                <p>id as <a class="link" href="apb.html#id-type">ID</a>, <span class="emphasis"><em>withKey</em></span>,
+                    <span class="emphasis"><em>withLabel</em></span>, label as <a class="link" href="apb.html#string-type">String</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+                </p>
+                <p>(all parameters except id optional)</p>
+              </td><td align="left">A yarn used in the pattern. The xmlAttributes parameter must have a typeref
+                attribute referring to a previously declared yarnType.</td><td align="left">
+                <code class="code">yarn 'y1' withKey withLabel 'Main Color' [symbol:'MC', typeref:'wool']
+                {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;yarn id="y1" message-key="yarn.MC" label="Main Color" symbol="MC"
+                  typeref="wool"&gt; ... &lt;/yarn&gt;</code>
+              </td></tr><tr><td align="left">yarnType</td><td align="left">id as <a class="link" href="apb.html#id-type">ID</a>, xmlAttributes as <a class="link" href="apb.html#map-type">Map</a>
+              </td><td align="left">Define a type of yarn for use in the pattern.</td><td align="left">
+                <code class="code">yarnType 'wool' [brand:'Lorna\'s Laces', weight:'fingering'] {...}</code>
+              </td><td align="left">
+                <code class="code">&lt;yarn-type id="wool" brand="Lorna's Laces"
+                  weight="fingering"/&gt;...&lt;/yarn-type&gt;</code>
+              </td></tr><tr><td align="left">yo</td><td align="left">(none)</td><td align="left">Yarn over</td><td align="left">
+                <code class="code">yo</code>
+              </td><td align="left">
+                <code class="code">&lt;increase type="yo"/&gt;</code>
+              </td></tr></tbody></table></div></div><p><br class="table-break">
+    </p><p><a name="dot-notation-explanation"></a>The ... notation indicates that there may be any number
+      of individual parameters with this name and type.</p><p>Whether or not the function is defined in <a class="xref" href="apb.html#el-function-table" title="Table&nbsp;B.1.&nbsp;Defined Expression Language Functions">Table&nbsp;B.1, &#8220;Defined Expression Language Functions&#8221;</a>, you can
+      use the following syntax to define any XML element:</p><p>
+      </p><pre class="programlisting"><span class="emphasis"><em>elementName</em></span> [<span class="emphasis"><em>attr1</em></span>:'<span class="emphasis"><em>attr1value</em></span>',<span class="emphasis"><em>attr2</em></span>:'<span class="emphasis"><em>attr2value</em></span>'...] { <span class="emphasis"><em>body</em></span> }</pre><p>
+    </p><p>When an element or attribute name has a hyphen in it (such as
+      <code class="code">instruction-group</code>), it must be in single quotes for the processor to interpret it
+      correctly.</p><p>The following table shows a few examples of custom functions:</p><p>
+      </p><div class="table"><a name="custom-function-example-table"></a><p class="title"><b>Table&nbsp;B.2.&nbsp;Custom Function Examples</b></p><div class="table-contents"><table summary="Custom Function Examples" border="1"><colgroup><col class="c1"><col class="c2"></colgroup><thead><tr><th>KnittingEL</th><th>XML</th></tr></thead><tbody><tr><td>
+                <pre class="programlisting">author {
+  'first-name' Jonathan
+  'last-name' Whitall
+}</pre>
+              </td><td>
+                <pre class="programlisting">&lt;author&gt;
+  &lt;first-name&gt;Jonathan&lt;/first-name&gt;
+  &lt;last-name&gt;Whitall&lt;/last-name&gt;
+&lt;/author&gt;</pre>
+              </td></tr><tr><td>
+                <pre class="programlisting">instruction [id:'my','message-key':'instruction.my'] {
+   k1, p1
+}</pre>
+              </td><td>
+                <pre class="programlisting">&lt;instruction id="my"
+             message-key="instruction.my"&gt;
+  &lt;knit&gt;1&lt;/knit&gt;
+  &lt;purl&gt;1&lt;/purl&gt;
+&lt;/instruction&gt;                </pre>
+              </td></tr><tr><td>
+                <pre class="programlisting">increase [type:'moss']</pre>
+              </td><td>
+                <pre class="programlisting">&lt;increase type="moss"/&gt;</pre>
+              </td></tr><tr><td>
+                <pre class="programlisting">slip5</pre>
+              </td><td>
+                <pre class="programlisting">&lt;slip&gt;5&lt;/slip&gt;</pre>
+              </td></tr><tr><td>
+                <pre class="programlisting">'slip5'</pre>
+                <p>(not valid KnitML)</p>
+              </td><td>
+                <pre class="programlisting">&lt;slip5/&gt;</pre>
+              </td></tr><tr><td>
+                <pre class="programlisting">tree [age:'150',size:'big'] {
+  name: 'Old Faithful'
+}</pre>
+                <p>(not valid KnitML)</p>
+              </td><td>
+                <pre class="programlisting">&lt;tree age="150" size="big"&gt;
+  &lt;name&gt;Old Faithful&lt;/name&gt;
+&lt;/tree&gt;</pre>
+              </td></tr></tbody></table></div></div><p><br class="table-break">
+    </p><p>Use the pre-defined functions whenever possible, but there may be times when you need
+      maximum flexibility to express the resulting XML.</p><p>
+      </p><div class="table"><a name="d0e3338"></a><p class="title"><b>Table&nbsp;B.3.&nbsp;Expression Language Data Types</b></p><div class="table-contents"><table summary="Expression Language Data Types" border="1"><colgroup><col class="c1"><col class="c2"><col class="newCol3"></colgroup><thead><tr><th>Type</th><th>Form</th><th>Example</th></tr></thead><tbody><tr><td><a name="cross-type"></a>Cross</td><td>
+                <code class="code">('inFrontOf' | 'behind')</code>
+              </td><td>
+                <code class="code">inFrontOf</code>
+              </td></tr><tr><td><a name="decimal-type"></a>Decimal</td><td>Same as XML Schema's decimal data type</td><td>
+                <code class="code">1.5</code>
+              </td></tr><tr><td rowspan="2"><a name="holder-type"></a>Holder</td><td rowspan="2"><code class="code">('to' | 'from') 'holder' holderId</code></td><td>
+                <code class="code">from holder 'stitch-holder-1'</code>
+              </td></tr><tr><td><code class="code">to holder 'stitch-holder-1'</code></td></tr><tr><td><a name="id-type"></a>ID</td><td>Same as XML Schema's ID data type</td><td>
+                <code class="code">'make-cuff'</code>
+              </td></tr><tr><td><a name="idref-type"></a>IDREF</td><td>Same as XML Schema's IDREF data type</td><td>
+                <code class="code">'make-cuff'</code>
+              </td></tr><tr><td><a name="integer-type"></a>Integer</td><td>Same as XML Schema's short data type</td><td>
+                <code class="code">3</code>
+              </td></tr><tr><td><a name="length-unit-type"></a>LengthUnit</td><td>
+                <code class="code">('in' | 'inch' | 'ins' | 'inches' | 'cm' | 'centimeters' | 'mm' |
+                  'millimeters' | 'm' | 'meters' | 'yd' | 'yards')</code>
+              </td><td>
+                <code class="code">inch</code>
+              </td></tr><tr><td>LoopToWork</td><td><code class="code">('tbl')</code></td><td><code class="code">tbl</code></td></tr><tr><td><a name="map-type"></a>Map</td><td>Grouping of name / value pairs; always translates to a list of attributes for
+                the target element. Each name is taken literally and need not be in quotes (unless
+                there is a hyphen in the name).</td><td>
+                <code class="code">[id:'needle1', typeref:'needle-type1', 'message-key':'needle.needle1']</code>
+              </td></tr><tr><td><a name="map-entry-type"></a>MapEntry</td><td>A name / value pair. The name is taken literally and need not be in quotes
+                (unless there is a hyphen in the name).</td><td>
+                <code class="code">needle1:36</code>
+              </td></tr><tr><td><a name="needle-size-type"></a>NeedleSize</td><td>
+                <code class="code">('US' | 'mm')</code>
+              </td><td>
+                <code class="code">US</code>
+              </td></tr><tr><td><a name="needle-type-type"></a>NeedleType</td><td>
+                <code class="code">('circ' | 'circular' | 'straight' | 'dpn')</code>
+              </td><td>
+                <code class="code">circ</code>
+              </td></tr><tr><td rowspan="4"><a name="repeat-type"></a>Repeat</td><td rowspan="4">
+                <code class="code">('to'?, <a class="link" href="apb.html#integer-type">Integer</a>?, 'before'|'from'?,
+                    <a class="link" href="apb.html#until-type">Until</a>)</code> in any order</td><td>
+                <code class="code">to 2 before end</code>
+              </td></tr><tr><td>
+                <code class="code">to 2 from end</code>
+              </td></tr><tr><td>
+                <code class="code">to end</code>
+              </td></tr><tr><td><code class="code">8 times</code></td></tr><tr><td rowspan="5"><a name="repeat-inst-type"></a>RepeatInst</td><td rowspan="5">
+                <code class="code">('until'?, <a class="link" href="apb.html#until-inst-type">UntilInst</a>, (<a class="link" href="apb.html#decimal-type">Decimal</a> | <a class="link" href="apb.html#integer-type">Integer</a>)?, <a class="link" href="apb.html#stitch-type">Stitch</a>?, <a class="link" href="apb.html#length-unit-type">LengthUnit</a>?)</code> in any order</td><td>
+                <code class="code">until measures 4.5 in</code>
+              </td></tr><tr><td>
+                <code class="code">for 4.5 in</code>
+              </td></tr><tr><td>
+                <code class="code">until 20 stitches remain</code>
+              </td></tr><tr><td>
+                <code class="code">until 1 st remains</code>
+              </td></tr><tr><td>
+                <code class="code">8 additionalTimes</code>
+              </td></tr><tr><td><a name="row-gauge-unit-type"></a>RowGaugeUnit</td><td>
+                <code class="code">('rowsPerInch' | 'rowsPerCentimeter')</code>
+              </td><td>
+                <code class="code">rowsPerInch</code>
+              </td></tr><tr><td><a name="side-type"></a>Side</td><td>
+                <code class="code">('right' | 'wrong')</code>
+              </td><td>
+                <code class="code">wrong</code>
+              </td></tr><tr><td><a name="shape-type"></a>Shape</td><td><code class="code">('flat' | 'round')</code></td><td><code class="code">round</code></td></tr><tr><td><a name="state-description-type"></a>StateDescription</td><td><code class="code">('rem' | 'remain' | 'remaining' | 'inRow' | 'onNeedle' | 'onNeedles' |
+                  'left' | 'unworked')</code></td><td><code class="code">remaining</code></td></tr><tr><td><a name="stitch-type"></a>Stitch</td><td>
+                <code class="code">('st' | 'sts' | 'stitch' | 'stitches')</code>
+              </td><td>
+                <code class="code">sts</code>
+              </td></tr><tr><td><a name="stitch-gauge-unit-type"></a>StitchGaugeUnit</td><td>
+                <code class="code">('stitchesPerInch' | 'stitchesPerCentimeter')</code>
+              </td><td>
+                <code class="code">stitchesPerCentimeter</code>
+              </td></tr><tr><td><a name="string-type"></a>String</td><td>Same as XML Schema's string data type</td><td>
+                <code class="code">'hello'</code>
+              </td></tr><tr><td><a name="thickness-unit-type"></a>ThicknessUnit</td><td>
+                <code class="code">('wrapsPerInch' | 'wrapsPerCentimeter')</code>
+              </td><td>
+                <code class="code">wrapsPerInch</code>
+              </td></tr><tr><td><a name="until-type"></a>Until</td><td>
+                <code class="code">('end' | 'beforeEnd' | 'beforeGap' | 'marker' | 'beforeMarker' |
+                'times')</code>
+              </td><td>
+                <code class="code">marker</code>
+              </td></tr><tr><td><a name="until-inst-type"></a>UntilInst</td><td>
+                <code class="code">('measures' | 'desiredLength' | 'remain' | 'remains' | 'additionalTimes' |
+                  'for')</code>
+              </td><td>
+                <code class="code">desiredLength</code>
+              </td></tr><tr><td><a name="weight-unit-type"></a>WeightUnit</td><td>
+                <code class="code">('g' | 'grams' | 'oz' | 'ounces')</code>
+              </td><td>
+                <code class="code">grams</code>
+              </td></tr><tr><td><a name="wise-type"></a>Wise</td><td>
+                <code class="code">('knitwise' | 'purlwise')</code>
+              </td><td>
+                <code class="code">purlwise</code>
+              </td></tr><tr><td><a name="with-type"></a>With</td><td>
+                <code class="code">('withKey' | 'withLabel')</code>
+              </td><td>
+                <code class="code">withKey</code>
+              </td></tr><tr><td><a name="yarn-position-type"></a>YarnPosition</td><td>
+                <code class="code">('wyif' | 'wyib')</code>
+              </td><td>
+                <code class="code">wyif</code>
+              </td></tr></tbody></table></div></div><p><br class="table-break">
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="apa.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;</td></tr><tr><td width="40%" align="left" valign="top">Appendix&nbsp;A.&nbsp;The Specification&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;</td></tr></table></div></body></html>

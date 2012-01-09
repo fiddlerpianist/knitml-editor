@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KnitML Pattern Editor Help Plug-in
+Bundle-SymbolicName: com.knitml.gpec.help; singleton:=true
+Bundle-Version: 0.3.0.M1
+Bundle-Vendor: KnitML
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
