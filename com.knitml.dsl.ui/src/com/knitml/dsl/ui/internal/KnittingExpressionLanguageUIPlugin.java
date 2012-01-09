@@ -22,6 +22,9 @@ import com.knitml.renderer.service.RenderingService;
  */
 public class KnittingExpressionLanguageUIPlugin extends AbstractUIPlugin {
 
+	// The plug-in ID
+	public static final String PLUGIN_ID = "com.knitml.dsl.ui";
+	
 	private ServiceTracker<RenderingPreferencesService, RenderingPreferencesService> preferencesServiceTracker;
 	private ServiceTracker<RenderingService, RenderingService> renderingServiceTracker;
 
