@@ -12,7 +12,7 @@
             id="com.knitml.gpec.kel.editors.KnittingElEditor">
       </editor>
    </extension>
-   <extension
+<!--   <extension
          point="org.eclipse.ui.newWizards">
       <wizard
             category="com.knitml.gpec.knitml"
@@ -123,6 +123,7 @@
          </command>
       </menuContribution>
    </extension>
+
    <extension
          point="org.eclipse.ui.commands">
       <command
@@ -133,8 +134,6 @@
             name="KnitML File (KEL Format)">
       </command>
    </extension>
-   <extension
-         point="org.eclipse.ui.menus">
-   </extension>
+-->
 
 </plugin>
