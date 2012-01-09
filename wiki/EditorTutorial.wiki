@@ -5,7 +5,7 @@
 Here is a crash course tutorial for the new editor.
 
 = Install an Example =
-From the File menu, select "New..." which will pop up a dialog box (it might take a moment). Click on the + sign next to the Examples folder in the list, select the example you want to look at, click the Next button, then Finish. If you don't already have a pattern open, the example pattern will open up in the editor.
+From the File menu, select "New..." which will pop up a dialog box (it might take a moment). Click on the + sign next to the Examples folder in the list, select the example you want to look at, click the Next button, then Finish. If you don't already have a pattern open, the example pattern will open in the editor.
 
 The current examples are:
   * a simple pattern
@@ -20,32 +20,49 @@ The current examples are:
 == Formatting ==
 Control-Shift-F will format the pattern with proper indentation and spacing.
 == Errors ==
-If the computer can't understand your pattern, you'll get one or more red X marks with a circle in them on the left margin.
+If the computer can't understand your pattern, you'll get one or more red X marks with a circle in them on the left margin. If you mouse over this error, 
 
 == Other controls ==
+These are common editor controls that work in the editor:
 Control-F: find / replace
 Control-C: copy
 Control-X: cut
 Control-V: paste
+Right click (a.k.a. secondary click): pop-up menu with additional options
+
 
 = Elements of the Pattern =
 == The Header ==
 Each pattern has a header section which contains information such as the name of the pattern, a description, and the author. It also contains information about what is needed to knit the pattern (needles, yarn, stitch holders, etc.)
 
+Here is an example header:
+{{{
+Pattern name: "Simple Pattern"
+Description: "A simple pattern"
+Gauge: 5 st/in, 7 row/in
+Author: "Joe Smith"
+Yarn:
+	25 g of "Terri's Handspun" (worsted weight)
+Needles:
+	Size 1 US circular
+		Needle-One "Needle 1"
+
+}}}
+
 == The Directions ==
 === Starting Out ===
 Most patterns start with a cast on. For instance, to start with 20 stitches, you would type:
-
-`Cast on 20 sts`
-
+{{{
+Cast on 20 sts
+}}}
 If you use more than one needle in the pattern, however, you might first need to indicate which needles to start with:
-
-`Use Needle-One`
-
+{{{
+Use Needle-One
+}}}
 If it's obvious to the knitter which needle to use and you are just telling the computer (remember, computers are incredibly dumb), you can put it in parentheses:
-
-`(Use Needle-One)`
-
+{{{
+(Use Needle-One)
+}}}
 When you use the two next to each other:
 {{{
 (Use Needle-One)
@@ -56,5 +73,8 @@ this will look something like "Using Needle One, cast on 20 stitches" when the f
 
 === Rows ===
 
+
+=== Instructions ===
+An instruction is a group of rows that are meant to be worked together. By 
 
 If you're not sure what to type next, try Control-Space. 
