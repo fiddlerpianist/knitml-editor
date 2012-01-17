@@ -68,6 +68,13 @@ Most patterns start with a cast on. For To cast on 20 stitches, for example, you
 {{{
 Cast on 20 sts
 }}}
+{{{
+Cast on 20
+}}}
+or even:
+{{{
+CO 20
+}}}
 If you use more than one needle in the pattern, you first need to indicate which needles to start with:
 {{{
 Use Needle-One
