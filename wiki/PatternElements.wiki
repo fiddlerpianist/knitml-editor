@@ -1,7 +1,7 @@
-#summary This page describes the syntax in depth.
+#summary Elements of a Pattern
+<wiki:toc max_depth="3" />
 
-= Elements of a Pattern =
-== The Header ==
+= The Header =
 Each pattern has a header section which contains information such as the name of the pattern, a description, and the author. It also contains information about what is needed to knit the pattern (needles, yarn, stitch holders, etc.)
 
 Here is an example header:
@@ -20,8 +20,8 @@ Needles:
 
 The header is optional, but if you need to specify yarn or needles used later in the pattern, they must be put in the header. If the header is present, the pattern name and description (in that order) are required.
 
-== The Directions ==
-=== Casting On ===
+= The Directions =
+== Casting On ==
 Most patterns start with a cast on. For To cast on 20 stitches, for example, you would type:
 {{{
 Cast on 20 sts
@@ -48,7 +48,7 @@ Cast on 20 sts
 }}}
 this will look something like "Using Needle One, cast on 20 stitches" when the final (i.e., rendered) pattern is produced.
 
-=== Rows ===
+== Rows ==
 Directions which describe how to work stitches occur within a row. Here is an example:
 {{{
 Row 1: k to end
@@ -118,7 +118,7 @@ Row: k to end
 
 There are other things that you can do with rows that aren't covered here. See the examples for further usage.
 
-=== Instructions ===
+== Instructions ==
 An instruction is a group of rows that go together. All instructions have names. This instruction's name is Stockinette.
 {{{
 Instruction Stockinette:
@@ -179,7 +179,7 @@ Instruction Decreasing-Stockinette:
 Repeat Decreasing-Stockinette until 10 st remain
 }}}
 
-==== Special Consideration for Instructions ====
+=== Special Consideration for Instructions ===
 Instructions are terminated *by a blank line*. Rows 1 and 2 are part of the Stockinette instruction, but row 3 is not.
 {{{
 Instruction Stockinette:
