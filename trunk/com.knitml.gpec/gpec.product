@@ -28,8 +28,12 @@ Project (http://www.springframework.org).
    </configIni>
 
    <launcherArgs>
+      <programArgs>--launcher.XXMaxPermSize
+128m</programArgs>
       <programArgsMac>-vm /System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Commands/java</programArgsMac>
-      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <vmArgsLin>-XX:MaxPermSize=128m</vmArgsLin>
+      <vmArgsMac>-XX:MaxPermSize=128m
+-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <windowImages i16="icons/window_16.png" i32="icons/window_32.png" i48="icons/window_48.png"/>
@@ -143,6 +147,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="com.knitml.dsl.converter" version="0.3.0.M1"/>
       <plugin id="com.knitml.dsl.ui" version="0.3.0.M1"/>
       <plugin id="com.knitml.dsl.ui.examples" version="0.3.0.M1"/>
+      <plugin id="com.knitml.dsl.ui.startup" version="0.3.0.M1"/>
       <plugin id="com.knitml.el" version="0.6.0.M1"/>
       <plugin id="com.knitml.engine" version="0.6.0.M1"/>
       <plugin id="com.knitml.gpec" version="0.3.0.M1"/>
@@ -309,10 +314,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="org.springframework.context"/>
       <plugin id="org.springframework.core"/>
    </plugins>
-
-   <features>
-      <feature id="com.knitml.gpec.feature" version="1.0.0"/>
-   </features>
 
 
 </product>

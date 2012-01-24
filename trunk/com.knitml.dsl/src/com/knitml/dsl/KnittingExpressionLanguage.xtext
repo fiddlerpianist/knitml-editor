@@ -23,7 +23,7 @@ Header:
 	('Gauge:' LF? gauge=Gauge LF)? &
 	('Author:' LF? author=STRING LF)? &
 	('Techniques:' LF? techniques+=STRING (techniques+=STRING)* LF)? &
-	('Copyright: ' LF? copyright=STRING LF)? &
+	('Copyright:' LF? copyright=STRING LF)? &
 	('Needles:' LF
 	(needleTypes+=NeedleType LF (needleTypes+=NeedleType LF)*))? &
 	('Yarn:' LF?
@@ -309,7 +309,7 @@ ApplyNextRow:
 
 Repeat:
 	(('Repeat' | 'repeat') '[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' 'to'? spec=RepeatSpec) |
-	('[' operations+=InlineOperation (',' operations+=InlineOperation)* ']' (',' ('Repeat' | 'repeat'))? 'to'?
+	('[' operations+=InlineOperation (',' LF? operations+=InlineOperation)* ']' (',' ('Repeat' | 'repeat'))? 'to'?
 	spec=RepeatSpec);
 
 FromStitchHolder:

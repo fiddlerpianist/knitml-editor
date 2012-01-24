@@ -3,8 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-Name: com.knitml.dsl.ui
 Bundle-Vendor: KnitML
 Bundle-Version: 0.3.0.M1
-Bundle-SymbolicName: com.knitml.dsl.ui; singleton:=true
+Bundle-Activator: com.knitml.dsl.ui.internal.KnittingExpressionLanguageUIPlugin
 Bundle-ActivationPolicy: lazy
+Bundle-SymbolicName: com.knitml.dsl.ui; singleton:=true
 Require-Bundle: com.knitml.dsl;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.5.0",
@@ -52,4 +53,3 @@ Import-Package: com.knitml.core.common,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: com.knitml.dsl.ui.contentassist.antlr,
  com.knitml.dsl.ui.internal
-Bundle-Activator: com.knitml.dsl.ui.internal.KnittingExpressionLanguageUIPlugin
