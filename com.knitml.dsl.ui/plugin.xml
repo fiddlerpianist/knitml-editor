@@ -176,6 +176,15 @@
 	</extension>
 
 	<!-- Rename Refactoring -->
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.knitml.gpec.perspective">
+         <newWizardShortcut
+               id="com.knitml.dsl.ui.wizard.KnittingExpressionLanguageNewProjectAndPatternWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
 	<extension point="org.eclipse.ui.handlers">
 		<handler
 			class="com.knitml.dsl.ui.KnittingExpressionLanguageWithConverterExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
