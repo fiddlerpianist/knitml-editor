@@ -27,6 +27,7 @@ class YarnTypeExtractor {
 		Yarn yarn = createYarn(emfYarnType)
 		yarnType.yarns << yarn
 		yarn.yarnType = yarnType
+		yarnType.afterPropertiesSet()
 		return yarnType
 	}
 
@@ -45,6 +46,7 @@ class YarnTypeExtractor {
 				yarn.yarnType = yarnType
 			}
 		}
+		yarnType.afterPropertiesSet()
 		return yarnType
 	}
 

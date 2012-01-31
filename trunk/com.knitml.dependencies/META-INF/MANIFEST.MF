@@ -10,7 +10,7 @@ Bundle-ClassPath: commons-io-1.4.jar,
  groovy-all-1.8.3.jar,
  jibx-extras-1.2.3.jar,
  jibx-run-1.2.3.jar,
- xmlunit-1.2.jar
+ xmlunit-1.3.jar
 Bundle-Vendor: KnitML
 Export-Package: groovy.inspect;version="1.8.3",
  groovy.inspect.swingui;version="1.8.3",
@@ -45,7 +45,7 @@ Export-Package: groovy.inspect;version="1.8.3",
  org.codehaus.groovy.runtime.powerassert;version="1.8.3",
  org.codehaus.groovy.runtime.typehandling;version="1.8.3",
  org.codehaus.groovy.runtime.wrappers;version="1.8.3",
- org.custommonkey.xmlunit;version="1.2.0",
+ org.custommonkey.xmlunit;version="1.3.0",
  org.jibx.extras;version="1.2.3",
  org.jibx.runtime;version="1.2.3",
  org.jibx.runtime.impl;version="1.2.3"
