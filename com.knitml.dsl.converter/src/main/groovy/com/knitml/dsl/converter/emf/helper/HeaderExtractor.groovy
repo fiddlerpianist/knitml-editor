@@ -76,7 +76,6 @@ class HeaderExtractor {
 			supplies.needleTypes = []
 			emfHeader.needleTypes.each {
 				def needleType = extractNeedleType(it)
-				supplies.needles.addAll(needleType.needles)
 				supplies.needleTypes << needleType
 			}
 		}
@@ -84,7 +83,6 @@ class HeaderExtractor {
 			supplies.yarnTypes = []
 			emfHeader.yarnTypes.each {
 				def yarnType = yarnTypeExtractor.extractYarnType(it)
-				supplies.yarns.addAll(yarnType.yarns)
 				supplies.yarnTypes << yarnType
 			}
 		}
@@ -140,6 +138,7 @@ class HeaderExtractor {
 			emfHelper.addNeedle(needle)
 			needleType.needles << needle
 		}
+		needleType.afterPropertiesSet()
 		return needleType
 	}
 
