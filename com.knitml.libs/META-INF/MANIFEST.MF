@@ -190,7 +190,7 @@ Export-Package: com.knitml.core.common;version="0.6.0.CI-20110111";uses:="com.kn
    org.springframework.aop",
  com.knitml.validation.visitor.util;version="0.6.0.CI-20110111";uses:="com.knitml.engine,com.knitml.core.model.directions.block,com.knitml.validation.context"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: com.knitml.dependencies;bundle-version="0.6.0.CI-20110111"
+Require-Bundle: com.knitml.dependencies;bundle-version="0.6.0"
 Import-Package: org.aopalliance.aop;version="1.0.0",
  org.aopalliance.intercept;version="1.0.0",
  org.slf4j;version="[1.5.2,2.0.0)",
