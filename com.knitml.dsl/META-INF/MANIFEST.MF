@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.knitml.dsl
+Bundle-Vendor: KnitML
+Bundle-Version: 0.3.0.M2
+Bundle-SymbolicName: com.knitml.dsl; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.common.types
+Import-Package: org.apache.commons.logging,
+ org.apache.log4j;version="1.2.16",
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xtend2.lib,
+ org.slf4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: com.knitml.dsl; uses:="org.eclipse.xtext,  org.eclipse.xtext.service,  org.eclipse.xtext.common.types,  com.google.inject",
+ com.knitml.dsl.formatting;uses:="org.eclipse.xtext.formatting.impl,com.knitml.dsl.services",
+ com.knitml.dsl.knittingExpressionLanguage;uses:="org.eclipse.emf.ecore,org.eclipse.emf.common.util",
+ com.knitml.dsl.knittingExpressionLanguage.impl; uses:="org.eclipse.emf.ecore,  org.eclipse.emf.common.util,  com.knitml.dsl.knittingExpressionLanguage,  org.eclipse.emf.common.notify,  org.eclipse.emf.ecore.impl",
+ com.knitml.dsl.knittingExpressionLanguage.util; uses:="org.eclipse.emf.ecore.util,  org.eclipse.emf.ecore,  org.eclipse.emf.common.notify.impl,  com.knitml.dsl.knittingExpressionLanguage,  org.eclipse.emf.common.notify",
+ com.knitml.dsl.parser.antlr;uses:="com.knitml.dsl.parser.antlr.internal,com.knitml.dsl.services,org.eclipse.xtext.parser.antlr",
+ com.knitml.dsl.parser.antlr.internal; uses:="org.eclipse.emf.ecore,  com.knitml.dsl.services,  org.eclipse.emf.common.util,  org.antlr.runtime,  org.eclipse.xtext.parser.antlr",
+ com.knitml.dsl.scoping;uses:="org.eclipse.xtext.scoping.impl",
+ com.knitml.dsl.serializer; uses:="org.eclipse.xtext,  org.eclipse.emf.ecore,  org.eclipse.xtext.serializer.acceptor,  com.knitml.dsl.services,  org.eclipse.xtext.serializer.sequencer,  com.knitml.dsl.knittingExpressionLanguage,  org.eclipse.xtext.serializer.analysis,  org.eclipse.xtext.serializer.diagnostic,  org.eclipse.xtext.nodemodel,  com.google.inject",
+ com.knitml.dsl.services;uses:="org.eclipse.xtext,org.eclipse.xtext.service",
+ com.knitml.dsl.validation;uses:="org.eclipse.xtext.validation"
+
