@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.knitml.dsl.converter
 Bundle-Vendor: KnitML
-Bundle-Version: 0.3.0.M1
+Bundle-Version: 0.3.0.M2
 Bundle-SymbolicName: com.knitml.dsl.converter; singleton:=true
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.inject,

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KnitML Rendering Service Plug-in
 Bundle-SymbolicName: com.knitml.renderer.service
-Bundle-Version: 0.6.0.M1
+Bundle-Version: 0.6.0.M2
 Bundle-Activator: com.knitml.renderer.service.Activator
 Bundle-Vendor: KnitML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

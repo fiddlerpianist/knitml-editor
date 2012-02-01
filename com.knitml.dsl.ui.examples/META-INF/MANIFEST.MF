@@ -6,5 +6,5 @@ Bundle-Name: Knitting Expression Language Examples
 Bundle-SymbolicName: com.knitml.dsl.ui.examples;singleton:=true
 Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.em
  f.common.ui
-Bundle-Version: 0.3.0.M1
+Bundle-Version: 0.3.0.M2
 Bundle-ManifestVersion: 2
