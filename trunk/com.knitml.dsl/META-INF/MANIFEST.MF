@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.knitml.dsl
 Bundle-Vendor: KnitML
-Bundle-Version: 0.3.0.M1
+Bundle-Version: 0.3.0.M2
 Bundle-SymbolicName: com.knitml.dsl; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,

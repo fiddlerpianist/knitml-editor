@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="KnitML Pattern Editor" id="com.knitml.gpec.product" application="com.knitml.gpec.application" version="0.3.0.M1" useFeatures="false" includeLaunchers="true">
+<product name="KnitML Pattern Editor" id="com.knitml.gpec.product" application="com.knitml.gpec.application" version="0.3.0.M2" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="icons/about.gif"/>
       <text>
          KnitML Pattern Editor
 
-Version: 0.3.0.M1
+Version: 0.3.0.M2
 
 (c) Copyright KnitML contributors and others 2008, 2009, 2010, 2011, 2012.  All rights reserved.
 Visit http://www.knitml.com/
@@ -141,24 +141,24 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="com.google.guava"/>
       <plugin id="com.google.inject"/>
       <plugin id="com.ibm.icu"/>
-      <plugin id="com.knitml.core" version="0.6.0.M1"/>
-      <plugin id="com.knitml.dependencies" version="0.6.0.M1"/>
-      <plugin id="com.knitml.dsl" version="0.3.0.M1"/>
-      <plugin id="com.knitml.dsl.converter" version="0.3.0.M1"/>
-      <plugin id="com.knitml.dsl.ui" version="0.3.0.M1"/>
-      <plugin id="com.knitml.dsl.ui.examples" version="0.3.0.M1"/>
-      <plugin id="com.knitml.dsl.ui.startup" version="0.3.0.M1"/>
-      <plugin id="com.knitml.el" version="0.6.0.M1"/>
-      <plugin id="com.knitml.engine" version="0.6.0.M1"/>
-      <plugin id="com.knitml.gpec" version="0.3.0.M1"/>
-      <plugin id="com.knitml.gpec.help" version="0.3.0.M1"/>
-      <plugin id="com.knitml.gpec.kel" version="0.3.0.M1"/>
-      <plugin id="com.knitml.gpec.renderer.preferences" version="0.3.0.M1"/>
-      <plugin id="com.knitml.gpec.renderer.preferences.operations" version="0.3.0.M1"/>
-      <plugin id="com.knitml.logging.config" version="0.3.0.M1" fragment="true"/>
-      <plugin id="com.knitml.renderer" version="0.6.0.M1"/>
-      <plugin id="com.knitml.renderer.service" version="0.6.0.M1"/>
-      <plugin id="com.knitml.validation" version="0.6.0.M1"/>
+      <plugin id="com.knitml.core" version="0.6.0.M2"/>
+      <plugin id="com.knitml.dependencies" version="0.6.0.M2"/>
+      <plugin id="com.knitml.dsl" version="0.3.0.M2"/>
+      <plugin id="com.knitml.dsl.converter" version="0.3.0.M2"/>
+      <plugin id="com.knitml.dsl.ui" version="0.3.0.M2"/>
+      <plugin id="com.knitml.dsl.ui.examples" version="0.3.0.M2"/>
+      <plugin id="com.knitml.dsl.ui.startup" version="0.3.0.M2"/>
+      <plugin id="com.knitml.el" version="0.6.0.M2"/>
+      <plugin id="com.knitml.engine" version="0.6.0.M2"/>
+      <plugin id="com.knitml.gpec" version="0.3.0.M2"/>
+      <plugin id="com.knitml.gpec.help" version="0.3.0.M2"/>
+      <plugin id="com.knitml.gpec.kel" version="0.3.0.M2"/>
+      <plugin id="com.knitml.gpec.renderer.preferences" version="0.3.0.M2"/>
+      <plugin id="com.knitml.gpec.renderer.preferences.operations" version="0.3.0.M2"/>
+      <plugin id="com.knitml.logging.config" version="0.3.0.M2" fragment="true"/>
+      <plugin id="com.knitml.renderer" version="0.6.0.M2"/>
+      <plugin id="com.knitml.renderer.service" version="0.6.0.M2"/>
+      <plugin id="com.knitml.validation" version="0.6.0.M2"/>
       <plugin id="com.ning.async-http-client"/>
       <plugin id="com.springsource.org.aopalliance"/>
       <plugin id="javax.servlet"/>
