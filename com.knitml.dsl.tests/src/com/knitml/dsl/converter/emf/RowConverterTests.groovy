@@ -8,15 +8,15 @@ import com.knitml.core.common.KnittingShape
 import com.knitml.core.common.RowDefinitionScope
 import com.knitml.core.common.Side
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.directions.block.Row
-import com.knitml.core.model.directions.information.Message
-import com.knitml.core.model.directions.information.NumberOfStitches
+import com.knitml.core.model.operations.block.Row;
+import com.knitml.core.model.operations.information.Message;
+import com.knitml.core.model.operations.information.NumberOfStitches;
 
 class RowConverterTests extends AbstractConverterTests {
 
 	@Test
 	void basicRows() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Pattern name:  "My Pattern" 
 			Description:  "My Description" 
 			Yarn: 50g of worsted weight named A
@@ -52,7 +52,7 @@ class RowConverterTests extends AbstractConverterTests {
 	
 	@Test
 	void sideRelatedRows() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Row RS: knit
 			Row WS: knit
 			Row (state side): knit
@@ -72,7 +72,7 @@ class RowConverterTests extends AbstractConverterTests {
 	
 	@Test
 	void shortLongNextRows() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Row 1: knit
 			Short Row 2: knit
 			Long Row 3: knit
@@ -110,7 +110,7 @@ class RowConverterTests extends AbstractConverterTests {
 
 	@Test
 	void rowRange() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Rows 1-3: knit
 			Rounds 4,5,6: knit
 		'''
@@ -124,7 +124,7 @@ class RowConverterTests extends AbstractConverterTests {
 
 	@Test
 	void rowRangesMixedWithNumbers() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Rows 1-3,5: knit
 			Rounds 4,6-9: knit
 		'''
@@ -138,7 +138,7 @@ class RowConverterTests extends AbstractConverterTests {
 
 	@Test
 	void rowNumbersOutOfOrder() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Rows 5,1-3: knit
 			Rounds 6-9,4: knit
 		'''
@@ -152,7 +152,7 @@ class RowConverterTests extends AbstractConverterTests {
 
 	@Test
 	void rowWithStateSts() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Row: knit, state sts
 		'''
 		((Row) pattern.directions.operations[0]).with {
@@ -165,7 +165,7 @@ class RowConverterTests extends AbstractConverterTests {
 
 	@Test
 	void rowWithMessage() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Row: knit, "This row will look funny."
 		'''
 		((Row) pattern.directions.operations[0]).with {
@@ -177,7 +177,7 @@ class RowConverterTests extends AbstractConverterTests {
 
 	@Test
 	void rowWithState5StsAndMessage() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Row: knit to end, state 5 sts, "This row will look funny."
 		'''
 		((Row) pattern.directions.operations[0]).with {

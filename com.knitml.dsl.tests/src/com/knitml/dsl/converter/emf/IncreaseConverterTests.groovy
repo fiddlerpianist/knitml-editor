@@ -8,9 +8,9 @@ import org.junit.Test
 
 import com.knitml.core.common.DecreaseType
 import com.knitml.core.common.IncreaseType
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.inline.Decrease
-import com.knitml.core.model.directions.inline.Increase
+import com.knitml.core.model.operations.inline.Decrease;
+import com.knitml.core.model.operations.inline.Increase;
+import com.knitml.core.model.pattern.Pattern;
 
 class IncreaseConverterTests extends AbstractConverterTests {
 

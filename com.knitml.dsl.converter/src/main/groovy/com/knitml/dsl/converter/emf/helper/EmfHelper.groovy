@@ -9,14 +9,14 @@ import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.Identifiable
-import com.knitml.core.model.directions.Operation
-import com.knitml.core.model.directions.inline.InlineInstruction
-import com.knitml.core.model.directions.inline.Repeat
-import com.knitml.core.model.directions.inline.Repeat.Until
-import com.knitml.core.model.header.Needle
-import com.knitml.core.model.header.StitchHolder
-import com.knitml.core.model.header.Yarn
+import com.knitml.core.model.common.Identifiable;
+import com.knitml.core.model.common.Needle;
+import com.knitml.core.model.common.StitchHolder;
+import com.knitml.core.model.common.Yarn;
+import com.knitml.core.model.operations.inline.Repeat.Until
+import com.knitml.core.model.operations.Operation;
+import com.knitml.core.model.operations.inline.InlineInstruction;
+import com.knitml.core.model.operations.inline.Repeat;
 import com.knitml.dsl.converter.OperationContainer
 import com.knitml.dsl.knittingExpressionLanguage.RepeatSpec
 

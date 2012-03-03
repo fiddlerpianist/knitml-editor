@@ -209,9 +209,9 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 	 */
 	protected void pageChange(int newPageIndex) {
 		if (newPageIndex == PATTERN_PAGE) {
-			com.knitml.core.model.Pattern pattern = convertFromEmf();
+			com.knitml.core.model.pattern.Pattern pattern = convertFromEmf();
 			initializePatternViewControl();
-			com.knitml.core.model.Pattern processedPattern = patternViewContainer
+			com.knitml.core.model.pattern.Pattern processedPattern = patternViewContainer
 					.render(pattern);
 			if (processedPattern != null) {
 				IResource resource = (IResource) getEditorInput().getAdapter(
@@ -225,7 +225,7 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 		super.pageChange(newPageIndex);
 	}
 
-	protected com.knitml.core.model.Pattern convertFromEmf() {
+	protected com.knitml.core.model.pattern.Pattern convertFromEmf() {
 		Resource emfResource = resourceFactory.createResource(editor
 				.getEditorInput());
 		try {
@@ -234,7 +234,7 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 			throw new ConversionException(ex);
 		}
 		Pattern emfModel = (Pattern) emfResource.getContents().get(0);
-		return (com.knitml.core.model.Pattern) converterLocator
+		return (com.knitml.core.model.pattern.Pattern) converterLocator
 				.locateConverter(emfModel).convert(emfModel);
 	}
 

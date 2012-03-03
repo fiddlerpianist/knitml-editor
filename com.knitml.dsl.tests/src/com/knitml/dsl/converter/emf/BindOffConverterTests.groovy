@@ -6,9 +6,9 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.knitml.core.common.Wise
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.inline.BindOff
-import com.knitml.core.model.directions.inline.BindOffAll
+import com.knitml.core.model.operations.inline.BindOff;
+import com.knitml.core.model.operations.inline.BindOffAll;
+import com.knitml.core.model.pattern.Pattern;
 
 
 class BindOffConverterTests extends AbstractConverterTests {

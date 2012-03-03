@@ -5,18 +5,18 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.knitml.core.model.directions.block.CastOn
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.block.InstructionGroup
-import com.knitml.core.model.directions.block.RepeatInstruction
-import com.knitml.core.model.directions.block.Row
-import com.knitml.core.model.directions.block.Section
+import com.knitml.core.model.operations.block.CastOn;
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.block.RepeatInstruction;
+import com.knitml.core.model.operations.block.Row;
+import com.knitml.core.model.pattern.InstructionGroup;
+import com.knitml.core.model.pattern.Section;
 
 class InstructionGroupConverterTests extends AbstractConverterTests {
 
 	@Test
 	void basicInstructionGroup() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Group cast-on:
 		Row: knit
 		'''
@@ -31,7 +31,7 @@ class InstructionGroupConverterTests extends AbstractConverterTests {
 	
 	@Test
 	void instructionGroupWithLabelAndResetCountApplied() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Group cast-on "Set up your work" (with key, reset count):
 		Row: knit
 		'''
@@ -46,7 +46,7 @@ class InstructionGroupConverterTests extends AbstractConverterTests {
 	
 	@Test
 	void instructionGroupNoParagraphs() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Group cast-on "Setup your work":
 		Cast on 20
 
@@ -79,7 +79,7 @@ class InstructionGroupConverterTests extends AbstractConverterTests {
 
 	@Test
 	void instructionGroupWithParagraphs() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		PARAGRAPHS
 
 		Group cast-on "Setup your work":

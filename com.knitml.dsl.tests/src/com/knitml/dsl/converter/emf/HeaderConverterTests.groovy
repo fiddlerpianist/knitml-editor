@@ -6,18 +6,18 @@ import static com.knitml.core.units.Units.*
 import org.junit.Test
 
 import com.knitml.core.common.NeedleStyle;
-import com.knitml.core.model.directions.block.CastOn
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.block.RepeatInstruction
-import com.knitml.core.model.directions.block.Row
-import com.knitml.core.model.directions.block.Section
-import com.knitml.core.model.directions.information.Information
+import com.knitml.core.model.operations.block.CastOn;
+import com.knitml.core.model.operations.block.Information;
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.block.RepeatInstruction;
+import com.knitml.core.model.operations.block.Row;
+import com.knitml.core.model.pattern.Section;
 
 class HeaderConverterTests extends AbstractConverterTests {
 
 	@Test
 	void minimalHeader() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Emmaheld"
 		Description: "A fair isle piece inspired by my trip to the Shetlands"
 
@@ -36,7 +36,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 	}
 	@Test
 	void fullGeneralInformationHeader() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Emmaheld"
 		Description: "A fair isle piece inspired by my trip to the Shetlands"
 		Language: French
@@ -63,7 +63,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 	}
 	@Test
 	void decimalGauge() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Emmaheld"
 		Description: "A fair isle piece inspired by my trip to the Shetlands"
 		Gauge: 3.5 st/in, 5.5 rows/in
@@ -75,7 +75,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 	}
 	@Test
 	void needleTypes() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Needles:
@@ -139,7 +139,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 
 	@Test
 	void singleYarnWithYarnTypesNoBrandInfo() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Yarn:
@@ -177,7 +177,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 	}
 	@Test
 	void singleYarnWithYarnTypesWithBrandInfo() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Yarn:
@@ -231,7 +231,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 
 	@Test
 	void multipleYarnsPerYarnType() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Yarn:
@@ -262,7 +262,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 
 	@Test
 	void yarnWithoutWeight() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Yarn: worsted weight yarn
@@ -275,7 +275,7 @@ class HeaderConverterTests extends AbstractConverterTests {
 	
 	@Test
 	void stitchHolders() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Stitch Holders:

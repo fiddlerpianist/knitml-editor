@@ -5,17 +5,17 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.knitml.core.common.KnittingShape
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.inline.InlineInstruction
-import com.knitml.core.model.directions.inline.Knit
-import com.knitml.core.model.directions.inline.Purl
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.inline.InlineInstruction;
+import com.knitml.core.model.operations.inline.Knit;
+import com.knitml.core.model.operations.inline.Purl;
 import com.knitml.dsl.converter.emf.exception.ConversionException
 
 class InstructionConverterTests extends AbstractConverterTests {
 
 	@Test
 	void instructionWithColonAndLineFeed() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Instruction one:
 			Row: knit
 
@@ -27,7 +27,7 @@ class InstructionConverterTests extends AbstractConverterTests {
 	}
 	@Test
 	void instructionWithBrackets() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Instruction one { Row: knit }'''
 		((Instruction) pattern.directions.operations[0]).with {
 			assertThat it, instanceOf (Instruction)
@@ -36,7 +36,7 @@ class InstructionConverterTests extends AbstractConverterTests {
 	}
 	@Test
 	void fullInstruction() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Instruction SunnyDayStitch "Sunny Day Stitch" (with key, round shape, 2 rounds):
 			Row: knit
 			Row: knit
@@ -55,14 +55,14 @@ class InstructionConverterTests extends AbstractConverterTests {
 	// test cases which demonstrate invalid syntax
 	@Test(expected=ConversionException)
 	void instructionWithColonWithoutLineFeed() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Instruction one:
 			Row: knit'''
 	}
 
 	@Test
 	void basicInlineInstruction() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Row: instruction one: [k, p]
 		'''
 		((InlineInstruction) pattern.directions.operations[0].operations[0]).with {
@@ -75,7 +75,7 @@ class InstructionConverterTests extends AbstractConverterTests {
 	}
 	@Test
 	void fullInlineInstruction() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Row: instruction one "Number One" (with key): [k, p]
 		'''
 		((InlineInstruction) pattern.directions.operations[0].operations[0]).with {

@@ -15,7 +15,7 @@ import org.junit.runner.RunWith
 import com.google.inject.Inject
 import com.google.inject.Injector
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.Pattern
+import com.knitml.core.model.pattern.Pattern;
 import com.knitml.dsl.converter.KnittingExpressionLanguageInjectorProvider
 import com.knitml.dsl.converter.emf.exception.ConversionException
 import com.knitml.dsl.converter.emf.exception.LinkingException

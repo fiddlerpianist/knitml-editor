@@ -15,9 +15,9 @@ import org.jibx.runtime.JiBXException;
 import org.xml.sax.SAXException;
 
 import com.google.inject.Inject;
-import com.knitml.core.common.Parameters;
 import com.knitml.core.converter.DomainModelConverterLocator;
-import com.knitml.core.model.directions.block.RepeatInstruction;
+import com.knitml.core.model.operations.block.RepeatInstruction;
+import com.knitml.core.model.pattern.Parameters;
 import com.knitml.dsl.converter.emf.helper.EmfHelper;
 import com.knitml.dsl.knittingExpressionLanguage.Instruction;
 import com.knitml.dsl.knittingExpressionLanguage.Pattern;
@@ -37,7 +37,7 @@ public class KnittingExpressionLanguageJavaValidator extends
 	@Check(NORMAL)
 	public void checkInstruction(Instruction instruction) {
 		if (!instruction.isMerged()) {
-			com.knitml.core.model.directions.block.Instruction modelInstruction = (com.knitml.core.model.directions.block.Instruction) locator
+			com.knitml.core.model.operations.block.Instruction modelInstruction = (com.knitml.core.model.operations.block.Instruction) locator
 					.locateConverter(instruction).convert(instruction);
 			try {
 				createExpandedRows(modelInstruction);
@@ -49,7 +49,7 @@ public class KnittingExpressionLanguageJavaValidator extends
 
 	@Check(NORMAL)
 	public void checkPattern(Pattern pattern) {
-		com.knitml.core.model.Pattern modelPattern = (com.knitml.core.model.Pattern) locator
+		com.knitml.core.model.pattern.Pattern modelPattern = (com.knitml.core.model.pattern.Pattern) locator
 				.locateConverter(pattern).convert(pattern);
 		try {
 			testKnitPattern(modelPattern);
@@ -97,7 +97,7 @@ public class KnittingExpressionLanguageJavaValidator extends
 		}
 	}
 
-	private void testKnitPattern(com.knitml.core.model.Pattern pattern)
+	private void testKnitPattern(com.knitml.core.model.pattern.Pattern pattern)
 			throws KnittingEngineException {
 		ValidationProgram program = new ValidationProgram(true);
 		Parameters parameters = new Parameters();

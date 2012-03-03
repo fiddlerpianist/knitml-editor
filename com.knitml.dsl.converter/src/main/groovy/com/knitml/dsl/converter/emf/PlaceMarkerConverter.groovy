@@ -5,9 +5,9 @@ import org.apache.commons.logging.LogFactory
 
 import com.knitml.core.common.Wise
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.inline.BindOff
-import com.knitml.core.model.directions.inline.BindOffAll
-import com.knitml.core.model.directions.inline.PlaceMarker
+import com.knitml.core.model.operations.inline.BindOff;
+import com.knitml.core.model.operations.inline.BindOffAll;
+import com.knitml.core.model.operations.inline.PlaceMarker;
 
 public class PlaceMarkerConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.PlaceMarker> {
 

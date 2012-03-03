@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory
 
 import com.google.inject.Inject
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.block.GraftTogether
+import com.knitml.core.model.operations.block.GraftTogether;
 import com.knitml.dsl.converter.emf.helper.EmfHelper
 import com.knitml.dsl.knittingExpressionLanguage.Graft
 

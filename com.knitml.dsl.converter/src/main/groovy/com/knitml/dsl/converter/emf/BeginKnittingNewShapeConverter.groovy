@@ -5,9 +5,9 @@ import org.apache.commons.logging.LogFactory
 
 import com.knitml.core.common.Side;
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.BlockOperation
-import com.knitml.core.model.directions.block.DeclareFlatKnitting;
-import com.knitml.core.model.directions.block.DeclareRoundKnitting;
+import com.knitml.core.model.operations.BlockOperation;
+import com.knitml.core.model.operations.block.DeclareFlatKnitting;
+import com.knitml.core.model.operations.block.DeclareRoundKnitting;
 
 public class BeginKnittingNewShapeConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.BeginKnittingNewShape> {
 

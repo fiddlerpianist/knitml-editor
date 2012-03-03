@@ -8,8 +8,8 @@ import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IMarshallingContext;
 import org.jibx.runtime.JiBXException;
 
-import com.knitml.core.common.Parameters;
-import com.knitml.core.model.Pattern;
+import com.knitml.core.model.pattern.Parameters;
+import com.knitml.core.model.pattern.Pattern;
 import com.knitml.engine.common.KnittingEngineException;
 import com.knitml.renderer.RendererFactory;
 import com.knitml.renderer.common.RenderingException;

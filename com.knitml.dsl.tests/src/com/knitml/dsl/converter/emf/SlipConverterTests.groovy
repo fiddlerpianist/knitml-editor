@@ -8,9 +8,9 @@ import org.junit.Test
 import com.knitml.core.common.SlipDirection
 import com.knitml.core.common.Wise
 import com.knitml.core.common.YarnPosition
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.inline.Slip
-import com.knitml.core.model.directions.inline.SlipToStitchHolder;
+import com.knitml.core.model.operations.inline.Slip;
+import com.knitml.core.model.operations.inline.SlipToStitchHolder;
+import com.knitml.core.model.pattern.Pattern;
 
 class SlipConverterTests extends AbstractConverterTests {
 

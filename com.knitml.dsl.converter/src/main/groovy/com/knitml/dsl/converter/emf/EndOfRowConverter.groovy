@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.inline.DesignateEndOfRow
+import com.knitml.core.model.operations.inline.DesignateEndOfRow;
 
 public class EndOfRowConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.EndOfRow> {
 

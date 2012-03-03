@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.knitml.core.model.directions.Operation;
+import com.knitml.core.model.operations.Operation;
 
 public class OperationContainer implements Operation {
 

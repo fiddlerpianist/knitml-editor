@@ -4,8 +4,8 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.information.Information
-import com.knitml.core.model.directions.information.NumberOfStitches
+import com.knitml.core.model.operations.block.Information;
+import com.knitml.core.model.operations.information.NumberOfStitches;
 
 public class StateStitchesConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.StateStitches> {
 

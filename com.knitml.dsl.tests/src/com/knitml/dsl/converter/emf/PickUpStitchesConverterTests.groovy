@@ -6,9 +6,9 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.knitml.core.common.Wise
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.block.PickUpStitches
-import com.knitml.core.model.directions.inline.InlinePickUpStitches
+import com.knitml.core.model.operations.block.PickUpStitches;
+import com.knitml.core.model.operations.inline.InlinePickUpStitches;
+import com.knitml.core.model.pattern.Pattern;
 
 
 class PickUpStitchesConverterTests extends AbstractConverterTests {

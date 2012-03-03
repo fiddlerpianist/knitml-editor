@@ -3,8 +3,8 @@ package com.knitml.renderer.service;
 import java.io.IOException;
 import java.io.Writer;
 
-import com.knitml.core.common.Parameters;
-import com.knitml.core.model.Pattern;
+import com.knitml.core.model.pattern.Parameters;
+import com.knitml.core.model.pattern.Pattern;
 import com.knitml.renderer.RendererFactory;
 import com.knitml.renderer.common.RenderingException;
 import com.knitml.renderer.context.Options;

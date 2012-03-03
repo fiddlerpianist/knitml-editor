@@ -7,8 +7,8 @@ import org.junit.Test
 
 import com.knitml.core.common.CrossType;
 import com.knitml.core.common.SlipDirection
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.inline.CrossStitches
+import com.knitml.core.model.operations.inline.CrossStitches;
+import com.knitml.core.model.pattern.Pattern;
 
 class CrossStitchesConverterTests extends AbstractConverterTests {
 

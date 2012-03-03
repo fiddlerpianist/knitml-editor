@@ -4,8 +4,8 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.block.CastOn
-import com.knitml.core.model.directions.inline.InlineCastOn
+import com.knitml.core.model.operations.block.CastOn;
+import com.knitml.core.model.operations.inline.InlineCastOn;
 
 public class InlineCastOnConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.InlineCastOn> {
 

@@ -7,11 +7,11 @@ import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.Identifiable
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.Version
-import com.knitml.core.model.directions.Directions
-import com.knitml.core.model.header.Directives
+import com.knitml.core.model.common.Identifiable;
+import com.knitml.core.model.pattern.Directions;
+import com.knitml.core.model.pattern.Directives;
+import com.knitml.core.model.pattern.Pattern;
+import com.knitml.core.model.pattern.Version;
 import com.knitml.dsl.converter.emf.helper.EmfHelper
 import com.knitml.dsl.converter.emf.helper.HeaderExtractor
 import com.knitml.dsl.knittingExpressionLanguage.Header
