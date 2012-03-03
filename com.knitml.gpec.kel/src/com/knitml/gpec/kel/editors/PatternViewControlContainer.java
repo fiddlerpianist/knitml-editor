@@ -22,7 +22,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.springframework.core.io.ResourceLoader;
 
-import com.knitml.core.common.Parameters;
+import com.knitml.core.model.pattern.Parameters;
 import com.knitml.gpec.internal.kel.KelPlugin;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
 import com.knitml.renderer.chart.symbol.NoSymbolFoundException;

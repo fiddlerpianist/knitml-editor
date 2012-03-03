@@ -28,7 +28,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.ide.IDE;
 
-import com.knitml.core.common.Parameters;
+import com.knitml.core.model.pattern.Parameters;
 import com.knitml.el.KelProgram;
 import com.knitml.gpec.internal.kel.KelPlugin;
 import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
