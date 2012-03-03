@@ -6,9 +6,9 @@ import com.google.inject.Inject
 import com.knitml.core.common.KnittingShape
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.directions.Operation
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.inline.InlineInstruction;
+import com.knitml.core.model.operations.Operation;
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.inline.InlineInstruction;
 import com.knitml.dsl.converter.emf.helper.EmfHelper;
 
 public class InlineInstructionConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.InlineInstruction> {

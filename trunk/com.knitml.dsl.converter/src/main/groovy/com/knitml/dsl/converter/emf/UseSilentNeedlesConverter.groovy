@@ -5,8 +5,8 @@ import org.apache.commons.logging.LogFactory
 
 import com.google.inject.Inject;
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.block.JoinInRound
-import com.knitml.core.model.directions.block.UseNeedles
+import com.knitml.core.model.operations.block.JoinInRound;
+import com.knitml.core.model.operations.block.UseNeedles;
 import com.knitml.dsl.converter.emf.helper.EmfHelper;
 
 public class UseSilentNeedlesConverter extends UseNeedlesConverter {

@@ -5,11 +5,11 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.block.ArrangeStitchesOnNeedles
-import com.knitml.core.model.directions.block.GraftTogether
-import com.knitml.core.model.directions.block.LabelNeedle
-import com.knitml.core.model.directions.block.UseNeedles
+import com.knitml.core.model.operations.block.ArrangeStitchesOnNeedles;
+import com.knitml.core.model.operations.block.GraftTogether;
+import com.knitml.core.model.operations.block.LabelNeedle;
+import com.knitml.core.model.operations.block.UseNeedles;
+import com.knitml.core.model.pattern.Pattern;
 
 
 class UseNeedlesConverterTests extends AbstractConverterTests {

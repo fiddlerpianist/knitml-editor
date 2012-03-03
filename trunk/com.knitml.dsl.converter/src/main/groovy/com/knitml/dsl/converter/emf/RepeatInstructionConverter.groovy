@@ -5,8 +5,8 @@ import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.directions.block.RepeatInstruction
-import com.knitml.core.model.directions.block.RepeatInstruction.Until
+import com.knitml.core.model.operations.block.RepeatInstruction.Until
+import com.knitml.core.model.operations.block.RepeatInstruction;
 import com.knitml.core.units.KnittingMeasure
 import com.knitml.core.units.Units
 import com.knitml.dsl.converter.emf.helper.EmfHelper;

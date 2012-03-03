@@ -7,17 +7,17 @@ Bundle-Activator: com.knitml.renderer.service.Activator
 Bundle-Vendor: KnitML
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Import-Package: com.knitml.core.common;version="0.6.0",
- com.knitml.core.model;version="0.6.0",
- com.knitml.engine;version="0.6.0",
- com.knitml.engine.common;version="0.6.0",
- com.knitml.renderer;version="0.6.0",
- com.knitml.renderer.common;version="0.6.0",
- com.knitml.renderer.context;version="0.6.0",
- com.knitml.renderer.program;version="0.6.0",
- com.knitml.validation.visitor.instruction;version="0.6.0",
- com.knitml.validation.visitor.instruction.impl;version="0.6.0",
+Import-Package: com.knitml.core.common,
+ com.knitml.core.model.pattern,
+ com.knitml.engine,
+ com.knitml.engine.common,
+ com.knitml.renderer,
+ com.knitml.renderer.common,
+ com.knitml.renderer.context,
+ com.knitml.renderer.program,
+ com.knitml.validation.visitor.instruction,
+ com.knitml.validation.visitor.instruction.impl,
  org.jibx.runtime;version="1.2.1",
  org.osgi.framework;version="1.5.0"
-Export-Package: com.knitml.renderer.service;version="0.6.0.CI-20110111"
+Export-Package: com.knitml.renderer.service;version="0.6.0.M2"
 Require-Bundle: com.knitml.dependencies;bundle-version="0.6.0"

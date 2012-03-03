@@ -7,9 +7,9 @@ import static com.knitml.dsl.knittingExpressionLanguage.Language.*
 import org.eclipse.emf.ecore.util.EcoreUtil
 
 import com.google.inject.Inject
-import com.knitml.core.model.header.Color
-import com.knitml.core.model.header.Yarn
-import com.knitml.core.model.header.YarnType
+import com.knitml.core.model.common.Color;
+import com.knitml.core.model.common.Yarn;
+import com.knitml.core.model.common.YarnType;
 import com.knitml.core.units.KnittingMeasure
 import com.knitml.core.units.Units
 import com.knitml.dsl.knittingExpressionLanguage.WeightAndLengthSpec

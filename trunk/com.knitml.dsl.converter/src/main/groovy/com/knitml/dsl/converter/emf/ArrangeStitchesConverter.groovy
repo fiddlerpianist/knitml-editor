@@ -3,12 +3,12 @@ package com.knitml.dsl.converter.emf
 import org.eclipse.emf.ecore.EObject
 
 import com.google.inject.Inject
-import com.knitml.core.common.StitchesOnNeedle;
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.directions.block.ArrangeStitchesOnNeedles;
-import com.knitml.core.model.directions.block.UseNeedles
-import com.knitml.core.model.header.Needle
+import com.knitml.core.model.common.Needle;
+import com.knitml.core.model.common.StitchesOnNeedle;
+import com.knitml.core.model.operations.block.ArrangeStitchesOnNeedles;
+import com.knitml.core.model.operations.block.UseNeedles;
 import com.knitml.dsl.converter.OperationContainer
 import com.knitml.dsl.converter.emf.helper.EmfHelper
 

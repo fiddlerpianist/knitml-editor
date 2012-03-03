@@ -4,18 +4,18 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.knitml.core.model.directions.block.CastOn
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.block.RepeatInstruction
-import com.knitml.core.model.directions.block.Row
-import com.knitml.core.model.directions.block.Section
-import com.knitml.core.model.directions.information.Information
+import com.knitml.core.model.operations.block.CastOn;
+import com.knitml.core.model.operations.block.Information;
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.block.RepeatInstruction;
+import com.knitml.core.model.operations.block.Row;
+import com.knitml.core.model.pattern.Section;
 
 class SectionConverterTests extends AbstractConverterTests {
 
 	@Test
 	void instructionWithColonAndLineFeed() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		PARAGRAPHS
 
 		Cast on 17

@@ -5,10 +5,10 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.block.InstructionRef
-import com.knitml.core.model.directions.inline.InlineInstructionRef
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.block.InstructionRef;
+import com.knitml.core.model.operations.inline.InlineInstructionRef;
+import com.knitml.core.model.pattern.Pattern;
 
 
 class InstructionRefConverterTests extends AbstractConverterTests {

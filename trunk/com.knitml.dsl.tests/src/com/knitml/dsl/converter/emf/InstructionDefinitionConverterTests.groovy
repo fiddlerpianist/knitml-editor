@@ -7,18 +7,18 @@ import org.junit.Test
 import com.knitml.core.common.KnittingShape
 import com.knitml.core.common.MergePoint
 import com.knitml.core.common.MergeType
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.block.MergedInstruction
-import com.knitml.core.model.directions.block.Row
-import com.knitml.core.model.directions.inline.InlineInstruction
-import com.knitml.core.model.directions.inline.Knit
-import com.knitml.core.model.directions.inline.Purl
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.block.MergedInstruction;
+import com.knitml.core.model.operations.block.Row;
+import com.knitml.core.model.operations.inline.InlineInstruction;
+import com.knitml.core.model.operations.inline.Knit;
+import com.knitml.core.model.operations.inline.Purl;
 
 class InstructionDefinitionConverterTests extends AbstractConverterTests {
 
 	@Test
 	void basicInstructionDefinition() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
@@ -42,7 +42,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 	}
 	@Test
 	void fullInstructionDefinition() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
@@ -65,7 +65,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 
 	@Test
 	void mergedInstructionAtRow() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
@@ -92,7 +92,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 	
 	@Test
 	void mergedInstructionAtEnd() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
@@ -119,7 +119,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 	
 	@Test
 	void mergedInstructionWithForwardLink() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
@@ -146,7 +146,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 
 	@Test
 	void basicInlineInstructionDefinition() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
@@ -168,7 +168,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 
 	@Test
 	void fullInlineInstructionDefinition() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
@@ -187,7 +187,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 
 	@Test
 	void inlineInstructionDefinitionWithKeySpecified() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
@@ -206,7 +206,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 	
 	@Test
 	void mixedInstructions() {
-		com.knitml.core.model.Pattern pattern = convert '''
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:

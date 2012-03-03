@@ -4,8 +4,8 @@ import org.apache.commons.logging.Log
 import org.apache.commons.logging.LogFactory
 
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.information.Information
-import com.knitml.core.model.directions.information.Message
+import com.knitml.core.model.operations.block.Information;
+import com.knitml.core.model.operations.information.Message;
 import com.knitml.dsl.converter.emf.exception.ConversionException
 
 public class MessageConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Message> {

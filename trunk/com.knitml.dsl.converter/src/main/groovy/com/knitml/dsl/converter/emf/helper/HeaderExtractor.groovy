@@ -6,14 +6,14 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 
 import com.google.inject.Inject
 import com.knitml.core.common.NeedleStyle
-import com.knitml.core.model.Identifiable
-import com.knitml.core.model.header.Author
-import com.knitml.core.model.header.Gauge
-import com.knitml.core.model.header.GeneralInformation
-import com.knitml.core.model.header.Needle
-import com.knitml.core.model.header.NeedleType
-import com.knitml.core.model.header.StitchHolder;
-import com.knitml.core.model.header.Supplies
+import com.knitml.core.model.common.Identifiable;
+import com.knitml.core.model.common.Needle;
+import com.knitml.core.model.common.NeedleType;
+import com.knitml.core.model.common.StitchHolder;
+import com.knitml.core.model.pattern.Author;
+import com.knitml.core.model.pattern.Gauge;
+import com.knitml.core.model.pattern.GeneralInformation;
+import com.knitml.core.model.pattern.Supplies;
 import com.knitml.core.units.KnittingMeasure
 import com.knitml.core.units.Units
 import com.knitml.dsl.knittingExpressionLanguage.Header

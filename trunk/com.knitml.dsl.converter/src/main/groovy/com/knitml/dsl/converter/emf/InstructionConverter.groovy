@@ -8,11 +8,11 @@ import com.knitml.core.common.MergePoint
 import com.knitml.core.common.MergeType
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.Identifiable
-import com.knitml.core.model.directions.block.ForEachRowInInstruction
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.block.InstructionRef
-import com.knitml.core.model.directions.block.MergedInstruction
+import com.knitml.core.model.common.Identifiable;
+import com.knitml.core.model.operations.block.ForEachRowInInstruction;
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.block.InstructionRef;
+import com.knitml.core.model.operations.block.MergedInstruction;
 import com.knitml.dsl.converter.emf.helper.EmfHelper
 
 public class InstructionConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Instruction> {

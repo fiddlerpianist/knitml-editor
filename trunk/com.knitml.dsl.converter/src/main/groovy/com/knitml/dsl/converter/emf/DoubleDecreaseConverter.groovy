@@ -6,7 +6,7 @@ import org.apache.commons.logging.LogFactory
 import com.google.inject.Inject
 import com.knitml.core.common.DecreaseType
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.inline.DoubleDecrease
+import com.knitml.core.model.operations.inline.DoubleDecrease;
 import com.knitml.dsl.converter.emf.helper.EmfHelper
 
 public class DoubleDecreaseConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.DoubleDecrease> {

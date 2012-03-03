@@ -5,12 +5,12 @@ import org.apache.commons.logging.LogFactory
 
 import com.knitml.core.common.DecreaseType
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.InlineOperation
-import com.knitml.core.model.directions.inline.Decrease
-import com.knitml.core.model.directions.inline.DoubleDecrease
-import com.knitml.core.model.directions.inline.Repeat
-import com.knitml.core.model.directions.inline.WorkEven
-import com.knitml.core.model.directions.inline.Repeat.Until
+import com.knitml.core.model.operations.inline.Repeat.Until
+import com.knitml.core.model.operations.InlineOperation;
+import com.knitml.core.model.operations.inline.Decrease;
+import com.knitml.core.model.operations.inline.DoubleDecrease;
+import com.knitml.core.model.operations.inline.Repeat;
+import com.knitml.core.model.operations.inline.WorkEven;
 import com.knitml.dsl.converter.emf.exception.ConversionException
 import com.knitml.dsl.knittingExpressionLanguage.RepeatSpec
 

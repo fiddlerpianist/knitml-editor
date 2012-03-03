@@ -4,11 +4,11 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.inline.Knit
-import com.knitml.core.model.directions.inline.Purl
-import com.knitml.core.model.directions.inline.Repeat
-import com.knitml.core.model.directions.inline.Repeat.Until
+import com.knitml.core.model.operations.inline.Repeat.Until
+import com.knitml.core.model.operations.inline.Knit;
+import com.knitml.core.model.operations.inline.Purl;
+import com.knitml.core.model.operations.inline.Repeat;
+import com.knitml.core.model.pattern.Pattern;
 import com.knitml.dsl.converter.emf.exception.ConversionException
 
 class RepeatConverterTests extends AbstractConverterTests {

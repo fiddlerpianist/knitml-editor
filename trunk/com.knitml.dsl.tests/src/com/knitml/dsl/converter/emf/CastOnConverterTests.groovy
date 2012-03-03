@@ -5,9 +5,9 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.block.CastOn
-import com.knitml.core.model.directions.inline.InlineCastOn
+import com.knitml.core.model.operations.block.CastOn;
+import com.knitml.core.model.operations.inline.InlineCastOn;
+import com.knitml.core.model.pattern.Pattern;
 
 
 class CastOnConverterTests extends AbstractConverterTests {

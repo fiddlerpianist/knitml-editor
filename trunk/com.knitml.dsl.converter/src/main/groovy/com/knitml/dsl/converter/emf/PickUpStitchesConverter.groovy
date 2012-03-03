@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory
 
 import com.knitml.core.common.Wise
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.block.PickUpStitches
+import com.knitml.core.model.operations.block.PickUpStitches;
 
 public class PickUpStitchesConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.PickUpStitches> {
 

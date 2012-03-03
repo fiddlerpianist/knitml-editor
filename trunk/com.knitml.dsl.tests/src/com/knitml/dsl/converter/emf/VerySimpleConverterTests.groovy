@@ -5,14 +5,14 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.knitml.core.common.Side
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.block.DeclareFlatKnitting
-import com.knitml.core.model.directions.block.DeclareRoundKnitting
-import com.knitml.core.model.directions.block.JoinInRound
-import com.knitml.core.model.directions.inline.DesignateEndOfRow
-import com.knitml.core.model.directions.inline.NoStitch
-import com.knitml.core.model.directions.inline.PlaceMarker
-import com.knitml.core.model.directions.inline.RemoveMarker
+import com.knitml.core.model.operations.block.DeclareFlatKnitting;
+import com.knitml.core.model.operations.block.DeclareRoundKnitting;
+import com.knitml.core.model.operations.block.JoinInRound;
+import com.knitml.core.model.operations.inline.DesignateEndOfRow;
+import com.knitml.core.model.operations.inline.NoStitch;
+import com.knitml.core.model.operations.inline.PlaceMarker;
+import com.knitml.core.model.operations.inline.RemoveMarker;
+import com.knitml.core.model.pattern.Pattern;
 
 class VerySimpleConverterTests extends AbstractConverterTests {
 

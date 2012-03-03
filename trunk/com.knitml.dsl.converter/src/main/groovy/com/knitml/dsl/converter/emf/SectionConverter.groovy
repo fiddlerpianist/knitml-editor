@@ -5,8 +5,8 @@ import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.directions.block.Section
-import com.knitml.core.model.directions.inline.Repeat
+import com.knitml.core.model.operations.inline.Repeat;
+import com.knitml.core.model.pattern.Section;
 import com.knitml.dsl.converter.emf.helper.EmfHelper;
 
 public class SectionConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.Section> {

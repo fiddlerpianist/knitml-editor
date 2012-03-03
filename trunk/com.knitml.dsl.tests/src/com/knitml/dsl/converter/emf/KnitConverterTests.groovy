@@ -8,12 +8,12 @@ import org.junit.Test
 
 import com.knitml.core.common.DecreaseType
 import com.knitml.core.common.LoopToWork
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.inline.Decrease
-import com.knitml.core.model.directions.inline.DoubleDecrease
-import com.knitml.core.model.directions.inline.Knit
-import com.knitml.core.model.directions.inline.Repeat
-import com.knitml.core.model.directions.inline.Repeat.Until
+import com.knitml.core.model.operations.inline.Repeat.Until
+import com.knitml.core.model.operations.inline.Decrease;
+import com.knitml.core.model.operations.inline.DoubleDecrease;
+import com.knitml.core.model.operations.inline.Knit;
+import com.knitml.core.model.operations.inline.Repeat;
+import com.knitml.core.model.pattern.Pattern;
 import com.knitml.dsl.converter.emf.exception.ConversionException
 
 class KnitConverterTests extends AbstractConverterTests {

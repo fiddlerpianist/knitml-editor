@@ -5,11 +5,11 @@ import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
 import com.knitml.core.converter.DomainModelConverter
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.directions.block.Row
-import com.knitml.core.model.directions.information.Information
-import com.knitml.core.model.directions.information.Message
-import com.knitml.core.model.directions.information.NumberOfStitches
-import com.knitml.core.model.directions.inline.UsingNeedle
+import com.knitml.core.model.operations.block.Information;
+import com.knitml.core.model.operations.block.Row;
+import com.knitml.core.model.operations.information.Message;
+import com.knitml.core.model.operations.information.NumberOfStitches;
+import com.knitml.core.model.operations.inline.UsingNeedle;
 import com.knitml.dsl.converter.emf.helper.EmfHelper
 
 public class UsingNeedleConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.UsingNeedle> {

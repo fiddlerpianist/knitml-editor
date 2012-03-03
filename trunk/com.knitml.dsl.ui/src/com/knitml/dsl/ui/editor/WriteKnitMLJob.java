@@ -16,7 +16,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 
 import com.google.inject.Inject;
-import com.knitml.core.model.Pattern;
+import com.knitml.core.model.pattern.Pattern;
 import com.knitml.renderer.service.RenderingService;
 
 public class WriteKnitMLJob extends WorkspaceJob {

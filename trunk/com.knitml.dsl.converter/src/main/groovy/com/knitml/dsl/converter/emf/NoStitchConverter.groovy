@@ -7,8 +7,8 @@ import com.knitml.core.common.SlipDirection
 import com.knitml.core.common.Wise
 import com.knitml.core.common.YarnPosition
 import com.knitml.core.converter.DomainModelConverter
-import com.knitml.core.model.directions.inline.NoStitch
-import com.knitml.core.model.directions.inline.Slip
+import com.knitml.core.model.operations.inline.NoStitch;
+import com.knitml.core.model.operations.inline.Slip;
 
 public class NoStitchConverter implements DomainModelConverter<com.knitml.dsl.knittingExpressionLanguage.NoStitch> {
 

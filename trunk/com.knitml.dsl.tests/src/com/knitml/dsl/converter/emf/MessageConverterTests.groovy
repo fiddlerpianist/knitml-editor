@@ -4,9 +4,9 @@ import static org.junit.Assert.*
 
 import org.junit.Test
 
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.information.Information
-import com.knitml.core.model.directions.information.Message
+import com.knitml.core.model.operations.block.Information;
+import com.knitml.core.model.operations.information.Message;
+import com.knitml.core.model.pattern.Pattern;
 
 class MessageConverterTests extends AbstractConverterTests {
 

@@ -7,10 +7,10 @@ import javax.measure.Measurable
 
 import org.junit.Test
 
-import com.knitml.core.model.Pattern
-import com.knitml.core.model.directions.block.Instruction
-import com.knitml.core.model.directions.block.RepeatInstruction
-import com.knitml.core.model.directions.block.RepeatInstruction.Until
+import com.knitml.core.model.operations.block.RepeatInstruction.Until
+import com.knitml.core.model.operations.block.Instruction;
+import com.knitml.core.model.operations.block.RepeatInstruction;
+import com.knitml.core.model.pattern.Pattern;
 import com.knitml.core.units.Units
 import com.knitml.dsl.converter.emf.exception.LinkingException
 
