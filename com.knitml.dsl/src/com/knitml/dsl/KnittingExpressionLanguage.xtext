@@ -30,6 +30,7 @@ Header:
 	(yarnTypes+=YarnType LF (yarnTypes+=YarnType LF)*))? &
 	('Stitch'? 'Holders:' LF
 	(stitchHolders+=StitchHolder LF (stitchHolders+=StitchHolder LF)*))? &
+	(imports+=Import)* &
 	('Instructions:' LF
 	instructions+=(InstructionDefinitionRule | InlineInstructionDefinitionRule | MergedInstructionDefinitionRule)+)?);
 
@@ -103,11 +104,25 @@ Gauge:
 StitchHolder:
 	name=ID label=STRING? ('(' withKey=WithKey ')')?;
 
+Import:
+	'Import' 'from' location=(ID | STRING) ':' LF
+	assignments+=(YarnAssignment | InstructionAssignment | InlineInstructionAssignment)+;
+
+YarnAssignment:
+	'Yarn' from=ID 'as' yarn=[Yarn] LF;
+
+InstructionAssignment returns Instruction:
+	'Instruction' from=ID 'as' name=ID LF;
+
+InlineInstructionAssignment returns InlineInstruction:
+	'Inline' 'instruction' from=ID 'as' name=ID LF;
+
 InstructionDefinitionRule returns Instruction:
 	'Instruction' name=ID label=STRING?
 	'(' (withKey=WithKey)?
 	(','? shape=('round' | 'flat') 'shape'?)
-	(','? rowCount=INT ('rows' | 'rounds')?)?
+	(','? rowCount=INT ('rows' | 'rounds'))?
+	(','? startingStitchCount=INT 'starting'? StitchLiteral)?
 	')' ':' LF
 	rows+=Row+;
 
@@ -229,7 +244,7 @@ InlineOperation:
 	Decrease | DoubleDecrease | PassPreviousStitchOver |
 	Increase | CrossStitches | FromStitchHolder |
 	PlaceMarker | RemoveMarker | EndOfRow |
-	Repeat | BindOff | Turn |
+	Repeat | OperationGroup | BindOff | Turn |
 	InlineInstructionRule | InlineInstructionRef | ApplyNextRow);
 
 InlinePickUpStitches:
@@ -277,10 +292,12 @@ Increase:
 	type=IncreaseType (number=INT TimesLiteral?)? ('with'? yarnRef=[Yarn])?;
 
 CrossStitches:
-	'cross' 'next'? first=INT StitchLiteral?
-	(direction='behind' |
-	('in' direction='front' 'of')) ('next' | 'following')?
-	next=INT StitchLiteral?;
+//	'cross' 'next'? first=INT StitchLiteral?
+//	(direction='behind' |
+//	('in' direction='front' 'of')) ('next' | 'following')?
+//	next=INT StitchLiteral?;
+	first=INT '/' second=INT ('/' third=INT)? direction=CrossType ('[' operations+=InlineOperation (','
+	operations+=InlineOperation)* ']');
 
 PlaceMarker:
 	{PlaceMarker} (('place' 'marker') | 'pm');
@@ -292,14 +309,11 @@ EndOfRow:
 	{EndOfRow} ('end' 'of' ('row' | 'round'));
 
 InlineInstructionRule returns InlineInstruction:
-	'instruction' name=ID label=STRING? ('(' (withKey=WithKey) ')')? ':' LF?
-	'[' operations+=InlineOperation (',' operations+=InlineOperation)* ']';
+	'instruction' name=ID label=STRING? ('(' (withKey=WithKey) ')')? ':' LF? '[' operations+=InlineOperation (','
+	operations+=InlineOperation)* ']';
 
 InlineInstruction:
-	name=ID
-	label=STRING
-	withKey=WithKey
-	operations+=InlineOperation;
+	name=ID label=STRING withKey=WithKey operations+=InlineOperation;
 
 InlineInstructionRef:
 	referencedInstruction=[InlineInstruction];
@@ -312,17 +326,21 @@ Repeat:
 	('[' operations+=InlineOperation (',' LF? operations+=InlineOperation)* ']' (',' ('Repeat' | 'repeat'))? 'to'?
 	spec=RepeatSpec);
 
+OperationGroup:
+	('Group' | 'group') ('of' size=INT StitchLiteral?)? ('[' operations+=InlineOperation (','
+	operations+=InlineOperation)* ']');
+
 FromStitchHolder:
-	('From'|'from') holder=[StitchHolder] ':'? LF?
-	('[' operations+=InlineOperation (',' operations+=InlineOperation)* ']');
-	
+	('From' | 'from') holder=[StitchHolder] ':'? LF? ('[' operations+=InlineOperation (',' operations+=InlineOperation)*
+	']');
+
 BindOff:
 	('Bind off' | 'bind off' | 'BO' | 'bo') (all?='all' | value=INT) StitchLiteral? wise=Wise? ('with' yarnRef=[Yarn])?;
 
 RepeatSpec:
 	(toEnd?=('end') | toMarker?=('marker') | (value=INT StitchLiteral? beforeEnd?=('before end')) | (value=INT
 	StitchLiteral? beforeGap?=('before gap')) | (value=INT StitchLiteral? beforeMarker?=('before marker')) | (value=INT
-	times?=(TimesLiteral)));
+	times?=(TimesLiteral)) | (twice?='twice') | (times?='x' value=INT));
 
 Turn:
 	{Turn} 'turn' (stateUnworked?='(' 'state' number=INT? 'unworked' StitchLiteral? ')')?;
@@ -331,6 +349,9 @@ UsingNeedle:
 	'Using' needle=[Needle] ':' LF? (operations+=InlineOperation (',' LF? operations+=InlineOperation)*);
 
 	// lower-level data types
+enum CrossType:
+	LEFT='LC' | RIGHT='RC' | LEFT_FRONT='LRC' | RIGHT_FRONT='RRC';
+
 enum DecreaseType:
 	SSK='ssk' | SSP='ssp' | SKP='skp';
 

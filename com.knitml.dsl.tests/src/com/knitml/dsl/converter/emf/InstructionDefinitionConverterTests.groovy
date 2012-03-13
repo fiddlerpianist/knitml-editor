@@ -46,7 +46,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 		Pattern name: "Thing"
 		Description: "Thing 2"
 		Instructions:
-			Instruction one "One and Only" (with key, round shape, 3 rounds):
+			Instruction one "One and Only" (with key, round shape, 3 rounds, 5 starting sts):
 				Row: knit
 
 		Row: knit
@@ -59,6 +59,7 @@ class InstructionDefinitionConverterTests extends AbstractConverterTests {
 			assertThat it.label, is ('One and Only')
 			assertThat it.knittingShape, is (KnittingShape.ROUND)
 			assertThat it.rowCount, is (3)
+			assertThat it.startingStitchCount, is (5)
 			assertThat it.messageKey, is ('instruction.one')
 		}
 	}

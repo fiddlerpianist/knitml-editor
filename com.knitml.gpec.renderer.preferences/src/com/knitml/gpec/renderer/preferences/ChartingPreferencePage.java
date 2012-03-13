@@ -10,7 +10,9 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.renderer.chart.advisor.impl.AireRiverSymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.KnittersSymbolsWSymbolAdvisor;
+import com.knitml.renderer.chart.advisor.impl.StitchMasterySymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.TextArtSymbolAdvisor;
+import com.knitml.renderer.chart.symbol.impl.StitchMasterySymbolProvider;
 
 /**
  * This class represents a preference page that is contributed to the
@@ -28,7 +30,8 @@ public class ChartingPreferencePage extends FieldEditorPreferencePage implements
 
 	public ChartingPreferencePage() {
 		super(GRID);
-		setPreferenceStore(RenderingPreferencesPlugin.getDefault().getPreferenceStore());
+		setPreferenceStore(RenderingPreferencesPlugin.getDefault()
+				.getPreferenceStore());
 		setDescription("Rendering preferences");
 	}
 
@@ -50,12 +53,13 @@ public class ChartingPreferencePage extends FieldEditorPreferencePage implements
 				"Chart Symbol Set",
 				1,
 				new String[][] {
-						{ "Te&xt Art",
-								TextArtSymbolAdvisor.class.getName() },
+						{ "Te&xt Art", TextArtSymbolAdvisor.class.getName() },
 						{ "Knitter's S&ymbols",
 								KnittersSymbolsWSymbolAdvisor.class.getName() },
 						{ "&Aire River Knitting Font",
-								AireRiverSymbolAdvisor.class.getName() } },
+								AireRiverSymbolAdvisor.class.getName() },
+						{ "&StitchMastery Font Set",
+								StitchMasterySymbolAdvisor.class.getName() } },
 				getFieldEditorParent()));
 	}
 
