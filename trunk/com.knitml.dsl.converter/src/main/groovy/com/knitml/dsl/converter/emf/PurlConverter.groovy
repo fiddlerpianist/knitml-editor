@@ -21,7 +21,7 @@ public class PurlConverter implements DomainModelConverter<com.knitml.dsl.knitti
 
 	@Override
 	public InlineOperation convert(com.knitml.dsl.knittingExpressionLanguage.Purl emfPurl) {
-		def purl = new Purl(emfPurl.number, emfPurl.yarnRef?.name, (emfPurl?.throughTrailingLoop ? LoopToWork.TRAILING: null ))
+		def purl = new Purl(emfPurl.number, (emfPurl?.throughTrailingLoop ? LoopToWork.TRAILING: null ), emfPurl.yarnRef?.name)
 
 		if (emfPurl.together) {
 			// actually a decrease in the model

@@ -22,6 +22,6 @@ public class InlinePickUpStitchesConverter implements DomainModelConverter<com.k
 		if (emfInlinePickUpStitches.yarnRef != null) {
 			yarnRefId = emfInlinePickUpStitches.yarnRef.name
 		}
-		return new InlinePickUpStitches(emfInlinePickUpStitches.number, yarnRefId, wise)
+		return new InlinePickUpStitches(emfInlinePickUpStitches.number, wise, yarnRefId)
 	}
 }

@@ -9,14 +9,14 @@ import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import com.knitml.core.converter.DomainModelConverterLocator
-import com.knitml.core.model.common.Identifiable;
-import com.knitml.core.model.common.Needle;
-import com.knitml.core.model.common.StitchHolder;
-import com.knitml.core.model.common.Yarn;
+import com.knitml.core.model.common.Identifiable
+import com.knitml.core.model.common.Needle
+import com.knitml.core.model.common.StitchHolder
+import com.knitml.core.model.common.Yarn
+import com.knitml.core.model.operations.Operation
+import com.knitml.core.model.operations.inline.InlineInstruction
+import com.knitml.core.model.operations.inline.Repeat
 import com.knitml.core.model.operations.inline.Repeat.Until
-import com.knitml.core.model.operations.Operation;
-import com.knitml.core.model.operations.inline.InlineInstruction;
-import com.knitml.core.model.operations.inline.Repeat;
 import com.knitml.dsl.converter.OperationContainer
 import com.knitml.dsl.knittingExpressionLanguage.RepeatSpec
 
@@ -33,8 +33,8 @@ public class EmfHelper {
 	private Map<String, Needle> needleMap = [:]
 	private Map<String, Yarn> yarnMap = [:]
 	private Map<String, StitchHolder> stitchHolderMap = [:]
-	
-	private Map<Operation, EObject> operationToEmfTraceMap = new HashMap<Operation, EObject>(500)
+
+	private Map<Operation, EObject> operationToEmfTraceMap = new IdentityHashMap<Operation, EObject>(500)
 
 	public void reset() {
 		// FIXME we won't need this method once the correct scope is implemented
@@ -43,7 +43,7 @@ public class EmfHelper {
 		needleMap = [:]
 		yarnMap = [:]
 		stitchHolderMap = [:]
-		operationToEmfTraceMap = new HashMap<Operation, EObject>(500)
+		operationToEmfTraceMap = new IdentityHashMap<Operation, EObject>(500)
 	}
 
 	void addInstruction(Identifiable modelInstruction) {
@@ -91,7 +91,7 @@ public class EmfHelper {
 	Yarn getYarn(String id) {
 		yarnMap.get(id)
 	}
-	
+
 	@Override
 	Repeat processRepeatSpec(com.knitml.dsl.knittingExpressionLanguage.RepeatSpec emfRepeatSpec) {
 		def repeat = new Repeat()
@@ -107,6 +107,9 @@ public class EmfHelper {
 		} else if (emfRepeatSpec.beforeMarker) {
 			repeat.until = Until.BEFORE_MARKER
 		} else if (emfRepeatSpec.times) {
+			repeat.until = Until.TIMES
+		} else if (emfRepeatSpec.twice) {
+			repeat.value = 2
 			repeat.until = Until.TIMES
 		}
 		return repeat
@@ -128,7 +131,7 @@ public class EmfHelper {
 		}
 		return operations
 	}
-	
+
 	EObject getEObjectForOperation(Operation operation) {
 		operationToEmfTraceMap.get(operation)
 	}

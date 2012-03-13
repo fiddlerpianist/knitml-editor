@@ -75,6 +75,36 @@ class RepeatConverterTests extends AbstractConverterTests {
 			assertThat it.value, is (2)
 		}
 	}
+	@Test
+	void brackets() {
+		Pattern pattern = convert '''
+			Row 1: [k1,p1] 2 times
+		'''
+		((Repeat) pattern.directions.operations[0].operations[0]).with {
+			assertThat it.until, is (Until.TIMES)
+			assertThat it.value, is (2)
+		}
+	}
+	@Test
+	void twice() {
+		Pattern pattern = convert '''
+			Row 1: [k1,p1] twice
+		'''
+		((Repeat) pattern.directions.operations[0].operations[0]).with {
+			assertThat it.until, is (Until.TIMES)
+			assertThat it.value, is (2)
+		}
+	}
+	@Test
+	void x2() {
+		Pattern pattern = convert '''
+			Row 1: [k1,p1] x 2
+		'''
+		((Repeat) pattern.directions.operations[0].operations[0]).with {
+			assertThat it.until, is (Until.TIMES)
+			assertThat it.value, is (2)
+		}
+	}
 	@Test(expected=ConversionException)
 	void repeatInvalidSyntax() {
 		Pattern pattern = convert '''Row 1: repeat [k1] to 2 times to end'''

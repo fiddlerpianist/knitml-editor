@@ -77,6 +77,7 @@ public class InstructionConverter implements DomainModelConverter<com.knitml.dsl
 			}
 		}
 		def rowCount = emfInstruction.rowCount
+		def startingStitchCount = emfInstruction.startingStitchCount
 		def knittingShape = null
 		if (emfInstruction.shape != null) {
 			knittingShape = emfInstruction.shape.equals('round') ? KnittingShape.ROUND : KnittingShape.FLAT
@@ -86,7 +87,7 @@ public class InstructionConverter implements DomainModelConverter<com.knitml.dsl
 			instruction = new Instruction(id, label, messageKey, convertForEachRow(emfInstruction.forEachRow))
 		} else {
 			def rows = emfHelper.convertOperations (emfInstruction.rows)
-			instruction = new Instruction(id, label, messageKey, knittingShape, rows, rowCount)
+			instruction = new Instruction(id, label, messageKey, knittingShape, rows, rowCount, startingStitchCount, null)
 		}
 		emfHelper.addInstruction(instruction)
 		return instruction

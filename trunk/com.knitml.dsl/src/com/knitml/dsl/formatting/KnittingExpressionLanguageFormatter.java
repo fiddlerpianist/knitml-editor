@@ -61,14 +61,14 @@ public class KnittingExpressionLanguageFormatter extends
 
 		// Instructions
 		c.setIndentationIncrement().before(
-				gr.getHeaderAccess().getInstructionsAssignment_7_10_2());
+				gr.getHeaderAccess().getInstructionsAssignment_7_11_2());
 		c.setIndentationDecrement().after(
-				gr.getHeaderAccess().getInstructionsAssignment_7_10_2());
+				gr.getHeaderAccess().getInstructionsAssignment_7_11_2());
 		// InstructionDefinition
 		c.setIndentationIncrement().before(
-				gr.getInstructionDefinitionRuleAccess().getRowsAssignment_10());
+				gr.getInstructionDefinitionRuleAccess().getRowsAssignment_11());
 		c.setIndentationDecrement().after(
-				gr.getInstructionDefinitionRuleAccess().getRowsAssignment_10());
+				gr.getInstructionDefinitionRuleAccess().getRowsAssignment_11());
 
 		// InstructionGroup
 		c.setIndentationIncrement().before(

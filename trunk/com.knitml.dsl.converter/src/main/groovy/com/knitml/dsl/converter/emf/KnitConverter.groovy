@@ -21,7 +21,7 @@ public class KnitConverter implements DomainModelConverter<com.knitml.dsl.knitti
 
 	@Override
 	public InlineOperation convert(com.knitml.dsl.knittingExpressionLanguage.Knit emfKnit) {
-		def knit = new Knit(emfKnit.number, emfKnit.yarnRef?.name, (emfKnit?.throughTrailingLoop ? LoopToWork.TRAILING: null ))
+		def knit = new Knit(emfKnit.number, (emfKnit?.throughTrailingLoop ? LoopToWork.TRAILING: null ), emfKnit.yarnRef?.name)
 
 		if (emfKnit.together) {
 			// actually a decrease in the model
