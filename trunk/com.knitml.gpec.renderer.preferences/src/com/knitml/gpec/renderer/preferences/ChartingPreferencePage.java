@@ -12,7 +12,6 @@ import com.knitml.renderer.chart.advisor.impl.AireRiverSymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.KnittersSymbolsWSymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.StitchMasterySymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.TextArtSymbolAdvisor;
-import com.knitml.renderer.chart.symbol.impl.StitchMasterySymbolProvider;
 
 /**
  * This class represents a preference page that is contributed to the

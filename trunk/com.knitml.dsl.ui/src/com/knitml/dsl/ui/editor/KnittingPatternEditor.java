@@ -34,7 +34,7 @@ import com.knitml.dsl.converter.emf.exception.ConversionException;
 import com.knitml.dsl.knittingExpressionLanguage.Pattern;
 import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
-import com.knitml.renderer.impl.basic.BasicTextRendererFactory;
+import com.knitml.renderer.impl.basic.BasicTextRenderer;
 
 /**
  * An example showing how to create a multi-page editor. This example has 3
@@ -134,11 +134,11 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 	 */
 	protected void initializePatternViewControl() {
 		PatternControlType controlTypeToUse;
-		String rendererFactoryName = preferencesService
-				.getPreference(PreferenceKeys.RENDERER_FACTORY);
+		String rendererName = preferencesService
+				.getPreference(PreferenceKeys.RENDERER);
 
-		if (rendererFactoryName
-				.equals(BasicTextRendererFactory.class.getName())) {
+		if (rendererName
+				.equals(BasicTextRenderer.class.getName())) {
 			controlTypeToUse = PatternControlType.TEXT;
 		} else {
 			controlTypeToUse = PatternControlType.BROWSER;

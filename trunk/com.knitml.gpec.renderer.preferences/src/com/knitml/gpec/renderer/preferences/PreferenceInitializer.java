@@ -8,7 +8,7 @@ import org.osgi.service.prefs.Preferences;
 
 import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.renderer.chart.advisor.impl.TextArtSymbolAdvisor;
-import com.knitml.renderer.impl.html.HtmlRendererFactory;
+import com.knitml.renderer.impl.html.HtmlRenderer;
 
 /**
  * Class used to initialize default preference values.
@@ -24,7 +24,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		Preferences preferences = DefaultScope.INSTANCE.getNode(PLUGIN_ID);
 		preferences.putBoolean(PreferenceKeys.CHART_GLOBALLY, false);
-		preferences.put(PreferenceKeys.RENDERER_FACTORY, HtmlRendererFactory.class.getName());
+		preferences.put(PreferenceKeys.RENDERER, HtmlRenderer.class.getName());
 		preferences.put(PreferenceKeys.SYSTEM_OF_UNITS, "");
 		preferences.putBoolean(PreferenceKeys.SQUARE_GAUGE, true);
 		preferences.put(PreferenceKeys.LANGUAGE, "");

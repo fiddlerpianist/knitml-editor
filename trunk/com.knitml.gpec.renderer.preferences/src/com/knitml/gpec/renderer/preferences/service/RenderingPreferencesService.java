@@ -2,7 +2,7 @@ package com.knitml.gpec.renderer.preferences.service;
 
 import org.eclipse.swt.graphics.FontData;
 
-import com.knitml.renderer.util.Configuration;
+import com.knitml.renderer.config.Configuration;
 
 public interface RenderingPreferencesService {
 	

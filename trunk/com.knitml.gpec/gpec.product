@@ -139,7 +139,6 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="ch.qos.logback.slf4j" fragment="true"/>
       <plugin id="com.google.collect"/>
       <plugin id="com.google.guava"/>
-      <plugin id="com.google.inject"/>
       <plugin id="com.ibm.icu"/>
       <plugin id="com.knitml.core" version="0.6.0.M2"/>
       <plugin id="com.knitml.dependencies" version="0.6.0.M2"/>
@@ -164,6 +163,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
       <plugin id="javax.xml"/>
+      <plugin id="jcl.over.slf4j"/>
       <plugin id="log4j.over.slf4j" version="1.6.1"/>
       <plugin id="org.antlr.runtime"/>
       <plugin id="org.apache.commons.cli"/>

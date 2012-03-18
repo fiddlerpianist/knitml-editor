@@ -58,14 +58,14 @@ public class BasePreferencePage extends FieldEditorPreferencePage implements
 						{ "Unspecified", "" } }, getFieldEditorParent()));
 
 		addField(new RadioGroupFieldEditor(
-				PreferenceKeys.RENDERER_FACTORY,
+				PreferenceKeys.RENDERER,
 				"Format",
 				1,
 				new String[][] {
 						{ "Text",
-								"com.knitml.renderer.impl.basic.BasicTextRendererFactory" },
+								"com.knitml.renderer.impl.basic.BasicTextRenderer" },
 						{ "HTML",
-								"com.knitml.renderer.impl.html.HtmlRendererFactory" } },
+								"com.knitml.renderer.impl.html.HtmlRenderer" } },
 				getFieldEditorParent()));
 	}
 

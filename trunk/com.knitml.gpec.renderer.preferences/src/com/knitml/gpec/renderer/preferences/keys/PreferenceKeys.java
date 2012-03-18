@@ -9,7 +9,7 @@ public class PreferenceKeys {
 
 	public static final String SYSTEM_OF_UNITS = "systemOfUnits";
 
-	public static final String RENDERER_FACTORY = "rendererFactory";
+	public static final String RENDERER = "renderer";
 	
 	public static final String SQUARE_GAUGE = "squareGauge";
 

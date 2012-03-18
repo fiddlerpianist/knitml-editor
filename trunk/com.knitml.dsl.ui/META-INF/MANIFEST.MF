@@ -40,12 +40,18 @@ Import-Package: com.knitml.core.common,
  com.knitml.renderer.context,
  com.knitml.renderer.impl.basic,
  com.knitml.renderer.service,
- com.knitml.renderer.util,
+ com.knitml.renderer.config,
  org.apache.commons.lang;version="2.4.0",
  org.apache.commons.logging,
  org.apache.log4j;version="1.2.16",
  org.slf4j,
- org.springframework.core.io
+ org.springframework.core.io,
+ javax.inject;version="1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: com.knitml.dsl.ui.contentassist.antlr,
- com.knitml.dsl.ui.internal
+Export-Package: com.knitml.dsl.ui.contentassist.antlr;
+  uses:="org.eclipse.xtext,
+   com.knitml.dsl.services,
+   com.knitml.dsl.ui.contentassist.antlr.internal,
+   org.eclipse.xtext.ui.editor.contentassist.antlr.internal,
+   org.eclipse.xtext.ui.editor.contentassist.antlr",
+ com.knitml.dsl.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject"

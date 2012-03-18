@@ -37,9 +37,9 @@ import com.knitml.engine.common.KnittingEngineException;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
 import com.knitml.renderer.chart.symbol.NoSymbolFoundException;
 import com.knitml.renderer.common.RenderingException;
+import com.knitml.renderer.config.Configuration;
 import com.knitml.renderer.context.Options;
 import com.knitml.renderer.service.RenderingService;
-import com.knitml.renderer.util.Configuration;
 
 class PatternViewControlContainer {
 
@@ -163,7 +163,7 @@ class PatternViewControlContainer {
 		parameters.setWriter(renderedPatternWriter);
 
 		return renderingService.renderPattern(parameters,
-				configuration.getRendererFactory(), options);
+				configuration.getModule(), options);
 	}
 
 	private String handleKnittingException(KnittingEngineException ex) {
