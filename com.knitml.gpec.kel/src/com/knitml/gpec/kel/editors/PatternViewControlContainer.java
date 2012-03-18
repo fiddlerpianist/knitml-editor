@@ -26,9 +26,9 @@ import com.knitml.core.model.pattern.Parameters;
 import com.knitml.gpec.internal.kel.KelPlugin;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
 import com.knitml.renderer.chart.symbol.NoSymbolFoundException;
+import com.knitml.renderer.config.Configuration;
 import com.knitml.renderer.context.Options;
 import com.knitml.renderer.service.RenderingService;
-import com.knitml.renderer.util.Configuration;
 
 public class PatternViewControlContainer {
 
@@ -133,8 +133,9 @@ public class PatternViewControlContainer {
 				.getRenderingService();
 
 		try {
-			renderingService.renderPattern(parameters, configuration
-					.getRendererFactory(), options);
+			renderingService.renderPattern(parameters,
+					configuration.getModule(), options);
+
 			return renderedPatternWriter.toString();
 		} catch (Exception ex) {
 			Throwable cause = ex;

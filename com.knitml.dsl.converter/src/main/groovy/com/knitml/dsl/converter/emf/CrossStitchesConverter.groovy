@@ -60,6 +60,7 @@ public class CrossStitchesConverter implements DomainModelConverter<com.knitml.d
 					if (emfObject.third != null) {
 						crossStitches.skipType = CrossType.BACK
 					}
+					break;
 				case RIGHT_FRONT:
 					crossStitches.type = CrossType.BACK
 					crossStitches.skipType = CrossType.FRONT

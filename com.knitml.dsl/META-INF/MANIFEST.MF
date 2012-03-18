@@ -19,7 +19,8 @@ Import-Package: org.apache.commons.logging,
  org.apache.log4j;version="1.2.16",
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.xtend2.lib,
- org.slf4j
+ org.slf4j,
+ javax.inject;version="1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: com.knitml.dsl; uses:="org.eclipse.xtext,  org.eclipse.xtext.service,  org.eclipse.xtext.common.types,  com.google.inject",
  com.knitml.dsl.formatting;uses:="org.eclipse.xtext.formatting.impl,com.knitml.dsl.services",

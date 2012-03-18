@@ -33,7 +33,7 @@ import com.knitml.el.KelProgram;
 import com.knitml.gpec.internal.kel.KelPlugin;
 import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
-import com.knitml.renderer.impl.basic.BasicTextRendererFactory;
+import com.knitml.renderer.impl.basic.BasicTextRenderer;
 import com.knitml.validation.ValidationProgram;
 import com.knitml.validation.context.KnittingContextFactory;
 import com.knitml.validation.context.impl.DefaultKnittingContextFactory;
@@ -158,12 +158,11 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 		PatternControlType controlTypeToUse;
 		RenderingPreferencesService preferencesService = KelPlugin.getDefault()
 				.getRenderingPreferencesService();
-		String textRendererFactoryName = BasicTextRendererFactory.class
-				.getName();
-		String rendererFactoryName = preferencesService
-				.getPreference(PreferenceKeys.RENDERER_FACTORY);
+		String textRendererName = BasicTextRenderer.class.getName();
+		String rendererName = preferencesService
+				.getPreference(PreferenceKeys.RENDERER);
 
-		if (rendererFactoryName.equals(textRendererFactoryName)) {
+		if (rendererName.equals(textRendererName)) {
 			controlTypeToUse = PatternControlType.TEXT;
 		} else {
 			controlTypeToUse = PatternControlType.BROWSER;

@@ -8,21 +8,24 @@ import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IMarshallingContext;
 import org.jibx.runtime.JiBXException;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.knitml.core.model.pattern.Parameters;
 import com.knitml.core.model.pattern.Pattern;
 import com.knitml.engine.common.KnittingEngineException;
-import com.knitml.renderer.RendererFactory;
 import com.knitml.renderer.common.RenderingException;
+import com.knitml.renderer.config.DefaultModule;
 import com.knitml.renderer.context.Options;
 import com.knitml.renderer.program.RendererProgram;
 import com.knitml.renderer.service.RenderingService;
 
 public class RenderingServiceImpl implements RenderingService {
 
-	public Pattern renderPattern(Parameters parameters, RendererFactory factory,
+	public Pattern renderPattern(Parameters parameters, Module configurationModule,
 			Options options) throws RenderingException, KnittingEngineException {
-		RendererProgram program = new RendererProgram(factory);
-		//program.setVisitorFactory(new DefaultVisitorFactory());
+		Injector injector = Guice.createInjector(configurationModule, new DefaultModule());
+		RendererProgram program = injector.getInstance(RendererProgram.class);
 		program.setOptions(options);
 		try {
 			return program.render(parameters);
