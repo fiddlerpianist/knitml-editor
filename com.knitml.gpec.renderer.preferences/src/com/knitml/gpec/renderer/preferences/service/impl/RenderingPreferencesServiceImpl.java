@@ -34,6 +34,7 @@ import com.knitml.renderer.Renderer;
 import com.knitml.renderer.RendererFactory;
 import com.knitml.renderer.chart.advisor.impl.TextArtSymbolAdvisor;
 import com.knitml.renderer.chart.stylesheet.StylesheetProvider;
+import com.knitml.renderer.chart.stylesheet.impl.TextArtStylesheetProvider;
 import com.knitml.renderer.chart.symbol.SymbolProvider;
 import com.knitml.renderer.chart.writer.ChartWriter;
 import com.knitml.renderer.chart.writer.impl.HtmlChartWriter;
@@ -70,7 +71,7 @@ public class RenderingPreferencesServiceImpl implements
 			if (StylesheetProvider.class.isAssignableFrom(symbolProviderClass)) {
 				stylesheetProviderClass = symbolProviderClass.asSubclass(StylesheetProvider.class);
 			} else {
-				stylesheetProviderClass = null;
+				stylesheetProviderClass = TextArtStylesheetProvider.class;
 			}
 			final Class<? extends ChartWriter> chartWriterClass;
 			
