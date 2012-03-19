@@ -65,14 +65,14 @@ public class RenderingPreferencesServiceImpl implements
 		// prepare the renderer factory
 		final Class<? extends Renderer> baseRendererClass = findBaseRendererClass();
 		Module dynamicModule;
+		final Class<? extends SymbolProvider> symbolProviderClass = findSymbolProviderClass();
+		final Class<? extends StylesheetProvider> stylesheetProviderClass;
+		if (StylesheetProvider.class.isAssignableFrom(symbolProviderClass)) {
+			stylesheetProviderClass = symbolProviderClass.asSubclass(StylesheetProvider.class);
+		} else {
+			stylesheetProviderClass = TextArtStylesheetProvider.class;
+		}
 		if (localOptions.isGlobalChart()) {
-			final Class<? extends SymbolProvider> symbolProviderClass = findSymbolProviderClass();
-			final Class<? extends StylesheetProvider> stylesheetProviderClass;
-			if (StylesheetProvider.class.isAssignableFrom(symbolProviderClass)) {
-				stylesheetProviderClass = symbolProviderClass.asSubclass(StylesheetProvider.class);
-			} else {
-				stylesheetProviderClass = TextArtStylesheetProvider.class;
-			}
 			final Class<? extends ChartWriter> chartWriterClass;
 			
 			// this is probably a dangerous assumption to make
@@ -97,6 +97,7 @@ public class RenderingPreferencesServiceImpl implements
 				protected void configure() {
 					install(new FactoryModuleBuilder().implement(Renderer.class,
 							baseRendererClass).build(RendererFactory.class));
+					bind(StylesheetProvider.class).to(stylesheetProviderClass);
 				}
 			};
 		}
