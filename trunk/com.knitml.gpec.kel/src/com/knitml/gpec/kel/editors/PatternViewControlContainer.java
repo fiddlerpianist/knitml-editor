@@ -25,7 +25,7 @@ import org.springframework.core.io.ResourceLoader;
 import com.knitml.core.model.pattern.Parameters;
 import com.knitml.gpec.internal.kel.KelPlugin;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
-import com.knitml.renderer.chart.symbol.NoSymbolFoundException;
+import com.knitml.renderer.chart.symbol.SymbolResolutionException;
 import com.knitml.renderer.config.Configuration;
 import com.knitml.renderer.context.Options;
 import com.knitml.renderer.service.RenderingService;
@@ -142,7 +142,7 @@ public class PatternViewControlContainer {
 			while (cause.getCause() != null) {
 				cause = cause.getCause();
 			}
-			if (cause instanceof NoSymbolFoundException) {
+			if (cause instanceof SymbolResolutionException) {
 				return "The system is unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
 						+ cause.getMessage();
 			} else {

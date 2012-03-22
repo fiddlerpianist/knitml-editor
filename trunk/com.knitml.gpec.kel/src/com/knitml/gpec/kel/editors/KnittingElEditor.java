@@ -38,7 +38,7 @@ import com.knitml.validation.ValidationProgram;
 import com.knitml.validation.context.KnittingContextFactory;
 import com.knitml.validation.context.impl.DefaultKnittingContextFactory;
 import com.knitml.validation.visitor.instruction.VisitorFactory;
-import com.knitml.validation.visitor.instruction.impl.SpringVisitorFactory;
+import com.knitml.validation.visitor.instruction.impl.DefaultVisitorFactory;
 
 /**
  * An example showing how to create a multi-page editor. This example has 3
@@ -311,7 +311,7 @@ public class KnittingElEditor extends MultiPageEditorPart implements
 
 	protected void validateXml() {
 		KnittingContextFactory validationContextFactory = new DefaultKnittingContextFactory();
-		VisitorFactory validationVisitorFactory = new SpringVisitorFactory();
+		VisitorFactory validationVisitorFactory = new DefaultVisitorFactory();
 		ValidationProgram validator = new ValidationProgram(
 				validationContextFactory, validationVisitorFactory);
 
