@@ -35,7 +35,7 @@ import com.knitml.core.model.pattern.Pattern;
 import com.knitml.core.model.pattern.Section;
 import com.knitml.engine.common.KnittingEngineException;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
-import com.knitml.renderer.chart.symbol.NoSymbolFoundException;
+import com.knitml.renderer.chart.symbol.SymbolResolutionException;
 import com.knitml.renderer.common.RenderingException;
 import com.knitml.renderer.config.Configuration;
 import com.knitml.renderer.context.Options;
@@ -121,7 +121,7 @@ class PatternViewControlContainer {
 			while (cause.getCause() != null) {
 				cause = cause.getCause();
 			}
-			if (cause instanceof NoSymbolFoundException) {
+			if (cause instanceof SymbolResolutionException) {
 				errors = "Unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
 						+ cause.getMessage();
 			} else {
