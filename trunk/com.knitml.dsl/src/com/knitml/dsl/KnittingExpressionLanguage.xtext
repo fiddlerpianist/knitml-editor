@@ -242,7 +242,7 @@ InlineOperation:
 	(InlinePickUpStitches | InlineCastOn |
 	Knit | Purl | WorkEven | Slip | NoStitch |
 	Decrease | DoubleDecrease | PassPreviousStitchOver |
-	Increase | CrossStitches | FromStitchHolder |
+	Increase | IncreaseIntoNextStitch | CrossStitches | FromStitchHolder |
 	PlaceMarker | RemoveMarker | EndOfRow |
 	Repeat | OperationGroup | BindOff | Turn |
 	InlineInstructionRule | InlineInstructionRef | ApplyNextRow);
@@ -291,6 +291,10 @@ PassPreviousStitchOver:
 Increase:
 	type=IncreaseType (number=INT TimesLiteral?)? ('with'? yarnRef=[Yarn])?;
 
+IncreaseIntoNextStitch:
+	'inc'? 'into next' StitchLiteral ('with'? yarnRef=[Yarn])? ('[' operations+=InlineOperation (','
+	operations+=InlineOperation)* ']');
+	
 CrossStitches:
 //	'cross' 'next'? first=INT StitchLiteral?
 //	(direction='behind' |

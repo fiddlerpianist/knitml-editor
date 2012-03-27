@@ -115,19 +115,18 @@ class PatternViewControlContainer {
 			renderedPattern = doRenderPattern(patternModel, writer);
 			// return renderedPatternWriter.toString();
 		} catch (KnittingEngineException ex) {
-			errors = handleKnittingException(ex);
-		} catch (RenderingException ex) {
 			Throwable cause = ex;
 			while (cause.getCause() != null) {
 				cause = cause.getCause();
 			}
-			if (cause instanceof SymbolResolutionException) {
-				errors = "Unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
-						+ cause.getMessage();
+			if (ex.getCause() instanceof RenderingException) {
+				errors = handleRenderingException((RenderingException) ex
+						.getCause());
 			} else {
-				errors = "Could not render pattern because of the following: "
-						+ ex.getMessage();
+				errors = handleKnittingException(ex);
 			}
+		} catch (RenderingException ex) {
+			errors = handleRenderingException(ex);
 		} catch (Exception ex) {
 			StringWriter stringError = new StringWriter();
 			PrintWriter pw = new PrintWriter(stringError);
@@ -141,6 +140,20 @@ class PatternViewControlContainer {
 		} else {
 			writeContentToPatternPage(writer.toString());
 			return renderedPattern;
+		}
+	}
+
+	private String handleRenderingException(RenderingException ex) {
+		Throwable cause = ex;
+		while (cause.getCause() != null) {
+			cause = cause.getCause();
+		}
+		if (cause instanceof SymbolResolutionException) {
+			return "Unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
+					+ cause.getMessage();
+		} else {
+			return "Could not render pattern because of the following: "
+					+ ex.getMessage();
 		}
 	}
 

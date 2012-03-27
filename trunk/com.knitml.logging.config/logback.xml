@@ -19,7 +19,7 @@
 	</appender>
 
 	<logger name="org.eclipse.xtext" level="INFO" />
-	<logger name="com.knitml" level="DEBUG" />
+	<logger name="com.knitml" level="WARN" />
 
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />

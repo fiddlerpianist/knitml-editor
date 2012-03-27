@@ -29,5 +29,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		preferences.putBoolean(PreferenceKeys.SQUARE_GAUGE, true);
 		preferences.put(PreferenceKeys.LANGUAGE, "");
 		preferences.put(PreferenceKeys.CHART_SYMBOL_PROVIDER, TextArtSymbolAdvisor.class.getName());
+		preferences.putBoolean(PreferenceKeys.USE_GREY_NO_STITCH, true);
 	}
 }

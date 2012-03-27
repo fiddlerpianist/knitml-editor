@@ -7,6 +7,8 @@ public class PreferenceKeys {
 
 	public static final String CHART_GLOBALLY = "globalChart";
 
+	public static final String USE_GREY_NO_STITCH = "useGreyNoStitchSymbol";
+	
 	public static final String SYSTEM_OF_UNITS = "systemOfUnits";
 
 	public static final String RENDERER = "renderer";
