@@ -118,6 +118,14 @@ public class KnittingExpressionLanguageFormatter extends
 		c.setNoSpace().after(gr.getPurlAccess().getPKeyword_0_0_0_1());
 		c.setNoSpace().before(gr.getPurlAccess().getTogetherAssignment_0_0_2());
 
+		// format 2/2 LC
+		c.setNoSpace().before(gr.getCrossStitchesAccess().getSolidusKeyword_1());
+		c.setNoSpace().after(gr.getCrossStitchesAccess().getSolidusKeyword_1());
+		
+		// format 2/2/2 LC
+		c.setNoSpace().before(gr.getCrossStitchesAccess().getSolidusKeyword_3_0());
+		c.setNoSpace().after(gr.getCrossStitchesAccess().getSolidusKeyword_3_0());
+
 		// format Rows 1-3
 		c.setNoSpace().after(gr.getRangeAccess().getMinAssignment_0());
 		c.setNoSpace().before(gr.getRangeAccess().getMaxAssignment_2());

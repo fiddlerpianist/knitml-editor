@@ -60,6 +60,10 @@ public class ChartingPreferencePage extends FieldEditorPreferencePage implements
 						{ "&StitchMastery Font Set",
 								StitchMasterySymbolAdvisor.class.getName() } },
 				getFieldEditorParent()));
+
+		addField(new BooleanFieldEditor(PreferenceKeys.USE_GREY_NO_STITCH,
+				"Use grey color for \"no stitch\" symbol", getFieldEditorParent()));
+		
 	}
 
 	/*

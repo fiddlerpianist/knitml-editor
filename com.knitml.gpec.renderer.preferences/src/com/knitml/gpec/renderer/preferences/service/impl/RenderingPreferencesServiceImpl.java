@@ -7,6 +7,7 @@ import static com.knitml.gpec.renderer.preferences.keys.PreferenceKeys.LANGUAGE;
 import static com.knitml.gpec.renderer.preferences.keys.PreferenceKeys.RENDERER;
 import static com.knitml.gpec.renderer.preferences.keys.PreferenceKeys.SQUARE_GAUGE;
 import static com.knitml.gpec.renderer.preferences.keys.PreferenceKeys.SYSTEM_OF_UNITS;
+import static com.knitml.gpec.renderer.preferences.keys.PreferenceKeys.USE_GREY_NO_STITCH;
 
 import java.util.Locale;
 
@@ -163,6 +164,9 @@ public class RenderingPreferencesServiceImpl implements
 		boolean squareGauge = Platform.getPreferencesService().getBoolean(
 				PLUGIN_ID, SQUARE_GAUGE, true, null);
 		options.setSquareGauge(squareGauge);
+		boolean greyNoStitches = Platform.getPreferencesService().getBoolean(
+				PLUGIN_ID, USE_GREY_NO_STITCH, true, null);
+		options.setGreyNoStitches(greyNoStitches);
 
 		String systemOfUnits = Platform.getPreferencesService().getString(
 				PLUGIN_ID, SYSTEM_OF_UNITS, "", null);
