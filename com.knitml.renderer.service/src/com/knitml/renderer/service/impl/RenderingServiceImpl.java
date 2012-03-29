@@ -26,7 +26,7 @@ public class RenderingServiceImpl implements RenderingService {
 			Options options) throws RenderingException, KnittingEngineException {
 		Injector injector = Guice.createInjector(configurationModule, new DefaultModule());
 		RendererProgram program = injector.getInstance(RendererProgram.class);
-		program.setOptions(options);
+//		program.setOptions(options);
 		try {
 			return program.render(parameters);
 		} catch (KnittingEngineException ex) {
