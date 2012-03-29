@@ -11,6 +11,7 @@ import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.renderer.chart.advisor.impl.AireRiverSymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.KnittersSymbolsWSymbolAdvisor;
 import com.knitml.renderer.chart.advisor.impl.StitchMasterySymbolAdvisor;
+import com.knitml.renderer.chart.advisor.impl.StitchMasterySymbolDashAdvisor;
 import com.knitml.renderer.chart.advisor.impl.TextArtSymbolAdvisor;
 
 /**
@@ -57,13 +58,16 @@ public class ChartingPreferencePage extends FieldEditorPreferencePage implements
 								KnittersSymbolsWSymbolAdvisor.class.getName() },
 						{ "&Aire River Knitting Font",
 								AireRiverSymbolAdvisor.class.getName() },
-						{ "&StitchMastery Font Set",
-								StitchMasterySymbolAdvisor.class.getName() } },
+						{ "&StitchMastery Font Set (Dot style)",
+								StitchMasterySymbolAdvisor.class.getName() },
+						{ "StitchMastery Font Set (&Dash style)",
+								StitchMasterySymbolDashAdvisor.class.getName() } },
 				getFieldEditorParent()));
 
 		addField(new BooleanFieldEditor(PreferenceKeys.USE_GREY_NO_STITCH,
-				"Use grey color for \"no stitch\" symbol", getFieldEditorParent()));
-		
+				"Use &grey color for \"no stitch\" symbol",
+				getFieldEditorParent()));
+
 	}
 
 	/*
