@@ -56,12 +56,22 @@ public class CrossStitchesConverter implements DomainModelConverter<com.knitml.d
 					crossStitches.skipType = CrossType.FRONT
 					break;
 				case RIGHT:
+					// right crosses switch the numbers
+					def tmp = crossStitches.first
+					crossStitches.first = crossStitches.next
+					crossStitches.next = tmp
+
 					crossStitches.type = CrossType.BACK
 					if (emfObject.third != null) {
 						crossStitches.skipType = CrossType.BACK
 					}
 					break;
 				case RIGHT_FRONT:
+					// right crosses switch the numbers
+					def tmp = crossStitches.first
+					crossStitches.first = crossStitches.next
+					crossStitches.next = tmp
+					
 					crossStitches.type = CrossType.BACK
 					crossStitches.skipType = CrossType.FRONT
 					break;
