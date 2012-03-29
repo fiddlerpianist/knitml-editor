@@ -61,7 +61,7 @@ public class RenderingPreferencesServiceImpl implements
 	}
 
 	public void refreshPreferences() {
-		Options localOptions = configureOptions();
+		final Options localOptions = configureOptions();
 
 		// prepare the renderer factory
 		final Class<? extends Renderer> baseRendererClass = findBaseRendererClass();
@@ -91,6 +91,7 @@ public class RenderingPreferencesServiceImpl implements
 					bind(SymbolProvider.class).to(symbolProviderClass);
 					bind(ChartWriter.class).to(chartWriterClass);
 					bind(StylesheetProvider.class).to(stylesheetProviderClass);
+					bind(Options.class).toInstance(localOptions);
 				}
 			};
 		} else {
