@@ -36,9 +36,9 @@ class CrossStitchesConverterTests extends AbstractConverterTests {
 			assertThat size, is (5)
 			assertThat operations.size(), is (2)
 			((CrossStitches)operations[0]).with {
-				assertThat first, is (2)
+				assertThat first, is (3)
 				assertThat type, is (CrossType.BACK)
-				assertThat next, is (3)
+				assertThat next, is (2)
 			}
 			((Knit)operations[1]).with {
 				assertThat it.numberOfTimes, is (5)
@@ -56,6 +56,24 @@ class CrossStitchesConverterTests extends AbstractConverterTests {
 				assertThat skip, is (3)
 				assertThat next, is (4)
 				assertThat type, is (CrossType.FRONT)
+				assertThat skipType, is (CrossType.BACK)
+			}
+			((Knit)operations[1]).with {
+				assertThat it.numberOfTimes, is (9)
+			}
+		}
+	}
+	@Test
+	void rightCross2And3And4() {
+		Pattern pattern = convert 'Row: 2/3/4 RC [k9]'
+		((OperationGroup) pattern.directions.operations[0].operations[0]).with {
+			assertThat size, is (9)
+			assertThat operations.size(), is (2)
+			((CrossStitches)operations[0]).with {
+				assertThat first, is (4)
+				assertThat skip, is (3)
+				assertThat next, is (2)
+				assertThat type, is (CrossType.BACK)
 				assertThat skipType, is (CrossType.BACK)
 			}
 			((Knit)operations[1]).with {
