@@ -230,4 +230,10 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 				PATH_EVIEW + "problems_view_warning.gif", true); //$NON-NLS-1$
 	}
 
+	@Override
+	public void initialize(IWorkbenchConfigurer configurer) {
+		super.initialize(configurer);
+		configurer.setSaveAndRestore(true);
+	}
+
 }

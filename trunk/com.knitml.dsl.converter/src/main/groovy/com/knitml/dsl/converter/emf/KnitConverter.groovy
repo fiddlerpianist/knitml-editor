@@ -42,6 +42,10 @@ public class KnitConverter implements DomainModelConverter<com.knitml.dsl.knitti
 					break;
 			}
 		}
+		
+		if (emfKnit.stitchBelow) {
+			knit.rowsBelow = 1
+		}
 
 		if (emfKnit.repeat != null) {
 			// handle repeats such as 'k to end'

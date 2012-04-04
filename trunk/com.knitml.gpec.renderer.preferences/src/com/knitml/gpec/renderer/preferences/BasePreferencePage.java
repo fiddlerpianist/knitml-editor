@@ -51,6 +51,9 @@ public class BasePreferencePage extends FieldEditorPreferencePage implements
 		addField(new BooleanFieldEditor(PreferenceKeys.SQUARE_GAUGE,
 				"Describe gauge as a s&quare", getFieldEditorParent()));
 
+		addField(new BooleanFieldEditor(PreferenceKeys.ENABLE_GAUGE_TRANSFORMATION,
+				"Enable gauge &changes", getFieldEditorParent()));
+		
 		addField(new ComboFieldEditor(PreferenceKeys.SYSTEM_OF_UNITS,
 				"System of units", new String[][] {
 						{ "U.S. Customary", SystemOfUnits.US.name() },

@@ -39,7 +39,7 @@ public class WriteKnitMLJob extends WorkspaceJob {
 			String shortName = resource.getName().substring(0,
 					resource.getName().lastIndexOf('.'));
 			IFile newKnitMLFile = resource.getParent().getFile(
-					new Path(shortName + ".xml"));
+					new Path(shortName + ".knitml"));
 			// PipedWriter writer = new PipedWriter();
 			// PipedReader reader = new PipedReader(writer);
 			Writer writer = new StringWriter();

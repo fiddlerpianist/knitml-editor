@@ -21,4 +21,6 @@ public class PreferenceKeys {
 	
 	public static final String CHART_SYMBOL_PROVIDER = "chartSymbolProvider";
 	
+	public static final String ENABLE_GAUGE_TRANSFORMATION = "enableGaugeTransformation";
+	
 }

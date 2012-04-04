@@ -65,6 +65,16 @@ class KnitConverterTests extends AbstractConverterTests {
 		}
 	}
 
+	@Test
+	void ktblStitchBelow() {
+		Pattern pattern = convert 'Row: k tbl into st below'
+		((Knit) pattern.directions.operations[0].operations[0]).with {
+			assertThat loopToWork, is (LoopToWork.TRAILING)
+			assertThat numberOfTimes, is (null)
+			assertThat rowsBelow, is (1)
+			assertThat yarnIdRef, is (null)
+		}
+	}
 
 	/**
 	 * Not fully supported

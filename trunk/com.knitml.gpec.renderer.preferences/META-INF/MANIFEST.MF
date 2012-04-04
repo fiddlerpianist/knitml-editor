@@ -16,8 +16,9 @@ Export-Package: com.knitml.gpec.renderer.preferences;
    org.osgi.framework,
    org.eclipse.core.runtime.preferences",
  com.knitml.gpec.renderer.preferences.keys;version="0.3.0.M2",
- com.knitml.gpec.renderer.preferences.listener;version="0.3.0.M22";uses:="org.eclipse.core.runtime.preferences,com.knitml.gpec.renderer.preferences.service",
- com.knitml.gpec.renderer.preferences.service;version="0.3.0.M2";uses:="com.knitml.renderer.config,com.knitml.renderer.context"
+ com.knitml.gpec.renderer.preferences.listener;version="0.3.0.M2";uses:="org.eclipse.core.runtime.preferences,com.knitml.gpec.renderer.preferences.service",
+ com.knitml.gpec.renderer.preferences.service;version="0.3.0.M2";uses:="com.knitml.renderer.config,com.knitml.renderer.context",
+ com.knitml.gpec.renderer.preferences.values;version="0.3.0.M2"
 Import-Package: com.google.inject;version="1.3.0",
  com.google.inject.binder;version="1.3.0",
  com.google.inject.assistedinject;version="1.3.0",
