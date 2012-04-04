@@ -43,6 +43,10 @@ public class PurlConverter implements DomainModelConverter<com.knitml.dsl.knitti
 			}
 		}
 
+		if (emfPurl.stitchBelow) {
+			purl.rowsBelow = 1
+		}
+
 		if (emfPurl.repeat != null) {
 			// handle repeats such as 'p to end'
 			RepeatSpec emfRepeat = emfPurl.repeat

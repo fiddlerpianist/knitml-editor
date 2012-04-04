@@ -8,9 +8,11 @@ import org.jibx.runtime.IBindingFactory;
 import org.jibx.runtime.IMarshallingContext;
 import org.jibx.runtime.JiBXException;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+import com.google.inject.util.Modules;
 import com.knitml.core.model.pattern.Parameters;
 import com.knitml.core.model.pattern.Pattern;
 import com.knitml.engine.common.KnittingEngineException;
@@ -23,10 +25,15 @@ import com.knitml.renderer.service.RenderingService;
 public class RenderingServiceImpl implements RenderingService {
 
 	public Pattern renderPattern(Parameters parameters, Module configurationModule,
-			Options options) throws RenderingException, KnittingEngineException {
-		Injector injector = Guice.createInjector(configurationModule, new DefaultModule());
+			final Options options) throws RenderingException, KnittingEngineException {
+		Module optionsModule = new AbstractModule() {
+			protected void configure() {
+				bind(Options.class).toInstance(options);
+			}
+		};
+		Module moduleToUse = Modules.override(new DefaultModule()).with(configurationModule);
+		Injector injector = Guice.createInjector(moduleToUse, optionsModule);
 		RendererProgram program = injector.getInstance(RendererProgram.class);
-//		program.setOptions(options);
 		try {
 			return program.render(parameters);
 		} catch (KnittingEngineException ex) {

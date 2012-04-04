@@ -50,14 +50,14 @@ public class RenderingPreferencesServiceImpl implements
 		RenderingPreferencesService {
 
 	private Options options;
-	private Module configurationModule;
+	private Module configuration;
 
 	public synchronized Configuration retrieveConfiguration() {
 		Options optionsToReturn = new Options();
 		// make a copy in case someone else modifies the options for a different
 		// execution at the same time
 		BeanUtils.copyProperties(options, optionsToReturn);
-		return new Configuration(configurationModule, optionsToReturn);
+		return new Configuration(configuration, optionsToReturn);
 	}
 
 	public void refreshPreferences() {
@@ -91,7 +91,6 @@ public class RenderingPreferencesServiceImpl implements
 					bind(SymbolProvider.class).to(symbolProviderClass);
 					bind(ChartWriter.class).to(chartWriterClass);
 					bind(StylesheetProvider.class).to(stylesheetProviderClass);
-					bind(Options.class).toInstance(localOptions);
 				}
 			};
 		} else {
@@ -109,7 +108,7 @@ public class RenderingPreferencesServiceImpl implements
 		// configuration
 		synchronized (this) {
 			this.options = localOptions;
-			this.configurationModule = dynamicModule;
+			this.configuration = dynamicModule;
 		}
 	}
 

@@ -29,7 +29,6 @@ public class RenderingPreferencesPlugin extends AbstractUIPlugin {
 	private ServiceRegistration<RenderingPreferencesService> preferencesServiceRegistration;
 	private IEclipsePreferences preferences;
 	private IPreferenceChangeListener listener;
-	
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)

@@ -38,5 +38,15 @@
          </command>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.themes">
+      <fontDefinition
+            categoryId="org.eclipse.ui.workbenchMisc"
+            id="com.knitml.gpec.renderer.defaultRenderingFont"
+            isEditable="false"
+            label="Pattern Rendering Font"
+            value="Garamond-regular-12">
+      </fontDefinition>
+   </extension>
 
 </plugin>

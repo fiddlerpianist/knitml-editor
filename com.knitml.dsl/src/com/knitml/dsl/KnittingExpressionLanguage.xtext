@@ -258,6 +258,7 @@ Knit:
 	(('Knit' | 'knit') number=INT StitchLiteral? (together?='tog')?) |
 	({Knit} ('K' | 'k' | 'Knit' | 'knit')))
 	throughTrailingLoop?=('tbl' | 'ttl')?
+	(stitchBelow?='into' StitchLiteral 'below')?
 	('with'? yarnRef=[Yarn])? ('to'? repeat=RepeatSpec)?;
 
 Purl:
@@ -265,6 +266,7 @@ Purl:
 	(('Purl' | 'purl') number=INT StitchLiteral? (together?='tog')?) |
 	({Purl} ('P' | 'p' | 'Purl' | 'purl')))
 	throughTrailingLoop?=('tbl' | 'ttl')?
+	(stitchBelow?='into' StitchLiteral 'below')?
 	('with'? yarnRef=[Yarn])? ('to'? repeat=RepeatSpec)?;
 
 WorkEven:
@@ -292,7 +294,7 @@ Increase:
 	type=IncreaseType (number=INT TimesLiteral?)? ('with'? yarnRef=[Yarn])?;
 
 IncreaseIntoNextStitch:
-	'inc'? 'into next' StitchLiteral ('with'? yarnRef=[Yarn])? ('[' operations+=InlineOperation (','
+	'inc'? 'into' 'next' StitchLiteral ('with'? yarnRef=[Yarn])? ('[' operations+=InlineOperation (','
 	operations+=InlineOperation)* ']');
 	
 CrossStitches:

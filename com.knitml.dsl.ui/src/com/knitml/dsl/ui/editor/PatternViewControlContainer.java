@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import javax.measure.Measurable;
+
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTError;
 import org.eclipse.swt.browser.Browser;
@@ -24,7 +27,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ResourceLoader;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
+import com.google.inject.Module;
+import com.google.inject.TypeLiteral;
+import com.google.inject.util.Modules;
 import com.knitml.core.model.operations.DiscreteInlineOperation;
 import com.knitml.core.model.operations.block.Instruction;
 import com.knitml.core.model.operations.block.RepeatInstruction;
@@ -33,13 +40,18 @@ import com.knitml.core.model.pattern.InstructionGroup;
 import com.knitml.core.model.pattern.Parameters;
 import com.knitml.core.model.pattern.Pattern;
 import com.knitml.core.model.pattern.Section;
+import com.knitml.core.units.StitchGauge;
+import com.knitml.dsl.ui.dialog.GaugeDialog;
 import com.knitml.engine.common.KnittingEngineException;
+import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
 import com.knitml.gpec.renderer.preferences.service.RenderingPreferencesService;
+import com.knitml.gpec.renderer.preferences.values.SystemOfUnits;
 import com.knitml.renderer.chart.symbol.SymbolResolutionException;
 import com.knitml.renderer.common.RenderingException;
 import com.knitml.renderer.config.Configuration;
 import com.knitml.renderer.context.Options;
 import com.knitml.renderer.service.RenderingService;
+import com.knitml.validation.context.PatternEventListener;
 
 class PatternViewControlContainer {
 
@@ -101,19 +113,18 @@ class PatternViewControlContainer {
 		composite.setLayout(layout);
 		renderedPattern = new StyledText(composite, SWT.H_SCROLL | SWT.V_SCROLL);
 		renderedPattern.setEditable(false);
-		FontData[] fontData = renderingPreferencesService.getFontData();
-		renderedPatternFont = new Font(Display.getCurrent(), fontData);
-		renderedPattern.setFont(renderedPatternFont);
 		return composite;
 	}
 
 	public Pattern render(Pattern patternModel) {
+		if (renderingBrowser != null) {
+			renderingBrowser.setText("");
+		}
 		Pattern renderedPattern = null;
 		Writer writer = new StringWriter();
 		String errors = null;
 		try {
 			renderedPattern = doRenderPattern(patternModel, writer);
-			// return renderedPatternWriter.toString();
 		} catch (KnittingEngineException ex) {
 			Throwable cause = ex;
 			while (cause.getCause() != null) {
@@ -149,7 +160,7 @@ class PatternViewControlContainer {
 			cause = cause.getCause();
 		}
 		if (cause instanceof SymbolResolutionException) {
-			return "Unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences.  "
+			return "Unable to chart a symbol using this symbol set. Consider using a complete symbol set. You can change this value in your preferences."
 					+ cause.getMessage();
 		} else {
 			return "Could not render pattern because of the following: "
@@ -162,7 +173,33 @@ class PatternViewControlContainer {
 			RenderingException {
 		Configuration configuration = renderingPreferencesService
 				.retrieveConfiguration();
+		Module configurationModule = configuration.getModule();
 		Options options = configuration.getOptions();
+		if (renderingPreferencesService
+				.getBooleanPreference(PreferenceKeys.ENABLE_GAUGE_TRANSFORMATION)) {
+			boolean internationalUnits = !(SystemOfUnits.US.name())
+					.equals(renderingPreferencesService
+							.getPreference(PreferenceKeys.SYSTEM_OF_UNITS));
+			boolean useSquare = renderingPreferencesService
+					.getBooleanPreference(PreferenceKeys.SQUARE_GAUGE);
+
+			GaugeDialog dialog = new GaugeDialog(parentContainer.getShell(),
+					internationalUnits, useSquare);
+			if (dialog.open() == Window.OK) {
+				final Measurable<StitchGauge> stitchGauge = dialog
+						.getStitchGauge();
+				configurationModule = Modules.combine(configurationModule,
+						new AbstractModule() {
+							protected void configure() {
+								bind(
+										new TypeLiteral<List<PatternEventListener>>() {
+										}).toProvider(
+										new EventListenerCollectionProvider(
+												stitchGauge));
+							}
+						});
+			}
+		}
 
 		// modify the options to load pattern messages from the current
 		// directory
@@ -175,8 +212,8 @@ class PatternViewControlContainer {
 		parameters.setPattern(patternModel);
 		parameters.setWriter(renderedPatternWriter);
 
-		return renderingService.renderPattern(parameters,
-				configuration.getModule(), options);
+		return renderingService.renderPattern(parameters, configurationModule,
+				options);
 	}
 
 	private String handleKnittingException(KnittingEngineException ex) {
@@ -259,14 +296,20 @@ class PatternViewControlContainer {
 		if (renderingBrowser != null) {
 			renderingBrowser.setText(pattern);
 		} else {
-			FontData[] fontData = renderingPreferencesService.getFontData();
-			Font fontToUse = new Font(Display.getCurrent(), fontData);
-			renderedPattern.setFont(fontToUse);
-			renderedPattern.setText(pattern);
-			if (renderedPatternFont != null) {
-				renderedPatternFont.dispose();
+			FontData[] fontDataFromPrefs = renderingPreferencesService
+					.getFontData();
+			if (renderedPatternFont == null
+					|| !ArrayUtils.isEquals(fontDataFromPrefs,
+							renderedPatternFont.getFontData())) {
+				Font fontToUse = new Font(Display.getCurrent(),
+						fontDataFromPrefs);
+				renderedPattern.setFont(fontToUse);
+				renderedPattern.setText(pattern);
+				if (renderedPatternFont != null) {
+					renderedPatternFont.dispose();
+				}
+				renderedPatternFont = fontToUse;
 			}
-			renderedPatternFont = fontToUse;
 		}
 	}
 

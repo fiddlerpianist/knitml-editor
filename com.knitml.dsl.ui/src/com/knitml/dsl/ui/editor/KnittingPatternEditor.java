@@ -137,8 +137,7 @@ public class KnittingPatternEditor extends MultiPageEditorPart implements
 		String rendererName = preferencesService
 				.getPreference(PreferenceKeys.RENDERER);
 
-		if (rendererName
-				.equals(BasicTextRenderer.class.getName())) {
+		if (rendererName.equals(BasicTextRenderer.class.getName())) {
 			controlTypeToUse = PatternControlType.TEXT;
 		} else {
 			controlTypeToUse = PatternControlType.BROWSER;
