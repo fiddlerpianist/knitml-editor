@@ -1,4 +1,5 @@
 #summary Elements of a Pattern
+#labels Featured
 <wiki:toc max_depth="3" />
 
 = The Header =
