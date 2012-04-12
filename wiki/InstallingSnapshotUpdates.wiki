@@ -1,4 +1,5 @@
 #summary How to Install Snapshot Updates for the KnitML Editor
+#labels Deprecated
 
 If you want the latest and greatest updates to the KnitML Core Tools without having to wait for the next version of KnitML Pattern Editor, this document tells you what you need to do.
 
