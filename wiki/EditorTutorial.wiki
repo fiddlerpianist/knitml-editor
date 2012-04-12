@@ -1,5 +1,5 @@
 #summary Tutorial of the Editor
-#labels Phase-Support
+#labels Phase-Support,Featured
 <wiki:toc max_depth="3" />
 
 = Introduction =
