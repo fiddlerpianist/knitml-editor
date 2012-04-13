@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+	<extensionContent id="samples" name="Editor Samples"
+		style="css/intro.css" path="samples/@">
+		<group id="editor-samples-links" style-id="content-group">
+			<link label="Install a sample pattern" url="http://org.eclipse.ui.intro/runAction?pluginId=org.eclipse.ui.ide&amp;class=org.eclipse.ui.actions.NewExampleAction&amp;standby=true"
+				id="install-sample-pattern" style-id="content-link">
+			</link>
+		</group>
+	</extensionContent>
+</introContent>
