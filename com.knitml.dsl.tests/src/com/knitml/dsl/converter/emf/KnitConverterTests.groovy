@@ -76,14 +76,11 @@ class KnitConverterTests extends AbstractConverterTests {
 		}
 	}
 
-	/**
-	 * Not fully supported
-	 */
 	@Test
 	void k3togTbl() {
 		Pattern pattern = convert 'Row: k3tog tbl'
 		((DoubleDecrease) pattern.directions.operations[0].operations[0]).with {
-			assertThat type, is (DecreaseType.K3TOG)
+			assertThat type, is (DecreaseType.K3TOG_TBL)
 			assertThat numberOfTimes, is (null)
 			assertThat yarnIdRef, is (null)
 		}

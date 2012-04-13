@@ -10,26 +10,12 @@ import com.knitml.dsl.knittingExpressionLanguage.ArrangeStitches;
 import com.knitml.dsl.knittingExpressionLanguage.CrossStitches;
 import com.knitml.dsl.knittingExpressionLanguage.CrossType;
 import com.knitml.dsl.knittingExpressionLanguage.Instruction;
-import com.knitml.dsl.knittingExpressionLanguage.Knit;
 import com.knitml.dsl.knittingExpressionLanguage.Needle;
 import com.knitml.dsl.knittingExpressionLanguage.NeedleStitchCount;
-import com.knitml.dsl.knittingExpressionLanguage.Purl;
 import com.knitml.dsl.knittingExpressionLanguage.Row;
 
 public class KnittingExpressionLanguageJavaValidator extends
 		AbstractKnittingExpressionLanguageJavaValidator {
-
-	@Check
-	public void checkKnitTogetherNotGreaterThan3(Knit knit) {
-		if (knit.isTogether() && knit.getNumber() != null) {
-			if (knit.getNumber() > 3) {
-				error("Decreases greater than k3tog are not supported", null);
-			} else if (knit.getNumber() == 3 && knit.isThroughTrailingLoop()) {
-				warning("k3tog through trailing/back loop not supported by the model. Will become k3tog",
-						null);
-			}
-		}
-	}
 
 	@Check
 	public void checkSingleRowNumber(Row row) {
@@ -37,13 +23,6 @@ public class KnittingExpressionLanguageJavaValidator extends
 				&& (row.getNumber().size() > 1 || row.getRange().size() > 0)) {
 			error("A row with multiple row numbers must be specified within an instruction",
 					null);
-		}
-	}
-
-	@Check
-	public void checkPurlTogetherNotGreaterThan3(Purl purl) {
-		if (purl.isTogether() && purl.getNumber() > 3) {
-			error("Decreases greater than p3tog are not supported", null);
 		}
 	}
 

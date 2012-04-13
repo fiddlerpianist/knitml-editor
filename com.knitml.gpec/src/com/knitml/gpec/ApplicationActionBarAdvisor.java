@@ -64,6 +64,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		action = ActionFactory.HELP_CONTENTS.create(window);
 		register(action);
 
+		action = ActionFactory.INTRO.create(window);
+		register(action);
+
 		action = ActionFactory.NEW_WIZARD_DROP_DOWN.create(window);
 		register(action);
 

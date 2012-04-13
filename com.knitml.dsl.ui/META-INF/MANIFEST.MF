@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.knitml.dsl.ui
 Bundle-Vendor: KnitML
-Bundle-Version: 0.3.0.M2
+Bundle-Version: 0.4.0.qualifier
 Bundle-Activator: com.knitml.dsl.ui.internal.KnittingExpressionLanguageUIPlugin
 Bundle-ActivationPolicy: lazy
 Bundle-SymbolicName: com.knitml.dsl.ui; singleton:=true
@@ -26,8 +26,8 @@ Require-Bundle: com.knitml.dsl;visibility:=reexport,
  com.knitml.gpec
 Import-Package: com.knitml.core.common,
  com.knitml.core.converter,
- com.knitml.core.model.operations;version="0.6.0.M2",
- com.knitml.core.model.operations.block;version="0.6.0.M2",
+ com.knitml.core.model.operations;version="0.7.0.BUILD",
+ com.knitml.core.model.operations.block;version="0.7.0.BUILD",
  com.knitml.core.model.pattern,
  com.knitml.core.units,
  com.knitml.dsl.converter,
@@ -42,9 +42,9 @@ Import-Package: com.knitml.core.common,
  com.knitml.renderer.context,
  com.knitml.renderer.impl.basic,
  com.knitml.renderer.service,
- com.knitml.transform.gauge;version="0.6.0.M2",
- com.knitml.transform.gauge.event;version="0.6.0.M2",
- com.knitml.validation.context;version="0.6.0.M2",
+ com.knitml.transform.gauge;version="0.7.0.BUILD",
+ com.knitml.transform.gauge.event;version="0.7.0.BUILD",
+ com.knitml.validation.context;version="0.7.0.BUILD",
  javax.inject;version=1,
  javax.measure,
  javax.measure.unit,

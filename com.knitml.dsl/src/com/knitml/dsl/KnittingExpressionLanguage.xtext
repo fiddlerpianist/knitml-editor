@@ -199,16 +199,19 @@ ForEachRowInInstruction:
 	operations+=UsingNeedle)*)) (',' LF? stateStitches?='state' numberToState=INT? StitchLiteral?)? => LF;
 
 Row:
-	nextRow?='Next'? (shortRow?='Short'? & longRow?='Long'?) label=('Row' | 'Round' | 'Rows' | 'Rounds')
+	nextRow?='Next'? (shortRow?='Short'? & longRow?='Long'?) label=('Row' | 'Round' | 'Rows' | 'Rounds' | 'R')
 	((range+=Range | number+=INT) (',' (range+=Range | number+=INT))*
 	('and' 'all'? subsequent=('even' | 'odd') ('rows' | 'rounds')?)?)?
 	(side=('WS' | 'RS')? &
 	('with' yarnRef=[Yarn])?) ('(' (','? inform?='state' 'side')? (','? reset?='reset' 'count'?)?
 	')')? ':' LF?
 	((operations+=InlineOperation (',' LF? operations+=InlineOperation)*) | (operations+=UsingNeedle (LF
-	operations+=UsingNeedle)*)) (',' LF? stateStitches?='state' numberToState=INT? StitchLiteral?)? (',' LF?
-	followupMessage=STRING)? => LF?;
-
+	operations+=UsingNeedle)*))
+	((',' LF? stateStitches?='state' numberToState=INT? StitchLiteral?) |
+	('(' numberToState=INT? stateStitches?=StitchLiteral ')'))?
+	(',' LF? followupMessage=STRING)? => LF?;
+	//	(',' LF? stateStitches?='state' numberToState=INT? StitchLiteral?)?
+//	(',' LF? followupMessage=STRING)? => LF?;
 RepeatInstruction:
 	'Repeat' instruction=[Instruction] (('for' desiredLength?='desired length') | ('until' value=INT ('st' | 'sts')
 	remain?='remain') |
@@ -241,7 +244,7 @@ Graft:
 InlineOperation:
 	(InlinePickUpStitches | InlineCastOn |
 	Knit | Purl | WorkEven | Slip | NoStitch |
-	Decrease | DoubleDecrease | PassPreviousStitchOver |
+	Decrease | DoubleDecrease | PassPreviousStitchOver | SlipSlipDecrease |
 	Increase | IncreaseIntoNextStitch | CrossStitches | FromStitchHolder |
 	PlaceMarker | RemoveMarker | EndOfRow |
 	Repeat | OperationGroup | BindOff | Turn |
@@ -290,13 +293,17 @@ DoubleDecrease:
 PassPreviousStitchOver:
 	{PassPreviousStitchOver} 'ppso' (number=INT TimesLiteral?)?;
 
+SlipSlipDecrease:
+	's' number=INT nature=('k' | 'p')
+	('with'? yarnRef=[Yarn])?;
+
 Increase:
 	type=IncreaseType (number=INT TimesLiteral?)? ('with'? yarnRef=[Yarn])?;
 
 IncreaseIntoNextStitch:
 	'inc'? 'into' 'next' StitchLiteral ('with'? yarnRef=[Yarn])? ('[' operations+=InlineOperation (','
 	operations+=InlineOperation)* ']');
-	
+
 CrossStitches:
 //	'cross' 'next'? first=INT StitchLiteral?
 //	(direction='behind' |

@@ -12,7 +12,7 @@ import org.eclipse.ui.PlatformUI;
 import org.osgi.service.prefs.Preferences;
 
 import com.knitml.gpec.renderer.preferences.keys.PreferenceKeys;
-import com.knitml.renderer.chart.advisor.impl.TextArtSymbolAdvisor;
+import com.knitml.renderer.chart.advisor.impl.AireRiverSymbolAdvisor;
 import com.knitml.renderer.impl.html.HtmlRenderer;
 
 /**
@@ -34,7 +34,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		preferences.putBoolean(PreferenceKeys.SQUARE_GAUGE, true);
 		preferences.put(PreferenceKeys.LANGUAGE, "");
 		preferences.put(PreferenceKeys.CHART_SYMBOL_PROVIDER,
-				TextArtSymbolAdvisor.class.getName());
+				AireRiverSymbolAdvisor.class.getName());
 		preferences.putBoolean(PreferenceKeys.USE_GREY_NO_STITCH, true);
 		preferences.putBoolean(PreferenceKeys.ENABLE_GAUGE_TRANSFORMATION,
 				false);
