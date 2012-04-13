@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+	<extensionContent id="overview-links" name="Resources"
+		style="css/intro.css" path="overview/@">
+		<group id="editor-overview-links" style-id="content-group">
+			<link label="Online Documentation"
+				url="http://org.eclipse.ui.intro/openBrowser?url=http%3A%2F%2Fcode.google.com%2Fp%2Fknitml-editor%2Fw%2Flist%3Fcan%3D3" id="wiki"
+				style-id="content-link">
+				<text>Online tutorials (hosted on Google Code)</text>
+			</link>
+			<link label="Support" url="http://org.eclipse.ui.intro/openBrowser?url=http%3A%2F%2Fwww.ravelry.com%2Fdiscuss%2Fknitml"
+				id="support" style-id="content-link">
+				<text>Ask questions, request features, and discuss ideas on our
+					Ravelry group (registration required but free!)
+				</text>
+			</link>
+			<link label="The Specification" url="http://org.eclipse.ui.intro/openBrowser?url=http%3A%2F%2Fwww.knitml.com" id="knitml-home"
+				style-id="content-link">
+				<text>Get details about the KnitML Specification from the KnitML
+					home page
+				</text>
+			</link>
+		</group>
+	</extensionContent>
+</introContent>
