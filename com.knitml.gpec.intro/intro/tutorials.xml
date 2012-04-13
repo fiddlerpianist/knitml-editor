@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<introContent>
-	<extensionContent id="tutorials" name="Tutorials"
-		style="css/intro.css" path="tutorials/@">
-		<group id="editor-tutorials" style-id="content-group">
-			<text>No tutorials yet. Anyone want to help me write some? :)</text>
-		</group>
-	</extensionContent>
-</introContent>
