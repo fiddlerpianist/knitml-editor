@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: com.knitml.dsl.converter
 Bundle-Vendor: KnitML
-Bundle-Version: 0.3.0.M2
+Bundle-Version: 0.4.0.qualifier
 Bundle-SymbolicName: com.knitml.dsl.converter; singleton:=true
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.inject,
@@ -10,10 +10,10 @@ Import-Package: com.google.inject,
  com.knitml.core.common,
  com.knitml.core.converter,
  com.knitml.core.model.common,
- com.knitml.core.model.operations;version="0.6.0.M2",
- com.knitml.core.model.operations.block;version="0.6.0.M2",
- com.knitml.core.model.operations.information;version="0.6.0.M2",
- com.knitml.core.model.operations.inline;version="0.6.0.M2",
+ com.knitml.core.model.operations;version="0.7.0.BUILD",
+ com.knitml.core.model.operations.block;version="0.7.0.BUILD",
+ com.knitml.core.model.operations.information;version="0.7.0.BUILD",
+ com.knitml.core.model.operations.inline;version="0.7.0.BUILD",
  com.knitml.core.model.pattern,
  com.knitml.core.units,
  com.knitml.dsl,

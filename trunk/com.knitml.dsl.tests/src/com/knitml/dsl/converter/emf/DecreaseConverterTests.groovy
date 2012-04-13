@@ -7,14 +7,15 @@ import static org.junit.Assert.*
 import org.junit.Test
 
 import com.knitml.core.common.DecreaseType
-import com.knitml.core.common.LoopToWork
+import com.knitml.core.common.Lean;
+import com.knitml.core.model.operations.StitchNature;
+import com.knitml.core.model.operations.inline.Decrease
+import com.knitml.core.model.operations.inline.DoubleDecrease
+import com.knitml.core.model.operations.inline.MultipleDecrease
+import com.knitml.core.model.operations.inline.PassPreviousStitchOver
+import com.knitml.core.model.operations.inline.Repeat
 import com.knitml.core.model.operations.inline.Repeat.Until
-import com.knitml.core.model.operations.inline.Decrease;
-import com.knitml.core.model.operations.inline.DoubleDecrease;
-import com.knitml.core.model.operations.inline.Knit;
-import com.knitml.core.model.operations.inline.PassPreviousStitchOver;
-import com.knitml.core.model.operations.inline.Repeat;
-import com.knitml.core.model.pattern.Pattern;
+import com.knitml.core.model.pattern.Pattern
 import com.knitml.dsl.converter.emf.exception.ConversionException
 
 class DecreaseConverterTests extends AbstractConverterTests {
@@ -49,6 +50,83 @@ class DecreaseConverterTests extends AbstractConverterTests {
 		((Decrease) pattern.directions.operations[0].operations[0]).with {
 			assertThat type, is (DecreaseType.K2TOG)
 			assertThat numberOfTimes, is (null)
+			assertThat yarnIdRef, is (null)
+		}
+	}
+	@Test
+	void k9tog() {
+		Pattern pattern = convert 'Row: k9tog'
+		((MultipleDecrease) pattern.directions.operations[0].operations[0]).with {
+			assertThat stitchesIntoOne, is (9)
+			assertThat lean, is (Lean.RIGHT)
+			assertThat stitchNatureProduced, is (StitchNature.KNIT)
+			assertThat yarnIdRef, is (null)
+		}
+	}
+	@Test
+	void k9togWithA() {
+		Pattern pattern = convert '''
+			Pattern name: "Thing"
+			Description: "Thing 2"
+			Yarn: 50g of sport weight yarn named A
+
+			Row: k9tog with A
+		'''
+		((MultipleDecrease) pattern.directions.operations[0].operations[0]).with {
+			assertThat stitchesIntoOne, is (9)
+			assertThat lean, is (Lean.RIGHT)
+			assertThat stitchNatureProduced, is (StitchNature.KNIT)
+			assertThat yarnIdRef, is ('A')
+		}
+	}
+
+	@Test
+	void k9togTbl() {
+		Pattern pattern = convert 'Row: k9tog tbl'
+		((MultipleDecrease) pattern.directions.operations[0].operations[0]).with {
+			assertThat stitchesIntoOne, is (9)
+			assertThat lean, is (Lean.LEFT)
+			assertThat stitchNatureProduced, is (StitchNature.KNIT)
+			assertThat yarnIdRef, is (null)
+		}
+	}
+	@Test
+	void p9tog() {
+		Pattern pattern = convert 'Row: p9tog'
+		((MultipleDecrease) pattern.directions.operations[0].operations[0]).with {
+			assertThat stitchesIntoOne, is (9)
+			assertThat lean, is (Lean.LEFT)
+			assertThat stitchNatureProduced, is (StitchNature.PURL)
+			assertThat yarnIdRef, is (null)
+		}
+	}
+	@Test
+	void p9togTbl() {
+		Pattern pattern = convert 'Row: p9tog tbl'
+		((MultipleDecrease) pattern.directions.operations[0].operations[0]).with {
+			assertThat stitchesIntoOne, is (9)
+			assertThat lean, is (Lean.RIGHT)
+			assertThat stitchNatureProduced, is (StitchNature.PURL)
+			assertThat yarnIdRef, is (null)
+		}
+	}
+	@Test
+	void s9k() {
+		Pattern pattern = convert 'Row: s9k'
+		((MultipleDecrease) pattern.directions.operations[0].operations[0]).with {
+			assertThat stitchesIntoOne, is (9)
+			assertThat lean, is (Lean.LEFT)
+			assertThat stitchNatureProduced, is (StitchNature.KNIT)
+			assertThat yarnIdRef, is (null)
+		}
+	}
+	@Test
+	void s9p() {
+		Pattern pattern = convert 'Row: s9p'
+		((MultipleDecrease) pattern.directions.operations[0].operations[0]).with {
+			assertThat stitchesIntoOne, is (9)
+			assertThat lean, is (Lean.RIGHT)
+			assertThat stitchNatureProduced, is (StitchNature.PURL)
 			assertThat yarnIdRef, is (null)
 		}
 	}
@@ -124,7 +202,7 @@ class DecreaseConverterTests extends AbstractConverterTests {
 			assertThat yarnIdRef, is (null)
 		}
 	}
-	
+
 	@Test
 	void cdd() {
 		Pattern pattern = convert 'Row: cdd'
@@ -164,14 +242,19 @@ class DecreaseConverterTests extends AbstractConverterTests {
 			assertThat operations[0].numberOfTimes, is (null)
 		}
 	}
-	/**
-	 * Not currently supported
-	 */
-	@Test(expected=ConversionException)
-	void k4tog() {
-		Pattern pattern = convert 'Row: k4tog'
-	}
 
+	@Test
+	void k2togTwice() {
+		Pattern pattern = convert 'Row: k2tog twice'
+		((Repeat) pattern.directions.operations[0].operations[0]).with {
+			assertThat until, is (Until.TIMES)
+			assertThat value, is (2)
+			assertThat operations[0], instanceOf (Decrease)
+			assertThat operations[0].type, is (DecreaseType.K2TOG)
+			assertThat operations[0].numberOfTimes, is (null)
+		}
+	}
+	
 	@Test
 	void ppso() {
 		Pattern pattern = convert 'Row: ppso'

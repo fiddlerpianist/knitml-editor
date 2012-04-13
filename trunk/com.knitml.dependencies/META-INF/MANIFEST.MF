@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: KnitML Plugin Dependencies
 Bundle-SymbolicName: com.knitml.dependencies
-Bundle-Version: 0.6.0.M2
+Bundle-Version: 0.7.0.BUILD
 Bundle-ClassPath: commons-io-1.4.jar,
  jscience-4.3.1.jar,
  stax-api-1.0.1.jar,

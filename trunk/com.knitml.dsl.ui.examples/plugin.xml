@@ -2,12 +2,19 @@
 <?eclipse version="3.0"?>
 <plugin>
 	<extension point="org.eclipse.ui.newWizards">
-		<category id="com.knitml.dsl.ui.Examples" 
-				  name="Knitting Expression Language Examples" 
-				  parentCategory="org.eclipse.ui.Examples" />
+    <category
+          id="com.knitml.dsl.ui.Examples"
+          name="Pattern Examples"
+          parentCategory="org.eclipse.ui.Examples">
+    </category>
+    <category
+          id="com.knitml.dsl.ui.Demos"
+          name="Demonstrations"
+          parentCategory="org.eclipse.ui.Examples">
+    </category>
 	</extension>
 
-	<!-- ========= com.knitml.dsl.ui.examples.advancedsock ========= -->
+	<!-- ========= advancedsock ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="com.knitml.dsl.ui.examples.AdvancedSockExampleWizard" 
 			name="Advanced Sock"
@@ -20,13 +27,13 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="com.knitml.dsl.ui.examples.AdvancedSockExampleWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="Advanced Sock Example (Nutkin 2)" contentURI="contents/com.knitml.dsl.ui.examples.advancedsock.zip" description="Advanced sock example project and pattern"/>
+		 <projectDescriptor name="Advanced Sock Example (Nutkin 2)" contentURI="contents/pattern-advancedsock.zip" description="Advanced sock example project and pattern"/>
    <fileToOpen
          location="Advanced Sock Example (Nutkin 2)/nutkin2.kel2">
    </fileToOpen>
 	  </example>
 	</extension>
-	<!-- ========= com.knitml.dsl.ui.examples.basicsock ========= -->
+	<!-- ========= basicsock ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="com.knitml.dsl.ui.examples.BasicSockExampleWizard" 
 			name="Basic Sock"
@@ -39,13 +46,13 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="com.knitml.dsl.ui.examples.BasicSockExampleWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="Basic Sock Example" contentURI="contents/com.knitml.dsl.ui.examples.basicsock.zip" description="Basic sock example project and pattern"/>
+		 <projectDescriptor name="Basic Sock Example" contentURI="contents/pattern-basicsock.zip" description="Basic sock example project and pattern"/>
    <fileToOpen
          location="Basic Sock Example/basic-sock.kel2">
    </fileToOpen>
 	  </example>
 	</extension>   
-	<!-- ========= com.knitml.dsl.ui.examples.laceshawl ========= -->
+	<!-- ========= laceshawl ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="com.knitml.dsl.ui.examples.LaceShawlExampleWizard" 
 			name="Lace Shawl"
@@ -58,35 +65,16 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="com.knitml.dsl.ui.examples.LaceShawlExampleWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="Lace Shawl Example (Foliage)" contentURI="contents/com.knitml.dsl.ui.examples.laceshawl.zip" description="Lace shawl example project and pattern"/>
+		 <projectDescriptor name="Lace Shawl Example (Foliage)" contentURI="contents/pattern-laceshawl.zip" description="Lace shawl example project and pattern"/>
    <fileToOpen
          location="Lace Shawl Example (Foliage)/foliage-small-gauge.kel2">
    </fileToOpen>
 	  </example>
 	</extension>
-	<!-- ========= com.knitml.dsl.ui.examples.sampler ========= -->
-	<extension point="org.eclipse.ui.newWizards">
-		<wizard	id="com.knitml.dsl.ui.examples.SamplerExampleWizard" 
-			name="Stitch Sampler"
-			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
-			category="org.eclipse.ui.Examples/com.knitml.dsl.ui.Examples"
-			icon="icons/genproject.gif" 
-			project="true">
-			<description>A sampler swatch. Demonstrates a variety of different types of knitting.</description>
-		</wizard>
-	</extension>
-	<extension point="org.eclipse.emf.common.ui.examples">
-	   <example wizardID="com.knitml.dsl.ui.examples.SamplerExampleWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="Stitch Sampler Example" contentURI="contents/com.knitml.dsl.ui.examples.sampler.zip" description="Stitch sampler example project and pattern"/>
-   <fileToOpen
-         location="Stitch Sampler Example/sampler-swatch.kel2">
-   </fileToOpen>
-	  </example>
-	</extension>
-	<!-- ========= com.knitml.dsl.ui.examples.simple ========= -->
+	<!-- ========= simple ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="com.knitml.dsl.ui.examples.SimpleExampleWizard" 
-			name="Simple pattern"
+			name="Simple"
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/com.knitml.dsl.ui.Examples"
 			icon="icons/genproject.gif" 
@@ -96,13 +84,32 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="com.knitml.dsl.ui.examples.SimpleExampleWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="Simple Example" contentURI="contents/com.knitml.dsl.ui.examples.simple.zip" description="Simple example project and pattern"/>
+		 <projectDescriptor name="Simple Example" contentURI="contents/pattern-simple.zip" description="Simple example project and pattern"/>
    <fileToOpen
          location="Simple Example/simple.kel2">
    </fileToOpen>
 	  </example>
 	</extension>
-	<!-- ========= com.knitml.dsl.ui.examples.sweater ========= -->
+	<!-- ========= color ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="com.knitml.dsl.ui.examples.ColorKnittingExampleWizard" 
+			name="Colorwork"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/com.knitml.dsl.ui.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>A pattern which shows how to work with more than one yarn at the same time.</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="com.knitml.dsl.ui.examples.ColorKnittingExampleWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="Color Knitting Example" contentURI="contents/pattern-color.zip" description="Color knitting example project and pattern"/>
+   <fileToOpen
+         location="Color Knitting Example/color-knitting.kel2">
+   </fileToOpen>
+	  </example>
+	</extension>
+	<!-- ========= sweater ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="com.knitml.dsl.ui.examples.SweaterExampleWizard" 
 			name="Sweater"
@@ -115,9 +122,49 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	   <example wizardID="com.knitml.dsl.ui.examples.SweaterExampleWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="Sweater Example (Banff)" contentURI="contents/com.knitml.dsl.ui.examples.sweater.zip" description="Sweater example project and pattern"/>
+		 <projectDescriptor name="Sweater Example (Banff)" contentURI="contents/pattern-sweater.zip" description="Sweater example project and pattern"/>
    <fileToOpen
          location="Sweater Example (Banff)/banff.kel2">
+   </fileToOpen>
+	  </example>
+	</extension>
+	
+	<!-- Now for the demos! -->
+	<!-- ========= demo-cables ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="com.knitml.dsl.ui.examples.demo.cablesWizard" 
+			name="Cables"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/com.knitml.dsl.ui.Demos"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description></description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="com.knitml.dsl.ui.examples.demo.cablesWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="Cable Instructions Demonstration" contentURI="contents/demo-cables.zip" description="A demonstration of cable instructions"/>
+   <fileToOpen
+         location="Cable Instructions Demonstration/cable-instructions.kel2">
+   </fileToOpen>
+	  </example>
+	</extension>
+	<!-- ========= demo-lace ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="com.knitml.dsl.ui.examples.demo.laceWizard" 
+			name="Lace"
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/com.knitml.dsl.ui.Demos"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description></description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="com.knitml.dsl.ui.examples.demo.laceWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="Lace Instructions Demonstration" contentURI="contents/demo-lace.zip" description="A demonstration of lace instructions"/>
+   <fileToOpen
+         location="Lace Instructions Demonstration/lace-instructions.kel2">
    </fileToOpen>
 	  </example>
 	</extension>

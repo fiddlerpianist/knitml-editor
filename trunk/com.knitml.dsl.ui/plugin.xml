@@ -242,13 +242,6 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
-         <menu
-               id="com.knitml.gpec.application.render"
-               label="Render">
-         </menu>
-      </menuContribution>
-      <menuContribution
             locationURI="popup:common.new.menu?before=top">
          <command
                commandId="com.knitml.dsl.ui.commands.newProjectWizard"

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="KnitML Pattern Editor" id="com.knitml.gpec.product" application="com.knitml.gpec.application" version="0.3.0.M2" useFeatures="false" includeLaunchers="true">
+<product name="KnitML Pattern Editor" uid="com.knitml.gpec.product" id="com.knitml.gpec.product" application="com.knitml.gpec.application" version="0.4.0" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="icons/about.gif"/>
       <text>
          KnitML Pattern Editor
 
-Version: 0.3.0.M2
+Version:  0.4.0
 
 (c) Copyright KnitML contributors and others 2008, 2009, 2010, 2011, 2012.  All rights reserved.
 Visit http://www.knitml.com/
@@ -52,7 +52,7 @@ Project (http://www.springframework.org).
       </win>
    </launcher>
 
-   <intro introId="com.knitml.gpec.intro"/>
+   <intro introId="org.eclipse.ui.intro.universal"/>
 
    <vm>
    </vm>
@@ -139,26 +139,29 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="ch.qos.logback.slf4j" fragment="true"/>
       <plugin id="com.google.collect"/>
       <plugin id="com.google.guava"/>
+      <plugin id="com.google.inject" version="3.0.0"/>
       <plugin id="com.ibm.icu"/>
-      <plugin id="com.knitml.core" version="0.6.0.M2"/>
-      <plugin id="com.knitml.dependencies" version="0.6.0.M2"/>
-      <plugin id="com.knitml.dsl" version="0.3.0.M2"/>
-      <plugin id="com.knitml.dsl.converter" version="0.3.0.M2"/>
-      <plugin id="com.knitml.dsl.ui" version="0.3.0.M2"/>
-      <plugin id="com.knitml.dsl.ui.examples" version="0.3.0.M2"/>
-      <plugin id="com.knitml.dsl.ui.startup" version="0.3.0.M2"/>
-      <plugin id="com.knitml.el" version="0.6.0.M2"/>
-      <plugin id="com.knitml.engine" version="0.6.0.M2"/>
-      <plugin id="com.knitml.gpec" version="0.3.0.M2"/>
-      <plugin id="com.knitml.gpec.help" version="0.3.0.M2"/>
-      <plugin id="com.knitml.gpec.kel" version="0.3.0.M2"/>
-      <plugin id="com.knitml.gpec.renderer.preferences" version="0.3.0.M2"/>
-      <plugin id="com.knitml.gpec.renderer.preferences.operations" version="0.3.0.M2"/>
-      <plugin id="com.knitml.logging.config" version="0.3.0.M2" fragment="true"/>
-      <plugin id="com.knitml.renderer" version="0.6.0.M2"/>
-      <plugin id="com.knitml.renderer.service" version="0.6.0.M2"/>
-      <plugin id="com.knitml.validation" version="0.6.0.M2"/>
+      <plugin id="com.knitml.core" version=" 0.7.0.BUILD"/>
+      <plugin id="com.knitml.dependencies" version=" 0.7.0.BUILD"/>
+      <plugin id="com.knitml.dsl" version=" 0.4.0"/>
+      <plugin id="com.knitml.dsl.converter" version=" 0.4.0"/>
+      <plugin id="com.knitml.dsl.ui" version=" 0.4.0"/>
+      <plugin id="com.knitml.dsl.ui.examples" version=" 0.4.0"/>
+      <plugin id="com.knitml.dsl.ui.startup" version=" 0.4.0"/>
+      <plugin id="com.knitml.el" version=" 0.7.0.BUILD"/>
+      <plugin id="com.knitml.engine" version=" 0.7.0.BUILD"/>
+      <plugin id="com.knitml.gauge" version=" 0.7.0.BUILD"/>
+      <plugin id="com.knitml.gpec" version=" 0.4.0"/>
+      <plugin id="com.knitml.gpec.intro" version=" 0.4.0"/>
+      <plugin id="com.knitml.gpec.kel" version=" 0.4.0"/>
+      <plugin id="com.knitml.gpec.renderer.preferences" version=" 0.4.0"/>
+      <plugin id="com.knitml.gpec.renderer.preferences.operations" version=" 0.4.0"/>
+      <plugin id="com.knitml.logging.config" version=" 0.4.0" fragment="true"/>
+      <plugin id="com.knitml.renderer" version=" 0.7.0.BUILD"/>
+      <plugin id="com.knitml.renderer.service" version=" 0.7.0.BUILD"/>
+      <plugin id="com.knitml.validation" version=" 0.7.0.BUILD"/>
       <plugin id="com.ning.async-http-client"/>
+      <plugin id="com.springsource.javax.inject" version="1.0.0"/>
       <plugin id="com.springsource.org.aopalliance"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
@@ -178,6 +181,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="org.apache.xerces"/>
       <plugin id="org.apache.xml.resolver"/>
       <plugin id="org.apache.xml.serializer"/>
+      <plugin id="org.codehaus.groovy.frameworkadapter" fragment="true"/>
       <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
       <plugin id="org.eclipse.core.commands"/>
@@ -271,6 +275,8 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="org.eclipse.ui.editors"/>
       <plugin id="org.eclipse.ui.forms"/>
       <plugin id="org.eclipse.ui.ide"/>
+      <plugin id="org.eclipse.ui.intro"/>
+      <plugin id="org.eclipse.ui.intro.universal"/>
       <plugin id="org.eclipse.ui.navigator"/>
       <plugin id="org.eclipse.ui.navigator.resources"/>
       <plugin id="org.eclipse.ui.views"/>

@@ -69,7 +69,23 @@ class RowConverterTests extends AbstractConverterTests {
 		}
 	}
 
-	
+	@Test
+	void abbreviatedRow() {
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
+			R1: knit
+			R: purl
+		'''
+		((List<Row>) pattern.directions.operations).with {
+			assertThat size(), is (2)
+			// we have to define int array separately, otherwise Groovy thinks it's a list
+			int[] expected = [1]
+			assertThat it[0].numbers, is (expected)
+			assertThat it[0].operations.size(), is (1)
+			assertThat it[1].numbers, is (null)
+			assertThat it[0].operations.size(), is (1)
+		}
+	}
+
 	@Test
 	void shortLongNextRows() {
 		com.knitml.core.model.pattern.Pattern pattern = convert '''
@@ -151,6 +167,18 @@ class RowConverterTests extends AbstractConverterTests {
 	}
 
 	@Test
+	void rowWithMessage() {
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
+			Row: knit, "This row will look funny."
+		'''
+		((Row) pattern.directions.operations[0]).with {
+			assertThat followupInformation?.details, not (null)
+			assertThat followupInformation.details[0], instanceOf (Message)
+			assertThat followupInformation.details[0].label, is ("This row will look funny.")
+		}
+	}
+
+	@Test
 	void rowWithStateSts() {
 		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Row: knit, state sts
@@ -164,14 +192,15 @@ class RowConverterTests extends AbstractConverterTests {
 	}
 
 	@Test
-	void rowWithMessage() {
+	void rowWithStateStsAlternativeSyntax() {
 		com.knitml.core.model.pattern.Pattern pattern = convert '''
-			Row: knit, "This row will look funny."
+			Row: knit (sts)
 		'''
 		((Row) pattern.directions.operations[0]).with {
 			assertThat followupInformation?.details, not (null)
-			assertThat followupInformation.details[0], instanceOf (Message)
-			assertThat followupInformation.details[0].label, is ("This row will look funny.")
+			assertThat followupInformation.details[0], instanceOf (NumberOfStitches)
+			assertThat followupInformation.details[0].number, is (null)
+			assertThat followupInformation.details[0].inform, is (true)
 		}
 	}
 
@@ -179,6 +208,21 @@ class RowConverterTests extends AbstractConverterTests {
 	void rowWithState5StsAndMessage() {
 		com.knitml.core.model.pattern.Pattern pattern = convert '''
 			Row: knit to end, state 5 sts, "This row will look funny."
+		'''
+		((Row) pattern.directions.operations[0]).with {
+			assertThat followupInformation?.details, not (null)
+			assertThat followupInformation.details[0], instanceOf (NumberOfStitches)
+			assertThat followupInformation.details[0].number, is (5)
+			assertThat followupInformation.details[0].inform, is (false)
+			assertThat followupInformation.details[1], instanceOf (Message)
+			assertThat followupInformation.details[1].label, is ("This row will look funny.")
+		}
+	}
+
+	@Test
+	void rowWithState5StsAndMessageAlternativeSyntax() {
+		com.knitml.core.model.pattern.Pattern pattern = convert '''
+			Row: knit to end (5 sts), "This row will look funny."
 		'''
 		((Row) pattern.directions.operations[0]).with {
 			assertThat followupInformation?.details, not (null)

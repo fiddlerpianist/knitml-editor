@@ -109,7 +109,7 @@
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
          <menu
-               id="com.knitml.gpec.application.render"
+               id="com.knitml.gpec.application.preferences"
                label="Render">
          </menu>
       </menuContribution>

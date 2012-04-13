@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Kel Plug-in
 Bundle-SymbolicName: com.knitml.gpec.kel; singleton:=true
-Bundle-Version: 0.3.0.M2
+Bundle-Version: 0.4.0.qualifier
 Bundle-Vendor: KnitML
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.ui,
@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.resources,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: com.knitml.gpec.internal.kel.KelPlugin
 Import-Package: com.knitml.core.common;version="0.6.0",
- com.knitml.core.model.pattern;version="0.6.0.M2",
+ com.knitml.core.model.pattern;version="0.7.0.BUILD",
  com.knitml.el;version="0.6.0",
  com.knitml.engine.common;version="0.6.0",
  com.knitml.gpec.renderer.preferences.keys,
