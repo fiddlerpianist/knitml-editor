@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KnitML Rendering Service Plug-in
+Bundle-SymbolicName: com.knitml.renderer.service
+Bundle-Version: 0.7.0.BUILD
+Bundle-Activator: com.knitml.renderer.service.Activator
+Bundle-Vendor: KnitML
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Import-Package: com.google.inject;version="1.3.0",
+ com.google.inject.binder;version="1.3.0",
+ com.google.inject.util;version="1.3.0",
+ com.knitml.core.common,
+ com.knitml.core.model.pattern,
+ com.knitml.engine,
+ com.knitml.engine.common,
+ com.knitml.renderer,
+ com.knitml.renderer.common,
+ com.knitml.renderer.config;version="0.7.0.BUILD",
+ com.knitml.renderer.context,
+ com.knitml.renderer.program,
+ com.knitml.validation.visitor.instruction,
+ com.knitml.validation.visitor.instruction.impl,
+ org.jibx.runtime;version="1.2.1",
+ org.osgi.framework;version="1.5.0"
+Export-Package: com.knitml.renderer.service;version="0.7.0.BUILD"
+Require-Bundle: com.knitml.dependencies;bundle-version="0.6.0"
