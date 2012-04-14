@@ -143,20 +143,20 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <plugin id="com.ibm.icu"/>
       <plugin id="com.knitml.core" version=" 0.7.0.BUILD"/>
       <plugin id="com.knitml.dependencies" version=" 0.7.0.BUILD"/>
-      <plugin id="com.knitml.dsl" version=" 0.4.0"/>
-      <plugin id="com.knitml.dsl.converter" version=" 0.4.0"/>
-      <plugin id="com.knitml.dsl.ui" version=" 0.4.0"/>
-      <plugin id="com.knitml.dsl.ui.examples" version=" 0.4.0"/>
-      <plugin id="com.knitml.dsl.ui.startup" version=" 0.4.0"/>
+      <plugin id="com.knitml.dsl" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.dsl.converter" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.dsl.ui" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.dsl.ui.examples" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.dsl.ui.startup" version="0.4.0.qualifier"/>
       <plugin id="com.knitml.el" version=" 0.7.0.BUILD"/>
       <plugin id="com.knitml.engine" version=" 0.7.0.BUILD"/>
       <plugin id="com.knitml.gauge" version=" 0.7.0.BUILD"/>
-      <plugin id="com.knitml.gpec" version=" 0.4.0"/>
-      <plugin id="com.knitml.gpec.intro" version=" 0.4.0"/>
-      <plugin id="com.knitml.gpec.kel" version=" 0.4.0"/>
-      <plugin id="com.knitml.gpec.renderer.preferences" version=" 0.4.0"/>
-      <plugin id="com.knitml.gpec.renderer.preferences.operations" version=" 0.4.0"/>
-      <plugin id="com.knitml.logging.config" version=" 0.4.0" fragment="true"/>
+      <plugin id="com.knitml.gpec" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.gpec.intro" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.gpec.kel" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.gpec.renderer.preferences" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.gpec.renderer.preferences.operations" version="0.4.0.qualifier"/>
+      <plugin id="com.knitml.logging.config" version="0.4.0.qualifier" fragment="true"/>
       <plugin id="com.knitml.renderer" version=" 0.7.0.BUILD"/>
       <plugin id="com.knitml.renderer.service" version=" 0.7.0.BUILD"/>
       <plugin id="com.knitml.validation" version=" 0.7.0.BUILD"/>
