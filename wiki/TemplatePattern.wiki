@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary You can cut-and-paste this into the Code View of any open pattern
 {{{
 -- This is a template knitting pattern.
 
