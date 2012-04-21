@@ -1,6 +1,5 @@
 #summary One-sentence summary of this page.
-{{{
--- This is a template knitting pattern.
+{{{-- This is a template knitting pattern.
 
 -- Two dashes (--) indicates a comment to (and including) the end of the line.
 -- You can toggle the comment on the line you're on by pressing Control-/ (Mac: Command-/) 
@@ -86,5 +85,5 @@ Instruction Two-Color-Garter-Stitch:
 
 Repeat Garter-Stitch for 66 in
 
-Row: BO all sts /* Note  */
-}}}
+Row: BO all sts /* Note how this shows you the row number in the Pattern View, even though it's
+                   not specified here */}}}
