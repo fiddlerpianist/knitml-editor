@@ -17,20 +17,20 @@
 -- knitting pattern (name, description, etc.). The header is optional,
 -- but if you require anything in the header, you MUST provide a pattern
 -- name and a description for your pattern (in that order).
+
+--NO PARAGRAPHS /* Uncomment if you don't want line breaks to indicate paragraphs */
 Pattern name: "My Scarf"
 Description: "A long-ish scarf for a long-ish guy"
--- The rest of the header elements are optional and can appear
--- in any order.
+-- The rest of the header elements are optional and can appear in any order.
 Language: English /* English, French, Spanish, or the 2-letter language code */ 
 -- Some information requires the values to be in quotes, such as copyright.
-Copyright: "2012, Joe Smith"
+Copyright: "Copyright 2012, Joe Smith"
 Dimensions: "76 in. long, 4 in. wide"
 Techniques: "knitting" "knitting with toes"
--- It's important to specify the gauge if you want to be able to transform the
--- pattern to a different gauge. 
-Gauge: 5 st/in, 12 rows/in /* Right now, there is only one gauge you can specify per pattern */ 
+-- It's important to specify the gauge if you want to be able to transform the pattern to a different gauge. 
+Gauge: 5 st/in, 7 rows/in /* Right now, there is only one gauge you can specify per pattern */ 
 --
--- There are many options for specifying yarn
+-- There are many options for specifying yarn.
 -- Giving a yarn an ID is important if you want to be able to refer to it later in the pattern.
 Yarn:
 -- From the basics...
@@ -72,19 +72,43 @@ Cast on 20 sts /* If you follow a Use needle statement in parentheses with a cas
 -- It's often helpful to add explanatory notes to your directions. They go in quotes.
 "You're going to be working in Garter Stitch (if you're familiar with that term)."
 
--- When in doubt, define your rows in an Instruction. That groups them together so that
--- they can be charted. You don't have to give it a label, but if you do it will show
--- up in the rendered pattern.
-Instruction Garter-Stitch "Garter Stitch":
-	Row: k to end
+-- Put rows that go together in an Instruction. That groups them together so that
+-- they can be charted. You don't have to give it a label, but if you do, the name will show
+-- up in the Pattern View.
+Instruction Garter-Stitch "Garter Stitch" (14 rows): /* The instruction's ID is 'Garter-Stitch' and its label is "Garter Stitch" */ 
+-- This shows all the different ways you can express row numbers in an instruction...
+-- but it's a silly way to express garter stitch :)   
+	Row 1 RS: k to end
+	Rows 2, 4 WS: k to end /* WS indicates the wrong side of the work */ 
+	Row 3: k to end
+	Rows 5-8, 10: k to end
+	Rows 9 and odd rows: k to end
+	Row 12 and even rows WS: k to end
+	/* The blank line at the end of the instruction is really important; it means the instruction is over.
+	If you were to put another row after a line break, it would NOT be part of that instruction. This
+	can get a little confusing, but if you press Control-Shift-F, it will format the pattern, and any
+	rows which fall outside of the instruction will appear at a different indent level than rows
+	within the instruction, making this clearer. */ --
 
-Repeat Garter-Stitch for 10 in
+--You can repeat instructions; just use the ID.
+Repeat Garter-Stitch for 12 in
+--Repeat Garter-Stitch 7 more times
+--Repeat Garter-Stitch for desired length
+State stitches /* will state how many sts are currently being worked in the Pattern View */ 
+--State 20 sts /* if you put a number here, it's a sanity check for the designer */
+/* A blank line here (i.e. in the directions but not within an instruction) means that this is the end of the section.
+ * This will look like a paragraph in the Pattern View UNLESS the "NO PARAGRAPHS" line at the top of the pattern is uncommented  
+ */ 
 
+Join in round
+Arrange as follows: Circ-One: 0, DPN-One: 6, DPN-Two: 6, DPN-Three: 8
+
+"Now you're going to be working Garter Stitch in the round!"
 Instruction Two-Color-Garter-Stitch:
 	Row with A: k to end
-	Row with B: k to end
+	Row with B: p to end
 
-Repeat Garter-Stitch for 66 in
+Repeat Two-Color-Garter-Stitch for 66 in
 
 Row: BO all sts /* Note how this shows you the row number in the Pattern View, even though it's
                    not specified here */
